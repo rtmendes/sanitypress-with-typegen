@@ -2,8 +2,12 @@
 
 ## Roadmap
 
-- [ ] Sanity Images
-- [ ] navigation menus (header/footer) + social links
+- [ ] Global site document
+  - [ ] navigation menus (header/footer) + social links
+- [x] Sanity Images
+  - [ ] responsive images (breakpoints)
+- [ ] Metadata field
+  - [ ] character count
 - [ ] [native CSS carousel](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_overflow/CSS_carousels)
 - [ ] Not found (404) page
 - [ ] error handling
