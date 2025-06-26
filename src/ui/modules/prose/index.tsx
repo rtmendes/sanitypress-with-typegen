@@ -1,8 +1,9 @@
 import TableOfContents from './table-of-contents'
 import { PortableText, stegaClean } from 'next-sanity'
+import AnchoredHeading from './anchored-heading'
+import Img from '@/ui/img'
 import { cn } from '@/lib/utils'
 import type { Prose } from '@/sanity/types'
-import AnchoredHeading from './anchored-heading'
 
 export default function ({
 	content,
@@ -35,6 +36,18 @@ export default function ({
 							h4: (node) => <AnchoredHeading as="h4" {...node} />,
 							h5: (node) => <AnchoredHeading as="h5" {...node} />,
 							h6: (node) => <AnchoredHeading as="h6" {...node} />,
+						},
+						types: {
+							image: ({ value: { asset, alt, figcaption } }) => (
+								<figure className="text-center">
+									<Img className="mx-auto" src={asset.url} alt={alt} />
+									{figcaption && (
+										<figcaption>
+											<PortableText value={figcaption} />
+										</figcaption>
+									)}
+								</figure>
+							),
 						},
 					}}
 				/>

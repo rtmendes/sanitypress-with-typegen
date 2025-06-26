@@ -8,6 +8,10 @@ const nextConfig: NextConfig = {
 		viewTransition: true,
 	},
 
+	images: {
+		remotePatterns: [new URL('https://cdn.sanity.io/**')],
+	},
+
 	async redirects() {
 		return await client.fetch(groq`*[_type == 'redirect']{
 			source,

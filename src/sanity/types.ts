@@ -15,24 +15,66 @@
 // Source: schema.json
 export type Prose = {
 	_type: 'prose'
-	content?: Array<{
-		children?: Array<{
-			marks?: Array<string>
-			text?: string
-			_type: 'span'
-			_key: string
-		}>
-		style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote'
-		listItem?: 'bullet' | 'number'
-		markDefs?: Array<{
-			href?: string
-			_type: 'link'
-			_key: string
-		}>
-		level?: number
-		_type: 'block'
-		_key: string
-	}>
+	content?: Array<
+		| {
+				children?: Array<{
+					marks?: Array<string>
+					text?: string
+					_type: 'span'
+					_key: string
+				}>
+				style?:
+					| 'normal'
+					| 'h1'
+					| 'h2'
+					| 'h3'
+					| 'h4'
+					| 'h5'
+					| 'h6'
+					| 'blockquote'
+				listItem?: 'bullet' | 'number'
+				markDefs?: Array<{
+					href?: string
+					_type: 'link'
+					_key: string
+				}>
+				level?: number
+				_type: 'block'
+				_key: string
+		  }
+		| {
+				asset?: {
+					_ref: string
+					_type: 'reference'
+					_weak?: boolean
+					[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+				}
+				media?: unknown
+				hotspot?: SanityImageHotspot
+				crop?: SanityImageCrop
+				alt?: string
+				figcaption?: Array<{
+					children?: Array<{
+						marks?: Array<string>
+						text?: string
+						_type: 'span'
+						_key: string
+					}>
+					style?: 'normal'
+					listItem?: 'bullet' | 'number'
+					markDefs?: Array<{
+						href?: string
+						_type: 'link'
+						_key: string
+					}>
+					level?: number
+					_type: 'block'
+					_key: string
+				}>
+				_type: 'image'
+				_key: string
+		  }
+	>
 	tableOfContents?: 'none' | 'left' | 'right'
 }
 
@@ -293,7 +335,7 @@ export type AllSanitySchemaTypes =
 export declare const internalGroqTypeReferenceTo: unique symbol
 // Source: ./src/app/(frontend)/[[...slug]]/page.tsx
 // Variable: PAGE_QUERY
-// Query: *[_type == 'page' && metadata.slug.current == $slug][0]{		...,		modules[]{			...,			_type == 'prose' => {				'headings': select(					tableOfContents in ['left', 'right'] => content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{						style,						'text': pt::text(@)					}				),			}		}	}
+// Query: *[_type == 'page' && metadata.slug.current == $slug][0]{		...,		modules[]{			...,			_type == 'prose' => {				content[]{					...,					_type == 'image' => {						...,						asset->					}				},				'headings': select(					tableOfContents in ['left', 'right'] => content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{						style,						'text': pt::text(@)					}				),			}		}	}
 export type PAGE_QUERYResult = {
 	_id: string
 	_type: 'page'
@@ -376,32 +418,82 @@ export type PAGE_QUERYResult = {
 		| {
 				_key: string
 				_type: 'prose'
-				content?: Array<{
-					children?: Array<{
-						marks?: Array<string>
-						text?: string
-						_type: 'span'
-						_key: string
-					}>
-					style?:
-						| 'blockquote'
-						| 'h1'
-						| 'h2'
-						| 'h3'
-						| 'h4'
-						| 'h5'
-						| 'h6'
-						| 'normal'
-					listItem?: 'bullet' | 'number'
-					markDefs?: Array<{
-						href?: string
-						_type: 'link'
-						_key: string
-					}>
-					level?: number
-					_type: 'block'
-					_key: string
-				}>
+				content: Array<
+					| {
+							children?: Array<{
+								marks?: Array<string>
+								text?: string
+								_type: 'span'
+								_key: string
+							}>
+							style?:
+								| 'blockquote'
+								| 'h1'
+								| 'h2'
+								| 'h3'
+								| 'h4'
+								| 'h5'
+								| 'h6'
+								| 'normal'
+							listItem?: 'bullet' | 'number'
+							markDefs?: Array<{
+								href?: string
+								_type: 'link'
+								_key: string
+							}>
+							level?: number
+							_type: 'block'
+							_key: string
+					  }
+					| {
+							asset: {
+								_id: string
+								_type: 'sanity.imageAsset'
+								_createdAt: string
+								_updatedAt: string
+								_rev: string
+								originalFilename?: string
+								label?: string
+								title?: string
+								description?: string
+								altText?: string
+								sha1hash?: string
+								extension?: string
+								mimeType?: string
+								size?: number
+								assetId?: string
+								uploadId?: string
+								path?: string
+								url?: string
+								metadata?: SanityImageMetadata
+								source?: SanityAssetSourceData
+							} | null
+							media?: unknown
+							hotspot?: SanityImageHotspot
+							crop?: SanityImageCrop
+							alt?: string
+							figcaption?: Array<{
+								children?: Array<{
+									marks?: Array<string>
+									text?: string
+									_type: 'span'
+									_key: string
+								}>
+								style?: 'normal'
+								listItem?: 'bullet' | 'number'
+								markDefs?: Array<{
+									href?: string
+									_type: 'link'
+									_key: string
+								}>
+								level?: number
+								_type: 'block'
+								_key: string
+							}>
+							_type: 'image'
+							_key: string
+					  }
+				> | null
 				tableOfContents?: 'left' | 'none' | 'right'
 				headings: Array<{
 					style:
@@ -425,6 +517,6 @@ export type PAGE_QUERYResult = {
 import '@sanity/client'
 declare module '@sanity/client' {
 	interface SanityQueries {
-		"\n\t*[_type == 'page' && metadata.slug.current == $slug][0]{\n\t\t...,\n\t\tmodules[]{\n\t\t\t...,\n\t\t\t_type == 'prose' => {\n\t\t\t\t'headings': select(\n\t\t\t\t\ttableOfContents in ['left', 'right'] => content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{\n\t\t\t\t\t\tstyle,\n\t\t\t\t\t\t'text': pt::text(@)\n\t\t\t\t\t}\n\t\t\t\t),\n\t\t\t}\n\t\t}\n\t}\n": PAGE_QUERYResult
+		"\n\t*[_type == 'page' && metadata.slug.current == $slug][0]{\n\t\t...,\n\t\tmodules[]{\n\t\t\t...,\n\t\t\t_type == 'prose' => {\n\t\t\t\tcontent[]{\n\t\t\t\t\t...,\n\t\t\t\t\t_type == 'image' => {\n\t\t\t\t\t\t...,\n\t\t\t\t\t\tasset->\n\t\t\t\t\t}\n\t\t\t\t},\n\t\t\t\t'headings': select(\n\t\t\t\t\ttableOfContents in ['left', 'right'] => content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{\n\t\t\t\t\t\tstyle,\n\t\t\t\t\t\t'text': pt::text(@)\n\t\t\t\t\t}\n\t\t\t\t),\n\t\t\t}\n\t\t}\n\t}\n": PAGE_QUERYResult
 	}
 }

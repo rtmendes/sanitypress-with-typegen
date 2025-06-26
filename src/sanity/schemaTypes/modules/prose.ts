@@ -11,7 +11,28 @@ export default defineType({
 		defineField({
 			name: 'content',
 			type: 'array',
-			of: [{ type: 'block' }],
+			of: [
+				{ type: 'block' },
+				{
+					type: 'image',
+					fields: [
+						defineField({
+							name: 'alt',
+							type: 'string',
+						}),
+						defineField({
+							name: 'figcaption',
+							type: 'array',
+							of: [
+								{
+									type: 'block',
+									styles: [{ title: 'Normal', value: 'normal' }],
+								},
+							],
+						}),
+					],
+				},
+			],
 		}),
 		defineField({
 			name: 'tableOfContents',

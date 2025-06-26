@@ -70,6 +70,13 @@ const PAGE_QUERY = groq`
 		modules[]{
 			...,
 			_type == 'prose' => {
+				content[]{
+					...,
+					_type == 'image' => {
+						...,
+						asset->
+					}
+				},
 				'headings': select(
 					tableOfContents in ['left', 'right'] => content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{
 						style,
