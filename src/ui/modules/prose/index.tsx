@@ -38,9 +38,9 @@ export default function ({
 							h6: (node) => <AnchoredHeading as="h6" {...node} />,
 						},
 						types: {
-							image: ({ value: { asset, alt, figcaption } }) => (
+							image: ({ value: { figcaption, ...image } }) => (
 								<figure className="text-center">
-									<Img className="mx-auto" src={asset.url} alt={alt} />
+									<Img className="mx-auto" image={image} alt={image.alt} />
 									{figcaption && (
 										<figcaption>
 											<PortableText value={figcaption} />

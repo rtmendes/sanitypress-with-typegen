@@ -74,7 +74,10 @@ const PAGE_QUERY = groq`
 					...,
 					_type == 'image' => {
 						...,
-						asset->
+						asset->{
+							...,
+							metadata
+						}
 					}
 				},
 				'headings': select(

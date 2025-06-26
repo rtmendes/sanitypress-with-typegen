@@ -15,6 +15,9 @@ export default defineType({
 				{ type: 'block' },
 				{
 					type: 'image',
+					options: {
+						hotspot: true,
+					},
 					fields: [
 						defineField({
 							name: 'alt',
