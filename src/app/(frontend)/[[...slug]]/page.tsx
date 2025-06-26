@@ -1,4 +1,5 @@
-import { sanityFetchLive, sanityFetch } from '@/sanity/lib/live'
+import { sanityFetchLive } from '@/sanity/lib/live'
+import { client } from '@/sanity/lib/client'
 import { groq } from 'next-sanity'
 import { notFound } from 'next/navigation'
 import ModulesResolver from '@/ui/modules'
@@ -39,18 +40,17 @@ export async function generateMetadata({
 }
 
 export async function generateStaticParams() {
-	const { data } = (await sanityFetch({
-		query: groq`
+	const slugs = await client.fetch<string[]>(
+		groq`
 			*[
 				_type == 'page'
 				&& defined(metadata.slug.current)
 				&& !(metadata.slug.current in ['not-found'])
 			].metadata.slug.current
 		`,
-		perspective: 'published',
-	})) as { data: string[] }
+	)
 
-	return data.map((slug) => ({
+	return slugs.map((slug) => ({
 		slug: slug === 'index' ? undefined : slug.split('/'),
 	}))
 }

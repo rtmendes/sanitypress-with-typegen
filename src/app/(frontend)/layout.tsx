@@ -1,6 +1,6 @@
 import { Geist } from 'next/font/google'
 import { unstable_ViewTransition as ViewTransition } from 'react'
-import { SanityLive } from '@/sanity/lib/live'
+import VisualEditing from '@/ui/modules/visual-editing'
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata } from 'next'
 import '@/app.css'
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 	icons: 'https://fav.farm/♣️',
 }
 
-export default function RootLayout({
+export default async function RootLayout({
 	children,
 }: Readonly<{
 	children: React.ReactNode
@@ -24,7 +24,7 @@ export default function RootLayout({
 				<body className="bg-background text-foreground antialiased">
 					{children}
 
-					<SanityLive />
+					<VisualEditing />
 					<Analytics />
 				</body>
 			</ViewTransition>
