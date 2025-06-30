@@ -1,4 +1,4 @@
-# SanityPress (with GROQ Typegen)
+# SanityPress (with GROQ TypeGen)
 
 ## Roadmap
 

@@ -1,5 +1,5 @@
 import { defineField, defineType } from 'sanity'
-import { CharacterCount } from 'sanitypress-utils'
+import CharacterCount from '@/sanity/ui/character-count'
 
 export default defineType({
 	name: 'metadata',

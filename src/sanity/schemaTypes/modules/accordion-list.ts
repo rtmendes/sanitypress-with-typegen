@@ -1,6 +1,6 @@
 import { defineArrayMember, defineField, defineType } from 'sanity'
-import { getBlockText } from 'sanitypress-utils'
 import { TfiLayoutAccordionMerged } from 'react-icons/tfi'
+import { getBlockText } from '@/lib/utils'
 
 export default defineType({
 	name: 'accordion-list',
