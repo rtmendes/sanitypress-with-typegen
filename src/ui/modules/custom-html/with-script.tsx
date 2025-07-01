@@ -1,7 +1,6 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
-import { usePathname } from 'next/navigation'
 import type { CustomHtml } from '@/sanity/types'
 
 /**
@@ -14,8 +13,6 @@ export default function WithScript({
 	if (!code) return null
 
 	const ref = useRef<HTMLElement>(null)
-	const pathname = usePathname()
-
 	const [firstRender, setFirstRender] = useState(true)
 
 	useEffect(() => {
@@ -25,7 +22,13 @@ export default function WithScript({
 			const parsed = document.createRange().createContextualFragment(code)
 			ref.current?.appendChild(parsed)
 		}
+
+		return () => {
+			if (ref.current) {
+				ref.current.innerHTML = ''
+			}
+		}
 	}, [ref.current, code])
 
-	return <section ref={ref} className={className} key={pathname} />
+	return <section ref={ref} className={className} />
 }

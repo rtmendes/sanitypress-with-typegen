@@ -12,7 +12,10 @@ export default function CustomHTML({ className, html, css }: CustomHtml) {
 
 			{html?.code &&
 				(html.code.includes('<script') ? (
-					<WithScript code={html.code} className={stegaClean(className)} />
+					<WithScript
+						code={stegaClean(html.code)}
+						className={stegaClean(className)}
+					/>
 				) : (
 					<section
 						className={stegaClean(className)}
