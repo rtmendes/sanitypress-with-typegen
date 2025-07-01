@@ -1,0 +1,43 @@
+'use client'
+
+import { useEffect, useRef } from 'react'
+import { usePathname } from 'next/navigation'
+
+export default function ({
+	className,
+	children,
+}: React.ComponentProps<'header'>) {
+	const ref = useRef<HTMLDivElement>(null)
+	const pathname = usePathname()
+
+	// set --header-height
+	useEffect(() => {
+		if (typeof window === 'undefined') return
+
+		function setHeight() {
+			if (!ref.current) return
+			document.documentElement.style.setProperty(
+				'--header-height',
+				`${ref.current.offsetHeight ?? 0}px`,
+			)
+		}
+		setHeight()
+		window.addEventListener('resize', setHeight)
+
+		return () => window.removeEventListener('resize', setHeight)
+	}, [])
+
+	// close menus after navigation
+	useEffect(() => {
+		if (!ref.current) return
+		ref.current.querySelectorAll('details').forEach((element) => {
+			if (element.open) element.open = false
+		})
+	}, [pathname])
+
+	return (
+		<header ref={ref} className={className} role="banner">
+			{children}
+		</header>
+	)
+}

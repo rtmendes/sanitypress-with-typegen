@@ -18,7 +18,7 @@ export default function ({
 				<TableOfContents
 					headings={headings}
 					className={cn(
-						'top-0 shrink-0 md:sticky md:w-[20ch]',
+						'top-(--header-height) shrink-0 md:sticky md:w-[20ch]',
 						toc === 'right' && 'md:order-last',
 					)}
 					open

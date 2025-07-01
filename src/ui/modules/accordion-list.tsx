@@ -1,5 +1,5 @@
-import type { AccordionList } from '@/sanity/types'
 import { PortableText } from 'next-sanity'
+import type { AccordionList } from '@/sanity/types'
 
 export default function ({
 	_key: _module_key,
@@ -38,7 +38,7 @@ export default function ({
 					</summary>
 
 					<div
-						className="py-4"
+						className="not-supports-[interpolate-size:allow-keywords]:anim-fade-to-b py-4"
 						{...(enableSchema && {
 							itemScope: true,
 							itemProp: 'acceptedAnswer',

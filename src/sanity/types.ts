@@ -133,6 +133,16 @@ export type AccordionList = {
 	enableSchema?: boolean
 }
 
+export type LinkList = {
+	_type: 'link.list'
+	link?: Link
+	links?: Array<
+		{
+			_key: string
+		} & Link
+	>
+}
+
 export type Redirect = {
 	_id: string
 	_type: 'redirect'
@@ -184,6 +194,68 @@ export type Metadata = {
 	description?: string
 	slug?: Slug
 	noIndex?: boolean
+}
+
+export type Site = {
+	_id: string
+	_type: 'site'
+	_createdAt: string
+	_updatedAt: string
+	_rev: string
+	title?: string
+	copyright?: Array<{
+		children?: Array<{
+			marks?: Array<string>
+			text?: string
+			_type: 'span'
+			_key: string
+		}>
+		style?: 'normal'
+		listItem?: never
+		markDefs?: Array<{
+			href?: string
+			_type: 'link'
+			_key: string
+		}>
+		level?: number
+		_type: 'block'
+		_key: string
+	}>
+	header?: {
+		_ref: string
+		_type: 'reference'
+		_weak?: boolean
+		[internalGroqTypeReferenceTo]?: 'navigation'
+	}
+	footer?: {
+		_ref: string
+		_type: 'reference'
+		_weak?: boolean
+		[internalGroqTypeReferenceTo]?: 'navigation'
+	}
+	social?: {
+		_ref: string
+		_type: 'reference'
+		_weak?: boolean
+		[internalGroqTypeReferenceTo]?: 'navigation'
+	}
+}
+
+export type Navigation = {
+	_id: string
+	_type: 'navigation'
+	_createdAt: string
+	_updatedAt: string
+	_rev: string
+	title?: string
+	items?: Array<
+		| ({
+				_key: string
+		  } & Link)
+		| ({
+				_key: string
+		  } & LinkList)
+	>
 }
 
 export type Code = {
@@ -316,10 +388,13 @@ export type AllSanitySchemaTypes =
 	| Prose
 	| CustomHtml
 	| AccordionList
+	| LinkList
 	| Redirect
 	| Link
 	| Page
 	| Metadata
+	| Site
+	| Navigation
 	| Code
 	| SanityImagePaletteSwatch
 	| SanityImagePalette
@@ -335,7 +410,7 @@ export type AllSanitySchemaTypes =
 export declare const internalGroqTypeReferenceTo: unique symbol
 // Source: ./src/app/(frontend)/[[...slug]]/page.tsx
 // Variable: PAGE_QUERY
-// Query: *[_type == 'page' && metadata.slug.current == $slug][0]{		...,		modules[]{			...,			_type == 'prose' => {				content[]{					...,					_type == 'image' => {						...,						asset->					}				},				'headings': select(					tableOfContents in ['left', 'right'] => content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{						style,						'text': pt::text(@)					}				),			}		}	}
+// Query: *[_type == 'page' && metadata.slug.current == $slug][0]{		...,		modules[]{			...,			_type == 'prose' => {				content[]{					...,					_type == 'image' => {						...,						asset->{							...,							metadata						}					}				},				'headings': select(					tableOfContents in ['left', 'right'] => content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{						style,						'text': pt::text(@)					}				),			}		}	}
 export type PAGE_QUERYResult = {
 	_id: string
 	_type: 'page'
@@ -465,7 +540,7 @@ export type PAGE_QUERYResult = {
 								uploadId?: string
 								path?: string
 								url?: string
-								metadata?: SanityImageMetadata
+								metadata: SanityImageMetadata | null
 								source?: SanityAssetSourceData
 							} | null
 							media?: unknown
@@ -513,10 +588,281 @@ export type PAGE_QUERYResult = {
 	metadata?: Metadata
 } | null
 
+// Source: ./src/sanity/lib/queries.ts
+// Variable: SITE_QUERY
+// Query: *[_type == 'site'][0]{	...,	header->{ 	items[]{		...,		link{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} },		links[]{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} },	} },	footer->{ 	items[]{		...,		link{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} },		links[]{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} },	} },	social->{ 	items[]{		...,		link{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} },		links[]{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} },	} },}
+export type SITE_QUERYResult = {
+	_id: string
+	_type: 'site'
+	_createdAt: string
+	_updatedAt: string
+	_rev: string
+	title?: string
+	copyright?: Array<{
+		children?: Array<{
+			marks?: Array<string>
+			text?: string
+			_type: 'span'
+			_key: string
+		}>
+		style?: 'normal'
+		listItem?: never
+		markDefs?: Array<{
+			href?: string
+			_type: 'link'
+			_key: string
+		}>
+		level?: number
+		_type: 'block'
+		_key: string
+	}>
+	header: {
+		items: Array<
+			| {
+					_key: string
+					_type: 'link.list'
+					link:
+						| {
+								_type: 'link'
+								label?: string
+								type?: 'external' | 'internal'
+								internal?: {
+									_ref: string
+									_type: 'reference'
+									_weak?: boolean
+									[internalGroqTypeReferenceTo]?: 'page'
+								}
+								external?: string
+								params?: string
+						  }
+						| {
+								_type: 'link'
+								label?: string
+								type?: 'external' | 'internal'
+								internal: {
+									_type: 'page'
+									title: string | null
+									slug: string | '/' | null
+								} | null
+								external?: string
+								params?: string
+						  }
+						| null
+					links: Array<
+						| {
+								_key: string
+								_type: 'link'
+								label?: string
+								type?: 'external' | 'internal'
+								internal?: {
+									_ref: string
+									_type: 'reference'
+									_weak?: boolean
+									[internalGroqTypeReferenceTo]?: 'page'
+								}
+								external?: string
+								params?: string
+						  }
+						| {
+								_key: string
+								_type: 'link'
+								label?: string
+								type?: 'external' | 'internal'
+								internal: {
+									_type: 'page'
+									title: string | null
+									slug: string | '/' | null
+								} | null
+								external?: string
+								params?: string
+						  }
+					> | null
+			  }
+			| {
+					_key: string
+					_type: 'link'
+					label?: string
+					type?: 'external' | 'internal'
+					internal?: {
+						_ref: string
+						_type: 'reference'
+						_weak?: boolean
+						[internalGroqTypeReferenceTo]?: 'page'
+					}
+					external?: string
+					params?: string
+					link: null
+					links: null
+			  }
+		> | null
+	} | null
+	footer: {
+		items: Array<
+			| {
+					_key: string
+					_type: 'link.list'
+					link:
+						| {
+								_type: 'link'
+								label?: string
+								type?: 'external' | 'internal'
+								internal?: {
+									_ref: string
+									_type: 'reference'
+									_weak?: boolean
+									[internalGroqTypeReferenceTo]?: 'page'
+								}
+								external?: string
+								params?: string
+						  }
+						| {
+								_type: 'link'
+								label?: string
+								type?: 'external' | 'internal'
+								internal: {
+									_type: 'page'
+									title: string | null
+									slug: string | '/' | null
+								} | null
+								external?: string
+								params?: string
+						  }
+						| null
+					links: Array<
+						| {
+								_key: string
+								_type: 'link'
+								label?: string
+								type?: 'external' | 'internal'
+								internal?: {
+									_ref: string
+									_type: 'reference'
+									_weak?: boolean
+									[internalGroqTypeReferenceTo]?: 'page'
+								}
+								external?: string
+								params?: string
+						  }
+						| {
+								_key: string
+								_type: 'link'
+								label?: string
+								type?: 'external' | 'internal'
+								internal: {
+									_type: 'page'
+									title: string | null
+									slug: string | '/' | null
+								} | null
+								external?: string
+								params?: string
+						  }
+					> | null
+			  }
+			| {
+					_key: string
+					_type: 'link'
+					label?: string
+					type?: 'external' | 'internal'
+					internal?: {
+						_ref: string
+						_type: 'reference'
+						_weak?: boolean
+						[internalGroqTypeReferenceTo]?: 'page'
+					}
+					external?: string
+					params?: string
+					link: null
+					links: null
+			  }
+		> | null
+	} | null
+	social: {
+		items: Array<
+			| {
+					_key: string
+					_type: 'link.list'
+					link:
+						| {
+								_type: 'link'
+								label?: string
+								type?: 'external' | 'internal'
+								internal?: {
+									_ref: string
+									_type: 'reference'
+									_weak?: boolean
+									[internalGroqTypeReferenceTo]?: 'page'
+								}
+								external?: string
+								params?: string
+						  }
+						| {
+								_type: 'link'
+								label?: string
+								type?: 'external' | 'internal'
+								internal: {
+									_type: 'page'
+									title: string | null
+									slug: string | '/' | null
+								} | null
+								external?: string
+								params?: string
+						  }
+						| null
+					links: Array<
+						| {
+								_key: string
+								_type: 'link'
+								label?: string
+								type?: 'external' | 'internal'
+								internal?: {
+									_ref: string
+									_type: 'reference'
+									_weak?: boolean
+									[internalGroqTypeReferenceTo]?: 'page'
+								}
+								external?: string
+								params?: string
+						  }
+						| {
+								_key: string
+								_type: 'link'
+								label?: string
+								type?: 'external' | 'internal'
+								internal: {
+									_type: 'page'
+									title: string | null
+									slug: string | '/' | null
+								} | null
+								external?: string
+								params?: string
+						  }
+					> | null
+			  }
+			| {
+					_key: string
+					_type: 'link'
+					label?: string
+					type?: 'external' | 'internal'
+					internal?: {
+						_ref: string
+						_type: 'reference'
+						_weak?: boolean
+						[internalGroqTypeReferenceTo]?: 'page'
+					}
+					external?: string
+					params?: string
+					link: null
+					links: null
+			  }
+		> | null
+	} | null
+} | null
+
 // Query TypeMap
 import '@sanity/client'
 declare module '@sanity/client' {
 	interface SanityQueries {
-		"\n\t*[_type == 'page' && metadata.slug.current == $slug][0]{\n\t\t...,\n\t\tmodules[]{\n\t\t\t...,\n\t\t\t_type == 'prose' => {\n\t\t\t\tcontent[]{\n\t\t\t\t\t...,\n\t\t\t\t\t_type == 'image' => {\n\t\t\t\t\t\t...,\n\t\t\t\t\t\tasset->\n\t\t\t\t\t}\n\t\t\t\t},\n\t\t\t\t'headings': select(\n\t\t\t\t\ttableOfContents in ['left', 'right'] => content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{\n\t\t\t\t\t\tstyle,\n\t\t\t\t\t\t'text': pt::text(@)\n\t\t\t\t\t}\n\t\t\t\t),\n\t\t\t}\n\t\t}\n\t}\n": PAGE_QUERYResult
+		"\n\t*[_type == 'page' && metadata.slug.current == $slug][0]{\n\t\t...,\n\t\tmodules[]{\n\t\t\t...,\n\t\t\t_type == 'prose' => {\n\t\t\t\tcontent[]{\n\t\t\t\t\t...,\n\t\t\t\t\t_type == 'image' => {\n\t\t\t\t\t\t...,\n\t\t\t\t\t\tasset->{\n\t\t\t\t\t\t\t...,\n\t\t\t\t\t\t\tmetadata\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t},\n\t\t\t\t'headings': select(\n\t\t\t\t\ttableOfContents in ['left', 'right'] => content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{\n\t\t\t\t\t\tstyle,\n\t\t\t\t\t\t'text': pt::text(@)\n\t\t\t\t\t}\n\t\t\t\t),\n\t\t\t}\n\t\t}\n\t}\n": PAGE_QUERYResult
+		"*[_type == 'site'][0]{\n\t...,\n\theader->{ \n\titems[]{\n\t\t...,\n\t\tlink{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n },\n\t\tlinks[]{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n },\n\t}\n },\n\tfooter->{ \n\titems[]{\n\t\t...,\n\t\tlink{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n },\n\t\tlinks[]{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n },\n\t}\n },\n\tsocial->{ \n\titems[]{\n\t\t...,\n\t\tlink{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n },\n\t\tlinks[]{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n },\n\t}\n },\n}": SITE_QUERYResult
 	}
 }

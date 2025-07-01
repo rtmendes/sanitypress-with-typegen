@@ -1,0 +1,42 @@
+import { sanityFetchLive } from './live'
+import { groq } from 'next-sanity'
+import type { SITE_QUERYResult } from '@/sanity/types'
+
+/* fragments */
+
+export const LINK_QUERY = /* groq */ `
+	...,
+	type == 'internal' => {
+		internal->{
+			_type,
+			title,
+			'slug': select(
+				metadata.slug.current == 'index' => '/',
+				'/' + metadata.slug.current
+			)
+		}
+	}
+`
+
+export const NAVIGATION_QUERY = /* groq */ `
+	items[]{
+		${LINK_QUERY},
+		link{ ${LINK_QUERY} },
+		links[]{ ${LINK_QUERY} },
+	}
+`
+
+const SITE_QUERY = groq`*[_type == 'site'][0]{
+	...,
+	header->{ ${NAVIGATION_QUERY} },
+	footer->{ ${NAVIGATION_QUERY} },
+	social->{ ${NAVIGATION_QUERY} },
+}`
+
+/* queries */
+
+export async function getSite() {
+	return await sanityFetchLive<SITE_QUERYResult>({
+		query: SITE_QUERY,
+	})
+}
