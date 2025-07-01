@@ -1,6 +1,7 @@
 'use client'
 
-import { ComponentProps, useEffect, useRef, useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
+import { usePathname } from 'next/navigation'
 import type { CustomHtml } from '@/sanity/types'
 
 /**
@@ -9,10 +10,12 @@ import type { CustomHtml } from '@/sanity/types'
 export default function WithScript({
 	code,
 	className,
-}: Partial<CustomHtml['html']> & ComponentProps<'section'>) {
+}: Partial<CustomHtml['html']> & React.ComponentProps<'section'>) {
 	if (!code) return null
 
 	const ref = useRef<HTMLElement>(null)
+	const pathname = usePathname()
+
 	const [firstRender, setFirstRender] = useState(true)
 
 	useEffect(() => {
@@ -24,5 +27,5 @@ export default function WithScript({
 		}
 	}, [ref.current, code])
 
-	return <section ref={ref} className={className} />
+	return <section ref={ref} className={className} key={pathname} />
 }

@@ -1,6 +1,6 @@
 import { stegaClean } from 'next-sanity'
-import CSS from './CSS'
-import WithScript from './WithScript'
+import CSS from './css'
+import WithScript from './with-script'
 import type { CustomHtml } from '@/sanity/types'
 
 export default function CustomHTML({ className, html, css }: CustomHtml) {
