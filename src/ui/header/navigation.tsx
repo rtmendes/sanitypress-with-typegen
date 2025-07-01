@@ -14,6 +14,7 @@ export default function ({
 					case 'link':
 						return (
 							<SanityLink
+								className="link"
 								{...(item as unknown as React.ComponentProps<
 									typeof SanityLink
 								>)}

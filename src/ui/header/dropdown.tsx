@@ -15,7 +15,7 @@ export default function ({
 			<ul className="bg-background anim-fade-to-b absolute top-full left-0 min-w-max border">
 				{links.map((link, key) => (
 					<li key={key}>
-						<SanityLink {...link} />
+						<SanityLink className="link" {...link} />
 					</li>
 				))}
 			</ul>

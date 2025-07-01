@@ -1,6 +1,7 @@
 import { Geist } from 'next/font/google'
 import { unstable_ViewTransition as ViewTransition } from 'react'
 import Header from '@/ui/header'
+import Footer from '@/ui/footer'
 import VisualEditing from '@/ui/modules/visual-editing'
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata } from 'next'
@@ -25,6 +26,7 @@ export default async function RootLayout({
 				<body className="bg-background text-foreground antialiased">
 					<Header />
 					<main>{children}</main>
+					<Footer />
 
 					<VisualEditing />
 					<Analytics />
