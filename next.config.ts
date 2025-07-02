@@ -19,8 +19,11 @@ const nextConfig: NextConfig = {
 				destination.type == 'internal' =>
 					select(
 						destination.internal->._type == 'blog.post' => '/${BLOG_DIR}/',
-						'/'
-					) + destination.internal->.metadata.slug.current,
+						''
+					) + select(
+						destination.internal->.metadata.slug.current == 'index' => '/',
+						'/' + destination.internal->.metadata.slug.current
+					),
 				destination.external
 			),
 			'permanent': true

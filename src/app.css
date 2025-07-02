@@ -5,9 +5,15 @@
 
 	--color-background: var(--background);
 	--color-foreground: var(--foreground);
+
+	--spacing-lh: 1lh;
+	--spacing-ch: 1ch;
 }
 
 @custom-variant hover (&:hover);
+
+@variant header-open (body:has(#header-open:checked) &);
+@variant header-not-open (body:has(#header-open:not(:checked)) &);
 
 @variant headings (& :is(h1, h2, h3, h4, h5, h6));
 
@@ -67,13 +73,34 @@
 		}
 	}
 
-	summary {
+	summary,
+	label {
 		cursor: pointer;
 	}
 
 	a {
 		color: revert;
 	}
+}
+
+/* ctas, links */
+
+@utility action-base {
+	cursor: pointer;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	gap: 0.5em;
+	padding: 0.25em 0.5em;
+}
+
+@utility action {
+	@apply action-base bg-foreground text-background;
+}
+
+@utility link {
+	@apply underline hover:decoration-2;
 }
 
 /* components */
@@ -107,8 +134,66 @@
 	}
 }
 
-@utility link {
-	@apply underline hover:decoration-2;
+@utility carousel {
+	display: grid;
+	grid-auto-flow: column;
+	grid-auto-columns: min(var(--container-sm), 80vw);
+
+	anchor-name: --carousel;
+	overflow-x: auto;
+	scroll-behavior: smooth;
+	scroll-snap-type: x mandatory;
+	scroll-marker-group: after;
+
+	&::scroll-button(*) {
+		cursor: pointer;
+		position: absolute;
+		position-anchor: --carousel;
+		top: calc(anchor(center));
+	}
+
+	&::scroll-button(left) {
+		content: 'Prev' / 'Scroll left';
+		left: calc(anchor(left));
+	}
+
+	&::scroll-button(right) {
+		content: 'Next' / 'Scroll right';
+		right: calc(anchor(right));
+	}
+
+	&::scroll-marker-group {
+		position: absolute;
+		position-anchor: --carousel;
+		top: calc(anchor(bottom));
+		justify-self: center;
+		display: flex;
+		align-items: center;
+		gap: 0.5ch;
+	}
+
+	& > * {
+		scroll-snap-align: center;
+
+		&::scroll-marker {
+			content: '';
+			display: inline-block;
+			width: 1ch;
+			height: 1ch;
+			border: 1px solid;
+		}
+
+		&::scroll-marker:target-current {
+			background-color: currentColor;
+		}
+	}
+}
+
+/* utilities */
+
+@utility full-bleed {
+	width: 100vw;
+	margin-inline: calc(50% - 50vw);
 }
 
 /* anims */

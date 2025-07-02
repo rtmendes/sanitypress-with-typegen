@@ -35,6 +35,13 @@ export default defineType({
 			group: 'navigation',
 		}),
 		defineField({
+			name: 'ctas',
+			title: 'Call-to-actions',
+			type: 'array',
+			of: [{ type: 'cta' }],
+			group: 'navigation',
+		}),
+		defineField({
 			name: 'footer',
 			type: 'reference',
 			to: [{ type: 'navigation' }],

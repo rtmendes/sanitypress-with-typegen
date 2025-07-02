@@ -27,6 +27,7 @@ export default defineType({
 				{ type: 'accordion-list' },
 				{ type: 'custom-html' },
 				{ type: 'prose' },
+				{ type: 'testimonial-list' },
 			],
 		}),
 		defineField({

@@ -9,6 +9,7 @@ export default function ({
 	internal,
 	external,
 	params,
+	children,
 	...props
 }: Omit<Link, 'internal'> & {
 	_key: string
@@ -16,7 +17,7 @@ export default function ({
 } & React.ComponentProps<typeof NextLink>) {
 	const linkProps: Omit<LinkProps, 'href'> | React.ComponentProps<'a'> = {
 		...props,
-		children: label || internal?.title || external,
+		children: children || label || internal?.title || external,
 	}
 
 	if (type === 'internal' && internal?.slug)

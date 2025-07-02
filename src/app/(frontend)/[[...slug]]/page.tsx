@@ -3,6 +3,7 @@ import { client } from '@/sanity/lib/client'
 import { groq } from 'next-sanity'
 import { notFound } from 'next/navigation'
 import ModulesResolver from '@/ui/modules'
+import { MODULES_QUERY } from '@/sanity/lib/queries'
 import type { Metadata } from 'next'
 import type { PAGE_QUERYResult } from '@/sanity/types'
 
@@ -45,7 +46,7 @@ export async function generateStaticParams() {
 			*[
 				_type == 'page'
 				&& defined(metadata.slug.current)
-				&& !(metadata.slug.current in ['not-found'])
+				&& !(metadata.slug.current in ['404'])
 			].metadata.slug.current
 		`,
 	)
@@ -67,26 +68,6 @@ async function getPage(slug?: string[]) {
 const PAGE_QUERY = groq`
 	*[_type == 'page' && metadata.slug.current == $slug][0]{
 		...,
-		modules[]{
-			...,
-			_type == 'prose' => {
-				content[]{
-					...,
-					_type == 'image' => {
-						...,
-						asset->{
-							...,
-							metadata
-						}
-					}
-				},
-				'headings': select(
-					tableOfContents in ['left', 'right'] => content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{
-						style,
-						'text': pt::text(@)
-					}
-				),
-			}
-		}
+		modules[]{ ${MODULES_QUERY} }
 	}
 `

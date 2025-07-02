@@ -137,7 +137,7 @@
 			"\ttype: 'array',",
 			"\tof: [",
 			"\t\tdefineArrayMember({",
-			"\t\t\tname: '',",
+			"\t\t\tname: 'item',",
 			"\t\t\ttype: 'object',",
 			"\t\t\tfields: [",
 			"\t\t\t\tdefineField({",

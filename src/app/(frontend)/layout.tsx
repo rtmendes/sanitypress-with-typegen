@@ -4,6 +4,7 @@ import Header from '@/ui/header'
 import Footer from '@/ui/footer'
 import VisualEditing from '@/ui/modules/visual-editing'
 import { Analytics } from '@vercel/analytics/next'
+import { dev } from '@/lib/env'
 import type { Metadata } from 'next'
 import '@/app.css'
 
@@ -29,7 +30,7 @@ export default async function RootLayout({
 					<Footer />
 
 					<VisualEditing />
-					<Analytics />
+					{!dev && <Analytics />}
 				</body>
 			</ViewTransition>
 		</html>

@@ -21,17 +21,49 @@ export const LINK_QUERY = /* groq */ `
 export const NAVIGATION_QUERY = /* groq */ `
 	items[]{
 		${LINK_QUERY},
-		link{ ${LINK_QUERY} },
-		links[]{ ${LINK_QUERY} },
+		defined(link) => { link{ ${LINK_QUERY} } },
+		defined(links[]) => { links[]{ ${LINK_QUERY} } },
 	}
 `
 
 const SITE_QUERY = groq`*[_type == 'site'][0]{
 	...,
 	header->{ ${NAVIGATION_QUERY} },
+	ctas[]{
+		...,
+		link{ ${LINK_QUERY} },
+	},
 	footer->{ ${NAVIGATION_QUERY} },
 	social->{ ${NAVIGATION_QUERY} },
 }`
+
+export const MODULES_QUERY = /* groq */ `
+	...,
+	_type == 'prose' => {
+		content[]{
+			...,
+			_type == 'image' => {
+				...,
+				asset->{
+					...,
+					metadata
+				}
+			}
+		},
+		'headings': select(
+			tableOfContents in ['left', 'right'] => content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{
+				style,
+				'text': pt::text(@)
+			}
+		),
+	},
+	_type == 'testimonial-list' => {
+		testimonials[]{
+			...,
+			_type == 'reference' => @->
+		}
+	},
+`
 
 /* queries */
 

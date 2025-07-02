@@ -7,6 +7,7 @@ import navigation from './documents/navigation'
 import redirect from './documents/redirect'
 
 // objects
+import cta from './objects/cta'
 import link from './objects/link'
 import linkList from './objects/link.list'
 import metadata from './objects/metadata'
@@ -15,6 +16,10 @@ import metadata from './objects/metadata'
 import accordionList from './modules/accordion-list'
 import customHtml from './modules/custom-html'
 import prose from './modules/prose'
+import testimonialList from './modules/testimonial-list'
+
+// references
+import testimonial from './documents/testimonial'
 
 export const schema: SchemaPluginOptions = {
 	types: [
@@ -25,6 +30,7 @@ export const schema: SchemaPluginOptions = {
 		redirect,
 
 		// objects
+		cta,
 		link,
 		linkList,
 		metadata,
@@ -33,6 +39,10 @@ export const schema: SchemaPluginOptions = {
 		accordionList,
 		customHtml,
 		prose,
+		testimonialList,
+
+		// references
+		testimonial,
 	],
 
 	templates: (templates) =>

@@ -1,15 +1,13 @@
+import { getSite } from '@/sanity/lib/queries'
 import SanityLink from '@/ui/sanity-link'
 import Dropdown from './dropdown'
-import type { SITE_QUERYResult } from '@/sanity/types'
 
-export default function ({
-	navigation,
-}: {
-	navigation?: NonNullable<SITE_QUERYResult>['header']
-}) {
+export default async function () {
+	const site = await getSite()
+
 	return (
-		<nav className="flex gap-4">
-			{navigation?.items?.map((item) => {
+		<nav className="max-md:header-not-open:hidden flex gap-x-4 [grid-area:navigation] max-md:flex-col">
+			{site?.header?.items?.map((item) => {
 				switch (item._type) {
 					case 'link':
 						return (

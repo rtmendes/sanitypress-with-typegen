@@ -22,6 +22,9 @@ export default structureTool({
 				S.divider().title('Navigation'),
 				S.documentTypeListItem('navigation'),
 				S.documentTypeListItem('redirect').title('Redirects'),
+
+				S.divider().title('References'),
+				S.documentTypeListItem('testimonial').title('Testimonials'),
 			]),
 })
 
