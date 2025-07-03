@@ -9,7 +9,7 @@ export default function ({ intro, testimonials }: Partial<any>) {
 
 			<ul className="carousel max-md:full-bleed gap-4 max-md:px-4">
 				{testimonials?.map((testimonial: any) => (
-					<li className="flex flex-col gap-4 border p-4" key={testimonial._key}>
+					<li className="flex flex-col gap-4" key={testimonial._key}>
 						<blockquote className="prose">
 							<PortableText value={testimonial.quote} />
 						</blockquote>

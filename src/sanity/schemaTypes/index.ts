@@ -11,6 +11,7 @@ import cta from './objects/cta'
 import link from './objects/link'
 import linkList from './objects/link.list'
 import metadata from './objects/metadata'
+import moduleAttributes from './objects/module-attributes'
 
 // modules
 import accordionList from './modules/accordion-list'
@@ -34,6 +35,7 @@ export const schema: SchemaPluginOptions = {
 		link,
 		linkList,
 		metadata,
+		moduleAttributes,
 
 		// modules
 		accordionList,

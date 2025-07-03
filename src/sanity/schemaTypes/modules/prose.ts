@@ -7,7 +7,13 @@ export default defineType({
 	title: 'Prose',
 	type: 'object',
 	icon: VscSymbolKeyword,
+	groups: [{ name: 'content', default: true }, { name: 'options' }],
 	fields: [
+		defineField({
+			name: 'attributes',
+			type: 'module-attributes',
+			group: 'options',
+		}),
 		defineField({
 			name: 'content',
 			type: 'array',
@@ -36,15 +42,16 @@ export default defineType({
 					],
 				},
 			],
+			group: 'content',
 		}),
 		defineField({
 			name: 'tableOfContents',
 			title: 'Table of contents',
 			type: 'string',
 			options: {
-				list: ['none', 'left', 'right'],
+				list: ['left', 'right'],
 			},
-			initialValue: 'none',
+			group: 'options',
 		}),
 	],
 	preview: {

@@ -3,7 +3,7 @@ import CustomHTML from './custom-html'
 import Prose from './prose'
 import TestimonialList from './testimonial-list'
 
-import { createDataAttribute } from 'next-sanity'
+import { createDataAttribute, stegaClean } from 'next-sanity'
 import type { PAGE_QUERYResult } from '@/sanity/types'
 
 const MODULES_MAP = {
@@ -36,4 +36,21 @@ export default function ModulesResolver({ page }: { page: PAGE_QUERYResult }) {
 			})}
 		</>
 	)
+}
+
+export type ModuleProps = Partial<
+	NonNullable<NonNullable<PAGE_QUERYResult>['modules']>[number]
+>
+
+// TODO: add type
+export function moduleAttributes({
+	_key,
+	_type,
+	attributes,
+}: ModuleProps & Record<string, any>) {
+	return {
+		id: stegaClean(attributes?.uid) || `module-${_key}`,
+		'data-module': _type,
+		hidden: attributes?.hidden,
+	}
 }

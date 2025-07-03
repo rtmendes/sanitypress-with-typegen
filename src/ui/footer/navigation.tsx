@@ -15,6 +15,7 @@ export default async function () {
 									{...(item as unknown as React.ComponentProps<
 										typeof SanityLink
 									>)}
+									className="link"
 								/>
 							)
 

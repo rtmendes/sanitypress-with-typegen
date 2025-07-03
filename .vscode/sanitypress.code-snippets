@@ -61,14 +61,14 @@
 		],
 	},
 
-	"module options field": {
-		"prefix": ["field-module-options", "module-options-field"],
+	"module attributes field": {
+		"prefix": ["field-module-attributes", "module-attributes-field"],
 		"scope": "typescript,typescriptreact",
 		"body": [
 			"defineField({",
-			"\tname: 'options',",
-			"\ttitle: 'Module options',",
-			"\ttype: 'module-options',",
+			"\tname: 'attributes',",
+			"\ttitle: 'Module attributes',",
+			"\ttype: 'module-attributes',",
 			"\tgroup: 'options',",
 			"}),",
 		],

@@ -1,3 +1,4 @@
+import { moduleAttributes, type ModuleProps } from '..'
 import TableOfContents from './table-of-contents'
 import { PortableText, stegaClean } from 'next-sanity'
 import AnchoredHeading from './anchored-heading'
@@ -9,11 +10,18 @@ export default function ({
 	content,
 	tableOfContents,
 	headings,
-}: Prose & React.ComponentProps<typeof TableOfContents>) {
+	...props
+}: Prose & React.ComponentProps<typeof TableOfContents> & ModuleProps) {
 	const toc = stegaClean(tableOfContents)
 
 	return (
-		<section className="section flex gap-4 max-md:flex-col md:items-start">
+		<section
+			className={cn(
+				'section',
+				toc && 'flex gap-4 max-md:flex-col md:items-start',
+			)}
+			{...moduleAttributes(props)}
+		>
 			{(toc === 'left' || toc === 'right') && (
 				<TableOfContents
 					headings={headings}
