@@ -1,4 +1,4 @@
-import { moduleAttributes, type ModuleProps } from '..'
+import { moduleAttributes } from '..'
 import TableOfContents from './table-of-contents'
 import { PortableText, stegaClean } from 'next-sanity'
 import AnchoredHeading from './anchored-heading'
@@ -11,7 +11,7 @@ export default function ({
 	tableOfContents,
 	headings,
 	...props
-}: Prose & React.ComponentProps<typeof TableOfContents> & ModuleProps) {
+}: Prose & React.ComponentProps<typeof TableOfContents>) {
 	const toc = stegaClean(tableOfContents)
 
 	return (

@@ -4,7 +4,7 @@ import Prose from './prose'
 import TestimonialList from './testimonial-list'
 
 import { createDataAttribute, stegaClean } from 'next-sanity'
-import type { PAGE_QUERYResult } from '@/sanity/types'
+import type { ModuleAttributes, PAGE_QUERYResult } from '@/sanity/types'
 
 const MODULES_MAP = {
 	'accordion-list': AccordionList,
@@ -19,7 +19,9 @@ export default function ModulesResolver({ page }: { page: PAGE_QUERYResult }) {
 			{page?.modules?.map((module) => {
 				if (!module) return null
 
-				const Module = MODULES_MAP[module._type as keyof typeof MODULES_MAP]
+				const Module = MODULES_MAP[
+					module._type as keyof typeof MODULES_MAP
+				] as React.ComponentType
 
 				return (
 					<Module
@@ -29,7 +31,6 @@ export default function ModulesResolver({ page }: { page: PAGE_QUERYResult }) {
 							type: page._type,
 							path: `page[_key == "${module._key}"]`,
 						})}
-						// @ts-expect-error
 						key={module._key}
 					/>
 				)
@@ -40,14 +41,9 @@ export default function ModulesResolver({ page }: { page: PAGE_QUERYResult }) {
 
 export type ModuleProps = Partial<
 	NonNullable<NonNullable<PAGE_QUERYResult>['modules']>[number]
->
+> & { attributes?: ModuleAttributes }
 
-// TODO: add type
-export function moduleAttributes({
-	_key,
-	_type,
-	attributes,
-}: ModuleProps & Record<string, any>) {
+export function moduleAttributes({ _key, _type, attributes }: ModuleProps) {
 	return {
 		id: stegaClean(attributes?.uid) || `module-${_key}`,
 		'data-module': _type,

@@ -19,8 +19,6 @@ export default async function () {
 
 				<Navigation />
 				<CTAList
-					// TODO: fix this when Sanity TypeGen issue is resolved
-					// @ts-ignore
 					ctas={site?.ctas}
 					className="max-md:header-not-open:hidden [grid-area:ctas]"
 				/>

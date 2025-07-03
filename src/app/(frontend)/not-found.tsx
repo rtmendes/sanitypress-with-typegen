@@ -3,6 +3,7 @@ import ModulesResolver from '@/ui/modules'
 import { MODULES_QUERY } from '@/sanity/lib/queries'
 import { sanityFetchLive } from '@/sanity/lib/live'
 import type { Metadata } from 'next'
+import type { NOT_FOUND_QUERYResult } from '@/sanity/types'
 
 export default async function () {
 	const page = await getPage()
@@ -26,8 +27,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 async function getPage() {
-	// TODO: add type
-	return await sanityFetchLive<any>({
+	return await sanityFetchLive<NOT_FOUND_QUERYResult>({
 		query: NOT_FOUND_QUERY,
 	})
 }

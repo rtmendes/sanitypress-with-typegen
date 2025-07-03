@@ -23,9 +23,7 @@ export default async function (props: React.ComponentProps<'nav'>) {
 
 						return (
 							<SanityLink
-								{...(link as unknown as React.ComponentProps<
-									typeof SanityLink
-								>)}
+								{...link}
 								aria-label={link.label || url}
 								key={link._key}
 							>

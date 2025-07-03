@@ -10,14 +10,7 @@ export default async function () {
 				{site?.footer?.items?.map((item) => {
 					switch (item._type) {
 						case 'link':
-							return (
-								<SanityLink
-									{...(item as unknown as React.ComponentProps<
-										typeof SanityLink
-									>)}
-									className="link"
-								/>
-							)
+							return <SanityLink {...item} className="link" />
 
 						default:
 							return null

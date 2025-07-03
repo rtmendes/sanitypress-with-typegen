@@ -10,23 +10,10 @@ export default async function () {
 			{site?.header?.items?.map((item) => {
 				switch (item._type) {
 					case 'link':
-						return (
-							<SanityLink
-								className="link"
-								{...(item as unknown as React.ComponentProps<
-									typeof SanityLink
-								>)}
-								key={item._key}
-							/>
-						)
+						return <SanityLink className="link" {...item} key={item._key} />
 
 					case 'link.list':
-						return (
-							<Dropdown
-								{...(item as unknown as React.ComponentProps<typeof Dropdown>)}
-								key={item._key}
-							/>
-						)
+						return <Dropdown {...item} key={item._key} />
 
 					default:
 						return null
