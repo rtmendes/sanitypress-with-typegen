@@ -4,7 +4,7 @@ import type { SITE_QUERYResult } from '@/sanity/types'
 
 /* fragments */
 
-export const LINK_QUERY = /* groq */ `
+const LINK_QUERY = /* groq */ `
 	...,
 	type == 'internal' => {
 		internal->{
@@ -18,7 +18,7 @@ export const LINK_QUERY = /* groq */ `
 	}
 `
 
-export const NAVIGATION_QUERY = /* groq */ `
+const NAVIGATION_QUERY = /* groq */ `
 	items[]{
 		${LINK_QUERY},
 		defined(link) => { link{ ${LINK_QUERY} } },
@@ -55,7 +55,7 @@ export const MODULES_QUERY = /* groq */ `
 				style,
 				'text': pt::text(@)
 			}
-		),
+		)
 	},
 	_type == 'testimonial-list' => {
 		testimonials[]{

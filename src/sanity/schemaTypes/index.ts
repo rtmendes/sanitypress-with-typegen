@@ -3,6 +3,7 @@ import type { SchemaPluginOptions } from 'sanity'
 // documents
 import site from './documents/site'
 import page from './documents/page'
+import blogPost from './documents/blog.post'
 import navigation from './documents/navigation'
 import redirect from './documents/redirect'
 
@@ -27,6 +28,7 @@ export const schema: SchemaPluginOptions = {
 		// documents
 		site,
 		page,
+		blogPost,
 		navigation,
 		redirect,
 

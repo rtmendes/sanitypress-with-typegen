@@ -4,9 +4,9 @@
 
 - [x] Sanity Images
   - [ ] responsive images (breakpoints)
+- [ ] global modules OR references to modules documents?
 - [ ] modules list section (separate page?)
 - [ ] error handling
-- [ ] /blog
 
 ## Not included
 

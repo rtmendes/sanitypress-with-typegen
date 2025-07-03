@@ -1,6 +1,7 @@
 import { defineField, defineType } from 'sanity'
 import { VscSymbolKeyword } from 'react-icons/vsc'
 import { getBlockText } from '@/lib/utils'
+import { image } from '../documents/fragments'
 
 export default defineType({
 	name: 'prose',
@@ -17,31 +18,7 @@ export default defineType({
 		defineField({
 			name: 'content',
 			type: 'array',
-			of: [
-				{ type: 'block' },
-				{
-					type: 'image',
-					options: {
-						hotspot: true,
-					},
-					fields: [
-						defineField({
-							name: 'alt',
-							type: 'string',
-						}),
-						defineField({
-							name: 'figcaption',
-							type: 'array',
-							of: [
-								{
-									type: 'block',
-									styles: [{ title: 'Normal', value: 'normal' }],
-								},
-							],
-						}),
-					],
-				},
-			],
+			of: [{ type: 'block' }, image],
 			group: 'content',
 		}),
 		defineField({
