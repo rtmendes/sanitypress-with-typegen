@@ -47,10 +47,10 @@ export default function ({
 						},
 						types: {
 							image: ({ value: { figcaption, ...image } }) => (
-								<figure className="text-center">
+								<figure className="space-y-2 text-center">
 									<Img className="mx-auto" image={image} alt={image.alt} />
 									{figcaption && (
-										<figcaption>
+										<figcaption className="text-foreground/50 italic">
 											<PortableText value={figcaption} />
 										</figcaption>
 									)}

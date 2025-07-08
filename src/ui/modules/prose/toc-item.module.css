@@ -1,0 +1,3 @@
+.inView:not(:has(~ .inView)) {
+	font-weight: bold;
+}
