@@ -10,7 +10,7 @@ export default async function () {
 			{site?.header?.items?.map((item) => {
 				switch (item._type) {
 					case 'link':
-						return <SanityLink className="link" {...item} key={item._key} />
+						return <SanityLink link={item} className="link" key={item._key} />
 
 					case 'link.list':
 						return <Dropdown {...item} key={item._key} />

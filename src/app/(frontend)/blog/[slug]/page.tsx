@@ -55,11 +55,19 @@ async function getPost(slug: string) {
 	return await sanityFetchLive<BLOG_POST_QUERYResult>({
 		query: BLOG_POST_QUERY,
 		params: { slug },
+		tags: ['blog-post'],
 	})
 }
 
 const BLOG_POST_QUERY = groq`*[_type == 'blog.post' && metadata.slug.current == $slug][0]{
 	...,
+	content[]{
+		...,
+		_type == 'image' => {
+			...,
+			asset->
+		}
+	},
 	'headings': content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{
 			style,
 			'text': pt::text(@)

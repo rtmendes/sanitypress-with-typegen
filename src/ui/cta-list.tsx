@@ -18,7 +18,7 @@ export default function ({
 		>
 			{ctas.map((cta: Cta & { _key: string }) => (
 				<SanityLink
-					{...cta.link}
+					link={cta.link}
 					className={stegaClean(cta.style)}
 					key={cta._key}
 				/>

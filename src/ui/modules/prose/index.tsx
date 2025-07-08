@@ -2,7 +2,7 @@ import { moduleAttributes } from '..'
 import TableOfContents from './table-of-contents'
 import { PortableText, stegaClean } from 'next-sanity'
 import AnchoredHeading from './anchored-heading'
-import Img from '@/ui/img'
+import Image from './image'
 import { cn } from '@/lib/utils'
 import type { Prose } from '@/sanity/types'
 
@@ -46,16 +46,7 @@ export default function ({
 							h6: (node) => <AnchoredHeading as="h6" {...node} />,
 						},
 						types: {
-							image: ({ value: { figcaption, ...image } }) => (
-								<figure className="space-y-2 text-center">
-									<Img className="mx-auto" image={image} alt={image.alt} />
-									{figcaption && (
-										<figcaption className="text-foreground/50 italic">
-											<PortableText value={figcaption} />
-										</figcaption>
-									)}
-								</figure>
-							),
+							image: Image,
 						},
 					}}
 				/>

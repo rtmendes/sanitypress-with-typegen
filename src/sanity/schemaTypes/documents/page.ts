@@ -25,6 +25,8 @@ export default defineType({
 			group: 'content',
 			of: [
 				{ type: 'accordion-list' },
+				{ type: 'blog.frontpage' },
+				{ type: 'blog-post-list' },
 				{ type: 'custom-html' },
 				{ type: 'prose' },
 				{ type: 'testimonial-list' },

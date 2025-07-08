@@ -33,7 +33,7 @@ export default defineType({
 	],
 	preview: {
 		select: {
-			title: 'metadata.title',
+			title: 'title',
 			subtitle: 'publishDate',
 		},
 	},

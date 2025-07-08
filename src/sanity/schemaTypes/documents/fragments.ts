@@ -4,6 +4,7 @@ export const image = defineArrayMember({
 	type: 'image',
 	options: {
 		hotspot: true,
+		metadata: ['lqip'],
 	},
 	fields: [
 		defineField({

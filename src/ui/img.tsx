@@ -17,11 +17,13 @@ export default function ({
 	image,
 	...props
 }: {
-	image?: {
-		asset: SanityImageAsset
-		crop: SanityImageCrop
-		hotspot: SanityImageHotspot
-	}
+	image?:
+		| {
+				asset: SanityImageAsset
+				crop?: SanityImageCrop
+				hotspot?: SanityImageHotspot
+		  }
+		| any
 } & Omit<ImageProps, 'src'>) {
 	if (!image?.asset) return null
 

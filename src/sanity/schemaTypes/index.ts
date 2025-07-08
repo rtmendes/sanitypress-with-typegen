@@ -16,6 +16,8 @@ import moduleAttributes from './objects/module-attributes'
 
 // modules
 import accordionList from './modules/accordion-list'
+import blogFrontpage from './modules/blog.frontpage'
+import blogPostList from './modules/blog-post-list'
 import customHtml from './modules/custom-html'
 import prose from './modules/prose'
 import testimonialList from './modules/testimonial-list'
@@ -41,6 +43,8 @@ export const schema: SchemaPluginOptions = {
 
 		// modules
 		accordionList,
+		blogFrontpage,
+		blogPostList,
 		customHtml,
 		prose,
 		testimonialList,

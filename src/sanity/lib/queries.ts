@@ -70,5 +70,6 @@ export const MODULES_QUERY = /* groq */ `
 export async function getSite() {
 	return await sanityFetchLive<SITE_QUERYResult>({
 		query: SITE_QUERY,
+		tags: ['site'],
 	})
 }

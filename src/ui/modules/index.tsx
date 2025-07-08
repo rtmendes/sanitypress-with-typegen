@@ -1,4 +1,6 @@
 import AccordionList from './accordion-list'
+import BlogFrontpage from './blog/blog.frontpage'
+import BlogPostList from './blog/blog-post-list'
 import CustomHTML from './custom-html'
 import Prose from './prose'
 import TestimonialList from './testimonial-list'
@@ -8,6 +10,8 @@ import type { ModuleAttributes, PAGE_QUERYResult } from '@/sanity/types'
 
 const MODULES_MAP = {
 	'accordion-list': AccordionList,
+	'blog.frontpage': BlogFrontpage,
+	'blog-post-list': BlogPostList,
 	'custom-html': CustomHTML,
 	prose: Prose,
 	'testimonial-list': TestimonialList,

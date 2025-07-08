@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useState } from 'react'
 import { cn, slug } from '@/lib/utils'
 import css from './toc-item.module.css'
 
@@ -15,19 +15,26 @@ export default function ({
 	if (!heading.text) return null
 
 	const ref = useRef<HTMLLIElement>(null)
+	const [windowHalfHeight, setWindowHalfHeight] = useState(0)
 
+	// update window height
+	useEffect(() => {
+		const updateWindowHalfHeight = () => {
+			setWindowHalfHeight(window.innerHeight / 2)
+		}
+		updateWindowHalfHeight()
+
+		window.addEventListener('resize', updateWindowHalfHeight)
+		return () => window.removeEventListener('resize', updateWindowHalfHeight)
+	}, [])
+
+	// add className when heading is in view
 	useEffect(() => {
 		if (typeof document === 'undefined' || !ref.current || !heading.text) return
 
 		const target = ref.current
 			.closest('[data-module="prose"]')
 			?.querySelector(`#${slug(heading.text)}`)!
-
-		// const headerHeight =
-		// 	document.documentElement.style.getPropertyValue('--header-height') ??
-		// 	'0px'
-
-		console.log(window.innerHeight)
 
 		const observer = new IntersectionObserver(
 			(entries) => {
@@ -41,14 +48,13 @@ export default function ({
 			},
 			{
 				threshold: 1,
-				rootMargin: `${document.documentElement.scrollHeight}px 0px 0px 0px`,
+				rootMargin: `${document.documentElement.scrollHeight}px 0px -${windowHalfHeight}px 0px`,
 			},
 		)
 
 		if (target) observer.observe(target)
-
 		return () => observer.disconnect()
-	}, [heading])
+	}, [heading, windowHalfHeight])
 
 	return (
 		<li ref={ref}>

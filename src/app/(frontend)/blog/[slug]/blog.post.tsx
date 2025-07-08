@@ -1,5 +1,7 @@
 import { PortableText } from 'next-sanity'
 import TableOfContents from '@/ui/modules/prose/table-of-contents'
+import Date from '@/ui/modules/blog/date'
+import Image from '@/ui/modules/prose/image'
 import type { BLOG_POST_QUERYResult } from '@/sanity/types'
 
 export default function ({ post }: { post: BLOG_POST_QUERYResult }) {
@@ -8,11 +10,9 @@ export default function ({ post }: { post: BLOG_POST_QUERYResult }) {
 	return (
 		<>
 			<section className="section">
-				<header className="text-center">
+				<header className="prose text-center">
 					<h1>{post.title || post.metadata?.title}</h1>
-					{post.publishDate && (
-						<time dateTime={post.publishDate}>{post.publishDate}</time>
-					)}
+					<Date date={post.publishDate} />
 				</header>
 
 				<div className="flex gap-4 max-md:flex-col md:items-start">
@@ -23,7 +23,14 @@ export default function ({ post }: { post: BLOG_POST_QUERYResult }) {
 					/>
 
 					<article className="prose">
-						<PortableText value={post.content ?? []} />
+						<PortableText
+							value={post.content ?? []}
+							components={{
+								types: {
+									image: Image,
+								},
+							}}
+						/>
 					</article>
 				</div>
 			</section>

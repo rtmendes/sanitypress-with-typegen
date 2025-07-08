@@ -7,16 +7,13 @@ export type SanityLinkType = Omit<Link, 'internal'> & {
 }
 
 export default function ({
-	_key,
-	_type,
-	label,
-	type,
-	internal,
-	external,
-	params,
+	link: { label, type, internal, external, params },
 	children,
 	...props
-}: (SanityLinkType | any) & React.ComponentProps<typeof NextLink>) {
+}: { link: SanityLinkType | any } & Omit<
+	React.ComponentProps<typeof NextLink>,
+	'href'
+>) {
 	const linkProps: Omit<LinkProps, 'href'> | React.ComponentProps<'a'> = {
 		...props,
 		children: children || label || internal?.title || external,

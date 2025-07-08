@@ -1,3 +1,5 @@
-.inView:not(:has(~ .inView)) {
-	font-weight: bold;
+@media (width >= 48rem) {
+	.inView:not(:has(~ .inView)) {
+		font-weight: bold;
+	}
 }

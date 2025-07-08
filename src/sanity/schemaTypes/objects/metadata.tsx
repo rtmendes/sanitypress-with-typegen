@@ -36,6 +36,15 @@ export default defineType({
 			validation: (Rule) => Rule.required(),
 		}),
 		defineField({
+			name: 'image',
+			description: 'Used for social sharing previews',
+			type: 'image',
+			options: {
+				hotspot: true,
+				metadata: ['lqip'],
+			},
+		}),
+		defineField({
 			name: 'noIndex',
 			description: 'Prevent search engines from indexing this page',
 			type: 'boolean',

@@ -14,7 +14,7 @@ export default function (props: LinkList | any) {
 			<ul className="md:bg-background anim-fade-to-b top-full left-0 max-md:pl-4 md:absolute md:min-w-max md:border">
 				{links?.map((link, key) => (
 					<li key={key}>
-						<SanityLink className="link" {...link} />
+						<SanityLink link={link} className="link" />
 					</li>
 				))}
 			</ul>
