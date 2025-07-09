@@ -6,8 +6,8 @@ export default defineType({
 	type: 'document',
 	groups: [
 		{ name: 'branding', default: true },
-		{ name: 'info' },
 		{ name: 'navigation' },
+		{ name: 'info' },
 	],
 	fields: [
 		defineField({
@@ -15,18 +15,6 @@ export default defineType({
 			type: 'string',
 			validation: (Rule) => Rule.required(),
 			group: 'branding',
-		}),
-		defineField({
-			name: 'copyright',
-			type: 'array',
-			of: [
-				{
-					type: 'block',
-					styles: [{ title: 'Normal', value: 'normal' }],
-					lists: [],
-				},
-			],
-			group: 'info',
 		}),
 		defineField({
 			name: 'header',
@@ -52,6 +40,18 @@ export default defineType({
 			type: 'reference',
 			to: [{ type: 'navigation' }],
 			group: 'navigation',
+		}),
+		defineField({
+			name: 'copyright',
+			type: 'array',
+			of: [
+				{
+					type: 'block',
+					styles: [{ title: 'Normal', value: 'normal' }],
+					lists: [],
+				},
+			],
+			group: 'info',
 		}),
 	],
 	preview: {

@@ -4,9 +4,7 @@
 
 - [x] Sanity Images
   - [ ] responsive images (breakpoints)
-- [ ] Blog
-  - [ ] authors
-  - [ ] categories
+- [x] Blog
   - [ ] filtering
 - [ ] global modules OR references to modules documents?
 - [ ] modules list section (separate page?)

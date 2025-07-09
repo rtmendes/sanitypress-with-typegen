@@ -1,9 +1,14 @@
 import { PortableText } from 'next-sanity'
 import TableOfContents from '@/ui/modules/prose/table-of-contents'
 import Author from '@/ui/modules/blog/author'
+import Categories from '@/ui/modules/blog/categories'
 import Date from '@/ui/modules/blog/date'
 import Image from '@/ui/modules/prose/image'
-import type { BLOG_POST_QUERYResult, Person } from '@/sanity/types'
+import type {
+	BLOG_POST_QUERYResult,
+	Person,
+	BlogCategory,
+} from '@/sanity/types'
 
 export default function ({ post }: { post: BLOG_POST_QUERYResult }) {
 	if (!post) return null
@@ -11,11 +16,12 @@ export default function ({ post }: { post: BLOG_POST_QUERYResult }) {
 	return (
 		<>
 			<section className="section">
-				<header className="prose text-center">
-					<h1>{post.title || post.metadata?.title}</h1>
+				<header className="text-center">
+					<h1 className="h1">{post.title || post.metadata?.title}</h1>
 					<div className="flex flex-wrap items-center justify-center gap-x-4">
 						<Author author={post.author as unknown as Person} />
 						<Date date={post.publishDate} />
+						<Categories categories={post.category as BlogCategory[]} />
 					</div>
 				</header>
 

@@ -19,6 +19,7 @@ export default async function ({
 	return (
 		<>
 			<BlogPost post={post} />
+			{/* TODO: setup global modules */}
 		</>
 	)
 }
@@ -77,6 +78,10 @@ const BLOG_POST_QUERY = groq`*[_type == 'blog.post' && metadata.slug.current == 
 	'headings': content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{
 		style,
 		'text': pt::text(@)
+	},
+	category[]->{
+		title,
+		slug
 	},
 	author->{
 		name,

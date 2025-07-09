@@ -12,10 +12,11 @@ export default structureTool({
 				singleton(S, 'site').icon(VscServerProcess),
 
 				S.divider().title('Pages'),
-				S.documentTypeListItem('page').title('All pages'),
+				S.documentTypeListItem('page').title('Pages'),
 
 				S.divider().title('Blog'),
-				S.documentTypeListItem('blog.post').title('All posts'),
+				S.documentTypeListItem('blog.post').title('Posts'),
+				S.documentTypeListItem('blog.category').title('Categories'),
 
 				S.divider().title('Navigation'),
 				S.documentTypeListItem('navigation'),

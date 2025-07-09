@@ -2,7 +2,8 @@ import SanityLink from '@/ui/sanity-link'
 import Img from '@/ui/img'
 import Date from './date'
 import Author from './author'
-import type { BlogPost, Person } from '@/sanity/types'
+import type { BlogCategory, Person, BlogPost } from '@/sanity/types'
+import Categories from './categories'
 
 export default function ({ post }: { post: BlogPost }) {
 	return (
@@ -31,6 +32,7 @@ export default function ({ post }: { post: BlogPost }) {
 			<div className="flex flex-wrap items-center gap-x-4">
 				<Author author={post.author as unknown as Person} />
 				<Date date={post.publishDate} />
+				<Categories categories={post.category as unknown as BlogCategory[]} />
 			</div>
 		</li>
 	)

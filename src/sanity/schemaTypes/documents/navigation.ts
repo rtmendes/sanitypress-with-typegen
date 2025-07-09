@@ -1,5 +1,5 @@
 import { defineField, defineType } from 'sanity'
-import { VscMap, VscLayoutMenubar, VscLayoutPanelLeft } from 'react-icons/vsc'
+import { VscMap, VscLayoutMenubar, VscLayoutPanelOff } from 'react-icons/vsc'
 import { IoShareSocialOutline } from 'react-icons/io5'
 import { count } from '@/lib/utils'
 
@@ -36,7 +36,7 @@ export default defineType({
 					: t.includes('header')
 						? VscLayoutMenubar
 						: t.includes('footer')
-							? VscLayoutPanelLeft
+							? VscLayoutPanelOff
 							: null,
 			}
 		},

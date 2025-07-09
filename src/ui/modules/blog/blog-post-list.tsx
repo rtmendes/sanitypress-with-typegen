@@ -33,6 +33,10 @@ export default async function ({ intro, limit = 6 }: BlogPostList) {
 const BLOG_POST_LIST_QUERY = groq`
 	*[_type == 'blog.post']|order(publishDate desc)[0...$limit]{
 		...,
+		category[]->{
+			title,
+			slug
+		},
 		author->{
 			name,
 			image{

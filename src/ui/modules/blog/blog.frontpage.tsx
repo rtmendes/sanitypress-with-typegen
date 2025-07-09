@@ -16,7 +16,7 @@ export default async function ({ intro }: BlogFrontpage) {
 				<PortableText value={intro ?? []} />
 			</header>
 
-			<ul className="grid grid-cols-[repeat(auto-fill,minmax(var(--container-sm),1fr))] gap-4">
+			<ul className="grid gap-4 sm:grid-cols-[repeat(auto-fill,minmax(var(--container-sm),1fr))]">
 				{posts?.map((post) => (
 					<PostPreview
 						post={
@@ -35,6 +35,10 @@ export default async function ({ intro }: BlogFrontpage) {
 const BLOG_FRONTPAGE_QUERY = groq`
 	*[_type == 'blog.post']|order(publishDate desc){
 		...,
+		category[]->{
+			title,
+			slug
+		},
 		author->{
 			name,
 			image{
