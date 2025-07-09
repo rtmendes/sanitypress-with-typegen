@@ -26,6 +26,12 @@ export default defineType({
 			group: 'content',
 		}),
 		defineField({
+			name: 'author',
+			type: 'reference',
+			to: [{ type: 'person' }],
+			group: 'content',
+		}),
+		defineField({
 			name: 'metadata',
 			type: 'metadata',
 			group: 'metadata',

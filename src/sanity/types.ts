@@ -417,7 +417,34 @@ export type BlogPost = {
 		  }
 	>
 	publishDate?: string
+	author?: {
+		_ref: string
+		_type: 'reference'
+		_weak?: boolean
+		[internalGroqTypeReferenceTo]?: 'person'
+	}
 	metadata?: Metadata
+}
+
+export type Person = {
+	_id: string
+	_type: 'person'
+	_createdAt: string
+	_updatedAt: string
+	_rev: string
+	name?: string
+	image?: {
+		asset?: {
+			_ref: string
+			_type: 'reference'
+			_weak?: boolean
+			[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+		}
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		_type: 'image'
+	}
 }
 
 export type Page = {
@@ -677,6 +704,7 @@ export type AllSanitySchemaTypes =
 	| Redirect
 	| Link
 	| BlogPost
+	| Person
 	| Page
 	| Metadata
 	| Site
@@ -1073,7 +1101,7 @@ export type PAGE_QUERYResult = {
 
 // Source: ./src/app/(frontend)/blog/[slug]/page.tsx
 // Variable: BLOG_POST_QUERY
-// Query: *[_type == 'blog.post' && metadata.slug.current == $slug][0]{	...,	content[]{		...,		_type == 'image' => {			...,			asset->		}	},	'headings': content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{			style,			'text': pt::text(@)		}}
+// Query: *[_type == 'blog.post' && metadata.slug.current == $slug][0]{	...,	content[]{		...,		_type == 'image' => {			...,			asset->		}	},	'headings': content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{		style,		'text': pt::text(@)	},	author->{		name,		image{			...,			asset->		}	}}
 export type BLOG_POST_QUERYResult = {
 	_id: string
 	_type: 'blog.post'
@@ -1158,6 +1186,37 @@ export type BLOG_POST_QUERYResult = {
 		  }
 	> | null
 	publishDate?: string
+	author: {
+		name: string | null
+		image: {
+			asset: {
+				_id: string
+				_type: 'sanity.imageAsset'
+				_createdAt: string
+				_updatedAt: string
+				_rev: string
+				originalFilename?: string
+				label?: string
+				title?: string
+				description?: string
+				altText?: string
+				sha1hash?: string
+				extension?: string
+				mimeType?: string
+				size?: number
+				assetId?: string
+				uploadId?: string
+				path?: string
+				url?: string
+				metadata?: SanityImageMetadata
+				source?: SanityAssetSourceData
+			} | null
+			media?: unknown
+			hotspot?: SanityImageHotspot
+			crop?: SanityImageCrop
+			_type: 'image'
+		} | null
+	} | null
 	metadata?: Metadata
 	headings: Array<{
 		style:
@@ -1176,7 +1235,7 @@ export type BLOG_POST_QUERYResult = {
 
 // Source: ./src/app/(frontend)/blog/rss.xml/route.ts
 // Variable: BLOG_RSS_QUERY
-// Query: {	'blog': *[_type == 'page' && metadata.slug.current == $blogDir][0]{		metadata	},	'posts': *[_type == 'blog.post' && metadata.noIndex != true]|order(publishDate desc){		title,		content,		publishDate,		metadata	}}
+// Query: {	'blog': *[_type == 'page' && metadata.slug.current == $blogDir][0]{		metadata	},	'posts': *[_type == 'blog.post' && metadata.noIndex != true]|order(publishDate desc){		title,		content,		publishDate,		author->{ name },		metadata	}}
 export type BLOG_RSS_QUERYResult = {
 	blog: {
 		metadata: Metadata | null
@@ -1244,6 +1303,9 @@ export type BLOG_RSS_QUERYResult = {
 			  }
 		> | null
 		publishDate: string | null
+		author: {
+			name: string | null
+		} | null
 		metadata: Metadata | null
 	}>
 }
@@ -2202,7 +2264,7 @@ export type SITE_QUERYResult = {
 
 // Source: ./src/ui/modules/blog/blog-post-list.tsx
 // Variable: BLOG_POST_LIST_QUERY
-// Query: *[_type == 'blog.post']|order(publishDate desc)[0...$limit]{		...,		metadata{			...,			image{				...,				asset->			}		},		'slug': '/blog/' + metadata.slug.current,	}
+// Query: *[_type == 'blog.post']|order(publishDate desc)[0...$limit]{		...,		author->{			name,			image{				...,				asset->			}		},		metadata{			...,			image{				...,				asset->			}		},		'slug': '/blog/' + metadata.slug.current,	}
 export type BLOG_POST_LIST_QUERYResult = Array<{
 	_id: string
 	_type: 'blog.post'
@@ -2271,6 +2333,37 @@ export type BLOG_POST_LIST_QUERYResult = Array<{
 		  }
 	>
 	publishDate?: string
+	author: {
+		name: string | null
+		image: {
+			asset: {
+				_id: string
+				_type: 'sanity.imageAsset'
+				_createdAt: string
+				_updatedAt: string
+				_rev: string
+				originalFilename?: string
+				label?: string
+				title?: string
+				description?: string
+				altText?: string
+				sha1hash?: string
+				extension?: string
+				mimeType?: string
+				size?: number
+				assetId?: string
+				uploadId?: string
+				path?: string
+				url?: string
+				metadata?: SanityImageMetadata
+				source?: SanityAssetSourceData
+			} | null
+			media?: unknown
+			hotspot?: SanityImageHotspot
+			crop?: SanityImageCrop
+			_type: 'image'
+		} | null
+	} | null
 	metadata: {
 		_type: 'metadata'
 		title?: string
@@ -2311,7 +2404,7 @@ export type BLOG_POST_LIST_QUERYResult = Array<{
 
 // Source: ./src/ui/modules/blog/blog.frontpage.tsx
 // Variable: BLOG_FRONTPAGE_QUERY
-// Query: *[_type == 'blog.post']|order(publishDate desc){		...,		metadata{			...,			image{				...,				asset->			}		},		'slug': '/blog/' + metadata.slug.current,	}
+// Query: *[_type == 'blog.post']|order(publishDate desc){		...,		author->{			name,			image{				...,				asset->			}		},		metadata{			...,			image{				...,				asset->			}		},		'slug': '/blog/' + metadata.slug.current,	}
 export type BLOG_FRONTPAGE_QUERYResult = Array<{
 	_id: string
 	_type: 'blog.post'
@@ -2380,6 +2473,37 @@ export type BLOG_FRONTPAGE_QUERYResult = Array<{
 		  }
 	>
 	publishDate?: string
+	author: {
+		name: string | null
+		image: {
+			asset: {
+				_id: string
+				_type: 'sanity.imageAsset'
+				_createdAt: string
+				_updatedAt: string
+				_rev: string
+				originalFilename?: string
+				label?: string
+				title?: string
+				description?: string
+				altText?: string
+				sha1hash?: string
+				extension?: string
+				mimeType?: string
+				size?: number
+				assetId?: string
+				uploadId?: string
+				path?: string
+				url?: string
+				metadata?: SanityImageMetadata
+				source?: SanityAssetSourceData
+			} | null
+			media?: unknown
+			hotspot?: SanityImageHotspot
+			crop?: SanityImageCrop
+			_type: 'image'
+		} | null
+	} | null
 	metadata: {
 		_type: 'metadata'
 		title?: string
@@ -2423,11 +2547,11 @@ import '@sanity/client'
 declare module '@sanity/client' {
 	interface SanityQueries {
 		"\n\t*[_type == 'page' && metadata.slug.current == $slug][0]{\n\t\t...,\n\t\tmodules[]{ \n\t...,\n\t_type == 'prose' => {\n\t\tcontent[]{\n\t\t\t...,\n\t\t\t_type == 'image' => {\n\t\t\t\t...,\n\t\t\t\tasset->{\n\t\t\t\t\t...,\n\t\t\t\t\tmetadata\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t'headings': select(\n\t\t\ttableOfContents in ['left', 'right'] => content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{\n\t\t\t\tstyle,\n\t\t\t\t'text': pt::text(@)\n\t\t\t}\n\t\t)\n\t},\n\t_type == 'testimonial-list' => {\n\t\ttestimonials[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n }\n\t}\n": PAGE_QUERYResult
-		"*[_type == 'blog.post' && metadata.slug.current == $slug][0]{\n\t...,\n\tcontent[]{\n\t\t...,\n\t\t_type == 'image' => {\n\t\t\t...,\n\t\t\tasset->\n\t\t}\n\t},\n\t'headings': content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{\n\t\t\tstyle,\n\t\t\t'text': pt::text(@)\n\t\t}\n}": BLOG_POST_QUERYResult
-		"{\n\t'blog': *[_type == 'page' && metadata.slug.current == $blogDir][0]{\n\t\tmetadata\n\t},\n\t'posts': *[_type == 'blog.post' && metadata.noIndex != true]|order(publishDate desc){\n\t\ttitle,\n\t\tcontent,\n\t\tpublishDate,\n\t\tmetadata\n\t}\n}": BLOG_RSS_QUERYResult
+		"*[_type == 'blog.post' && metadata.slug.current == $slug][0]{\n\t...,\n\tcontent[]{\n\t\t...,\n\t\t_type == 'image' => {\n\t\t\t...,\n\t\t\tasset->\n\t\t}\n\t},\n\t'headings': content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{\n\t\tstyle,\n\t\t'text': pt::text(@)\n\t},\n\tauthor->{\n\t\tname,\n\t\timage{\n\t\t\t...,\n\t\t\tasset->\n\t\t}\n\t}\n}": BLOG_POST_QUERYResult
+		"{\n\t'blog': *[_type == 'page' && metadata.slug.current == $blogDir][0]{\n\t\tmetadata\n\t},\n\t'posts': *[_type == 'blog.post' && metadata.noIndex != true]|order(publishDate desc){\n\t\ttitle,\n\t\tcontent,\n\t\tpublishDate,\n\t\tauthor->{ name },\n\t\tmetadata\n\t}\n}": BLOG_RSS_QUERYResult
 		"\n\t*[_type == 'page' && metadata.slug.current == '404'][0]{\n\t\t...,\n\t\tmodules[]{ \n\t...,\n\t_type == 'prose' => {\n\t\tcontent[]{\n\t\t\t...,\n\t\t\t_type == 'image' => {\n\t\t\t\t...,\n\t\t\t\tasset->{\n\t\t\t\t\t...,\n\t\t\t\t\tmetadata\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t'headings': select(\n\t\t\ttableOfContents in ['left', 'right'] => content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{\n\t\t\t\tstyle,\n\t\t\t\t'text': pt::text(@)\n\t\t\t}\n\t\t)\n\t},\n\t_type == 'testimonial-list' => {\n\t\ttestimonials[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n }\n\t}\n": NOT_FOUND_QUERYResult
 		"*[_type == 'site'][0]{\n\t...,\n\theader->{ \n\titems[]{\n\t\t\n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n,\n\t\tdefined(link) => { link{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n } },\n\t\tdefined(links[]) => { links[]{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n } },\n\t}\n },\n\tctas[]{\n\t\t...,\n\t\tlink{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n },\n\t},\n\tfooter->{ \n\titems[]{\n\t\t\n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n,\n\t\tdefined(link) => { link{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n } },\n\t\tdefined(links[]) => { links[]{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n } },\n\t}\n },\n\tsocial->{ \n\titems[]{\n\t\t\n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n,\n\t\tdefined(link) => { link{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n } },\n\t\tdefined(links[]) => { links[]{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n } },\n\t}\n },\n}": SITE_QUERYResult
-		"\n\t*[_type == 'blog.post']|order(publishDate desc)[0...$limit]{\n\t\t...,\n\t\tmetadata{\n\t\t\t...,\n\t\t\timage{\n\t\t\t\t...,\n\t\t\t\tasset->\n\t\t\t}\n\t\t},\n\t\t'slug': '/blog/' + metadata.slug.current,\n\t}\n": BLOG_POST_LIST_QUERYResult
-		"\n\t*[_type == 'blog.post']|order(publishDate desc){\n\t\t...,\n\t\tmetadata{\n\t\t\t...,\n\t\t\timage{\n\t\t\t\t...,\n\t\t\t\tasset->\n\t\t\t}\n\t\t},\n\t\t'slug': '/blog/' + metadata.slug.current,\n\t}\n": BLOG_FRONTPAGE_QUERYResult
+		"\n\t*[_type == 'blog.post']|order(publishDate desc)[0...$limit]{\n\t\t...,\n\t\tauthor->{\n\t\t\tname,\n\t\t\timage{\n\t\t\t\t...,\n\t\t\t\tasset->\n\t\t\t}\n\t\t},\n\t\tmetadata{\n\t\t\t...,\n\t\t\timage{\n\t\t\t\t...,\n\t\t\t\tasset->\n\t\t\t}\n\t\t},\n\t\t'slug': '/blog/' + metadata.slug.current,\n\t}\n": BLOG_POST_LIST_QUERYResult
+		"\n\t*[_type == 'blog.post']|order(publishDate desc){\n\t\t...,\n\t\tauthor->{\n\t\t\tname,\n\t\t\timage{\n\t\t\t\t...,\n\t\t\t\tasset->\n\t\t\t}\n\t\t},\n\t\tmetadata{\n\t\t\t...,\n\t\t\timage{\n\t\t\t\t...,\n\t\t\t\tasset->\n\t\t\t}\n\t\t},\n\t\t'slug': '/blog/' + metadata.slug.current,\n\t}\n": BLOG_FRONTPAGE_QUERYResult
 	}
 }

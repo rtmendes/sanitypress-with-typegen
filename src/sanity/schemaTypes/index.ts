@@ -23,6 +23,7 @@ import prose from './modules/prose'
 import testimonialList from './modules/testimonial-list'
 
 // references
+import person from './documents/person'
 import testimonial from './documents/testimonial'
 
 export const schema: SchemaPluginOptions = {
@@ -50,6 +51,7 @@ export const schema: SchemaPluginOptions = {
 		testimonialList,
 
 		// references
+		person,
 		testimonial,
 	],
 

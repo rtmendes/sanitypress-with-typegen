@@ -35,6 +35,13 @@ export default async function ({ intro }: BlogFrontpage) {
 const BLOG_FRONTPAGE_QUERY = groq`
 	*[_type == 'blog.post']|order(publishDate desc){
 		...,
+		author->{
+			name,
+			image{
+				...,
+				asset->
+			}
+		},
 		metadata{
 			...,
 			image{

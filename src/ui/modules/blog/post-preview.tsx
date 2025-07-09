@@ -1,7 +1,8 @@
 import SanityLink from '@/ui/sanity-link'
 import Img from '@/ui/img'
 import Date from './date'
-import type { BlogPost } from '@/sanity/types'
+import Author from './author'
+import type { BlogPost, Person } from '@/sanity/types'
 
 export default function ({ post }: { post: BlogPost }) {
 	return (
@@ -27,7 +28,10 @@ export default function ({ post }: { post: BlogPost }) {
 
 			<p className="line-clamp-3">{post.metadata?.description}</p>
 
-			<Date date={post.publishDate} />
+			<div className="flex flex-wrap items-center gap-x-4">
+				<Author author={post.author as unknown as Person} />
+				<Date date={post.publishDate} />
+			</div>
 		</li>
 	)
 }
