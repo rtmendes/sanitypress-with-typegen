@@ -1,17 +1,12 @@
-import imageUrlBuilder from '@sanity/image-url'
-import { client } from '@/sanity/lib/client'
 import { getImageDimensions } from '@sanity/asset-utils'
 import Image from 'next/image'
-import type { SanityImageSource } from '@sanity/image-url/lib/types/types'
 import type {
 	SanityImageAsset,
 	SanityImageCrop,
 	SanityImageHotspot,
 } from '@/sanity/types'
+import { urlFor } from '@/sanity/lib/image'
 import type { ImageProps } from 'next/image'
-
-const builder = imageUrlBuilder(client)
-const urlFor = (source: SanityImageSource) => builder.image(source)
 
 export default function ({
 	image,

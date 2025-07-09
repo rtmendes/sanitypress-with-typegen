@@ -3,6 +3,7 @@ import { client } from '@/sanity/lib/client'
 import { groq } from 'next-sanity'
 import { notFound } from 'next/navigation'
 import BlogPost from './blog.post'
+import { BLOG_DIR } from '@/lib/env'
 import type { Metadata } from 'next'
 import type { BLOG_POST_QUERYResult } from '@/sanity/types'
 
@@ -39,6 +40,11 @@ export async function generateMetadata({
 		},
 		robots: {
 			index: post?.metadata?.noIndex ? false : undefined,
+		},
+		alternates: {
+			types: {
+				'application/rss+xml': `/${BLOG_DIR}/rss.xml`,
+			},
 		},
 	}
 }

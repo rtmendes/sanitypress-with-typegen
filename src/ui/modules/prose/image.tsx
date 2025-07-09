@@ -4,8 +4,6 @@ import { PortableText, type PortableTextTypeComponentProps } from 'next-sanity'
 export default function ({
 	value: { figcaption, ...image },
 }: PortableTextTypeComponentProps<any>) {
-	console.log(image)
-
 	return (
 		<figure className="space-y-2 text-center">
 			<Img className="mx-auto" image={image} alt={image.alt} />

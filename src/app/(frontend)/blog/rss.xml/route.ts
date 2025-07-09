@@ -1,0 +1,78 @@
+import { sanityFetchLive } from '@/sanity/lib/live'
+import { groq } from 'next-sanity'
+import { BLOG_DIR } from '@/lib/env'
+import { escapeHTML, toHTML } from '@portabletext/to-html'
+import { urlFor } from '@/sanity/lib/image'
+import type { BLOG_RSS_QUERYResult } from '@/sanity/types'
+
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL!
+
+export async function GET() {
+	const { blog, posts } = await sanityFetchLive<BLOG_RSS_QUERYResult>({
+		query: BLOG_RSS_QUERY,
+		params: {
+			blogDir: BLOG_DIR,
+		},
+	})
+
+	const rssXML = `<?xml version="1.0" encoding="UTF-8"?>
+		<rss version="2.0">
+			<channel>
+				<title>${blog?.metadata?.title}</title>
+				<description>${blog?.metadata?.description}</description>
+				<link>${BASE_URL}/${BLOG_DIR}</link>
+				<language>en-US</language>
+				<lastBuildDate>${new Date().toISOString()}</lastBuildDate>
+				${posts
+					.map((post) => {
+						const url = `${BASE_URL}/${BLOG_DIR}/${post.metadata?.slug?.current}`
+						return `<item>
+							<title>${post.title}</title>
+							<description>${post.metadata?.description}</description>
+							<link>${url}</link>
+							<guid isPermaLink="true">${url}</guid>
+							${post.publishDate ? `<pubDate>${new Date(post.publishDate).toISOString()}</pubDate>` : ''}
+							${post.metadata?.image ? `<enclosure url="${urlFor(post.metadata.image).format('jpg').url()}" length="0" type="image/jpeg" />` : ''}
+							${
+								post.content
+									? `<content:encoded><![CDATA[
+								${toHTML(post.content, {
+									components: {
+										types: {
+											image: ({
+												value: { alt = '', figcaption, ...value },
+											}) => `<figure>
+												<img src="${urlFor(value).url()}" alt="${escapeHTML(alt)}" />
+												${figcaption ? `<figcaption>${escapeHTML(figcaption)}</figcaption>` : ''}
+											</figure>`,
+										},
+									},
+								})}
+							]]></content:encoded>`
+									: ''
+							}
+						</item>`
+					})
+					.join('')}
+			</channel>
+		</rss>`
+
+	return new Response(rssXML, {
+		headers: {
+			'Content-Type': 'application/rss+xml',
+			'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=1800',
+		},
+	})
+}
+
+const BLOG_RSS_QUERY = groq`{
+	'blog': *[_type == 'page' && metadata.slug.current == $blogDir][0]{
+		metadata
+	},
+	'posts': *[_type == 'blog.post' && metadata.noIndex != true]|order(publishDate desc){
+		title,
+		content,
+		publishDate,
+		metadata
+	}
+}`
