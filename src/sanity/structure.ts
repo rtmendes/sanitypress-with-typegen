@@ -23,6 +23,7 @@ export default structureTool({
 				S.documentTypeListItem('redirect').title('Redirects'),
 
 				S.divider().title('References'),
+				S.documentTypeListItem('logo').title('Logos'),
 				S.documentTypeListItem('person').title('People'),
 				S.documentTypeListItem('testimonial').title('Testimonials'),
 			]),

@@ -2,6 +2,7 @@ import AccordionList from './accordion-list'
 import BlogFrontpage from './blog/blog.frontpage'
 import BlogPostList from './blog/blog-post-list'
 import CustomHTML from './custom-html'
+import LogoList from './logo-list'
 import Prose from './prose'
 import TestimonialList from './testimonial-list'
 
@@ -13,6 +14,7 @@ const MODULES_MAP = {
 	'blog.frontpage': BlogFrontpage,
 	'blog-post-list': BlogPostList,
 	'custom-html': CustomHTML,
+	'logo-list': LogoList,
 	prose: Prose,
 	'testimonial-list': TestimonialList,
 } as const

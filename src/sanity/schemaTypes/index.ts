@@ -20,10 +20,12 @@ import accordionList from './modules/accordion-list'
 import blogFrontpage from './modules/blog.frontpage'
 import blogPostList from './modules/blog-post-list'
 import customHtml from './modules/custom-html'
+import logoList from './modules/logo-list'
 import prose from './modules/prose'
 import testimonialList from './modules/testimonial-list'
 
 // references
+import logo from './documents/logo'
 import person from './documents/person'
 import testimonial from './documents/testimonial'
 
@@ -49,10 +51,12 @@ export const schema: SchemaPluginOptions = {
 		blogFrontpage,
 		blogPostList,
 		customHtml,
+		logoList,
 		prose,
 		testimonialList,
 
 		// references
+		logo,
 		person,
 		testimonial,
 	],

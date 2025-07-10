@@ -28,6 +28,7 @@ export default defineType({
 				{ type: 'blog.frontpage' },
 				{ type: 'blog-post-list' },
 				{ type: 'custom-html' },
+				{ type: 'logo-list' },
 				{ type: 'prose' },
 				{ type: 'testimonial-list' },
 			],

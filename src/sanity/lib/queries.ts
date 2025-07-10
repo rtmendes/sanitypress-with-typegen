@@ -39,6 +39,12 @@ const SITE_QUERY = groq`*[_type == 'site'][0]{
 
 export const MODULES_QUERY = /* groq */ `
 	...,
+	_type == 'logo-list' => {
+		logos[]{
+			...,
+			_type == 'reference' => @->
+		}
+	},
 	_type == 'prose' => {
 		content[]{
 			...,
