@@ -8,7 +8,11 @@ import type {
 	BlogPostList,
 } from '@/sanity/types'
 
-export default async function ({ intro, limit = 6 }: BlogPostList) {
+export default async function ({
+	intro,
+	limit = 6,
+	_key,
+}: BlogPostList & { _key: string }) {
 	const posts = await sanityFetchLive<BLOG_POST_LIST_QUERYResult>({
 		query: BLOG_POST_LIST_QUERY,
 		params: { limit },
@@ -21,7 +25,10 @@ export default async function ({ intro, limit = 6 }: BlogPostList) {
 				<PortableText value={intro ?? []} />
 			</header>
 
-			<ul className="carousel max-md:full-bleed gap-4 max-md:px-4 md:mask-r-from-[calc(100%-2rem)] md:pr-4">
+			<ul
+				className="carousel max-md:full-bleed gap-4 pb-2 max-md:px-4 md:mask-r-from-[calc(100%-2rem)] md:pr-4"
+				data-anchor-name={`--blog-post-list-${_key}`}
+			>
 				{posts?.map((post) => (
 					<PostPreview post={post as unknown as BlogPost} key={post._id} />
 				))}

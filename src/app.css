@@ -135,11 +135,11 @@
 }
 
 @utility carousel {
+	--anchor-name: attr(data-anchor-name type(<custom-ident>), --carousel);
+	anchor-name: var(--anchor-name);
 	display: grid;
 	grid-auto-flow: column;
 	grid-auto-columns: min(var(--container-sm), 80vw);
-
-	anchor-name: --carousel;
 	overflow-x: auto;
 	scroll-behavior: smooth;
 	scroll-snap-type: x mandatory;
@@ -148,28 +148,38 @@
 	&::scroll-button(*) {
 		cursor: pointer;
 		position: absolute;
-		position-anchor: --carousel;
+		position-anchor: var(--anchor-name);
 		top: calc(anchor(center));
+		z-index: 1;
+		display: block;
+		aspect-ratio: 1;
+		width: 4ch;
+		background-color: transparent;
+		line-height: 0;
+		translate: 0 -50%;
+		background-color: currentColor;
 	}
 
 	&::scroll-button(left) {
-		content: 'Prev' / 'Scroll left';
+		content: '' / 'Scroll left';
 		left: calc(anchor(left));
+		mask: url('https://ic0n.dev/vsc/VscChevronLeft') center / cover;
 	}
 
 	&::scroll-button(right) {
-		content: 'Next' / 'Scroll right';
+		content: '' / 'Scroll right';
 		right: calc(anchor(right));
+		mask: url('https://ic0n.dev/vsc/VscChevronRight') center / cover;
 	}
 
 	&::scroll-marker-group {
 		position: absolute;
-		position-anchor: --carousel;
+		position-anchor: var(--anchor-name);
 		top: calc(anchor(bottom));
 		justify-self: center;
 		display: flex;
 		align-items: center;
-		gap: 0.5ch;
+		gap: 0.8ch;
 	}
 
 	& > * {
@@ -178,9 +188,11 @@
 		&::scroll-marker {
 			content: '';
 			display: inline-block;
-			width: 1ch;
-			height: 1ch;
+			aspect-ratio: 1;
+			width: 0.8ch;
 			border: 1px solid;
+			border-radius: 100%;
+			color: inherit;
 		}
 
 		&::scroll-marker:target-current {
