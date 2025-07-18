@@ -4,7 +4,7 @@ import { groq } from 'next-sanity'
 import { notFound } from 'next/navigation'
 import ModulesResolver from '@/ui/modules'
 import { BLOG_DIR } from '@/lib/env'
-import { MODULES_QUERY } from '@/sanity/lib/queries'
+import { GLOBAL_MODULE_PATH_QUERY, MODULES_QUERY } from '@/sanity/lib/queries'
 import type { Metadata } from 'next'
 import type { PAGE_QUERYResult } from '@/sanity/types'
 
@@ -75,6 +75,17 @@ async function getPage(slug?: string[]) {
 const PAGE_QUERY = groq`
 	*[_type == 'page' && metadata.slug.current == $slug][0]{
 		...,
-		modules[]{ ${MODULES_QUERY} }
+		'modules': (
+			// global moddules (before)
+			*[_type == 'global-module' && path == '*'].before[]{ ${MODULES_QUERY} }
+			// path modules (before)
+			+ *[_type == 'global-module' && path != '*' && ${GLOBAL_MODULE_PATH_QUERY}].before[]{ ${MODULES_QUERY} }
+			// page modules
+			+ modules[]{ ${MODULES_QUERY} }
+			// path modules (after)
+			+ *[_type == 'global-module' && path != '*' && ${GLOBAL_MODULE_PATH_QUERY}].after[]{ ${MODULES_QUERY} }
+			// global moddules (after)
+			+ *[_type == 'global-module' && path == '*'].after[]{ ${MODULES_QUERY} }
+		)
 	}
 `

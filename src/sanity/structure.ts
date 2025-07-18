@@ -13,6 +13,7 @@ export default structureTool({
 
 				S.divider().title('Pages'),
 				S.documentTypeListItem('page').title('Pages'),
+				S.documentTypeListItem('global-module').title('Global modules'),
 
 				S.divider().title('Blog'),
 				S.documentTypeListItem('blog.post').title('Posts'),

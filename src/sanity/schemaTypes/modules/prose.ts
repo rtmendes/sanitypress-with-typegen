@@ -1,7 +1,7 @@
 import { defineField, defineType } from 'sanity'
 import { VscSymbolKeyword } from 'react-icons/vsc'
 import { getBlockText } from '@/lib/utils'
-import { image } from '../documents/fragments'
+import image from '../fragments/image'
 
 export default defineType({
 	name: 'prose',

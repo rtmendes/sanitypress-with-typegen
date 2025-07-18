@@ -37,6 +37,14 @@ const SITE_QUERY = groq`*[_type == 'site'][0]{
 	social->{ ${NAVIGATION_QUERY} },
 }`
 
+export const GLOBAL_MODULE_PATH_QUERY = groq`
+	string::startsWith($slug, path)
+	&& select(
+		defined(excludePaths) => count(excludePaths[string::startsWith($slug, @)]) == 0,
+		true
+	)
+`
+
 export const MODULES_QUERY = /* groq */ `
 	...,
 	_type == 'logo-list' => {

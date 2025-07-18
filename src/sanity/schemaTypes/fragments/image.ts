@@ -1,6 +1,6 @@
 import { defineArrayMember, defineField } from 'sanity'
 
-export const image = defineArrayMember({
+export default defineArrayMember({
 	type: 'image',
 	options: {
 		hotspot: true,

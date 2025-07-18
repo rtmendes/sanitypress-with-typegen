@@ -6,6 +6,7 @@ import {
 	VscEdit,
 	VscEyeClosed,
 } from 'react-icons/vsc'
+import modules from '../fragments/modules'
 
 export default defineType({
 	name: 'page',
@@ -20,18 +21,8 @@ export default defineType({
 			validation: (Rule) => Rule.required(),
 		}),
 		defineField({
-			name: 'modules',
-			type: 'array',
+			...modules,
 			group: 'content',
-			of: [
-				{ type: 'accordion-list' },
-				{ type: 'blog.frontpage' },
-				{ type: 'blog-post-list' },
-				{ type: 'custom-html' },
-				{ type: 'logo-list' },
-				{ type: 'prose' },
-				{ type: 'testimonial-list' },
-			],
 		}),
 		defineField({
 			name: 'metadata',
