@@ -4,6 +4,7 @@ import Author from '@/ui/modules/blog/author'
 import Categories from '@/ui/modules/blog/categories'
 import Date from '@/ui/modules/blog/date'
 import Image from '@/ui/modules/prose/image'
+import AnchoredHeading from '@/ui/modules/prose/anchored-heading'
 import type {
 	BLOG_POST_QUERYResult,
 	Person,
@@ -36,6 +37,14 @@ export default function ({ post }: { post: BLOG_POST_QUERYResult }) {
 						<PortableText
 							value={post.content ?? []}
 							components={{
+								block: {
+									h1: (node) => <AnchoredHeading as="h1" {...node} />,
+									h2: (node) => <AnchoredHeading as="h2" {...node} />,
+									h3: (node) => <AnchoredHeading as="h3" {...node} />,
+									h4: (node) => <AnchoredHeading as="h4" {...node} />,
+									h5: (node) => <AnchoredHeading as="h5" {...node} />,
+									h6: (node) => <AnchoredHeading as="h6" {...node} />,
+								},
 								types: {
 									image: Image,
 								},

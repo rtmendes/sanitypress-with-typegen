@@ -6,7 +6,8 @@
   - [ ] responsive images (breakpoints)
 - [x] Blog
   - [ ] filtering
-- [ ] global modules OR references to modules documents?
+- [x] global modules OR references to modules documents?
+  - [ ] `/blog/*` as global modules
 - [ ] modules list section (separate page?)
 - [ ] error handling
 
