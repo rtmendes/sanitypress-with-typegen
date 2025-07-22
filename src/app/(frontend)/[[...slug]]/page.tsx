@@ -15,8 +15,8 @@ export default async function Page({
 }) {
 	const { slug } = await params
 	const page = await getPage(slug)
-
 	if (!page) notFound()
+
 	return <ModulesResolver page={page} />
 }
 

@@ -1,17 +1,23 @@
+import { createDataAttribute, stegaClean } from 'next-sanity'
+import type {
+	BLOG_POST_QUERYResult,
+	ModuleAttributes,
+	PAGE_QUERYResult,
+} from '@/sanity/types'
+
 import AccordionList from './accordion-list'
 import BlogFrontpage from './blog/blog.frontpage'
+import blogPostContent from './blog/blog-post-content'
 import BlogPostList from './blog/blog-post-list'
 import CustomHTML from './custom-html'
 import LogoList from './logo-list'
 import Prose from './prose'
 import TestimonialList from './testimonial-list'
 
-import { createDataAttribute, stegaClean } from 'next-sanity'
-import type { ModuleAttributes, PAGE_QUERYResult } from '@/sanity/types'
-
 const MODULES_MAP = {
 	'accordion-list': AccordionList,
 	'blog.frontpage': BlogFrontpage,
+	'blog-post-content': blogPostContent,
 	'blog-post-list': BlogPostList,
 	'custom-html': CustomHTML,
 	'logo-list': LogoList,
@@ -19,24 +25,52 @@ const MODULES_MAP = {
 	'testimonial-list': TestimonialList,
 } as const
 
-export default function ModulesResolver({ page }: { page: PAGE_QUERYResult }) {
+export default function ModulesResolver({
+	page,
+	post,
+}: {
+	page?: PAGE_QUERYResult
+	post?: BLOG_POST_QUERYResult
+}) {
+	const modules = [...(page?.modules ?? []), ...(post?.modules ?? [])]
+
+	const moduleSpecificProps = (module: ModuleProps) => {
+		switch (module._type) {
+			case 'blog-post-content':
+				return { post }
+			default:
+				return {}
+		}
+	}
+
 	return (
 		<>
-			{page?.modules?.map((module) => {
+			{modules?.map((module) => {
 				if (!module) return null
 
 				const Module = MODULES_MAP[
 					module._type as keyof typeof MODULES_MAP
 				] as React.ComponentType
 
-				return (
-					<Module
-						{...module}
-						data-sanity={createDataAttribute({
+				const attributes = page
+					? {
 							id: page._id,
 							type: page._type,
 							path: `page[_key == "${module._key}"]`,
-						})}
+						}
+					: post
+						? {
+								id: post._id,
+								type: post._type,
+								path: `post[_key == "${module._key}"]`,
+							}
+						: {}
+
+				return (
+					<Module
+						{...module}
+						{...moduleSpecificProps(module)}
+						data-sanity={createDataAttribute(attributes)}
 						key={module._key}
 					/>
 				)
@@ -46,7 +80,9 @@ export default function ModulesResolver({ page }: { page: PAGE_QUERYResult }) {
 }
 
 export type ModuleProps = Partial<
-	NonNullable<NonNullable<PAGE_QUERYResult>['modules']>[number]
+	NonNullable<
+		NonNullable<PAGE_QUERYResult | BLOG_POST_QUERYResult>['modules']
+	>[number]
 > & { attributes?: ModuleAttributes }
 
 export function moduleAttributes({ _key, _type, attributes }: ModuleProps) {

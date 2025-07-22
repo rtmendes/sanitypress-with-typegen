@@ -2,8 +2,9 @@ import { sanityFetchLive } from '@/sanity/lib/live'
 import { client } from '@/sanity/lib/client'
 import { groq } from 'next-sanity'
 import { notFound } from 'next/navigation'
-import BlogPost from './blog.post'
+import ModulesResolver from '@/ui/modules'
 import { BLOG_DIR } from '@/lib/env'
+import { MODULES_QUERY } from '@/sanity/lib/queries'
 import type { Metadata } from 'next'
 import type { BLOG_POST_QUERYResult } from '@/sanity/types'
 
@@ -14,14 +15,9 @@ export default async function ({
 }) {
 	const { slug } = await params
 	const post = await getPost(slug)
-
 	if (!post) notFound()
-	return (
-		<>
-			<BlogPost post={post} />
-			{/* TODO: setup global modules */}
-		</>
-	)
+
+	return <ModulesResolver post={post} />
 }
 
 export async function generateMetadata({
@@ -61,7 +57,7 @@ export async function generateStaticParams() {
 async function getPost(slug: string) {
 	return await sanityFetchLive<BLOG_POST_QUERYResult>({
 		query: BLOG_POST_QUERY,
-		params: { slug },
+		params: { slug, blogDir: `${BLOG_DIR}/` },
 		tags: ['blog-post'],
 	})
 }
@@ -89,5 +85,15 @@ const BLOG_POST_QUERY = groq`*[_type == 'blog.post' && metadata.slug.current == 
 			...,
 			asset->
 		}
-	}
+	},
+	'modules': (
+		// global modules (before)
+		*[_type == 'global-module' && path == '*'].before[]{ ${MODULES_QUERY} }
+		// path modules (before)
+		+ *[_type == 'global-module' && path == $blogDir].before[]{ ${MODULES_QUERY} }
+		// path modules (after)
+		+ *[_type == 'global-module' && path == $blogDir].after[]{ ${MODULES_QUERY} }
+		// global modules (after)
+		+ *[_type == 'global-module' && path == '*'].after[]{ ${MODULES_QUERY} }
+	)
 }`

@@ -19,6 +19,7 @@ import moduleAttributes from './objects/module-attributes'
 // modules
 import accordionList from './modules/accordion-list'
 import blogFrontpage from './modules/blog.frontpage'
+import blogPostContent from './modules/blog-post-content'
 import blogPostList from './modules/blog-post-list'
 import customHtml from './modules/custom-html'
 import logoList from './modules/logo-list'
@@ -51,6 +52,7 @@ export const schema: SchemaPluginOptions = {
 		// modules
 		accordionList,
 		blogFrontpage,
+		blogPostContent,
 		blogPostList,
 		customHtml,
 		logoList,
