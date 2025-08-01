@@ -4,8 +4,8 @@
 
 - [x] Sanity Images
   - [ ] responsive images (breakpoints)
-- [x] Blog
-  - [ ] filtering
+- [ ] Blog
+  - [ ] pagination
 - [ ] modules list section (separate page?)
 - [ ] error handling
 

@@ -13,11 +13,12 @@ export default async function () {
 	return (
 		<Wrapper className="bg-background/50 sticky top-0 z-10 backdrop-blur">
 			<div className={cn(css.root, 'section grid items-center gap-x-4 p-4')}>
-				<Link href="/" className="[grid-area:logo]">
+				<Link href="/" className="h1 [grid-area:logo]">
 					{site?.title}
 				</Link>
 
 				<Navigation />
+
 				<CTAList
 					ctas={site?.ctas}
 					className="max-md:header-not-open:hidden [grid-area:ctas]"

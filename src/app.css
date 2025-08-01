@@ -42,13 +42,12 @@
 	}
 
 	@keyframes anchored-heading {
+
 		0%,
 		50% {
-			background-color: color-mix(
-				in oklab,
-				var(--color-amber-400) 50%,
-				transparent
-			);
+			background-color: color-mix(in oklab,
+					var(--color-amber-400) 50%,
+					transparent);
 		}
 	}
 
@@ -99,21 +98,71 @@
 	@apply action-base bg-foreground text-background;
 }
 
+@utility ghost {
+	@apply action-base hover:bg-foreground/10;
+}
+
 @utility link {
 	@apply underline hover:decoration-2;
+}
+
+/* typography */
+
+@utility h1 {
+	@apply text-lg font-bold;
+}
+
+@utility h2 {
+	@apply text-lg font-bold;
+}
+
+@utility h3 {
+	@apply text-lg font-bold;
+}
+
+@utility h4 {
+	@apply text-lg font-bold;
+}
+
+@utility h5 {
+	@apply text-lg font-bold;
+}
+
+@utility h6 {
+	@apply text-lg font-bold;
 }
 
 /* components */
 
 @utility section {
-	@apply mx-auto max-w-7xl p-4;
+	@apply mx-auto max-w-7xl px-4 py-12;
 }
 
 @utility prose {
 	@apply space-y-4 leading-relaxed;
 
-	& :is(h1, h2, h3, h4, h5, h6) {
-		font-weight: bold;
+	& h1 {
+		@apply h1;
+	}
+
+	& h2 {
+		@apply h2;
+	}
+
+	& h3 {
+		@apply h3;
+	}
+
+	& h4 {
+		@apply h4;
+	}
+
+	& h5 {
+		@apply h5;
+	}
+
+	& h6 {
+		@apply h6;
 	}
 
 	& blockquote {
@@ -124,7 +173,7 @@
 		list-style: revert;
 		padding-left: 1.5em;
 
-		& > li > ol {
+		&>li>ol {
 			list-style: lower-alpha;
 		}
 	}
@@ -182,7 +231,7 @@
 		gap: 0.8ch;
 	}
 
-	& > * {
+	&>* {
 		scroll-snap-align: center;
 
 		&::scroll-marker {
@@ -213,21 +262,24 @@
 @utility anim-fade {
 	--x: 0;
 	--y: 0;
-	animation: anim-fade-to var(--tw-duration, var(--default-transition-duration))
-		ease-in-out forwards;
+	animation: anim-fade-to var(--tw-duration, var(--default-transition-duration)) ease-in-out forwards;
 }
+
 @utility anim-fade-to-l {
 	@apply anim-fade;
 	--x: 1rem;
 }
+
 @utility anim-fade-to-r {
 	@apply anim-fade;
 	--x: -1rem;
 }
+
 @utility anim-fade-to-t {
 	@apply anim-fade;
 	--y: 1rem;
 }
+
 @utility anim-fade-to-b {
 	@apply anim-fade;
 	--y: -1rem;
@@ -238,6 +290,7 @@
 		opacity: 0;
 		translate: var(--x, 0) var(--y, 0);
 	}
+
 	to {
 		opacity: 1;
 		translate: 0 0;

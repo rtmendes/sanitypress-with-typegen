@@ -26,7 +26,7 @@ export default defineType({
 			group: 'content',
 		}),
 		defineField({
-			name: 'category',
+			name: 'categories',
 			type: 'array',
 			of: [{ type: 'reference', to: [{ type: 'blog.category' }] }],
 			group: 'content',

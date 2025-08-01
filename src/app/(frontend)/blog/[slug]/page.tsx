@@ -75,7 +75,7 @@ const BLOG_POST_QUERY = groq`*[_type == 'blog.post' && metadata.slug.current == 
 		style,
 		'text': pt::text(@)
 	},
-	category[]->{
+	categories[]->{
 		title,
 		slug
 	},

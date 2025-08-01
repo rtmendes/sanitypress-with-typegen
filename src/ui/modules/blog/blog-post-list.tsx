@@ -40,7 +40,7 @@ export default async function ({
 const BLOG_POST_LIST_QUERY = groq`
 	*[_type == 'blog.post']|order(publishDate desc)[0...$limit]{
 		...,
-		category[]->{
+		categories[]->{
 			title,
 			slug
 		},
