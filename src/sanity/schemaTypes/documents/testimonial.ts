@@ -14,24 +14,36 @@ export default defineType({
 			of: [{ type: 'block' }],
 		}),
 		defineField({
-			name: 'source',
-			type: 'array',
-			of: [
-				{
-					type: 'block',
-					styles: [{ title: 'Normal', value: 'normal' }],
-				},
+			name: 'author',
+			type: 'object',
+			options: {
+				columns: 2,
+			},
+			fields: [
+				defineField({
+					name: 'name',
+					type: 'string',
+				}),
+				defineField({
+					name: 'title',
+					type: 'string',
+				}),
+				defineField({
+					name: 'image',
+					type: 'image',
+				}),
 			],
 		}),
 	],
 	preview: {
 		select: {
 			quote: 'quote',
-			source: 'source',
+			author: 'author',
 		},
-		prepare: ({ quote, source }) => ({
+		prepare: ({ quote, author }) => ({
 			title: getBlockText(quote),
-			subtitle: getBlockText(source),
+			subtitle: [author?.name, author?.title].filter(Boolean).join(' / '),
+			media: author?.image?.asset,
 		}),
 	},
 })
