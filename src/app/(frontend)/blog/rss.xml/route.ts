@@ -30,7 +30,14 @@ export async function GET() {
 					<link>${url}</link>
 					<guid isPermaLink="true">${url}</guid>
 					${post.publishDate ? `<pubDate>${new Date(post.publishDate).toISOString()}</pubDate>` : ''}
-					${post.categories?.map((category) => `<category>${category.title}</category>`).join('') || ''}
+					${
+						// TODO: fix this
+						// @ts-ignore
+						post.categories
+							// @ts-ignore
+							?.map((category) => `<category>${category.title}</category>`)
+							.join('') || ''
+					}
 					${post.author ? `<dc:creator>${post.author.name}</dc:creator>` : ''}
 					${post.metadata?.image ? `<enclosure url="${urlFor(post.metadata.image).format('jpg').url()}" length="0" type="image/jpeg" />` : ''}
 					${

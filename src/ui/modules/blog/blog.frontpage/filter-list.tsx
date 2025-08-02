@@ -3,7 +3,7 @@ import { groq } from 'next-sanity'
 import Filter from './filter'
 
 export default async function () {
-	// TODO: fix types
+	// TODO: add type
 	const categories = await sanityFetchLive<any>({
 		query: CATEGORIES_QUERY,
 		tags: ['blog.category'],
@@ -13,7 +13,8 @@ export default async function () {
 		<div className="flex flex-wrap items-center gap-2">
 			<Filter>All</Filter>
 
-			{/* TODO: fix types */}
+			{/* TODO: fix type */}
+			{/* @ts-ignore */}
 			{categories?.map((category: any, i) => (
 				<Filter category={category} key={i} />
 			))}
