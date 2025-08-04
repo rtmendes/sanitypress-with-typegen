@@ -22,7 +22,7 @@ export default function ({ post }: { post: BLOG_POST_QUERYResult }) {
 					<div className="flex flex-wrap items-center justify-center gap-x-4">
 						<Author author={post.author as unknown as Person} />
 						<Date date={post.publishDate} />
-						<Categories categories={post.category as BlogCategory[]} />
+						<Categories categories={post.categories as BlogCategory[]} />
 					</div>
 				</header>
 

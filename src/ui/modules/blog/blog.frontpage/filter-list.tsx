@@ -1,10 +1,10 @@
 import { sanityFetchLive } from '@/sanity/lib/live'
 import { groq } from 'next-sanity'
 import Filter from './filter'
+import { CATEGORIES_QUERYResult } from '@/sanity/types'
 
 export default async function () {
-	// TODO: add type
-	const categories = await sanityFetchLive<any>({
+	const categories = await sanityFetchLive<CATEGORIES_QUERYResult>({
 		query: CATEGORIES_QUERY,
 		tags: ['blog.category'],
 	})
@@ -13,10 +13,8 @@ export default async function () {
 		<div className="flex flex-wrap items-center gap-2">
 			<Filter>All</Filter>
 
-			{/* TODO: fix type */}
-			{/* @ts-ignore */}
-			{categories?.map((category: any, i) => (
-				<Filter category={category} key={i} />
+			{categories?.map((category) => (
+				<Filter category={category} key={category._id} />
 			))}
 		</div>
 	)

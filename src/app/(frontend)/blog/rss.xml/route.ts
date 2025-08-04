@@ -31,10 +31,7 @@ export async function GET() {
 					<guid isPermaLink="true">${url}</guid>
 					${post.publishDate ? `<pubDate>${new Date(post.publishDate).toISOString()}</pubDate>` : ''}
 					${
-						// TODO: fix this
-						// @ts-ignore
 						post.categories
-							// @ts-ignore
 							?.map((category) => `<category>${category.title}</category>`)
 							.join('') || ''
 					}

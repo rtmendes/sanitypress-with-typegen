@@ -36,8 +36,6 @@ export default function ({
 			<div className="flex flex-wrap items-center gap-x-4">
 				<Author author={post.author as unknown as Person} />
 				<Date date={post.publishDate} />
-				{/* TODO: fix type */}
-				{/* @ts-ignore */}
 				<Categories categories={post.categories as unknown as BlogCategory[]} />
 			</div>
 		</li>
