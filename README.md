@@ -1,5 +1,7 @@
 # SanityPress (with GROQ TypeGen)
 
+> [Read more about SanityPres with TypeGen](https://typed.sanitypress.dev/blog/introducing-sanitypress-with-typegen)
+
 ## Roadmap
 
 - [x] Sanity Images

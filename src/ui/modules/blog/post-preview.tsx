@@ -11,7 +11,7 @@ export default function ({
 	className,
 }: { post: BlogPost } & React.ComponentProps<'li'>) {
 	return (
-		<li className={cn('relative', className)}>
+		<li className={cn('relative space-y-4', className)}>
 			<figure className="bg-foreground/5 aspect-video">
 				<Img
 					className="grid aspect-video w-full place-items-center object-cover"
