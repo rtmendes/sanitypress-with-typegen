@@ -109,15 +109,15 @@
 /* typography */
 
 @utility h1 {
-	@apply text-lg font-bold;
+	@apply text-3xl font-bold;
 }
 
 @utility h2 {
-	@apply text-lg font-bold;
+	@apply text-2xl font-bold;
 }
 
 @utility h3 {
-	@apply text-lg font-bold;
+	@apply text-xl font-bold;
 }
 
 @utility h4 {
@@ -125,11 +125,11 @@
 }
 
 @utility h5 {
-	@apply text-lg font-bold;
+	@apply text-base font-bold;
 }
 
 @utility h6 {
-	@apply text-lg font-bold;
+	@apply text-base font-bold;
 }
 
 /* components */

@@ -1,4 +1,4 @@
-import { defineField, defineType } from 'sanity'
+import { defineArrayMember, defineField, defineType } from 'sanity'
 import { VscEdit } from 'react-icons/vsc'
 import image from '../fragments/image'
 
@@ -17,7 +17,16 @@ export default defineType({
 		defineField({
 			name: 'content',
 			type: 'array',
-			of: [{ type: 'block' }, image],
+			of: [
+				{ type: 'block' },
+				image,
+				defineArrayMember({
+					type: 'code',
+					options: {
+						withFilename: true,
+					},
+				}),
+			],
 			group: 'content',
 		}),
 		defineField({

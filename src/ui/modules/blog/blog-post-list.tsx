@@ -20,7 +20,7 @@ export default async function ({
 	})
 
 	return (
-		<section className="section">
+		<section className="section space-y-4">
 			<header className="prose">
 				<PortableText value={intro ?? []} />
 			</header>

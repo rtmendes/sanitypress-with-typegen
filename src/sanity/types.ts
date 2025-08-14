@@ -550,6 +550,9 @@ export type BlogPost = {
 				_type: 'image'
 				_key: string
 		  }
+		| ({
+				_key: string
+		  } & Code)
 	>
 	publishDate?: string
 	categories?: Array<{
@@ -1481,6 +1484,14 @@ export type BLOG_POST_QUERYResult = {
 				_key: string
 		  }
 		| {
+				_key: string
+				_type: 'code'
+				language?: string
+				filename?: string
+				code?: string
+				highlightedLines?: Array<number>
+		  }
+		| {
 				asset: {
 					_id: string
 					_type: 'sanity.imageAsset'
@@ -2084,6 +2095,9 @@ export type BLOG_RSS_QUERYResult = {
 	posts: Array<{
 		title: string | null
 		content: Array<
+			| ({
+					_key: string
+			  } & Code)
 			| {
 					children?: Array<{
 						marks?: Array<string>
@@ -3248,6 +3262,9 @@ export type BLOG_POST_LIST_QUERYResult = Array<{
 	_rev: string
 	title?: string
 	content?: Array<
+		| ({
+				_key: string
+		  } & Code)
 		| {
 				children?: Array<{
 					marks?: Array<string>
@@ -3405,6 +3422,9 @@ export type BLOG_FRONTPAGE_QUERYResult = Array<{
 	_rev: string
 	title?: string
 	content?: Array<
+		| ({
+				_key: string
+		  } & Code)
 		| {
 				children?: Array<{
 					marks?: Array<string>

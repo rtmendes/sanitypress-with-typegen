@@ -4,6 +4,7 @@ import Author from '@/ui/modules/blog/author'
 import Categories from '@/ui/modules/blog/categories'
 import Date from '@/ui/modules/blog/date'
 import Image from '@/ui/modules/prose/image'
+import Code from '@/ui/modules/prose/code'
 import AnchoredHeading from '@/ui/modules/prose/anchored-heading'
 import type {
 	BLOG_POST_QUERYResult,
@@ -16,7 +17,7 @@ export default function ({ post }: { post: BLOG_POST_QUERYResult }) {
 
 	return (
 		<>
-			<section className="section">
+			<section className="section space-y-4">
 				<header className="text-center">
 					<h1 className="h1">{post.title || post.metadata?.title}</h1>
 					<div className="flex flex-wrap items-center justify-center gap-x-4">
@@ -47,6 +48,7 @@ export default function ({ post }: { post: BLOG_POST_QUERYResult }) {
 								},
 								types: {
 									image: Image,
+									code: Code
 								},
 							}}
 						/>
