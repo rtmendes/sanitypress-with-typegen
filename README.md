@@ -7,7 +7,7 @@
 - [x] Sanity Images
   - [ ] responsive images (breakpoints)
 - [ ] Blog
-  - [ ] pagination
+  - [ ] post-preview (featured / large)
 - [ ] modules list section (separate page?)
 - [ ] error handling
 

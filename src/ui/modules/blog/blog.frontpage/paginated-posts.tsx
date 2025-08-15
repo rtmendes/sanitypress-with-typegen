@@ -2,10 +2,17 @@
 
 import { useQueryState } from 'nuqs'
 import { useMemo } from 'react'
+import { usePagination } from '@/hooks/use-pagination'
 import PostPreview from '@/ui/modules/blog/post-preview'
 import type { BLOG_FRONTPAGE_QUERYResult } from '@/sanity/types'
 
-export default function ({ posts }: { posts: BLOG_FRONTPAGE_QUERYResult }) {
+export default function ({
+	posts,
+	postsPerPage,
+}: {
+	posts: BLOG_FRONTPAGE_QUERYResult
+	postsPerPage?: number
+}) {
 	const [category] = useQueryState('category')
 	const [sortBy] = useQueryState('sortBy')
 
@@ -29,17 +36,31 @@ export default function ({ posts }: { posts: BLOG_FRONTPAGE_QUERYResult }) {
 		[category, sortBy],
 	)
 
+	const { paginatedItems, Pagination } = usePagination({
+		items: processedPosts,
+		itemsPerPage: postsPerPage,
+	})
+
 	return (
-		<ul className="grid gap-4 sm:grid-cols-[repeat(auto-fill,minmax(var(--container-sm),1fr))]">
-			{processedPosts?.map((post) => (
-				<PostPreview
-					post={
-						post as unknown as React.ComponentProps<typeof PostPreview>['post']
-					}
-					className="anim-fade"
-					key={post._id}
-				/>
-			))}
-		</ul>
+		<>
+			<ul className="grid gap-4 sm:grid-cols-[repeat(auto-fill,minmax(var(--container-sm),1fr))]">
+				{paginatedItems?.map((post) => (
+					<PostPreview
+						post={
+							post as unknown as React.ComponentProps<
+								typeof PostPreview
+							>['post']
+						}
+						className="anim-fade"
+						key={post._id}
+					/>
+				))}
+			</ul>
+
+			<Pagination
+				className="gap-ch flex items-center justify-center tabular-nums"
+				buttonClassName="cursor-pointer not-disabled:hover:underline disabled:opacity-50"
+			/>
+		</>
 	)
 }

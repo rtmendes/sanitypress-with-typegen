@@ -11,7 +11,7 @@ export default function ({
 	className,
 }: { post: BlogPost } & React.ComponentProps<'li'>) {
 	return (
-		<li className={cn('relative space-y-4', className)}>
+		<li className={cn('relative space-y-2', className)}>
 			<figure className="bg-foreground/5 aspect-video">
 				<Img
 					className="grid aspect-video w-full place-items-center object-cover"
@@ -22,6 +22,7 @@ export default function ({
 			</figure>
 
 			<SanityLink
+				className="block"
 				link={{
 					type: 'internal',
 					internal: post,
@@ -31,7 +32,9 @@ export default function ({
 				<span className="absolute inset-0" />
 			</SanityLink>
 
-			<p className="line-clamp-3">{post.metadata?.description}</p>
+			{post.metadata?.description && (
+				<p className="line-clamp-3">{post.metadata?.description}</p>
+			)}
 
 			<div className="flex flex-wrap items-center gap-x-4">
 				<Author author={post.author as unknown as Person} />

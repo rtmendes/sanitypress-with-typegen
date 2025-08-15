@@ -5,10 +5,10 @@ import FilterList from './filter-list'
 import SortBy from './sort-by'
 import { Suspense } from 'react'
 import Loading from '@/ui/loading'
-import Posts from './posts'
+import PaginatedPosts from './paginated-posts'
 import type { BLOG_FRONTPAGE_QUERYResult, BlogFrontpage } from '@/sanity/types'
 
-export default async function ({ intro }: BlogFrontpage) {
+export default async function ({ intro, postsPerPage }: BlogFrontpage) {
 	const posts = await sanityFetchLive<BLOG_FRONTPAGE_QUERYResult>({
 		query: BLOG_FRONTPAGE_QUERY,
 		tags: ['blog.frontpage'],
@@ -28,7 +28,7 @@ export default async function ({ intro }: BlogFrontpage) {
 			</fieldset>
 
 			<Suspense fallback={<Loading>Loading posts...</Loading>}>
-				<Posts posts={posts} />
+				<PaginatedPosts posts={posts} postsPerPage={postsPerPage} />
 			</Suspense>
 		</section>
 	)
