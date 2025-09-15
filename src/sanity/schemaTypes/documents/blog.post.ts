@@ -26,6 +26,7 @@ export default defineType({
 						withFilename: true,
 					},
 				}),
+				{ type: 'custom-html' },
 			],
 			group: 'content',
 		}),

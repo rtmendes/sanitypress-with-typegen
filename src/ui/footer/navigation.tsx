@@ -15,7 +15,7 @@ export default async function () {
 
 						case 'link.list':
 							return (
-								<LinkList className="text-left" {...item} key={item._key} />
+								<LinkList {...item} className="text-left" key={item._key} />
 							)
 
 						default:

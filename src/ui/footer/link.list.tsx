@@ -14,7 +14,7 @@ export default function ({
 			<ul>
 				{links?.map((item: SanityLinkType) => (
 					<li key={item._key}>
-						<SanityLink link={item} />
+						<SanityLink className="link" link={item} />
 					</li>
 				))}
 			</ul>

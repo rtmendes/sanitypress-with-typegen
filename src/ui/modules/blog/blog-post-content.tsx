@@ -11,13 +11,15 @@ import type {
 	Person,
 	BlogCategory,
 } from '@/sanity/types'
+import CustomHTML from '../custom-html'
+import { moduleAttributes } from '..'
 
-export default function ({ post }: { post: BLOG_POST_QUERYResult }) {
+export default function ({ post, ...props }: { post: BLOG_POST_QUERYResult }) {
 	if (!post) return null
 
 	return (
 		<>
-			<section className="section space-y-4">
+			<section className="section space-y-4" {...moduleAttributes(props)}>
 				<header className="text-center">
 					<h1 className="h1">{post.title || post.metadata?.title}</h1>
 					<div className="flex flex-wrap items-center justify-center gap-x-4">
@@ -34,7 +36,7 @@ export default function ({ post }: { post: BLOG_POST_QUERYResult }) {
 						open
 					/>
 
-					<article className="prose">
+					<article className="prose w-full">
 						<PortableText
 							value={post.content ?? []}
 							components={{
@@ -48,7 +50,8 @@ export default function ({ post }: { post: BLOG_POST_QUERYResult }) {
 								},
 								types: {
 									image: Image,
-									code: Code
+									code: Code,
+									'custom-html': ({ value }) => <CustomHTML {...value} />,
 								},
 							}}
 						/>
