@@ -1,6 +1,6 @@
 import { draftMode } from 'next/headers'
 import { SanityLive } from '@/sanity/lib/live'
-import { VisualEditing } from 'next-sanity'
+import { VisualEditing } from 'next-sanity/visual-editing'
 
 export default async function () {
 	return (
