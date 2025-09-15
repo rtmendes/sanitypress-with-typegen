@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useState, type ComponentProps } from 'react'
-import { isMobile } from 'react-device-detect'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import css from './hover-details.module.css'
@@ -21,10 +20,21 @@ export default function ({
 	closeAfterNavigate?: boolean
 	delay?: number
 } & ComponentProps<'details'>) {
+	const [matchMedia, setMatchMedia] = useState(false)
 	const [open, setOpen] = useState(false)
 	let timeout: NodeJS.Timeout
 
-	const events = !isMobile
+	useEffect(() => {
+		if (typeof window === 'undefined') return
+		function handleMatchMedia() {
+			setMatchMedia(window.matchMedia('(hover: hover)').matches)
+		}
+		handleMatchMedia()
+		window.addEventListener('resize', handleMatchMedia)
+		return () => window.removeEventListener('resize', handleMatchMedia)
+	}, [matchMedia])
+
+	const events = matchMedia
 		? {
 				onMouseEnter: () => {
 					if (delay) {
