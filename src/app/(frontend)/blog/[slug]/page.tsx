@@ -36,6 +36,7 @@ export async function generateMetadata({
 		openGraph: {
 			title: title,
 			description: description,
+			url: `${process.env.NEXT_PUBLIC_BASE_URL}/${BLOG_DIR}/${slug}`,
 			images: image ? [urlFor(image).width(1200).url()] : undefined,
 		},
 		robots: {
