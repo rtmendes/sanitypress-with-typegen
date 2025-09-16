@@ -3,6 +3,7 @@ import { client } from '@/sanity/lib/client'
 import { groq } from 'next-sanity'
 import { notFound } from 'next/navigation'
 import ModulesResolver from '@/ui/modules'
+import { urlFor } from '@/sanity/lib/image'
 import { BLOG_DIR } from '@/lib/env'
 import { MODULES_QUERY } from '@/sanity/lib/queries'
 import type { Metadata } from 'next'
@@ -27,16 +28,18 @@ export async function generateMetadata({
 }): Promise<Metadata> {
 	const { slug } = await params
 	const post = await getPost(slug)
+	const { title, description, image, noIndex } = post?.metadata ?? {}
 
 	return {
-		title: post?.metadata?.title,
-		description: post?.metadata?.description,
+		title,
+		description: description,
 		openGraph: {
-			title: post?.metadata?.title,
-			description: post?.metadata?.description,
+			title: title,
+			description: description,
+			images: image ? [urlFor(image).width(1200).url()] : undefined,
 		},
 		robots: {
-			index: post?.metadata?.noIndex ? false : undefined,
+			index: noIndex ? false : undefined,
 		},
 		alternates: {
 			types: {

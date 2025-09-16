@@ -9,10 +9,10 @@ export default function ({
 
 	return (
 		<ul className={cn('flex flex-wrap gap-x-[.5ch] p-0', className)}>
-			{categories.map((category, i) => (
-				<li className="shrink-0" key={category._id}>
+			{categories.map((category, key) => (
+				<li className="shrink-0" key={key}>
 					{category.title}
-					{i < categories.length - 1 && <>, </>}
+					{key < categories.length - 1 && <>, </>}
 				</li>
 			))}
 		</ul>
