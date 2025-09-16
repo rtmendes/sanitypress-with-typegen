@@ -13,6 +13,8 @@ import type {
 } from '@/sanity/types'
 import CustomHTML from '../custom-html'
 import { moduleAttributes } from '..'
+import css from './blog-post-content.module.css'
+import { cn } from '@/lib/utils'
 
 export default function ({ post, ...props }: { post: BLOG_POST_QUERYResult }) {
 	if (!post) return null
@@ -36,7 +38,7 @@ export default function ({ post, ...props }: { post: BLOG_POST_QUERYResult }) {
 						open
 					/>
 
-					<article className="prose w-full">
+					<article className={cn(css.body, 'prose grid w-full')}>
 						<PortableText
 							value={post.content ?? []}
 							components={{
