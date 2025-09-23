@@ -10,6 +10,7 @@ import BlogFrontpage from './blog/blog.frontpage'
 import blogPostContent from './blog/blog-post-content'
 import BlogPostList from './blog/blog-post-list'
 import CustomHTML from './custom-html'
+import HeroSplit from './hero.split'
 import LogoList from './logo-list'
 import Prose from './prose'
 import TestimonialList from './testimonial-list'
@@ -20,6 +21,7 @@ const MODULES_MAP = {
 	'blog-post-content': blogPostContent,
 	'blog-post-list': BlogPostList,
 	'custom-html': CustomHTML,
+	'hero.split': HeroSplit,
 	'logo-list': LogoList,
 	prose: Prose,
 	'testimonial-list': TestimonialList,

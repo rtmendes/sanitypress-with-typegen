@@ -11,7 +11,11 @@ export default async function () {
 				{site?.footer?.items?.map((item) => {
 					switch (item._type) {
 						case 'link':
-							return <SanityLink link={item} className="link" key={item._key} />
+							return (
+								<li key={item._key}>
+									<SanityLink link={item} className="link" />
+								</li>
+							)
 
 						case 'link.list':
 							return (

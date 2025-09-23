@@ -3,14 +3,14 @@ import Img from '@/ui/img'
 import type { TestimonialList } from '@/sanity/types'
 
 export default function ({
-	intro,
+	intro = [],
 	testimonials,
 	_key,
 }: TestimonialList & { _key: string }) {
 	return (
 		<section className="section">
 			<header className="prose">
-				<PortableText value={intro ?? []} />
+				<PortableText value={intro} />
 			</header>
 
 			<ul
@@ -27,22 +27,22 @@ export default function ({
 						</blockquote>
 
 						{testimonial.author?.name && (
-							<dl className="flex items-center gap-2">
+							<cite className="flex items-center gap-2">
 								<Img
 									className="aspect-square size-[2lh] shrink-0 rounded-full"
 									image={testimonial.author?.image}
 									alt={testimonial.author?.name}
 								/>
 
-								<div className="">
+								<dl className="">
 									<dt>{testimonial.author.name}</dt>
 									{testimonial.author?.title && (
 										<dd className="text-sm italic">
 											{testimonial.author?.title}
 										</dd>
 									)}
-								</div>
-							</dl>
+								</dl>
+							</cite>
 						)}
 					</li>
 				))}

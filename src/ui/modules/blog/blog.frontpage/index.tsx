@@ -8,7 +8,7 @@ import Loading from '@/ui/loading'
 import PaginatedPosts from './paginated-posts'
 import type { BLOG_FRONTPAGE_QUERYResult, BlogFrontpage } from '@/sanity/types'
 
-export default async function ({ intro, postsPerPage }: BlogFrontpage) {
+export default async function ({ intro = [], postsPerPage }: BlogFrontpage) {
 	const posts = await sanityFetchLive<BLOG_FRONTPAGE_QUERYResult>({
 		query: BLOG_FRONTPAGE_QUERY,
 		tags: ['blog.frontpage'],
@@ -17,7 +17,7 @@ export default async function ({ intro, postsPerPage }: BlogFrontpage) {
 	return (
 		<section className="section space-y-4">
 			<header className="prose">
-				<PortableText value={intro ?? []} />
+				<PortableText value={intro} />
 			</header>
 
 			<fieldset className="flex flex-wrap items-end justify-between gap-4">

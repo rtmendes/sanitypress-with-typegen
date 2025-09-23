@@ -322,6 +322,50 @@ export type LogoList = {
 	duration?: number
 }
 
+export type HeroSplit = {
+	_type: 'hero.split'
+	attributes?: ModuleAttributes
+	content?: Array<{
+		children?: Array<{
+			marks?: Array<string>
+			text?: string
+			_type: 'span'
+			_key: string
+		}>
+		style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote'
+		listItem?: 'bullet' | 'number'
+		markDefs?: Array<{
+			href?: string
+			_type: 'link'
+			_key: string
+		}>
+		level?: number
+		_type: 'block'
+		_key: string
+	}>
+	ctas?: Array<
+		{
+			_key: string
+		} & Cta
+	>
+	image?: {
+		asset?: {
+			_ref: string
+			_type: 'reference'
+			_weak?: boolean
+			[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+		}
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		alt?: string
+		loading?: 'lazy' | 'eager'
+		onRight?: boolean
+		afterContent?: boolean
+		_type: 'image'
+	}
+}
+
 export type CustomHtml = {
 	_type: 'custom-html'
 	className?: string
@@ -621,6 +665,9 @@ export type GlobalModule = {
 		  } & CustomHtml)
 		| ({
 				_key: string
+		  } & HeroSplit)
+		| ({
+				_key: string
 		  } & LogoList)
 		| ({
 				_key: string
@@ -645,6 +692,9 @@ export type GlobalModule = {
 		| ({
 				_key: string
 		  } & CustomHtml)
+		| ({
+				_key: string
+		  } & HeroSplit)
 		| ({
 				_key: string
 		  } & LogoList)
@@ -680,6 +730,9 @@ export type Page = {
 		| ({
 				_key: string
 		  } & CustomHtml)
+		| ({
+				_key: string
+		  } & HeroSplit)
 		| ({
 				_key: string
 		  } & LogoList)
@@ -912,6 +965,7 @@ export type AllSanitySchemaTypes =
 	| TestimonialList
 	| Prose
 	| LogoList
+	| HeroSplit
 	| CustomHtml
 	| BlogPostList
 	| BlogPostContent
@@ -1091,6 +1145,58 @@ export type PAGE_QUERYResult = {
 				className?: string
 				html?: Code
 				css?: Code
+		  }
+		| {
+				_key: string
+				_type: 'hero.split'
+				attributes?: ModuleAttributes
+				content?: Array<{
+					children?: Array<{
+						marks?: Array<string>
+						text?: string
+						_type: 'span'
+						_key: string
+					}>
+					style?:
+						| 'blockquote'
+						| 'h1'
+						| 'h2'
+						| 'h3'
+						| 'h4'
+						| 'h5'
+						| 'h6'
+						| 'normal'
+					listItem?: 'bullet' | 'number'
+					markDefs?: Array<{
+						href?: string
+						_type: 'link'
+						_key: string
+					}>
+					level?: number
+					_type: 'block'
+					_key: string
+				}>
+				ctas?: Array<
+					{
+						_key: string
+					} & Cta
+				>
+				image?: {
+					asset?: {
+						_ref: string
+						_type: 'reference'
+						_weak?: boolean
+						[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+					}
+					media?: unknown
+					hotspot?: SanityImageHotspot
+					crop?: SanityImageCrop
+					alt?: string
+					loading?: 'eager' | 'lazy'
+					onRight?: boolean
+					afterContent?: boolean
+					_type: 'image'
+				}
 		  }
 		| {
 				_key: string
@@ -1741,6 +1847,58 @@ export type BLOG_POST_QUERYResult = {
 		  }
 		| {
 				_key: string
+				_type: 'hero.split'
+				attributes?: ModuleAttributes
+				content?: Array<{
+					children?: Array<{
+						marks?: Array<string>
+						text?: string
+						_type: 'span'
+						_key: string
+					}>
+					style?:
+						| 'blockquote'
+						| 'h1'
+						| 'h2'
+						| 'h3'
+						| 'h4'
+						| 'h5'
+						| 'h6'
+						| 'normal'
+					listItem?: 'bullet' | 'number'
+					markDefs?: Array<{
+						href?: string
+						_type: 'link'
+						_key: string
+					}>
+					level?: number
+					_type: 'block'
+					_key: string
+				}>
+				ctas?: Array<
+					{
+						_key: string
+					} & Cta
+				>
+				image?: {
+					asset?: {
+						_ref: string
+						_type: 'reference'
+						_weak?: boolean
+						[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+					}
+					media?: unknown
+					hotspot?: SanityImageHotspot
+					crop?: SanityImageCrop
+					alt?: string
+					loading?: 'eager' | 'lazy'
+					onRight?: boolean
+					afterContent?: boolean
+					_type: 'image'
+				}
+		  }
+		| {
+				_key: string
 				_type: 'logo-list'
 				intro?: Array<{
 					children?: Array<{
@@ -2329,6 +2487,58 @@ export type NOT_FOUND_QUERYResult = {
 				className?: string
 				html?: Code
 				css?: Code
+		  }
+		| {
+				_key: string
+				_type: 'hero.split'
+				attributes?: ModuleAttributes
+				content?: Array<{
+					children?: Array<{
+						marks?: Array<string>
+						text?: string
+						_type: 'span'
+						_key: string
+					}>
+					style?:
+						| 'blockquote'
+						| 'h1'
+						| 'h2'
+						| 'h3'
+						| 'h4'
+						| 'h5'
+						| 'h6'
+						| 'normal'
+					listItem?: 'bullet' | 'number'
+					markDefs?: Array<{
+						href?: string
+						_type: 'link'
+						_key: string
+					}>
+					level?: number
+					_type: 'block'
+					_key: string
+				}>
+				ctas?: Array<
+					{
+						_key: string
+					} & Cta
+				>
+				image?: {
+					asset?: {
+						_ref: string
+						_type: 'reference'
+						_weak?: boolean
+						[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+					}
+					media?: unknown
+					hotspot?: SanityImageHotspot
+					crop?: SanityImageCrop
+					alt?: string
+					loading?: 'eager' | 'lazy'
+					onRight?: boolean
+					afterContent?: boolean
+					_type: 'image'
+				}
 		  }
 		| {
 				_key: string

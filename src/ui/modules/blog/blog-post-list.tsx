@@ -9,7 +9,7 @@ import type {
 } from '@/sanity/types'
 
 export default async function ({
-	intro,
+	intro = [],
 	limit = 6,
 	_key,
 }: BlogPostList & { _key: string }) {
@@ -22,7 +22,7 @@ export default async function ({
 	return (
 		<section className="section space-y-4">
 			<header className="prose">
-				<PortableText value={intro ?? []} />
+				<PortableText value={intro} />
 			</header>
 
 			<ul

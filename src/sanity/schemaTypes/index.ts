@@ -22,6 +22,7 @@ import blogFrontpage from './modules/blog.frontpage'
 import blogPostContent from './modules/blog-post-content'
 import blogPostList from './modules/blog-post-list'
 import customHtml from './modules/custom-html'
+import heroSplit from './modules/hero.split'
 import logoList from './modules/logo-list'
 import prose from './modules/prose'
 import testimonialList from './modules/testimonial-list'
@@ -55,6 +56,7 @@ export const schema: SchemaPluginOptions = {
 		blogPostContent,
 		blogPostList,
 		customHtml,
+		heroSplit,
 		logoList,
 		prose,
 		testimonialList,

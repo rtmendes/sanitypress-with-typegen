@@ -178,7 +178,7 @@
 		}
 	}
 
-	& a {
+	& a:not([class]) {
 		@apply link;
 	}
 }

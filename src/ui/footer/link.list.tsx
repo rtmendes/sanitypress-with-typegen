@@ -7,9 +7,9 @@ export default function ({
 	link,
 	links,
 	...props
-}: (LinkList | any) & React.ComponentProps<'div'>) {
+}: (LinkList | any) & React.ComponentProps<'li'>) {
 	return (
-		<div {...props}>
+		<li {...props}>
 			<div>{link?.label}</div>
 			<ul>
 				{links?.map((item: SanityLinkType) => (
@@ -18,6 +18,6 @@ export default function ({
 					</li>
 				))}
 			</ul>
-		</div>
+		</li>
 	)
 }

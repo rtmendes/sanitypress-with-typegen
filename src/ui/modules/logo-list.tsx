@@ -5,7 +5,7 @@ import css from './logo-list.module.css'
 import type { Logo, LogoList } from '@/sanity/types'
 
 export default function ({
-	intro,
+	intro = [],
 	logos,
 	logoType = 'default',
 	autoScroll,
@@ -14,7 +14,7 @@ export default function ({
 	return (
 		<section className="section">
 			<header className="prose">
-				<PortableText value={intro ?? []} />
+				<PortableText value={intro} />
 			</header>
 
 			<figure
