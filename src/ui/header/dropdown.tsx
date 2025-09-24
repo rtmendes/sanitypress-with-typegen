@@ -11,7 +11,7 @@ export default function (props: LinkList | any) {
 				{summary?.label || (summary?.internal as unknown as Page)?.title}
 			</summary>
 
-			<ul className="md:bg-background anim-fade-to-b top-full left-0 max-md:pl-4 md:absolute md:min-w-max md:border">
+			<ul className="md:bg-background anim-fade-to-b top-full left-0 max-md:pl-4 md:absolute md:min-w-max md:border md:p-2">
 				{links?.map((link, key) => (
 					<li key={key}>
 						<SanityLink link={link} className="link" />

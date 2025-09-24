@@ -22,7 +22,7 @@ export default function ({ post, ...props }: { post: BLOG_POST_QUERYResult }) {
 	return (
 		<>
 			<section className="section space-y-4" {...moduleAttributes(props)}>
-				<header className="text-center">
+				<header className="space-y-4 text-center">
 					<h1 className="h1">{post.title || post.metadata?.title}</h1>
 					<div className="flex flex-wrap items-center justify-center gap-x-4">
 						<Author author={post.author as unknown as Person} />

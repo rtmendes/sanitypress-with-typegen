@@ -12,7 +12,7 @@ export default function ({
 	duration = 12,
 }: LogoList) {
 	return (
-		<section className="section">
+		<section className="section space-y-4 text-center">
 			<header className="prose">
 				<PortableText value={intro} />
 			</header>
