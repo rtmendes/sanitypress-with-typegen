@@ -5,6 +5,7 @@ import type {
 	SanityImageCrop,
 	SanityImageHotspot,
 } from '@/sanity/types'
+import { stegaClean } from 'next-sanity'
 import { urlFor } from '@/sanity/lib/image'
 import type { ImageProps } from 'next/image'
 
@@ -23,8 +24,8 @@ export default function ({
 	if (!image?.asset) return null
 
 	const { dimensions, lqip } = image.asset.metadata ?? {}
-
 	const { width, height } = getImageDimensions(image.asset)
+	const loading = props.loading || stegaClean(image.loading)
 
 	const src = urlFor(image)
 		.withOptions({
@@ -43,7 +44,8 @@ export default function ({
 			)}
 			placeholder={lqip ? 'blur' : undefined}
 			blurDataURL={lqip}
-			priority={props.loading === 'eager'}
+			loading={loading}
+			priority={loading === 'eager'}
 			{...props}
 		/>
 	)
