@@ -1,6 +1,6 @@
 {
 	"name": "typed-sanitypress",
-	"version": "0.0.8",
+	"version": "0.0.9",
 	"private": true,
 	"scripts": {
 		"dev": "next dev",
@@ -27,7 +27,8 @@
 		"sanity-plugin-dashboard-widget-vercel": "^3.1.4",
 		"shiki": "^3.13.0",
 		"styled-components": "^6.1.19",
-		"tailwind-merge": "^3.3.1"
+		"tailwind-merge": "^3.3.1",
+		"zustand": "^5.0.8"
 	},
 	"devDependencies": {
 		"@tailwindcss/postcss": "^4",

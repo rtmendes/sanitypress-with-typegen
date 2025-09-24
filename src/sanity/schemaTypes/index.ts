@@ -25,6 +25,7 @@ import customHtml from './modules/custom-html'
 import heroSplit from './modules/hero.split'
 import logoList from './modules/logo-list'
 import prose from './modules/prose'
+import searchModule from './modules/search-module'
 import testimonialList from './modules/testimonial-list'
 
 // references
@@ -59,6 +60,7 @@ export const schema: SchemaPluginOptions = {
 		heroSplit,
 		logoList,
 		prose,
+		searchModule,
 		testimonialList,
 
 		// references

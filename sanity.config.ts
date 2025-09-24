@@ -21,7 +21,7 @@ import { vercelWidget } from 'sanity-plugin-dashboard-widget-vercel'
 import { codeInput } from '@sanity/code-input'
 
 export default defineConfig({
-	title: 'SanityPress with TypeGen',
+	title: 'SanityPress',
 	basePath: '/admin',
 	projectId,
 	dataset,

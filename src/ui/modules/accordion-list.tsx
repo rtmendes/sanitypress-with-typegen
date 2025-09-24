@@ -10,7 +10,7 @@ export default function ({
 }: AccordionList & { _key: string }) {
 	return (
 		<section
-			className="section"
+			className="section space-y-4"
 			{...(enableSchema && {
 				itemScope: true,
 				itemType: 'https://schema.org/FAQPage',
@@ -22,35 +22,39 @@ export default function ({
 				</header>
 			)}
 
-			{accordions?.map(({ _key, summary, content, open }) => (
-				<details
-					name={connect ? _module_key : undefined}
-					open={open}
-					{...(enableSchema && {
-						itemScope: true,
-						itemProp: 'mainEntity',
-						itemType: 'https://schema.org/Question',
-					})}
-					key={_key}
-				>
-					<summary {...(enableSchema && { itemProp: 'name' })}>
-						{summary}
-					</summary>
-
-					<div
-						className="not-supports-[interpolate-size:allow-keywords]:anim-fade-to-b py-4"
+			<div>
+				{accordions?.map(({ _key, summary, content, open }) => (
+					<details
+						name={connect ? _module_key : undefined}
+						open={open}
 						{...(enableSchema && {
 							itemScope: true,
-							itemProp: 'acceptedAnswer',
-							itemType: 'https://schema.org/Answer',
+							itemProp: 'mainEntity',
+							itemType: 'https://schema.org/Question',
 						})}
+						key={_key}
 					>
-						<div className="prose" {...(enableSchema && { itemProp: 'text' })}>
-							<PortableText value={content ?? []} />
+						<summary {...(enableSchema && { itemProp: 'name' })}>
+							{summary}
+						</summary>
+						<div
+							className="not-supports-[interpolate-size:allow-keywords]:anim-fade-to-b py-4"
+							{...(enableSchema && {
+								itemScope: true,
+								itemProp: 'acceptedAnswer',
+								itemType: 'https://schema.org/Answer',
+							})}
+						>
+							<div
+								className="prose"
+								{...(enableSchema && { itemProp: 'text' })}
+							>
+								<PortableText value={content ?? []} />
+							</div>
 						</div>
-					</div>
-				</details>
-			))}
+					</details>
+				))}
+			</div>
 		</section>
 	)
 }

@@ -1,0 +1,75 @@
+import { create } from 'zustand'
+import { sanityFetchLive } from '@/sanity/lib/live'
+import { groq } from 'next-sanity'
+import { BLOG_DIR } from '@/lib/env'
+import type { SEARCH_QUERYResult, SearchModule } from '@/sanity/types'
+
+export const useSearchStore = create<{
+	loading: boolean
+	setLoading: (loading: boolean) => void
+	results: SEARCH_QUERYResult
+	setResults: (results: SEARCH_QUERYResult) => void
+}>((set) => ({
+	loading: false,
+	setLoading: (loading) => set({ loading }),
+	results: [],
+	setResults: (results) => set({ results }),
+}))
+
+const SCOPE_MAP = {
+	'blog posts': 'blog.post',
+	pages: 'page',
+}
+
+export async function handleSearch({
+	scope = 'all',
+	query,
+	setLoading,
+	setResults,
+}: {
+	scope: SearchModule['scope']
+	query: string
+	setLoading: (loading: boolean) => void
+	setResults: (results: SEARCH_QUERYResult) => void
+}) {
+	if (!query) setResults([])
+
+	setLoading(true)
+
+	const scopeValue = SCOPE_MAP[scope as keyof typeof SCOPE_MAP]
+
+	const results = await sanityFetchLive<SEARCH_QUERYResult>({
+		query: SEARCH_QUERY,
+		params: {
+			query: `*${query}*` as any,
+			scope: scope === 'all' ? Object.values(SCOPE_MAP) : [scopeValue],
+			blogDir: `/${BLOG_DIR}/`,
+		},
+	})
+
+	setResults(results)
+	setLoading(false)
+}
+
+const SEARCH_QUERY = groq`*[
+	_type in $scope
+	&& metadata.noIndex != true
+	&& !(metadata.slug.current in ['404'])
+	&& [
+		modules[].intro[].children[].text,
+		modules[].content[].children[].text,
+		content[].children[].text,
+		title,
+		metadata.title,
+		metadata.description
+	] match $query
+]{
+	_id,
+	_type,
+	title,
+	'slug': select(
+		_type == 'blog.post' => $blogDir + metadata.slug.current,
+		metadata.slug.current == 'index' => '/',
+		'/' + metadata.slug.current
+	)
+}`
