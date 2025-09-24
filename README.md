@@ -4,11 +4,16 @@
 
 ## Roadmap
 
+- [ ] Modules
+  - [ ] search
+  - [ ] stat list
+  - [ ] person list
+  - [ ] step list
+  - [ ] breadcrumbs
 - [x] Sanity Images
   - [ ] responsive images (breakpoints)
 - [ ] Blog
   - [ ] post-preview (featured / large)
-- [ ] modules list section (separate page?)
 - [ ] error handling
 
 ## Not included

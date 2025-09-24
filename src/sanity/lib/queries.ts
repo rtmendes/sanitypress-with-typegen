@@ -31,7 +31,7 @@ const SITE_QUERY = groq`*[_type == 'site'][0]{
 	header->{ ${NAVIGATION_QUERY} },
 	ctas[]{
 		...,
-		link{ ${LINK_QUERY} },
+		link{ ${LINK_QUERY} }
 	},
 	footer->{ ${NAVIGATION_QUERY} },
 	social->{ ${NAVIGATION_QUERY} },
@@ -47,6 +47,12 @@ export const GLOBAL_MODULE_PATH_QUERY = groq`
 
 export const MODULES_QUERY = /* groq */ `
 	...,
+	_type == 'hero.split' => {
+		ctas[]{
+			...,
+			link{ ${LINK_QUERY} }
+		}
+	},
 	_type == 'logo-list' => {
 		logos[]{
 			...,
