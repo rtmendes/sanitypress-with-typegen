@@ -54,7 +54,7 @@ export default function ({ scope }: Partial<SearchModule>) {
 									"
 								</p>
 
-								<SearchResults />
+								<SearchResults query={query} />
 								<GoogleResults scope={scope} />
 							</>
 						)}
