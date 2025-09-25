@@ -10,7 +10,7 @@ import GoogleResults from './google-results'
 import type { SearchModule } from '@/sanity/types'
 
 export default function ({ scope }: Partial<SearchModule>) {
-	const [query, setQuery] = useQueryState('search', { defaultValue: '' })
+	const [query, setQuery] = useQueryState('query', { defaultValue: '' })
 	const { loading, setLoading, results, setResults } = useSearchStore()
 
 	return (
