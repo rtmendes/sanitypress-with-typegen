@@ -12,7 +12,7 @@ export default async function () {
 
 	return (
 		<Wrapper className="bg-background/50 sticky top-0 z-10 backdrop-blur">
-			<div className={cn(css.root, 'section grid items-center gap-4 p-4')}>
+			<div className={cn(css.root, 'section grid items-center gap-x-4 p-4')}>
 				<Link href="/" className="font-bold [grid-area:logo]">
 					{site?.title}
 				</Link>
