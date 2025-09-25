@@ -11,7 +11,7 @@ export default function ({ query }: { query: string }) {
 		<ul>
 			{results.map(
 				(result) =>
-					result.slug && (
+					!!result.slug && (
 						<li key={result._id}>
 							<a
 								href={result.slug + `#:~:text=${query}`}
