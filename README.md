@@ -1,20 +1,28 @@
 # SanityPress (with GROQ TypeGen)
 
-> [Read more about SanityPres with TypeGen](https://typed.sanitypress.dev/blog/introducing-sanitypress-with-typegen)
+> [Read more about SanityPress with TypeGen](https://typed.sanitypress.dev/blog/introducing-sanitypress-with-typegen)
+
+## Features
+
+- Improved successor to the acclaimed [SanityPress](https://sanitypress.dev) starter template (300+ stars)
+- GROQ TypeGen for Sanity Schema types
+- Live Content API with Visual Editing
+- Opitmized images with Next Image component and Sanity CDN
+- Perfect PageSpeed Insight scores
+- Auto-generated sitemap.xml and blog RSS feed
 
 ## Roadmap
 
-- [ ] Modules
-  - [ ] search
-  - [ ] stat list
+- Modules
   - [ ] person list
+  - [ ] stat list
   - [ ] step list
   - [ ] breadcrumbs
-- [x] Sanity Images
+- Blog
+  - [ ] featured post preview
+- Sanity Images
   - [ ] responsive images (breakpoints)
-- [ ] Blog
-  - [ ] post-preview (featured / large)
-- [ ] error handling
+- imporved error handling
 
 ## Not included
 
