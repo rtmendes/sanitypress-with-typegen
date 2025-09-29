@@ -15,17 +15,17 @@ export default function ({
 	if (!heading.text) return null
 
 	const ref = useRef<HTMLLIElement>(null)
-	const [windowHalfHeight, setWindowHalfHeight] = useState(0)
+	const [thresholdHeight, setThresholdHeight] = useState(0)
 
-	// update window height
+	// update threshold height
 	useEffect(() => {
-		const updateWindowHalfHeight = () => {
-			setWindowHalfHeight(window.innerHeight / 2)
+		const updateThresholdHeight = () => {
+			setThresholdHeight(window.innerHeight / 2)
 		}
-		updateWindowHalfHeight()
+		updateThresholdHeight()
 
-		window.addEventListener('resize', updateWindowHalfHeight)
-		return () => window.removeEventListener('resize', updateWindowHalfHeight)
+		window.addEventListener('resize', updateThresholdHeight)
+		return () => window.removeEventListener('resize', updateThresholdHeight)
 	}, [])
 
 	// add className when heading is in view
@@ -33,8 +33,10 @@ export default function ({
 		if (typeof document === 'undefined' || !ref.current || !heading.text) return
 
 		const target = ref.current
-			.closest('[data-module="prose"]')
-			?.querySelector(`#${slug(heading.text)}`)!
+			.closest('[data-module]')
+			?.querySelector(
+				`#${slug(heading.text, { removeLeadingNumberAndHyphen: true })}`,
+			)!
 
 		const observer = new IntersectionObserver(
 			(entries) => {
@@ -48,13 +50,13 @@ export default function ({
 			},
 			{
 				threshold: 1,
-				rootMargin: `${document.documentElement.scrollHeight}px 0px -${windowHalfHeight}px 0px`,
+				rootMargin: `${document.documentElement.scrollHeight}px 0px -${thresholdHeight}px 0px`,
 			},
 		)
 
 		if (target) observer.observe(target)
 		return () => observer.disconnect()
-	}, [heading, windowHalfHeight])
+	}, [heading, thresholdHeight])
 
 	return (
 		<li ref={ref}>

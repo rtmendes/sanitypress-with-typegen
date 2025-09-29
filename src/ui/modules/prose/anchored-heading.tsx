@@ -6,7 +6,12 @@ export default function ({
 	children,
 	value,
 }: { as: React.ElementType } & PortableTextComponentProps<PortableTextBlock>) {
-	const id = slug(value.children.reduce((acc, { text }) => acc + text, ''))
+	const id = slug(
+		value.children.reduce((acc, { text }) => acc + text, ''),
+		{
+			removeLeadingNumberAndHyphen: true,
+		},
+	)
 
 	return (
 		<Tag className="group" id={id}>
