@@ -11,6 +11,7 @@ export default defineField({
 		{ type: 'custom-html' },
 		{ type: 'hero.split' },
 		{ type: 'logo-list' },
+		{ type: 'person-list' },
 		{ type: 'prose' },
 		{ type: 'search-module' },
 		{ type: 'testimonial-list' },

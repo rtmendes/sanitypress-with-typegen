@@ -59,6 +59,12 @@ export const MODULES_QUERY = /* groq */ `
 			_type == 'reference' => @->
 		}
 	},
+	_type == 'person-list' => {
+		people[]{
+			...,
+			_type == 'reference' => @->
+		}
+	},
 	_type == 'prose' => {
 		content[]{
 			...,

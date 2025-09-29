@@ -1,0 +1,28 @@
+import { PortableText } from 'next-sanity'
+import Img from '@/ui/img'
+import type { Person, PersonList } from '@/sanity/types'
+
+export default function ({ intro = [], people }: PersonList) {
+	return (
+		<section className="section space-y-4">
+			<header className="prose">
+				<PortableText value={intro} />
+			</header>
+
+			<ul className="carousel max-md:full-bleed gap-4 pb-2 max-md:px-4">
+				{(people as Partial<Person>[])?.map((person, key) => (
+					<li key={key}>
+						<article className="space-y-4">
+							<Img
+								className="aspect-square w-full object-cover"
+								image={person.image}
+								alt={person.name ?? ''}
+							/>
+							<div>{person.name}</div>
+						</article>
+					</li>
+				))}
+			</ul>
+		</section>
+	)
+}

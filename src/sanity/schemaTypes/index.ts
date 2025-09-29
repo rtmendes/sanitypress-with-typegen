@@ -24,6 +24,7 @@ import blogPostList from './modules/blog-post-list'
 import customHtml from './modules/custom-html'
 import heroSplit from './modules/hero.split'
 import logoList from './modules/logo-list'
+import personList from './modules/person-list'
 import prose from './modules/prose'
 import searchModule from './modules/search-module'
 import testimonialList from './modules/testimonial-list'
@@ -59,6 +60,7 @@ export const schema: SchemaPluginOptions = {
 		customHtml,
 		heroSplit,
 		logoList,
+		personList,
 		prose,
 		searchModule,
 		testimonialList,

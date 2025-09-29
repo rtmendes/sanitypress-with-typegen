@@ -14,7 +14,6 @@
 ## Roadmap
 
 - Modules
-  - [ ] person list
   - [ ] stat list
   - [ ] step list
   - [ ] breadcrumbs

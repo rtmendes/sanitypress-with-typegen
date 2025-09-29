@@ -12,6 +12,7 @@ import BlogPostList from './blog/blog-post-list'
 import CustomHTML from './custom-html'
 import HeroSplit from './hero.split'
 import LogoList from './logo-list'
+import PersonList from './person-list'
 import Prose from './prose'
 import SearchModule from './search'
 import TestimonialList from './testimonial-list'
@@ -24,6 +25,7 @@ const MODULES_MAP = {
 	'custom-html': CustomHTML,
 	'hero.split': HeroSplit,
 	'logo-list': LogoList,
+	'person-list': PersonList,
 	prose: Prose,
 	'search-module': SearchModule,
 	'testimonial-list': TestimonialList,
