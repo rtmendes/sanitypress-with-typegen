@@ -186,6 +186,10 @@
 	& a:not([class]) {
 		@apply link;
 	}
+
+	& code {
+		@apply bg-foreground/5 px-1 rounded-sm;
+	}
 }
 
 @utility carousel {

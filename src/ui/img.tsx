@@ -25,7 +25,7 @@ export default function ({
 
 	const { dimensions, lqip } = image.asset.metadata ?? {}
 	const { width, height } = getImageDimensions(image.asset)
-	const loading = props.loading || stegaClean(image.loading)
+	const loading = stegaClean(props.loading || image.loading)
 
 	const src = urlFor(image)
 		.withOptions({
@@ -42,10 +42,10 @@ export default function ({
 				dimensions?.height ?? height,
 				image.crop,
 			)}
-			placeholder={lqip ? 'blur' : undefined}
-			blurDataURL={lqip}
 			loading={loading}
 			priority={loading === 'eager'}
+			placeholder={lqip ? 'blur' : undefined}
+			blurDataURL={lqip}
 			{...props}
 		/>
 	)
