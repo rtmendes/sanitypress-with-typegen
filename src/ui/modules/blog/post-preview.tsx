@@ -1,7 +1,7 @@
 import SanityLink from '@/ui/sanity-link'
 import Img from '@/ui/img'
 import Date from './date'
-import Author from './author'
+import Author from './byline'
 import Categories from './categories'
 import { cn } from '@/lib/utils'
 import type { BlogCategory, Person, BlogPost } from '@/sanity/types'
