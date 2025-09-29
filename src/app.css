@@ -80,6 +80,10 @@
 	a {
 		color: revert;
 	}
+
+	cite {
+		font-style: normal;
+	}
 }
 
 /* ctas, links */
@@ -255,6 +259,25 @@
 		&::scroll-marker:target-current {
 			background-color: currentColor;
 		}
+	}
+}
+
+@utility accordion {
+	& summary {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: .5em;
+
+		&::after {
+			content: '+';
+			flex-shrink: 0;
+		}
+	}
+
+	&[open] summary::after {
+		content: '-';
+		font-family: var(--font-mono);
 	}
 }
 

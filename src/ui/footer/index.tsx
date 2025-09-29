@@ -9,7 +9,7 @@ export default async function () {
 	return (
 		<footer>
 			<div className="section space-y-4">
-				<div className="flex gap-4 max-md:flex-col md:items-start">
+				<div className="flex justify-between gap-4 max-md:flex-col md:items-start">
 					<div className="grid gap-4 max-md:text-center">
 						<div className="font-bold">{site?.title}</div>
 						<SocialNavigation className="[&_svg]:size-lh flex items-center gap-4 max-md:justify-center" />

@@ -37,9 +37,7 @@ export default function ({
 								<dl className="">
 									<dt>{testimonial.author.name}</dt>
 									{testimonial.author?.title && (
-										<dd className="text-sm italic">
-											{testimonial.author?.title}
-										</dd>
+										<dd className="text-sm">{testimonial.author?.title}</dd>
 									)}
 								</dl>
 							</cite>

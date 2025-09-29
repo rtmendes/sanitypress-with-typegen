@@ -25,6 +25,7 @@ export default function ({
 			<div>
 				{accordions?.map(({ _key, summary, content, open }) => (
 					<details
+						className="accordion border-neutral-300 not-last:border-b"
 						name={connect ? _module_key : undefined}
 						open={open}
 						{...(enableSchema && {
@@ -34,11 +35,15 @@ export default function ({
 						})}
 						key={_key}
 					>
-						<summary {...(enableSchema && { itemProp: 'name' })}>
+						<summary
+							className="py-2 font-bold"
+							{...(enableSchema && { itemProp: 'name' })}
+						>
 							{summary}
 						</summary>
+
 						<div
-							className="not-supports-[interpolate-size:allow-keywords]:anim-fade-to-b py-4"
+							className="not-supports-[interpolate-size:allow-keywords]:anim-fade-to-b pb-2"
 							{...(enableSchema && {
 								itemScope: true,
 								itemProp: 'acceptedAnswer',
