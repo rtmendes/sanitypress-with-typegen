@@ -1,7 +1,7 @@
 import SanityLink from '@/ui/sanity-link'
 import Img from '@/ui/img'
 import Date from './date'
-import Author from './byline'
+import Byline from './byline'
 import Categories from './categories'
 import { cn } from '@/lib/utils'
 import type { BlogCategory, Person, BlogPost } from '@/sanity/types'
@@ -28,7 +28,7 @@ export default function ({
 					internal: post,
 				}}
 			>
-				{post.title}
+				<strong>{post.title}</strong>
 				<span className="absolute inset-0" />
 			</SanityLink>
 
@@ -36,10 +36,13 @@ export default function ({
 				<p className="line-clamp-3">{post.metadata?.description}</p>
 			)}
 
-			<div className="flex flex-wrap items-center gap-x-4">
-				<Author author={post.author as unknown as Person} />
-				<Date date={post.publishDate} />
+			<div className="flex flex-wrap items-center justify-between gap-x-4">
+				<Byline author={post.author as unknown as Person} />
 				<Categories categories={post.categories as unknown as BlogCategory[]} />
+			</div>
+
+			<div>
+				<Date date={post.publishDate} />
 			</div>
 		</li>
 	)
