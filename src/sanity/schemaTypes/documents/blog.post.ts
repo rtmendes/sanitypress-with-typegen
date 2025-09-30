@@ -80,4 +80,16 @@ export default defineType({
 			subtitle: 'publishDate',
 		},
 	},
+	orderings: [
+		{
+			name: 'publishDate',
+			title: 'Publish date',
+			by: [{ field: 'publishDate', direction: 'desc' }],
+		},
+		{
+			name: 'title',
+			title: 'Title',
+			by: [{ field: 'title', direction: 'asc' }],
+		},
+	],
 })

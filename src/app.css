@@ -112,7 +112,7 @@
 
 @utility input {
 	padding: 0.25em 0.5em;
-	@apply bg-background border border-foreground/10 focus-within:border-foreground;
+	@apply bg-background border border-foreground/10 focus-within:border-foreground/30;
 }
 
 /* typography */
@@ -193,6 +193,22 @@
 
 	& code {
 		@apply bg-foreground/5 px-1 rounded-sm;
+	}
+
+	& table {
+		min-width: 100%;
+		display: block;
+		overflow-x: auto;
+
+		@apply max-md:full-bleed;
+
+		& :is(th, td) {
+			padding: 0.25em 0.5em;
+		}
+
+		& tbody tr:nth-child(odd) {
+			@apply bg-foreground/5;
+		}
 	}
 }
 

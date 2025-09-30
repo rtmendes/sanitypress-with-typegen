@@ -2,9 +2,11 @@ import { moduleAttributes } from '..'
 import TableOfContents from './table-of-contents'
 import { PortableText, stegaClean } from 'next-sanity'
 import AnchoredHeading from './anchored-heading'
-import Image from './image'
 import { cn } from '@/lib/utils'
 import type { Prose } from '@/sanity/types'
+
+import Image from './image'
+import CustomHTML from '@/ui/modules/custom-html'
 
 export default function ({
 	content,
@@ -47,6 +49,7 @@ export default function ({
 						},
 						types: {
 							image: Image,
+							'custom-html': ({ value }) => <CustomHTML {...value} />,
 						},
 					}}
 				/>

@@ -21,7 +21,11 @@ export default async function ({ intro = [], postsPerPage }: BlogFrontpage) {
 			</header>
 
 			<fieldset className="flex flex-wrap items-end justify-between gap-4">
-				<Suspense fallback={<Loading>Loading categories...</Loading>}>
+				<Suspense
+					fallback={
+						<Loading className="p-[.25em_.5em]">Loading categories...</Loading>
+					}
+				>
 					<FilterList />
 					<SortBy />
 				</Suspense>

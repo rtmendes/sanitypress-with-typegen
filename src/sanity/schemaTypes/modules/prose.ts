@@ -42,6 +42,7 @@ export default defineType({
 						}),
 					],
 				}),
+				{ type: 'custom-html' },
 			],
 			group: 'content',
 		}),

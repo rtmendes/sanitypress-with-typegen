@@ -18,7 +18,7 @@ export default function ({ intro = [], people }: PersonList) {
 								image={person.image}
 								alt={person.name ?? ''}
 							/>
-							<div>{person.name}</div>
+							<div className="font-bold">{person.name}</div>
 						</article>
 					</li>
 				))}
