@@ -37,7 +37,7 @@ export default function ({ post, ...props }: { post: BLOG_POST_QUERYResult }) {
 					open
 				/>
 
-				<div className={cn(css.body, 'prose grid w-full')}>
+				<div className={cn(css.body, 'prose mx-auto grid w-full max-w-4xl')}>
 					<PortableText
 						value={post.content ?? []}
 						components={{
@@ -52,7 +52,9 @@ export default function ({ post, ...props }: { post: BLOG_POST_QUERYResult }) {
 							types: {
 								image: Image,
 								code: Code,
-								'custom-html': ({ value }) => <CustomHTML {...value} />,
+								'custom-html': ({ value }) => (
+									<CustomHTML {...value} className="my-6" />
+								),
 							},
 						}}
 					/>
