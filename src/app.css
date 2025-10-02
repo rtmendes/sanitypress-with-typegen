@@ -102,8 +102,12 @@
 	@apply action-base bg-foreground text-background;
 }
 
+@utility action-outline {
+	@apply action-base border border-current/20 text-foreground hover:border-current;
+}
+
 @utility ghost {
-	@apply action-base hover:bg-foreground/10;
+	@apply action-base hover:bg-foreground/5 text-foreground;
 }
 
 @utility link {

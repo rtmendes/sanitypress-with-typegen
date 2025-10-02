@@ -15,7 +15,12 @@ export default defineType({
 			name: 'style',
 			type: 'string',
 			options: {
-				list: ['action', 'link'],
+				list: [
+					'action',
+					{ title: 'Action (outline)', value: 'action-outline' },
+					'ghost',
+					'link',
+				],
 			},
 		}),
 	],
