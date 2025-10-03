@@ -25,7 +25,7 @@ export default function ({
 			<div>
 				{accordions?.map(({ _key, summary, content, open }) => (
 					<details
-						className="accordion border-neutral-300 not-last:border-b"
+						className="accordion border-stroke not-last:border-b"
 						name={connect ? _module_key : undefined}
 						open={open}
 						{...(enableSchema && {

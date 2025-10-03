@@ -5,11 +5,9 @@ import type { Breadcrumbs, Page } from '@/sanity/types'
 
 export default function ({
 	crumbs,
-	page,
+	currentPage,
 	...props
-}: Breadcrumbs & { page?: Page }) {
-	console.log(page)
-
+}: Breadcrumbs & { currentPage?: Page }) {
 	return (
 		<nav className="section py-4 text-sm" {...moduleAttributes(props)}>
 			<ol
@@ -21,7 +19,7 @@ export default function ({
 					<Crumb link={crumb} position={index + 1} key={crumb._key} />
 				))}
 
-				<Crumb position={(crumbs?.length ?? 0) + 2}>{page?.title}</Crumb>
+				<Crumb position={(crumbs?.length ?? 0) + 2}>{currentPage?.title}</Crumb>
 			</ol>
 		</nav>
 	)

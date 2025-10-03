@@ -47,7 +47,7 @@ export default function ModulesResolver({
 			case 'blog-post-content':
 				return { post }
 			case 'breadcrumbs':
-				return { page }
+				return { currentPage: page || post }
 			default:
 				return {}
 		}

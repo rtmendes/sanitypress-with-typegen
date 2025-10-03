@@ -5,6 +5,7 @@
 
 	--color-background: var(--background);
 	--color-foreground: var(--foreground);
+	--color-stroke: var(--stroke);
 
 	--spacing-lh: 1lh;
 	--spacing-ch: 1ch;
@@ -21,6 +22,7 @@
 	:root {
 		--background: var(--color-neutral-100);
 		--foreground: var(--color-neutral-900);
+		--stroke: var(--color-neutral-200);
 	}
 
 	@supports (interpolate-size: allow-keywords) {
@@ -103,7 +105,7 @@
 }
 
 @utility action-outline {
-	@apply action-base border border-current/20 text-foreground hover:border-current;
+	@apply action-base border border-stroke text-foreground hover:border-current;
 }
 
 @utility ghost {
