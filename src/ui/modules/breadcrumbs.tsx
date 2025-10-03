@@ -11,7 +11,7 @@ export default function ({
 	return (
 		<nav className="section py-4 text-sm" {...moduleAttributes(props)}>
 			<ol
-				className="flex flex-wrap items-center gap-x-2 gap-y-1"
+				className="flex items-center gap-x-2 gap-y-1"
 				itemScope
 				itemType="https://schema.org/BreadcrumbList"
 			>
@@ -44,7 +44,7 @@ function Crumb({
 
 	return (
 		<li
-			className='line-clamp-1 not-first:before:mr-2 not-first:before:content-["/"]'
+			className='line-clamp-1 not-first:before:mr-2 not-first:before:content-["/"] first:shrink-0'
 			itemProp="itemListElement"
 			itemScope
 			itemType="https://schema.org/ListItem"

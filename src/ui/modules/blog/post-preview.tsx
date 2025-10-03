@@ -38,11 +38,11 @@ export default function ({
 
 			<div className="flex flex-wrap items-center justify-between gap-x-4">
 				<Byline author={post.author as unknown as Person} />
-				<Categories categories={post.categories as unknown as BlogCategory[]} />
+				<Date date={post.publishDate} />
 			</div>
 
 			<div>
-				<Date date={post.publishDate} />
+				<Categories categories={post.categories as unknown as BlogCategory[]} />
 			</div>
 		</li>
 	)
