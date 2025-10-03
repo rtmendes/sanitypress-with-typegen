@@ -8,6 +8,7 @@ export default defineField({
 		{ type: 'blog.frontpage' },
 		{ type: 'blog-post-content' },
 		{ type: 'blog-post-list' },
+		{ type: 'breadcrumbs' },
 		{ type: 'custom-html' },
 		{ type: 'hero.split' },
 		{ type: 'logo-list' },

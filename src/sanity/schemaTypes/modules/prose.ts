@@ -42,6 +42,10 @@ export default defineType({
 						}),
 					],
 				}),
+				defineArrayMember({
+					type: 'code',
+					options: { withFilename: true },
+				}),
 				{ type: 'custom-html' },
 			],
 			group: 'content',

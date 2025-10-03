@@ -1754,6 +1754,36 @@
                       }
                     }
                   }
+                },
+                {
+                  "type": "object",
+                  "attributes": {
+                    "_key": {
+                      "type": "objectAttribute",
+                      "value": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "rest": {
+                    "type": "inline",
+                    "name": "code"
+                  }
+                },
+                {
+                  "type": "object",
+                  "attributes": {
+                    "_key": {
+                      "type": "objectAttribute",
+                      "value": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "rest": {
+                    "type": "inline",
+                    "name": "custom-html"
+                  }
                 }
               ]
             }
@@ -3020,6 +3050,44 @@
     }
   },
   {
+    "name": "breadcrumbs",
+    "type": "type",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "breadcrumbs"
+          }
+        },
+        "crumbs": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "array",
+            "of": {
+              "type": "object",
+              "attributes": {
+                "_key": {
+                  "type": "objectAttribute",
+                  "value": {
+                    "type": "string"
+                  }
+                }
+              },
+              "rest": {
+                "type": "inline",
+                "name": "link"
+              }
+            }
+          },
+          "optional": true
+        }
+      }
+    }
+  },
+  {
     "name": "blog-post-list",
     "type": "type",
     "value": {
@@ -3984,6 +4052,14 @@
               {
                 "type": "string",
                 "value": "action"
+              },
+              {
+                "type": "string",
+                "value": "action-outline"
+              },
+              {
+                "type": "string",
+                "value": "ghost"
               },
               {
                 "type": "string",
@@ -5009,6 +5085,21 @@
                 },
                 "rest": {
                   "type": "inline",
+                  "name": "breadcrumbs"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
                   "name": "custom-html"
                 }
               },
@@ -5172,6 +5263,21 @@
                 "rest": {
                   "type": "inline",
                   "name": "blog-post-list"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "breadcrumbs"
                 }
               },
               {
@@ -5393,6 +5499,21 @@
                 "rest": {
                   "type": "inline",
                   "name": "blog-post-list"
+                }
+              },
+              {
+                "type": "object",
+                "attributes": {
+                  "_key": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "rest": {
+                  "type": "inline",
+                  "name": "breadcrumbs"
                 }
               },
               {

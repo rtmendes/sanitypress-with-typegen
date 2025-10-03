@@ -7,8 +7,9 @@ import type {
 
 import AccordionList from './accordion-list'
 import BlogFrontpage from './blog/blog.frontpage'
-import blogPostContent from './blog/blog-post-content'
+import BlogPostContent from './blog/blog-post-content'
 import BlogPostList from './blog/blog-post-list'
+import Breadcrumbs from './breadcrumbs'
 import CustomHTML from './custom-html'
 import HeroSplit from './hero.split'
 import LogoList from './logo-list'
@@ -20,8 +21,9 @@ import TestimonialList from './testimonial-list'
 const MODULES_MAP = {
 	'accordion-list': AccordionList,
 	'blog.frontpage': BlogFrontpage,
-	'blog-post-content': blogPostContent,
+	'blog-post-content': BlogPostContent,
 	'blog-post-list': BlogPostList,
+	breadcrumbs: Breadcrumbs,
 	'custom-html': CustomHTML,
 	'hero.split': HeroSplit,
 	'logo-list': LogoList,
@@ -44,6 +46,8 @@ export default function ModulesResolver({
 		switch (module._type) {
 			case 'blog-post-content':
 				return { post }
+			case 'breadcrumbs':
+				return { page }
 			default:
 				return {}
 		}

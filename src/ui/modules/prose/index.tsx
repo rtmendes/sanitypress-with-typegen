@@ -1,11 +1,12 @@
 import { moduleAttributes } from '..'
 import TableOfContents from './table-of-contents'
 import { PortableText, stegaClean } from 'next-sanity'
-import AnchoredHeading from './anchored-heading'
 import { cn } from '@/lib/utils'
 import type { Prose } from '@/sanity/types'
 
+import AnchoredHeading from './anchored-heading'
 import Image from './image'
+import Code from './code'
 import CustomHTML from '@/ui/modules/custom-html'
 
 export default function ({
@@ -35,7 +36,7 @@ export default function ({
 				/>
 			)}
 
-			<article className="prose">
+			<article className="prose mx-auto">
 				<PortableText
 					value={content ?? []}
 					components={{
@@ -49,6 +50,7 @@ export default function ({
 						},
 						types: {
 							image: Image,
+							code: Code,
 							'custom-html': ({ value }) => <CustomHTML {...value} />,
 						},
 					}}

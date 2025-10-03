@@ -7,7 +7,7 @@ export type SanityLinkType = Omit<Link, 'internal'> & {
 }
 
 export default function ({
-	link: { label, type, internal, external, params },
+	link: { label, type, internal, external, params } = {},
 	children,
 	...props
 }: { link: SanityLinkType | any } & Omit<

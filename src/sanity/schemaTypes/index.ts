@@ -21,6 +21,7 @@ import accordionList from './modules/accordion-list'
 import blogFrontpage from './modules/blog.frontpage'
 import blogPostContent from './modules/blog-post-content'
 import blogPostList from './modules/blog-post-list'
+import breadcrumbs from './modules/breadcrumbs'
 import customHtml from './modules/custom-html'
 import heroSplit from './modules/hero.split'
 import logoList from './modules/logo-list'
@@ -57,6 +58,7 @@ export const schema: SchemaPluginOptions = {
 		blogFrontpage,
 		blogPostContent,
 		blogPostList,
+		breadcrumbs,
 		customHtml,
 		heroSplit,
 		logoList,

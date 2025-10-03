@@ -47,6 +47,9 @@ export const GLOBAL_MODULE_PATH_QUERY = groq`
 
 export const MODULES_QUERY = /* groq */ `
 	...,
+	_type == 'breadcrumbs' => {
+		crumbs[]{ ${LINK_QUERY} }
+	},
 	_type == 'hero.split' => {
 		ctas[]{
 			...,
