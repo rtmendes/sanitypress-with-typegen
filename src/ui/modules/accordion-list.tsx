@@ -5,7 +5,7 @@ export default function ({
 	_key: _module_key,
 	intro,
 	accordions,
-	connect,
+	exclusive,
 	enableSchema,
 }: AccordionList & { _key: string }) {
 	return (
@@ -26,7 +26,7 @@ export default function ({
 				{accordions?.map(({ _key, summary, content, open }) => (
 					<details
 						className="accordion border-stroke not-last:border-b"
-						name={connect ? _module_key : undefined}
+						name={exclusive ? _module_key : undefined}
 						open={open}
 						{...(enableSchema && {
 							itemScope: true,

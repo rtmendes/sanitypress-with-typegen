@@ -50,9 +50,8 @@ export default defineType({
 			group: 'content',
 		}),
 		defineField({
-			name: 'connect',
-			title: 'Connect accordions',
-			description: 'Allows only one accordion to be expanded at a time',
+			name: 'exclusive',
+			description: 'Allow only one accordion to be expanded at any time',
 			type: 'boolean',
 			initialValue: false,
 			group: 'options',

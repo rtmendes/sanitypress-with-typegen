@@ -554,7 +554,7 @@ export type AccordionList = {
 		_type: 'accordion'
 		_key: string
 	}>
-	connect?: boolean
+	exclusive?: boolean
 	enableSchema?: boolean
 }
 
@@ -1185,7 +1185,7 @@ export type PAGE_QUERYResult = {
 					_type: 'accordion'
 					_key: string
 				}>
-				connect?: boolean
+				exclusive?: boolean
 				enableSchema?: boolean
 		  }
 		| {
@@ -2062,7 +2062,7 @@ export type BLOG_POST_QUERYResult = {
 					_type: 'accordion'
 					_key: string
 				}>
-				connect?: boolean
+				exclusive?: boolean
 				enableSchema?: boolean
 		  }
 		| {
@@ -2883,7 +2883,7 @@ export type NOT_FOUND_QUERYResult = {
 					_type: 'accordion'
 					_key: string
 				}>
-				connect?: boolean
+				exclusive?: boolean
 				enableSchema?: boolean
 		  }
 		| {

@@ -3930,7 +3930,7 @@
           },
           "optional": true
         },
-        "connect": {
+        "exclusive": {
           "type": "objectAttribute",
           "value": {
             "type": "boolean"
