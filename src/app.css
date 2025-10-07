@@ -1,11 +1,11 @@
 @import 'tailwindcss';
 
-@theme inline {
+@theme {
 	--font-sans: 'Geist', sans-serif;
 
-	--color-background: var(--background);
-	--color-foreground: var(--foreground);
-	--color-stroke: var(--stroke);
+	--color-background: var(--color-neutral-100);
+	--color-foreground: var(--color-neutral-900);
+	--color-stroke: var(--color-neutral-200);
 
 	--spacing-lh: 1lh;
 	--spacing-ch: 1ch;
@@ -19,12 +19,6 @@
 @variant headings (& :is(h1, h2, h3, h4, h5, h6));
 
 @layer base {
-	:root {
-		--background: var(--color-neutral-100);
-		--foreground: var(--color-neutral-900);
-		--stroke: var(--color-neutral-200);
-	}
-
 	@supports (interpolate-size: allow-keywords) {
 		:root {
 			interpolate-size: allow-keywords;

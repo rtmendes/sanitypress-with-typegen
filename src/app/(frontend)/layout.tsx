@@ -1,5 +1,5 @@
 import { Geist } from 'next/font/google'
-import { ViewTransition } from 'react'
+// import { ViewTransition } from 'react'
 import { NuqsAdapter } from 'nuqs/adapters/next/app'
 import Header from '@/ui/header'
 import Footer from '@/ui/footer'
@@ -24,18 +24,18 @@ export default async function RootLayout({
 }>) {
 	return (
 		<html lang="en">
-			<ViewTransition>
-				<NuqsAdapter>
-					<body className="bg-background text-foreground antialiased">
-						<Header />
-						<main>{children}</main>
-						<Footer />
+			<NuqsAdapter>
+				{/* <ViewTransition> */}
+				<body className="bg-background text-foreground antialiased">
+					<Header />
+					<main>{children}</main>
+					<Footer />
 
-						<VisualEditing />
-						{!dev && <Analytics />}
-					</body>
-				</NuqsAdapter>
-			</ViewTransition>
+					<VisualEditing />
+					{!dev && <Analytics />}
+				</body>
+				{/* </ViewTransition> */}
+			</NuqsAdapter>
 		</html>
 	)
 }
