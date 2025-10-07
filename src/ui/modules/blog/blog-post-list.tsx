@@ -30,7 +30,11 @@ export default async function ({
 				data-anchor-name={`--blog-post-list-${_key}`}
 			>
 				{posts?.map((post) => (
-					<PostPreview post={post as unknown as BlogPost} key={post._id} />
+					<PostPreview
+						className="md:snap-start"
+						post={post as unknown as BlogPost}
+						key={post._id}
+					/>
 				))}
 			</ul>
 		</section>

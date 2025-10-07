@@ -10,7 +10,9 @@ export default function ({
 }: (LinkList | any) & React.ComponentProps<'li'>) {
 	return (
 		<li {...props}>
-			<div>{link?.label}</div>
+			<div>
+				<b>{link?.label}</b>
+			</div>
 			<ul>
 				{links?.map((item: SanityLinkType) => (
 					<li key={item._key}>
