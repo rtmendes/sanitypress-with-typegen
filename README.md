@@ -1,5 +1,7 @@
 # SanityPress (with GROQ TypeGen)
 
+![](https://cdn.sanity.io/images/81pocpw8/production/83a1f41ece9f61f1b1f323f75dff2d6e9c4cd5f1-2400x1200.png)
+
 > [Read more about SanityPress with TypeGen](https://typed.sanitypress.dev/blog/introducing-sanitypress-with-typegen)
 
 ## Features
