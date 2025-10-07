@@ -1,5 +1,5 @@
 import { Geist } from 'next/font/google'
-import { unstable_ViewTransition as ViewTransition } from 'react'
+import { ViewTransition } from 'react'
 import { NuqsAdapter } from 'nuqs/adapters/next/app'
 import Header from '@/ui/header'
 import Footer from '@/ui/footer'
