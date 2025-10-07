@@ -9,6 +9,7 @@ export default defineField({
 		{ type: 'blog-post-content' },
 		{ type: 'blog-post-list' },
 		{ type: 'breadcrumbs' },
+		{ type: 'callout' },
 		{ type: 'custom-html' },
 		{ type: 'hero.split' },
 		{ type: 'logo-list' },

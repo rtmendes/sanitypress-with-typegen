@@ -22,6 +22,7 @@ import blogFrontpage from './modules/blog.frontpage'
 import blogPostContent from './modules/blog-post-content'
 import blogPostList from './modules/blog-post-list'
 import breadcrumbs from './modules/breadcrumbs'
+import callout from './modules/callout'
 import customHtml from './modules/custom-html'
 import heroSplit from './modules/hero.split'
 import logoList from './modules/logo-list'
@@ -59,6 +60,7 @@ export const schema: SchemaPluginOptions = {
 		blogPostContent,
 		blogPostList,
 		breadcrumbs,
+		callout,
 		customHtml,
 		heroSplit,
 		logoList,
