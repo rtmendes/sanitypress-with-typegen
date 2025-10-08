@@ -26,6 +26,11 @@ export default async function RootLayout({
 		<html lang="en">
 			<NuqsAdapter>
 				{/* <ViewTransition> */}
+				<head>
+					<link rel="preconnect" href="https://cdn.sanity.io" />
+					<link rel="preconnect" href="https://ic0n.dev" />
+				</head>
+
 				<body className="bg-background text-foreground antialiased">
 					<Header />
 					<main>{children}</main>
