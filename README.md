@@ -1,6 +1,6 @@
 # ♣️ SanityPress with TypeGen
 
-> Zero stress. 100% type-safe.
+> Zero setup stress. 100% type-safe.
 
 An improved successor to the acclaimed Next.js + Sanity.io starter template—now with auto-generated TypeScript types from your Sanity schema and GROQ queries.
 
