@@ -17,7 +17,12 @@ export default function ({ content = [], ctas, image, ...props }: HeroSplit) {
 					image?.afterContent && 'max-md:order-last',
 				)}
 			>
-				<Img image={image} alt={image?.alt ?? ''} />
+				<Img
+					className="w-full"
+					image={image}
+					width={900}
+					alt={image?.alt ?? ''}
+				/>
 			</figure>
 
 			<header className="prose">

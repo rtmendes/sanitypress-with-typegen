@@ -14,7 +14,7 @@ export default function ({
 				<Img
 					className="aspect-square object-cover"
 					image={author.image}
-					width={40}
+					width={48}
 					alt={author.name ?? ''}
 				/>
 			</figure>

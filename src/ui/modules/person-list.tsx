@@ -15,6 +15,7 @@ export default function ({ intro = [], people }: PersonList) {
 						<article className="space-y-4">
 							<Img
 								className="aspect-square w-full object-cover"
+								width={600}
 								image={person.image}
 								alt={person.name ?? ''}
 							/>
