@@ -2,6 +2,7 @@ import { sanityFetchLive } from '@/sanity/lib/live'
 import { groq } from 'next-sanity'
 import { BLOG_DIR } from '@/lib/env'
 import { escapeHTML, toHTML } from '@portabletext/to-html'
+import { getBlockText } from '@/lib/utils'
 import { urlFor } from '@/sanity/lib/image'
 import type { BLOG_RSS_QUERYResult } from '@/sanity/types'
 
@@ -29,33 +30,37 @@ export async function GET() {
 					<description><![CDATA[${post.metadata?.description}]]></description>
 					<link>${url}</link>
 					<guid isPermaLink="true">${url}</guid>
-					${post.publishDate ? `<pubDate>${new Date(post.publishDate).toISOString()}</pubDate>` : ''}
-					${
+					${[
+						post.publishDate &&
+							`<pubDate>${new Date(post.publishDate).toISOString()}</pubDate>`,
 						post.categories
 							?.map((category) => `<category>${category.title}</category>`)
-							.join('') || ''
-					}
-					${post.author ? `<dc:creator>${post.author.name}</dc:creator>` : ''}
-					${post.metadata?.image ? `<enclosure url="${urlFor(post.metadata.image).format('jpg').url()}" length="0" type="image/jpeg" />` : ''}
-					${
-						post.content
-							? `<content:encoded><![CDATA[${toHTML(post.content, {
-									components: {
-										types: {
-											image: ({
-												value: { alt = '', figcaption, ...value },
-											}) => {
-												const img = `<img src="${urlFor(value).url()}" alt="${escapeHTML(alt)}" />`
-												const fc = figcaption
-													? `<figcaption>${escapeHTML(figcaption)}</figcaption>`
-													: ''
-												return `<figure>${img}${fc}</figure>`
-											},
-										},
+							.join(''),
+						post.author && `<dc:creator>${post.author.name}</dc:creator>`,
+						post.metadata?.image &&
+							`<enclosure url="${urlFor(post.metadata.image).format('jpg').url()}" length="0" type="image/jpeg" />`,
+						post.content &&
+							`<content:encoded><![CDATA[${toHTML(post.content, {
+								components: {
+									types: {
+										image: ({ value: { alt = '', figcaption, ...value } }) =>
+											`<figure>${[
+												`<img src="${urlFor(value).url()}" alt="${escapeHTML(alt)}" />`,
+												figcaption &&
+													`<figcaption>${escapeHTML(getBlockText(figcaption))}</figcaption>`,
+											]
+												.filter(Boolean)
+												.join('')}</figure>`,
+										code: ({ value: { code } }) =>
+											code && `<pre><code>${code}</code></pre>`,
+										'custom-html': ({ value: { html } }) =>
+											html?.code && escapeHTML(html.code),
 									},
-								})}]]></content:encoded>`
-							: ''
-					}
+								},
+							})}]]></content:encoded>`,
+					]
+						.filter(Boolean)
+						.join('')}
 				</item>`
 			})
 			.join('')}</channel></rss>`
@@ -63,7 +68,6 @@ export async function GET() {
 	return new Response(rssXML, {
 		headers: {
 			'Content-Type': 'application/rss+xml',
-			'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=1800',
 		},
 	})
 }
