@@ -17,12 +17,12 @@ export default async function () {
 						<menu className="p-2 pt-0">
 							<li>
 								<a href="/api/draft-mode/disable" className="link">
-									Disable draft mode
+									Exit draft mode
 								</a>
 							</li>
 							<li>
 								<a href="/admin" className="link">
-									Open studio
+									Open the Studio
 								</a>
 							</li>
 						</menu>
