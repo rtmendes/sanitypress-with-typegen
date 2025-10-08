@@ -191,8 +191,15 @@
 		@apply link;
 	}
 
-	& code {
-		@apply bg-foreground/5 px-1 rounded-sm;
+	& :not(pre)>code {
+		padding-inline: .25em;
+		font-size: 0.875em;
+		@apply bg-foreground/5 rounded-sm;
+	}
+
+	& pre {
+		overflow-x: auto;
+		font-size: 0.875em;
 	}
 
 	& table {
@@ -203,7 +210,7 @@
 		@apply max-md:full-bleed;
 
 		& :is(th, td) {
-			padding: 0.25em 0.5em;
+			padding: 0.25em 1em;
 		}
 
 		& tbody tr:nth-child(odd) {
@@ -227,7 +234,7 @@
 		cursor: pointer;
 		position: absolute;
 		position-anchor: var(--anchor-name);
-		top: calc(anchor(center));
+		top: anchor(center);
 		z-index: 1;
 		display: block;
 		aspect-ratio: 1;
@@ -239,20 +246,20 @@
 
 	&::scroll-button(left) {
 		content: '' / 'Scroll left';
-		left: calc(anchor(left));
+		left: anchor(left);
 		mask: url('https://ic0n.dev/io5/IoChevronBackCircleSharp') center / cover;
 	}
 
 	&::scroll-button(right) {
 		content: '' / 'Scroll right';
-		right: calc(anchor(right));
+		right: anchor(right);
 		mask: url('https://ic0n.dev/io5/IoChevronForwardCircleSharp') center / cover;
 	}
 
 	&::scroll-marker-group {
 		position: absolute;
 		position-anchor: var(--anchor-name);
-		top: calc(anchor(bottom));
+		top: anchor(bottom);
 		justify-self: center;
 		display: flex;
 		align-items: center;
@@ -288,12 +295,12 @@
 		&::after {
 			content: '+';
 			flex-shrink: 0;
+			font-family: var(--font-mono);
 		}
 	}
 
 	&[open] summary::after {
 		content: '-';
-		font-family: var(--font-mono);
 	}
 }
 
