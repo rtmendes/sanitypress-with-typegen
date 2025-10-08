@@ -14,7 +14,7 @@ export default function ({
 	)
 
 	return (
-		<Tag className="group" id={id}>
+		<Tag className="group grid-cols-[1fr_auto] max-md:grid" id={id}>
 			{children}
 
 			{Tag !== 'h1' && (
@@ -22,7 +22,7 @@ export default function ({
 					href={`#${id}`}
 					className="ml-[1ch] inline-block pointer-fine:not-group-hover:invisible"
 				>
-					¶
+					#
 				</a>
 			)}
 		</Tag>

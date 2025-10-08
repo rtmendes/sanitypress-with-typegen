@@ -43,7 +43,9 @@ export default function ({
 				image.crop,
 			)}
 			loading={loading}
-			priority={loading === 'eager'}
+			{...(loading === 'eager'
+				? { priority: true, fetchPriority: 'high' }
+				: {})}
 			placeholder={lqip ? 'blur' : undefined}
 			blurDataURL={lqip}
 			{...props}

@@ -6,14 +6,16 @@ import type { SearchModule } from '@/sanity/types'
 
 export default function ({ intro = [], scope }: SearchModule) {
 	return (
-		<section className="section max-w-2xl space-y-4">
-			<header className="prose text-center">
-				<PortableText value={intro} />
-			</header>
+		<section className="section">
+			<div className="mx-auto max-w-2xl space-y-4">
+				<header className="prose text-center">
+					<PortableText value={intro} />
+				</header>
 
-			<Suspense fallback={<Loading>Loading search...</Loading>}>
-				<SearchForm scope={stegaClean(scope)} />
-			</Suspense>
+				<Suspense fallback={<Loading>Loading search...</Loading>}>
+					<SearchForm scope={stegaClean(scope)} />
+				</Suspense>
+			</div>
 		</section>
 	)
 }
