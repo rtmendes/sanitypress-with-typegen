@@ -18,6 +18,38 @@ An improved successor to the acclaimed Next.js + Sanity.io starter template—no
 - Perfect PageSpeed Insight scores
 - Auto-generated sitemap.xml and blog RSS feed
 
+## Getting Started
+
+### 1. Initialize the project
+
+[Create a new Sanity project](https://www.sanity.io/get-started?template=sanitypress-with-typegen&ref=templates-sanitypress-with-typegen) -- OR -- install with the Sanity CLI:
+
+```sh
+npm create sanity@latest -- --template=nuotsu/sanitypress-with-typegen
+```
+
+Environment variables should automatically get configured onto your local codebase.
+
+### 2. Add content in your Sanity Studio
+
+Publish the **required** `site` and `page` (with the slug "index" for the Homepage) documents:
+
+| Document        | Slug or Path | Usage              | Required? | Notes                                |
+| --------------- | ------------ | ------------------ | :-------: | ------------------------------------ |
+| `site`          |              | Global settings    |    Yes    |                                      |
+| `page`          | `index`      | Homepage route     |    Yes    |                                      |
+| `page`          | `404`        | Not found route    |           |                                      |
+| `page`          | `blog`       | Blog listing route |           | Add the **Blog frontpage** module    |
+| `global-module` | `blog/`      | Blog post template |           | Add the **Blog post content** module |
+
+### 3. Set up deployments
+
+Add a [Vercel](https://www.sanity.io/plugins/vercel-dashboard-widget) or [Netlify widget](https://www.sanity.io/plugins/sanity-plugin-dashboard-widget-netlify) to enable deployments from the Studio.
+
+### 4. Customize
+
+Adjust frontend styles to your liking, edit or add new schema and modules, etc.
+
 ## Roadmap / To-do
 
 - OG image generation
