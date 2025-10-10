@@ -61,7 +61,7 @@ export default function ({
 	return (
 		<li ref={ref}>
 			<a
-				href={`#${slug(heading.text)}`}
+				href={`#${slug(heading.text, { removeLeadingNumberAndHyphen: true })}`}
 				className={cn('link block py-1 leading-tight', {
 					'pl-[1ch]': heading.style === 'h3',
 					'pl-[2ch]': heading.style === 'h4',

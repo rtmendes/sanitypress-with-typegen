@@ -8,9 +8,7 @@ export default function ({
 }: { as: React.ElementType } & PortableTextComponentProps<PortableTextBlock>) {
 	const id = slug(
 		value.children.reduce((acc, { text }) => acc + text, ''),
-		{
-			removeLeadingNumberAndHyphen: true,
-		},
+		{ removeLeadingNumberAndHyphen: true },
 	)
 
 	return (
