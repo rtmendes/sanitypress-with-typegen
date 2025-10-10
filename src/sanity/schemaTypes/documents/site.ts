@@ -17,6 +17,11 @@ export default defineType({
 			group: 'branding',
 		}),
 		defineField({
+			name: 'logo',
+			type: 'logo',
+			group: 'branding',
+		}),
+		defineField({
 			name: 'header',
 			type: 'reference',
 			to: [{ type: 'navigation' }],
