@@ -26,8 +26,8 @@ export async function GET() {
 			.map((post) => {
 				const url = `${BASE_URL}/${BLOG_DIR}/${post.metadata?.slug?.current}`
 				return `<item>
-					<title><![CDATA[${post.title}]]></title>
-					<description><![CDATA[${post.metadata?.description}]]></description>
+					<title><![CDATA[${escapeHTML(post.title!)}]]></title>
+					<description><![CDATA[${escapeHTML(post.metadata?.description ?? '')}]]></description>
 					<link>${url}</link>
 					<guid isPermaLink="true">${url}</guid>
 					${[
@@ -42,6 +42,9 @@ export async function GET() {
 						post.content &&
 							`<content:encoded><![CDATA[${toHTML(post.content, {
 								components: {
+									marks: {
+										code: ({ text }) => `<code>${escapeHTML(text)}</code>`,
+									},
 									types: {
 										image: ({ value: { alt = '', figcaption, ...value } }) =>
 											`<figure>${[
@@ -53,8 +56,7 @@ export async function GET() {
 												.join('')}</figure>`,
 										code: ({ value: { code } }) =>
 											code && `<pre><code>${code}</code></pre>`,
-										'custom-html': ({ value: { html } }) =>
-											html?.code && escapeHTML(html.code),
+										'custom-html': ({ value: { html } }) => html?.code,
 									},
 								},
 							})}]]></content:encoded>`,
