@@ -6,6 +6,7 @@
 	--color-background: var(--color-neutral-100);
 	--color-foreground: var(--color-neutral-900);
 	--color-stroke: var(--color-neutral-200);
+	--color-accent: var(--color-blue-700);
 
 	--spacing-lh: 1lh;
 	--spacing-ch: 1ch;
@@ -107,7 +108,7 @@
 }
 
 @utility link {
-	@apply underline hover:decoration-2;
+	@apply text-accent underline hover:decoration-2;
 }
 
 @utility input {
@@ -116,6 +117,10 @@
 }
 
 /* typography */
+
+@utility h0 {
+	@apply text-4xl font-bold;
+}
 
 @utility h1 {
 	@apply text-3xl font-bold;
@@ -148,7 +153,7 @@
 }
 
 @utility prose {
-	@apply space-y-4 leading-relaxed;
+	@apply space-y-4 leading-relaxed headings:not-first:mt-[1em];
 
 	& h1 {
 		@apply h1;
@@ -206,6 +211,7 @@
 		min-width: 100%;
 		display: block;
 		overflow-x: auto;
+		line-height: 1.3;
 
 		@apply max-md:full-bleed;
 

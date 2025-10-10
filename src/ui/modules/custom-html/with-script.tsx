@@ -6,7 +6,7 @@ import type { CustomHtml } from '@/sanity/types'
 /**
  * @description If the code includes a <script> tag, ensure the script is re-run on each render
  */
-export default function WithScript({
+export default function ({
 	code,
 	className,
 }: Partial<CustomHtml['html']> & React.ComponentProps<'section'>) {

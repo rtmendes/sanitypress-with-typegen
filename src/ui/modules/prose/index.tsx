@@ -36,7 +36,7 @@ export default function ({
 				/>
 			)}
 
-			<article className="prose mx-auto w-full">
+			<article className="prose mx-auto w-full max-w-3xl">
 				<PortableText
 					value={content ?? []}
 					components={{

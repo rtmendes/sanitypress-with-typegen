@@ -3,7 +3,7 @@ import CSS from './css'
 import WithScript from './with-script'
 import type { CustomHtml } from '@/sanity/types'
 
-export default function CustomHTML({ className, html, css }: CustomHtml) {
+export default function ({ className, html, css }: CustomHtml) {
 	if (!html?.code && !css?.code) return null
 
 	return (

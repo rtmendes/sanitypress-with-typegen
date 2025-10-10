@@ -1,10 +1,12 @@
+import { VscMenu, VscChromeClose } from 'react-icons/vsc'
+
 export default function () {
 	return (
-		<label className="[grid-area:toggle] md:hidden">
+		<label className="text-xl [grid-area:toggle] md:hidden">
 			<input id="header-open" type="checkbox" hidden />
 
-			<span className="header-open:hidden">Open</span>
-			<span className="header-not-open:hidden">Close</span>
+			<VscMenu className="header-open:hidden" title="Open" />
+			<VscChromeClose className="header-not-open:hidden" title="Close" />
 		</label>
 	)
 }

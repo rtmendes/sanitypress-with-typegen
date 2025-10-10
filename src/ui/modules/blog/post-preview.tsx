@@ -22,7 +22,7 @@ export default function ({
 			</figure>
 
 			<SanityLink
-				className="block"
+				className="link block"
 				link={{
 					type: 'internal',
 					internal: post,
