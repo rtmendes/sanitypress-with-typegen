@@ -16,6 +16,7 @@ export default defineField({
 		{ type: 'person-list' },
 		{ type: 'prose' },
 		{ type: 'search-module' },
+		{ type: 'stat-list' },
 		{ type: 'testimonial-list' },
 	],
 	options: {

@@ -29,6 +29,7 @@ import logoList from './modules/logo-list'
 import personList from './modules/person-list'
 import prose from './modules/prose'
 import searchModule from './modules/search-module'
+import statList from './modules/stat-list'
 import testimonialList from './modules/testimonial-list'
 
 // references
@@ -67,6 +68,7 @@ export const schema: SchemaPluginOptions = {
 		personList,
 		prose,
 		searchModule,
+		statList,
 		testimonialList,
 
 		// references

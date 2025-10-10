@@ -17,6 +17,7 @@ import LogoList from './logo-list'
 import PersonList from './person-list'
 import Prose from './prose'
 import SearchModule from './search'
+import StatList from './stat-list'
 import TestimonialList from './testimonial-list'
 
 const MODULES_MAP = {
@@ -32,10 +33,11 @@ const MODULES_MAP = {
 	'person-list': PersonList,
 	prose: Prose,
 	'search-module': SearchModule,
+	'stat-list': StatList,
 	'testimonial-list': TestimonialList,
 } as const
 
-export default function ModulesResolver({
+export default function ({
 	page,
 	post,
 }: {

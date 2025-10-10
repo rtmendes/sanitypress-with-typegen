@@ -179,6 +179,52 @@ export type TestimonialList = {
 	>
 }
 
+export type StatList = {
+	_type: 'stat-list'
+	intro?: Array<{
+		children?: Array<{
+			marks?: Array<string>
+			text?: string
+			_type: 'span'
+			_key: string
+		}>
+		style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote'
+		listItem?: 'bullet' | 'number'
+		markDefs?: Array<{
+			href?: string
+			_type: 'link'
+			_key: string
+		}>
+		level?: number
+		_type: 'block'
+		_key: string
+	}>
+	stats?: Array<{
+		value?: string
+		suffix?: string
+		content?: Array<{
+			children?: Array<{
+				marks?: Array<string>
+				text?: string
+				_type: 'span'
+				_key: string
+			}>
+			style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote'
+			listItem?: 'bullet' | 'number'
+			markDefs?: Array<{
+				href?: string
+				_type: 'link'
+				_key: string
+			}>
+			level?: number
+			_type: 'block'
+			_key: string
+		}>
+		_type: 'stat'
+		_key: string
+	}>
+}
+
 export type SearchModule = {
 	_type: 'search-module'
 	intro?: Array<{
@@ -1130,6 +1176,7 @@ export type AllSanitySchemaTypes =
 	| Testimonial
 	| Logo
 	| TestimonialList
+| StatList
 	| SearchModule
 	| Prose
 	| PersonList
@@ -1839,6 +1886,69 @@ export type PAGE_QUERYResult = {
 					_key: string
 				}>
 				scope?: 'all' | 'blog posts' | 'pages'
+				ctas: null
+		  }
+		| {
+				_key: string
+				_type: 'stat-list'
+				intro?: Array<{
+					children?: Array<{
+						marks?: Array<string>
+						text?: string
+						_type: 'span'
+						_key: string
+					}>
+					style?:
+						| 'blockquote'
+						| 'h1'
+						| 'h2'
+						| 'h3'
+						| 'h4'
+						| 'h5'
+						| 'h6'
+						| 'normal'
+					listItem?: 'bullet' | 'number'
+					markDefs?: Array<{
+						href?: string
+						_type: 'link'
+						_key: string
+					}>
+					level?: number
+					_type: 'block'
+					_key: string
+				}>
+				stats?: Array<{
+					value?: string
+					suffix?: string
+					content?: Array<{
+						children?: Array<{
+							marks?: Array<string>
+							text?: string
+							_type: 'span'
+							_key: string
+						}>
+						style?:
+							| 'blockquote'
+							| 'h1'
+							| 'h2'
+							| 'h3'
+							| 'h4'
+							| 'h5'
+							| 'h6'
+							| 'normal'
+						listItem?: 'bullet' | 'number'
+						markDefs?: Array<{
+							href?: string
+							_type: 'link'
+							_key: string
+						}>
+						level?: number
+						_type: 'block'
+						_key: string
+					}>
+					_type: 'stat'
+					_key: string
+				}>
 				ctas: null
 		  }
 		| {
@@ -2793,6 +2903,69 @@ export type BLOG_POST_QUERYResult = {
 		  }
 		| {
 				_key: string
+				_type: 'stat-list'
+				intro?: Array<{
+					children?: Array<{
+						marks?: Array<string>
+						text?: string
+						_type: 'span'
+						_key: string
+					}>
+					style?:
+						| 'blockquote'
+						| 'h1'
+						| 'h2'
+						| 'h3'
+						| 'h4'
+						| 'h5'
+						| 'h6'
+						| 'normal'
+					listItem?: 'bullet' | 'number'
+					markDefs?: Array<{
+						href?: string
+						_type: 'link'
+						_key: string
+					}>
+					level?: number
+					_type: 'block'
+					_key: string
+				}>
+				stats?: Array<{
+					value?: string
+					suffix?: string
+					content?: Array<{
+						children?: Array<{
+							marks?: Array<string>
+							text?: string
+							_type: 'span'
+							_key: string
+						}>
+						style?:
+							| 'blockquote'
+							| 'h1'
+							| 'h2'
+							| 'h3'
+							| 'h4'
+							| 'h5'
+							| 'h6'
+							| 'normal'
+						listItem?: 'bullet' | 'number'
+						markDefs?: Array<{
+							href?: string
+							_type: 'link'
+							_key: string
+						}>
+						level?: number
+						_type: 'block'
+						_key: string
+					}>
+					_type: 'stat'
+					_key: string
+				}>
+				ctas: null
+		  }
+		| {
+				_key: string
 				_type: 'testimonial-list'
 				intro?: Array<{
 					children?: Array<{
@@ -3683,6 +3856,69 @@ export type NOT_FOUND_QUERYResult = {
 					_key: string
 				}>
 				scope?: 'all' | 'blog posts' | 'pages'
+				ctas: null
+		  }
+		| {
+				_key: string
+				_type: 'stat-list'
+				intro?: Array<{
+					children?: Array<{
+						marks?: Array<string>
+						text?: string
+						_type: 'span'
+						_key: string
+					}>
+					style?:
+						| 'blockquote'
+						| 'h1'
+						| 'h2'
+						| 'h3'
+						| 'h4'
+						| 'h5'
+						| 'h6'
+						| 'normal'
+					listItem?: 'bullet' | 'number'
+					markDefs?: Array<{
+						href?: string
+						_type: 'link'
+						_key: string
+					}>
+					level?: number
+					_type: 'block'
+					_key: string
+				}>
+				stats?: Array<{
+					value?: string
+					suffix?: string
+					content?: Array<{
+						children?: Array<{
+							marks?: Array<string>
+							text?: string
+							_type: 'span'
+							_key: string
+						}>
+						style?:
+							| 'blockquote'
+							| 'h1'
+							| 'h2'
+							| 'h3'
+							| 'h4'
+							| 'h5'
+							| 'h6'
+							| 'normal'
+						listItem?: 'bullet' | 'number'
+						markDefs?: Array<{
+							href?: string
+							_type: 'link'
+							_key: string
+						}>
+						level?: number
+						_type: 'block'
+						_key: string
+					}>
+					_type: 'stat'
+					_key: string
+				}>
 				ctas: null
 		  }
 		| {
