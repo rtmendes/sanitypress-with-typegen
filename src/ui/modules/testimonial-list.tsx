@@ -31,7 +31,7 @@ export default function ({
 								<Img
 									className="aspect-square size-[2lh] shrink-0 rounded-full"
 									image={testimonial.author?.image}
-									width={80}
+									width={48}
 									alt={testimonial.author?.name}
 								/>
 

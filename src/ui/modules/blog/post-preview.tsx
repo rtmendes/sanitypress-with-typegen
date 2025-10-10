@@ -16,7 +16,7 @@ export default function ({
 				<Img
 					className="grid aspect-video w-full place-items-center object-cover"
 					image={post.metadata?.image}
-					width={600}
+					width={400}
 					alt={post.title ?? ''}
 				/>
 			</figure>

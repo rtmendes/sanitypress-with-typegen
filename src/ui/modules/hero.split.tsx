@@ -20,7 +20,7 @@ export default function ({ content = [], ctas, image, ...props }: HeroSplit) {
 				<Img
 					className="w-full"
 					image={image}
-					width={900}
+					width={600}
 					alt={image?.alt ?? ''}
 				/>
 			</figure>
