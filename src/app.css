@@ -6,7 +6,8 @@
 	--color-background: var(--color-neutral-100);
 	--color-foreground: var(--color-neutral-900);
 	--color-stroke: var(--color-neutral-200);
-	--color-accent: var(--color-blue-700);
+
+	--color-primary: var(--color-blue-800);
 
 	--spacing-lh: 1lh;
 	--spacing-ch: 1ch;
@@ -54,6 +55,7 @@
 
 	html {
 		scroll-behavior: smooth;
+		@apply accent-primary caret-primary;
 	}
 
 	details {
@@ -108,7 +110,8 @@
 }
 
 @utility link {
-	@apply text-accent underline hover:decoration-2;
+
+	@apply text-primary underline hover:decoration-2;
 }
 
 @utility input {
@@ -236,40 +239,44 @@
 	scroll-snap-type: x mandatory;
 	scroll-marker-group: after;
 
-	&::scroll-button(*) {
-		cursor: pointer;
-		position: absolute;
-		position-anchor: var(--anchor-name);
-		top: anchor(center);
-		z-index: 1;
-		display: block;
-		aspect-ratio: 1;
-		width: 3ch;
-		line-height: 0;
-		translate: 0 -50%;
-		background-color: currentColor;
-	}
+	@supports (position-anchor: var(--anchor-name)) {
+		@apply no-scrollbar;
 
-	&::scroll-button(left) {
-		content: '' / 'Scroll left';
-		left: anchor(left);
-		mask: url('https://ic0n.dev/io5/IoChevronBackCircleSharp') center / cover;
-	}
+		&::scroll-button(*) {
+			cursor: pointer;
+			position: absolute;
+			position-anchor: var(--anchor-name);
+			top: anchor(center);
+			z-index: 1;
+			display: block;
+			aspect-ratio: 1;
+			width: 1.5lh;
+			margin-inline: .5lh;
+			translate: 0 -50%;
+			background-color: currentColor;
+		}
 
-	&::scroll-button(right) {
-		content: '' / 'Scroll right';
-		right: anchor(right);
-		mask: url('https://ic0n.dev/io5/IoChevronForwardCircleSharp') center / cover;
+		&::scroll-button(left) {
+			content: '' / 'Scroll left';
+			left: anchor(left);
+			mask: url('https://ic0n.dev/io5/IoChevronBackCircleSharp') center / cover;
+		}
+
+		&::scroll-button(right) {
+			content: '' / 'Scroll right';
+			right: anchor(right);
+			mask: url('https://ic0n.dev/io5/IoChevronForwardCircleSharp') center / cover;
+		}
 	}
 
 	&::scroll-marker-group {
 		position: absolute;
 		position-anchor: var(--anchor-name);
-		top: anchor(bottom);
+		top: calc(anchor(bottom) + 1rem);
 		justify-self: center;
 		display: flex;
 		align-items: center;
-		gap: 0.8ch;
+		gap: .5ch;
 	}
 
 	&>* {
@@ -277,16 +284,11 @@
 
 		&::scroll-marker {
 			content: '';
-			display: inline-block;
-			aspect-ratio: 1;
-			width: 0.8ch;
-			border: 1px solid;
-			border-radius: 100%;
-			color: inherit;
+			@apply block size-1 rounded-full bg-foreground/25;
 		}
 
 		&::scroll-marker:target-current {
-			background-color: currentColor;
+			@apply bg-foreground w-[2ch] opacity-100;
 		}
 	}
 }
@@ -315,6 +317,15 @@
 @utility full-bleed {
 	width: 100vw;
 	margin-inline: calc(50% - 50vw);
+}
+
+@utility no-scrollbar {
+	-webkit-overflow-scrolling: touch;
+	scrollbar-width: none;
+
+	&::-webkit-scrollbar {
+		display: none;
+	}
 }
 
 /* anims */
