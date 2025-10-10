@@ -66,6 +66,8 @@ export default function ({
 					module._type as keyof typeof MODULES_MAP
 				] as React.ComponentType
 
+				if (!Module) return null
+
 				const attributes = page
 					? {
 							id: page._id,
