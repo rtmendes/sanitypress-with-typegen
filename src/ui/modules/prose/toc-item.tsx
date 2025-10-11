@@ -1,17 +1,18 @@
 'use client'
 
-import { useRef, useEffect, useState } from 'react'
+import { useRef, useEffect, useState, type ComponentProps } from 'react'
 import { cn, slug } from '@/lib/utils'
 import css from './toc-item.module.css'
 
 export default function ({
 	heading,
+	...props
 }: {
 	heading: {
 		style: string | null
 		text: string | null
 	}
-}) {
+} & ComponentProps<'li'>) {
 	if (!heading.text) return null
 
 	const ref = useRef<HTMLLIElement>(null)
@@ -59,7 +60,7 @@ export default function ({
 	}, [heading, thresholdHeight])
 
 	return (
-		<li ref={ref}>
+		<li ref={ref} {...props}>
 			<a
 				href={`#${slug(heading.text, { removeLeadingNumberAndHyphen: true })}`}
 				className={cn('link block py-1 leading-tight', {

@@ -1,7 +1,9 @@
+import { cn } from '@/lib/utils'
 import TocItem from './toc-item'
 
 export default function ({
 	headings,
+	className,
 	...props
 }: {
 	headings: Array<{
@@ -10,10 +12,12 @@ export default function ({
 	}> | null
 } & React.ComponentProps<'details'>) {
 	return (
-		<details {...props}>
-			<summary>Table of Contents</summary>
+		<details className={cn('accordion', className)} {...props}>
+			<summary className="font-bold md:after:content-['']!">
+				Table of Contents
+			</summary>
 
-			<ol>
+			<ol className="border-stroke pl-ch border-l">
 				{headings?.map((heading, key) => (
 					<TocItem heading={heading} key={key} />
 				))}
