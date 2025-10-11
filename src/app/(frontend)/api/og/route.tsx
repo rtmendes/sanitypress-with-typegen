@@ -1,0 +1,82 @@
+import { sanityFetchLive } from '@/sanity/lib/live'
+import { groq } from 'next-sanity'
+import { ImageResponse } from 'next/og'
+import { BLOG_DIR } from '@/lib/env'
+import { cn } from '@/lib/utils'
+import type { OG_QUERYResult } from '@/sanity/types'
+
+const { hostname } = new URL(process.env.NEXT_PUBLIC_BASE_URL!)
+const blogDir = `${BLOG_DIR}/`
+
+const OG_QUERY = groq`*[_type == $type && metadata.slug.current == $slug][0]{
+	'title': coalesce(title, metadata.title),
+}`
+
+export async function GET(request: Request) {
+	const { searchParams } = new URL(request.url)
+	const slug = searchParams.get('slug') ?? 'index'
+	const invert = ['1', 'true'].includes(searchParams.get('invert')!)
+
+	const type = slug.startsWith(blogDir) ? 'blog.post' : 'page'
+
+	const { title = 'Not found...' } =
+		(await sanityFetchLive<OG_QUERYResult>({
+			query: OG_QUERY,
+			params: {
+				type,
+				slug: type === 'blog.post' ? slug.replace(blogDir, '') : slug,
+			},
+		})) ?? {}
+
+	const text = [...new Set([...title!, ...hostname])].join('')
+
+	return new ImageResponse(
+		(
+			<div
+				tw={cn(
+					'flex h-full w-full flex-col justify-between px-24 py-16',
+					invert
+						? 'bg-neutral-900 text-neutral-100'
+						: 'bg-neutral-100 text-neutral-900',
+				)}
+			>
+				<h1 tw="text-6xl leading-snug font-bold">{title}</h1>
+				<p tw="text-4xl">{hostname}</p>
+			</div>
+		),
+		{
+			width: 1200,
+			height: 630,
+			fonts: [
+				{
+					name: 'Geist',
+					data: await loadGoogleFont('Geist:wght@400', text),
+					weight: 400,
+					style: 'normal',
+				},
+				{
+					name: 'Geist',
+					data: await loadGoogleFont('Geist:wght@700', text),
+					weight: 700,
+					style: 'normal',
+				},
+			],
+		},
+	)
+}
+
+async function loadGoogleFont(font: string, text: string) {
+	const url = `https://fonts.googleapis.com/css2?family=${font}&text=${encodeURIComponent(text)}`
+	const css = await (await fetch(url)).text()
+	const regex = /src: url\((?<resource>.+)\) format\('(opentype|truetype)'\)/g
+	const { resource } = regex.exec(css)?.groups ?? {}
+
+	if (resource) {
+		const response = await fetch(resource)
+		if (response.status === 200) {
+			return await response.arrayBuffer()
+		}
+	}
+
+	throw new Error('Failed to load font data')
+}

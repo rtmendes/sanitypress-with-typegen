@@ -37,7 +37,11 @@ export async function generateMetadata({
 			title: title,
 			description: description,
 			url: `${process.env.NEXT_PUBLIC_BASE_URL}/${BLOG_DIR}/${slug}`,
-			images: image ? [urlFor(image).width(1200).url()] : undefined,
+			images: [
+				image
+					? urlFor(image).width(1200).url()
+					: `${process.env.NEXT_PUBLIC_BASE_URL}/api/og?slug=${BLOG_DIR}/${slug}`,
+			],
 		},
 		robots: {
 			index: noIndex ? false : undefined,

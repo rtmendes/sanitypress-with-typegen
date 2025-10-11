@@ -36,8 +36,14 @@ export async function generateMetadata({
 		openGraph: {
 			title,
 			description,
-			url: `${process.env.NEXT_PUBLIC_BASE_URL}/${slug?.join('/')}`,
-			images: image ? [urlFor(image).width(1200).url()] : undefined,
+			url: [process.env.NEXT_PUBLIC_BASE_URL, slug?.join('/')]
+				.filter(Boolean)
+				.join('/'),
+			images: [
+				image
+					? urlFor(image).width(1200).url()
+					: `${process.env.NEXT_PUBLIC_BASE_URL}/api/og?title=${title}`,
+			],
 		},
 		robots: {
 			index: noIndex ? false : undefined,

@@ -1,3 +1,4 @@
+import { BLOG_DIR } from '@/lib/env'
 import SanityLink from '@/ui/sanity-link'
 import Img from '@/ui/img'
 import Date from './date'
@@ -10,9 +11,18 @@ export default function ({
 	post,
 	className,
 }: { post: BlogPost } & React.ComponentProps<'li'>) {
+	console.log(post.metadata?.image)
+
 	return (
 		<li className={cn('relative space-y-2', className)}>
-			<figure className="bg-foreground/5 aspect-video">
+			<figure
+				className="bg-foreground/5 aspect-video bg-cover bg-center"
+				style={{
+					backgroundImage: !post.metadata?.image
+						? `url(/api/og?slug=${BLOG_DIR}/${post.metadata?.slug?.current}&invert=1)`
+						: undefined,
+				}}
+			>
 				<Img
 					className="grid aspect-video w-full place-items-center object-cover"
 					image={post.metadata?.image}
@@ -23,10 +33,7 @@ export default function ({
 
 			<SanityLink
 				className="link block"
-				link={{
-					type: 'internal',
-					internal: post,
-				}}
+				link={{ type: 'internal', internal: post }}
 			>
 				<strong>{post.title}</strong>
 				<span className="absolute inset-0" />
