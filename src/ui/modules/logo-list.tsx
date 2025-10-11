@@ -40,7 +40,7 @@ export default function ({
 							className="h-[2.5em] w-[200px] shrink-0 object-contain px-4 max-sm:w-[150px]"
 							style={{ '--index': key } as React.CSSProperties}
 							image={logo.image[logoType] ?? logo.image.default}
-							width={400}
+							width={200}
 							alt={logo.title ?? ''}
 							key={key}
 						/>

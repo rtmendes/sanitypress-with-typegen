@@ -1,6 +1,6 @@
 import { getSite } from '@/sanity/lib/queries'
-import Img from './img'
 import Link from 'next/link'
+import Img from './img'
 import { cn } from '@/lib/utils'
 
 export default async function ({
@@ -21,6 +21,7 @@ export default async function ({
 			{logo ? (
 				<Img
 					image={logo}
+					width={100}
 					className="inline-block size-auto object-contain"
 					alt={site?.title ?? ''}
 				/>
