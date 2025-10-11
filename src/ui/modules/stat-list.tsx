@@ -10,7 +10,7 @@ export default function ({ intro = [], stats }: StatList) {
 				</header>
 			)}
 
-			<dl className="flex flex-wrap items-start justify-evenly gap-4 max-md:flex-col">
+			<dl className="mx-auto flex flex-wrap items-start justify-evenly gap-4 max-md:max-w-max max-md:flex-col">
 				{stats?.map(({ value, suffix, content = [], _key }) => (
 					<div key={_key}>
 						<dt className="gap-x-ch flex items-baseline">

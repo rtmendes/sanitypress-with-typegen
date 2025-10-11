@@ -13,7 +13,7 @@ export default async function () {
 	return (
 		<Wrapper className="bg-background/80 max-md:header-open:shadow-xl sticky top-0 z-10 backdrop-blur">
 			<div className={cn(css.root, 'section grid items-center gap-x-4 p-4')}>
-				<Logo className="[grid-area:logo] max-md:mr-auto [&_img]:h-lh" />
+				<Logo className="[grid-area:logo] max-md:mr-auto [&_img]:-my-2 [&_img]:h-[2lh]" />
 
 				<Navigation />
 
