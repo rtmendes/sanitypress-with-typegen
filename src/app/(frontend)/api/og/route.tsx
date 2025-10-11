@@ -16,6 +16,7 @@ export async function GET(request: Request) {
 	const { searchParams } = new URL(request.url)
 	const slug = searchParams.get('slug') ?? 'index'
 	const invert = ['1', 'true'].includes(searchParams.get('invert')!)
+	const small = searchParams.get('size') === 'small'
 
 	const type = slug.startsWith(blogDir) ? 'blog.post' : 'page'
 
@@ -38,19 +39,21 @@ export async function GET(request: Request) {
 		(
 			<div
 				tw={cn(
-					'flex h-full w-full flex-col justify-between px-24 py-16',
+					'flex h-full w-full flex-col justify-between',
 					invert
 						? 'bg-neutral-900 text-neutral-100'
 						: 'bg-neutral-100 text-neutral-900',
+					small ? 'px-12 py-8' : 'px-24 py-16',
 				)}
 			>
-				<h1 tw="text-6xl leading-snug font-bold">{sanitizedTitle}</h1>
-				<p tw="text-4xl">{hostname}</p>
+				<h1 tw={cn('leading-snug font-bold', small ? 'text-3xl' : 'text-6xl')}>
+					{sanitizedTitle}
+				</h1>
+				<p tw={cn(small ? 'text-2xl' : 'text-4xl')}>{hostname}</p>
 			</div>
 		),
 		{
-			width: 1200,
-			height: 630,
+			...(small ? { width: 600, height: 338 } : { width: 1200, height: 630 }),
 			fonts: [
 				{
 					name: 'Geist',
