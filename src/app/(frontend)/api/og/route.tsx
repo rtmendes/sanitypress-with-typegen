@@ -28,7 +28,6 @@ export async function GET(request: Request) {
 			},
 		})) ?? {}
 
-	// split by " | " or " — " (with spaces around)
 	const sanitizedTitle = title
 		?.split(/(?:\s*[|-—]\s*)/)!
 		.at(0)
