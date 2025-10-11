@@ -9,7 +9,7 @@ const { hostname } = new URL(process.env.NEXT_PUBLIC_BASE_URL!)
 const blogDir = `${BLOG_DIR}/`
 
 const OG_QUERY = groq`*[_type == $type && metadata.slug.current == $slug][0]{
-	'title': coalesce(title, metadata.title),
+	'title': coalesce(metadata.title, title),
 }`
 
 export async function GET(request: Request) {
@@ -28,7 +28,12 @@ export async function GET(request: Request) {
 			},
 		})) ?? {}
 
-	const text = [...new Set([...title!, ...hostname])].join('')
+	// split by " | " or " — " (with spaces around)
+	const sanitizedTitle = title
+		?.split(/(?:\s*[|-—]\s*)/)!
+		.at(0)
+		?.trim()
+	const text = [...new Set([...sanitizedTitle!, ...hostname])].join('')
 
 	return new ImageResponse(
 		(
@@ -40,7 +45,7 @@ export async function GET(request: Request) {
 						: 'bg-neutral-100 text-neutral-900',
 				)}
 			>
-				<h1 tw="text-6xl leading-snug font-bold">{title}</h1>
+				<h1 tw="text-6xl leading-snug font-bold">{sanitizedTitle}</h1>
 				<p tw="text-4xl">{hostname}</p>
 			</div>
 		),

@@ -11,8 +11,6 @@ export default function ({
 	post,
 	className,
 }: { post: BlogPost } & React.ComponentProps<'li'>) {
-	console.log(post.metadata?.image)
-
 	return (
 		<li className={cn('relative space-y-2', className)}>
 			<figure
