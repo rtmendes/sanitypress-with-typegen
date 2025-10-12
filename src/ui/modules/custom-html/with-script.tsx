@@ -30,5 +30,5 @@ export default function ({
 		}
 	}, [ref.current, code])
 
-	return <section ref={ref} className={className} />
+	return <div ref={ref} className={className} />
 }

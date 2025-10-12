@@ -17,7 +17,7 @@ export default function ({ className, html, css }: CustomHtml) {
 						className={stegaClean(className)}
 					/>
 				) : (
-					<section
+					<div
 						className={stegaClean(className)}
 						dangerouslySetInnerHTML={{ __html: stegaClean(html.code) }}
 					/>
