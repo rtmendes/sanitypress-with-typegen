@@ -1,5 +1,5 @@
 import { moduleAttributes } from '..'
-import TableOfContents from './table-of-contents'
+import TableOfContents from '../table-of-contents'
 import { PortableText, stegaClean } from 'next-sanity'
 import { cn } from '@/lib/utils'
 import type { Prose } from '@/sanity/types'

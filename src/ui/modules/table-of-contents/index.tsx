@@ -1,5 +1,5 @@
+import ToCItem from './toc-item'
 import { cn } from '@/lib/utils'
-import TocItem from './toc-item'
 
 export default function ({
 	headings,
@@ -19,7 +19,7 @@ export default function ({
 
 			<ol className="border-stroke pl-ch border-l">
 				{headings?.map((heading, key) => (
-					<TocItem heading={heading} key={key} />
+					<ToCItem heading={heading} key={key} />
 				))}
 			</ol>
 		</details>

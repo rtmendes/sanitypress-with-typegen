@@ -18,11 +18,10 @@ export default function ({
 	const ref = useRef<HTMLLIElement>(null)
 	const [thresholdHeight, setThresholdHeight] = useState(0)
 
-	// update threshold height
+	// threshold height = 1/2 of viewport
 	useEffect(() => {
-		const updateThresholdHeight = () => {
+		const updateThresholdHeight = () =>
 			setThresholdHeight(window.innerHeight / 2)
-		}
 		updateThresholdHeight()
 
 		window.addEventListener('resize', updateThresholdHeight)
@@ -64,7 +63,7 @@ export default function ({
 			<a
 				href={`#${slug(heading.text, { removeLeadingNumberAndHyphen: true })}`}
 				className={cn('link block py-1 leading-tight', {
-					'pl-[1ch]': heading.style === 'h3',
+					'pl-ch': heading.style === 'h3',
 					'pl-[2ch]': heading.style === 'h4',
 					'pl-[3ch]': heading.style === 'h5',
 					'pl-[4ch]': heading.style === 'h6',
