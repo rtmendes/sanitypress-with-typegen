@@ -102,15 +102,14 @@
 }
 
 @utility action-outline {
-	@apply action-base border border-stroke text-foreground hover:border-current;
+	@apply action-base border bg-background border-stroke text-foreground hover:border-current;
 }
 
 @utility ghost {
-	@apply action-base hover:bg-foreground/5 text-foreground;
+	@apply action-base bg-background text-foreground hover:bg-foreground/5;
 }
 
 @utility link {
-
 	@apply text-primary underline hover:decoration-2;
 }
 

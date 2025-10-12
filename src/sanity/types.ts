@@ -491,6 +491,7 @@ export type HeroSplit = {
 
 export type CustomHtml = {
 	_type: 'custom-html'
+	attributes?: ModuleAttributes
 	className?: string
 	html?: Code
 	css?: Code
@@ -1511,6 +1512,7 @@ export type PAGE_QUERYResult = {
 		| {
 				_key: string
 				_type: 'custom-html'
+				attributes?: ModuleAttributes
 				className?: string
 				html?: Code
 				css?: Code
@@ -1838,6 +1840,7 @@ export type PAGE_QUERYResult = {
 					| {
 							_key: string
 							_type: 'custom-html'
+							attributes?: ModuleAttributes
 							className?: string
 							html?: Code
 							css?: Code
@@ -2201,6 +2204,7 @@ export type BLOG_POST_QUERYResult = {
 		| {
 				_key: string
 				_type: 'custom-html'
+				attributes?: ModuleAttributes
 				className?: string
 				html?: Code
 				css?: Code
@@ -2539,6 +2543,7 @@ export type BLOG_POST_QUERYResult = {
 		| {
 				_key: string
 				_type: 'custom-html'
+				attributes?: ModuleAttributes
 				className?: string
 				html?: Code
 				css?: Code
@@ -2866,6 +2871,7 @@ export type BLOG_POST_QUERYResult = {
 					| {
 							_key: string
 							_type: 'custom-html'
+							attributes?: ModuleAttributes
 							className?: string
 							html?: Code
 							css?: Code
@@ -3496,6 +3502,7 @@ export type NOT_FOUND_QUERYResult = {
 		| {
 				_key: string
 				_type: 'custom-html'
+				attributes?: ModuleAttributes
 				className?: string
 				html?: Code
 				css?: Code
@@ -3823,6 +3830,7 @@ export type NOT_FOUND_QUERYResult = {
 					| {
 							_key: string
 							_type: 'custom-html'
+							attributes?: ModuleAttributes
 							className?: string
 							html?: Code
 							css?: Code

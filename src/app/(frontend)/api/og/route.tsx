@@ -1,7 +1,8 @@
-import { sanityFetchLive } from '@/sanity/lib/live'
 import { groq } from 'next-sanity'
-import { ImageResponse } from 'next/og'
 import { BLOG_DIR } from '@/lib/env'
+import { sanityFetchLive } from '@/sanity/lib/live'
+import { getSite } from '@/sanity/lib/queries'
+import { ImageResponse } from 'next/og'
 import { cn } from '@/lib/utils'
 import type { OG_QUERYResult } from '@/sanity/types'
 
@@ -19,20 +20,20 @@ export async function GET(request: Request) {
 
 	const type = slug.startsWith(blogDir) ? 'blog.post' : 'page'
 
-	const { title = 'Not found...' } =
-		(await sanityFetchLive<OG_QUERYResult>({
+	const [page, site] = await Promise.all([
+		sanityFetchLive<OG_QUERYResult>({
 			query: OG_QUERY,
 			params: {
 				type,
 				slug: type === 'blog.post' ? slug.replace(blogDir, '') : slug,
 			},
-		})) ?? {}
+		}),
+		getSite(),
+	])
 
-	const sanitizedTitle = title
-		?.split(/(?:\s*[|-—]\s*)/)!
-		.at(0)
-		?.trim()
-	const text = [...new Set([...sanitizedTitle!, ...hostname])].join('')
+	const [h1 = '', h2 = ''] =
+		(page?.title || site?.title)?.split(/(?:\s*[|-—]\s*)/) ?? []
+	const text = [...new Set([...h1, ...h2, ...hostname])].join('')
 
 	return new ImageResponse(
 		(
@@ -44,7 +45,10 @@ export async function GET(request: Request) {
 						: 'bg-neutral-100 text-neutral-900',
 				)}
 			>
-				<h1 tw="text-6xl leading-snug font-bold">{sanitizedTitle}</h1>
+				<hgroup tw="flex flex-col">
+					<h1 tw="text-7xl leading-[1.1] font-bold">{h1}</h1>
+					{h2 && <h2 tw="text-4xl font-bold">{h2}</h2>}
+				</hgroup>
 				<p tw="text-4xl">{hostname}</p>
 			</div>
 		),

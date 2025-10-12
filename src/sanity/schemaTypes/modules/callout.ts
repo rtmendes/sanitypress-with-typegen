@@ -7,17 +7,25 @@ export default defineType({
 	title: 'Callout',
 	type: 'object',
 	icon: VscInspect,
+	groups: [{ name: 'content', default: true }, { name: 'options' }],
 	fields: [
+		defineField({
+			name: 'attributes',
+			type: 'module-attributes',
+			group: 'options',
+		}),
 		defineField({
 			name: 'intro',
 			type: 'array',
 			of: [{ type: 'block' }],
+			group: 'content',
 		}),
 		defineField({
 			name: 'ctas',
 			title: 'Call-to-actions',
 			type: 'array',
 			of: [{ type: 'cta' }],
+			group: 'content',
 		}),
 	],
 	preview: {

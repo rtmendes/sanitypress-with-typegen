@@ -3441,6 +3441,14 @@
             "value": "custom-html"
           }
         },
+        "attributes": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "module-attributes"
+          },
+          "optional": true
+        },
         "className": {
           "type": "objectAttribute",
           "value": {

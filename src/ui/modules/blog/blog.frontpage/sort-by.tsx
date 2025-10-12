@@ -10,7 +10,7 @@ export default function () {
 			<span>Sort by:</span>
 
 			<select
-				className="cursor-pointer"
+				className="ghost cursor-pointer text-left"
 				onChange={(e) => setSortBy(e.target.value as any)}
 			>
 				{SORT_BY_OPTIONS.map((option) => (
