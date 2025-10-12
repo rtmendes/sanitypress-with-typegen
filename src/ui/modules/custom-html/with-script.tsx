@@ -9,6 +9,7 @@ import type { CustomHtml } from '@/sanity/types'
 export default function ({
 	code,
 	className,
+	...props
 }: Partial<CustomHtml['html']> & React.ComponentProps<'div'>) {
 	if (!code) return null
 
@@ -30,5 +31,5 @@ export default function ({
 		}
 	}, [ref.current, code])
 
-	return <div ref={ref} className={className} />
+	return <div ref={ref} className={className} {...props} />
 }

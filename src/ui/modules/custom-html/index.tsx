@@ -1,10 +1,16 @@
+import { moduleAttributes } from '..'
 import { stegaClean } from 'next-sanity'
 import CSS from './css'
 import WithScript from './with-script'
 import type { CustomHtml } from '@/sanity/types'
 
-export default function ({ className, html, css }: CustomHtml) {
+export default function ({ className, html, css, ...props }: CustomHtml) {
 	if (!html?.code && !css?.code) return null
+
+	const attributes = {
+		className: stegaClean(className),
+		...moduleAttributes(props),
+	}
 
 	return (
 		<>
@@ -12,14 +18,11 @@ export default function ({ className, html, css }: CustomHtml) {
 
 			{html?.code &&
 				(html.code.includes('<script') ? (
-					<WithScript
-						code={stegaClean(html.code)}
-						className={stegaClean(className)}
-					/>
+					<WithScript code={stegaClean(html.code)} {...attributes} />
 				) : (
 					<div
-						className={stegaClean(className)}
 						dangerouslySetInnerHTML={{ __html: stegaClean(html.code) }}
+						{...attributes}
 					/>
 				))}
 		</>

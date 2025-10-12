@@ -13,6 +13,11 @@ export default defineType({
 	],
 	fields: [
 		defineField({
+			name: 'attributes',
+			type: 'module-attributes',
+			group: 'options',
+		}),
+		defineField({
 			name: 'className',
 			description: 'Optional class name to apply to the root HTML element',
 			type: 'string',
