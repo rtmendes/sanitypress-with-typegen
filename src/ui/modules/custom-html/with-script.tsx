@@ -9,10 +9,10 @@ import type { CustomHtml } from '@/sanity/types'
 export default function ({
 	code,
 	className,
-}: Partial<CustomHtml['html']> & React.ComponentProps<'section'>) {
+}: Partial<CustomHtml['html']> & React.ComponentProps<'div'>) {
 	if (!code) return null
 
-	const ref = useRef<HTMLElement>(null)
+	const ref = useRef<HTMLDivElement>(null)
 	const [firstRender, setFirstRender] = useState(true)
 
 	useEffect(() => {
