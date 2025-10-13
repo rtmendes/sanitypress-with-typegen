@@ -1,12 +1,12 @@
 import { defineField, defineType } from 'sanity'
-import { VscSearch } from 'react-icons/vsc'
+import { SearchIcon } from '@sanity/icons'
 import { getBlockText } from '@/lib/utils'
 
 export default defineType({
 	name: 'search-module',
 	title: 'Search',
 	type: 'object',
-	icon: VscSearch,
+	icon: SearchIcon,
 	groups: [{ name: 'content', default: true }, { name: 'options' }],
 	fields: [
 		defineField({

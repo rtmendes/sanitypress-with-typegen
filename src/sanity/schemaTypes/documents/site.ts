@@ -2,7 +2,7 @@ import { defineField, defineType } from 'sanity'
 
 export default defineType({
 	name: 'site',
-	title: 'Site settings',
+	title: 'Site',
 	type: 'document',
 	groups: [
 		{ name: 'branding', default: true },
@@ -73,7 +73,7 @@ export default defineType({
 	],
 	preview: {
 		prepare: () => ({
-			title: 'Site settings',
+			title: 'Site',
 		}),
 	},
 })

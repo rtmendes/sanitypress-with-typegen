@@ -9,11 +9,11 @@ export default structureTool({
 			.title('Content')
 			.items([
 				S.divider().title('Global'),
-				singleton(S, 'site').icon(VscServerProcess),
+				singleton(S, 'site').title('Site').icon(VscServerProcess),
+				S.documentTypeListItem('global-module').title('Global modules'),
 
 				S.divider().title('Pages'),
 				S.documentTypeListItem('page').title('Pages'),
-				S.documentTypeListItem('global-module').title('Global modules'),
 
 				S.divider().title('Blog'),
 				S.documentTypeListItem('blog.post').title('Posts'),

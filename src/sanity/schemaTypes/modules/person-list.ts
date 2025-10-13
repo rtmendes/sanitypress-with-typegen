@@ -1,12 +1,12 @@
 import { defineField, defineType } from 'sanity'
-import { VscOrganization } from 'react-icons/vsc'
+import { UsersIcon } from '@sanity/icons'
 import { getBlockText } from '@/lib/utils'
 
 export default defineType({
 	name: 'person-list',
 	title: 'Person list',
 	type: 'object',
-	icon: VscOrganization,
+	icon: UsersIcon,
 	fields: [
 		defineField({
 			name: 'intro',

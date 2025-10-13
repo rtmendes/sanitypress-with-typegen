@@ -1,11 +1,11 @@
 import { defineField, defineType } from 'sanity'
-import { GoPerson } from 'react-icons/go'
+import { UserIcon } from '@sanity/icons'
 
 export default defineType({
 	name: 'person',
 	title: 'Person',
 	type: 'document',
-	icon: GoPerson,
+	icon: UserIcon,
 	fields: [
 		defineField({
 			name: 'name',

@@ -1,11 +1,6 @@
 import { defineField, defineType } from 'sanity'
-import {
-	VscHome,
-	VscQuestion,
-	VscSearch,
-	VscEdit,
-	VscEyeClosed,
-} from 'react-icons/vsc'
+import { VscEyeClosed } from 'react-icons/vsc'
+import { HomeIcon, EditIcon, SearchIcon, ErrorScreenIcon } from '@sanity/icons'
 import modules from '../fragments/modules'
 
 export default defineType({
@@ -40,10 +35,10 @@ export default defineType({
 			title,
 			subtitle: `/${slug === 'index' ? '' : slug}`,
 			media:
-				(slug === 'index' && VscHome) ||
-				(slug === '404' && VscQuestion) ||
-				(slug === 'search' && VscSearch) ||
-				(slug === 'blog' && VscEdit) ||
+				(slug === 'index' && HomeIcon) ||
+				(slug === '404' && ErrorScreenIcon) ||
+				(slug === 'search' && SearchIcon) ||
+				(slug === 'blog' && EditIcon) ||
 				(noIndex && VscEyeClosed),
 		}),
 	},

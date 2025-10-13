@@ -1,12 +1,12 @@
 import { defineArrayMember, defineField, defineType } from 'sanity'
+import { FeedbackIcon } from '@sanity/icons'
 import { getBlockText } from '@/lib/utils'
-import { VscQuote } from 'react-icons/vsc'
 
 export default defineType({
 	name: 'testimonial-list',
 	title: 'Testimonial list',
 	type: 'object',
-	icon: VscQuote,
+	icon: FeedbackIcon,
 	fields: [
 		defineField({
 			name: 'intro',

@@ -1,12 +1,12 @@
 import { defineArrayMember, defineField, defineType } from 'sanity'
-import { VscSymbolOperator } from 'react-icons/vsc'
+import { NumberIcon } from '@sanity/icons'
 import { count, getBlockText } from '@/lib/utils'
 
 export default defineType({
 	name: 'stat-list',
 	title: 'Stat list',
 	type: 'object',
-	icon: VscSymbolOperator,
+	icon: NumberIcon,
 	fields: [
 		defineField({
 			name: 'intro',

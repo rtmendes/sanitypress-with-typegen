@@ -1,12 +1,12 @@
 import { defineField, defineType } from 'sanity'
+import { FeedbackIcon } from '@sanity/icons'
 import { getBlockText } from '@/lib/utils'
-import { VscQuote } from 'react-icons/vsc'
 
 export default defineType({
 	name: 'testimonial',
 	title: 'Testimonial',
 	type: 'document',
-	icon: VscQuote,
+	icon: FeedbackIcon,
 	fields: [
 		defineField({
 			name: 'quote',

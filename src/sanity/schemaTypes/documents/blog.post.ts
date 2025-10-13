@@ -1,11 +1,11 @@
 import { defineArrayMember, defineField, defineType } from 'sanity'
-import { VscEdit } from 'react-icons/vsc'
+import { EditIcon, ImageIcon } from '@sanity/icons'
 
 export default defineType({
 	name: 'blog.post',
 	title: 'Blog post',
 	type: 'document',
-	icon: VscEdit,
+	icon: EditIcon,
 	groups: [{ name: 'content', default: true }, { name: 'metadata' }],
 	fields: [
 		defineField({
@@ -20,6 +20,7 @@ export default defineType({
 				{ type: 'block' },
 				defineArrayMember({
 					type: 'image',
+					icon: ImageIcon,
 					options: {
 						hotspot: true,
 						metadata: ['lqip'],

@@ -499,6 +499,7 @@ export type CustomHtml = {
 
 export type Callout = {
 	_type: 'callout'
+	attributes?: ModuleAttributes
 	intro?: Array<{
 		children?: Array<{
 			marks?: Array<string>
@@ -1450,6 +1451,7 @@ export type PAGE_QUERYResult = {
 		| {
 				_key: string
 				_type: 'callout'
+				attributes?: ModuleAttributes
 				intro?: Array<{
 					children?: Array<{
 						marks?: Array<string>
@@ -2481,6 +2483,7 @@ export type BLOG_POST_QUERYResult = {
 		| {
 				_key: string
 				_type: 'callout'
+				attributes?: ModuleAttributes
 				intro?: Array<{
 					children?: Array<{
 						marks?: Array<string>
@@ -3440,6 +3443,7 @@ export type NOT_FOUND_QUERYResult = {
 		| {
 				_key: string
 				_type: 'callout'
+				attributes?: ModuleAttributes
 				intro?: Array<{
 					children?: Array<{
 						marks?: Array<string>

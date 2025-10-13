@@ -1,10 +1,10 @@
 import { defineField, defineType } from 'sanity'
-import { VscCode } from 'react-icons/vsc'
+import { LogoJsIcon, JsonIcon, CodeIcon } from '@sanity/icons'
 
 export default defineType({
 	name: 'custom-html',
 	title: 'Custom HTML',
-	icon: VscCode,
+	icon: CodeIcon,
 	type: 'object',
 	groups: [
 		{ name: 'html', title: 'HTML', default: true },
@@ -49,9 +49,24 @@ export default defineType({
 			html: 'html.code',
 			css: 'css.code',
 		},
-		prepare: ({ html, css }) => ({
-			title: html || css,
-			subtitle: html || !css ? 'Custom HTML' : 'Custom CSS',
-		}),
+		prepare: ({ html, css }) => {
+			return {
+				title: html || css,
+				...(html?.includes('<script')
+					? {
+							subtitle: 'Custom JavaScript',
+							media: LogoJsIcon,
+						}
+					: css
+						? {
+								subtitle: 'Custom CSS',
+								media: JsonIcon,
+							}
+						: {
+								subtitle: 'Custom HTML',
+								media: CodeIcon,
+							}),
+			}
+		},
 	},
 })

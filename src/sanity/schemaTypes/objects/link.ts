@@ -1,11 +1,11 @@
 import { defineField, defineType } from 'sanity'
-import { VscLink } from 'react-icons/vsc'
+import { LinkIcon } from '@sanity/icons'
 import resolveSlug from '@/sanity/lib/resolve-slug'
 
 export default defineType({
 	name: 'link',
 	title: 'Link',
-	icon: VscLink,
+	icon: LinkIcon,
 	type: 'object',
 	options: {
 		columns: 2,

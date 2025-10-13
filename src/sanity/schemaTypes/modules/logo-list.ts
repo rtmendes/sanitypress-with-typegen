@@ -1,12 +1,12 @@
 import { defineField, defineType } from 'sanity'
+import { ComponentIcon } from '@sanity/icons'
 import { count, getBlockText } from '@/lib/utils'
-import { VscSymbolMisc } from 'react-icons/vsc'
 
 export default defineType({
 	name: 'logo-list',
 	title: 'Logo list',
 	type: 'object',
-	icon: VscSymbolMisc,
+	icon: ComponentIcon,
 	groups: [{ name: 'content', default: true }, { name: 'options' }],
 	fields: [
 		defineField({

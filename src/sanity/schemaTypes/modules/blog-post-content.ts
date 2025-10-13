@@ -1,11 +1,11 @@
 import { defineField, defineType } from 'sanity'
-import { VscEdit } from 'react-icons/vsc'
+import { EditIcon } from '@sanity/icons'
 
 export default defineType({
 	name: 'blog-post-content',
 	title: 'Blog post content',
 	type: 'object',
-	icon: VscEdit,
+	icon: EditIcon,
 	fields: [
 		defineField({
 			name: 'attributes',

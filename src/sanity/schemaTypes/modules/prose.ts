@@ -1,12 +1,12 @@
 import { defineArrayMember, defineField, defineType } from 'sanity'
-import { VscSymbolKeyword } from 'react-icons/vsc'
+import { BlockContentIcon, ImageIcon } from '@sanity/icons'
 import { getBlockText } from '@/lib/utils'
 
 export default defineType({
 	name: 'prose',
 	title: 'Prose',
 	type: 'object',
-	icon: VscSymbolKeyword,
+	icon: BlockContentIcon,
 	groups: [{ name: 'content', default: true }, { name: 'options' }],
 	fields: [
 		defineField({
@@ -21,6 +21,7 @@ export default defineType({
 				{ type: 'block' },
 				defineArrayMember({
 					type: 'image',
+					icon: ImageIcon,
 					options: {
 						hotspot: true,
 						metadata: ['lqip'],

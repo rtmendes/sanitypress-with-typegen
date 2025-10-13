@@ -1,6 +1,6 @@
 {
 	"name": "typed-sanitypress",
-	"version": "0.0.16",
+	"version": "0.0.17",
 	"private": true,
 	"scripts": {
 		"dev": "next dev",
@@ -32,7 +32,7 @@
 	},
 	"devDependencies": {
 		"@tailwindcss/postcss": "^4.1.14",
-		"@types/node": "^24.7.1",
+		"@types/node": "^24.7.2",
 		"@types/react": "^19.2.2",
 		"@types/react-dom": "^19.2.1",
 		"prettier": "^3.6.2",

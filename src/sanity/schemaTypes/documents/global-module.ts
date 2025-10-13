@@ -1,5 +1,9 @@
 import { defineArrayMember, defineField, defineType } from 'sanity'
-import { VscInsert } from 'react-icons/vsc'
+import {
+	BlockElementIcon,
+	InsertAboveIcon,
+	InsertBelowIcon,
+} from '@sanity/icons'
 import modules from '../fragments/modules'
 import { count } from '@/lib/utils'
 
@@ -7,13 +11,13 @@ export default defineType({
 	name: 'global-module',
 	title: 'Global module',
 	type: 'document',
-	icon: VscInsert,
+	icon: BlockElementIcon,
 	fieldsets: [
 		{
 			name: 'path',
-			options: { columns: 2 },
 			description:
-				'Use * for all pages. A trailing slash (/) excludes the parent path.',
+				'Use "*" to target all pages. A trailing slash (.../) excludes the parent path.',
+			options: { columns: 2 },
 		},
 	],
 	fields: [
@@ -41,12 +45,12 @@ export default defineType({
 		defineField({
 			...modules,
 			name: 'before',
-			description: 'Added before the page content',
+			description: 'Added before all page modules',
 		}),
 		defineField({
 			...modules,
 			name: 'after',
-			description: 'Added after the page content',
+			description: 'Added after all page modules',
 		}),
 	],
 	preview: {
@@ -57,7 +61,8 @@ export default defineType({
 		},
 		prepare: ({ path, before, after }) => ({
 			title: count([...(before ?? []), ...(after ?? [])], 'module'),
-			subtitle: path === '*' ? '* (All pages)' : path,
+			subtitle: path,
+			media: after ? InsertBelowIcon : InsertAboveIcon,
 		}),
 	},
 })

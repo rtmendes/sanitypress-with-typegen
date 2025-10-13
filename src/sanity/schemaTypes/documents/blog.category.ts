@@ -1,11 +1,11 @@
 import { defineField, defineType } from 'sanity'
-import { VscTag } from 'react-icons/vsc'
+import { TagIcon } from '@sanity/icons'
 
 export default defineType({
 	name: 'blog.category',
 	title: 'Blog (category)',
 	type: 'document',
-	icon: VscTag,
+	icon: TagIcon,
 	fields: [
 		defineField({
 			name: 'title',

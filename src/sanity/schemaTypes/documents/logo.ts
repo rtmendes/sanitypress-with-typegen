@@ -1,11 +1,11 @@
 import { defineField, defineType } from 'sanity'
-import { VscSymbolMisc } from 'react-icons/vsc'
+import { ComponentIcon } from '@sanity/icons'
 
 export default defineType({
 	name: 'logo',
 	title: 'Logo',
 	type: 'document',
-	icon: VscSymbolMisc,
+	icon: ComponentIcon,
 	fields: [
 		defineField({
 			name: 'title',
