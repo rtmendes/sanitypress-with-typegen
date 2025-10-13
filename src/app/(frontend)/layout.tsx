@@ -1,13 +1,14 @@
 import { Geist } from 'next/font/google'
-// import { ViewTransition } from 'react'
+import { preconnect } from 'react-dom'
 import { NuqsAdapter } from 'nuqs/adapters/next/app'
+// import { ViewTransition } from 'react'
 import Header from '@/ui/header'
 import Footer from '@/ui/footer'
 import VisualEditing from '@/ui/modules/visual-editing'
 import { Analytics } from '@vercel/analytics/next'
 import { dev } from '@/lib/env'
-import type { Metadata } from 'next'
 import '@/app.css'
+import type { Metadata } from 'next'
 
 const fontSans = Geist({
 	subsets: ['latin'],
@@ -22,15 +23,13 @@ export default async function RootLayout({
 }: Readonly<{
 	children: React.ReactNode
 }>) {
+	preconnect('https://cdn.sanity.io')
+	preconnect('https://ic0n.dev')
+
 	return (
 		<html lang="en">
 			<NuqsAdapter>
 				{/* <ViewTransition> */}
-				<head>
-					<link rel="preconnect" href="https://cdn.sanity.io" />
-					<link rel="preconnect" href="https://ic0n.dev" />
-				</head>
-
 				<body className="bg-background text-foreground antialiased">
 					<Header />
 					<main>{children}</main>

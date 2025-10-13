@@ -4,9 +4,10 @@ import { BLOG_DIR } from './src/lib/env'
 import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
-	// experimental: {
-	// 	viewTransition: true,
-	// },
+	experimental: {
+		reactCompiler: true,
+		// viewTransition: true,
+	},
 
 	images: {
 		remotePatterns: [{ protocol: 'https', hostname: 'cdn.sanity.io' }],
