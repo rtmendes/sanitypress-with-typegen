@@ -42,7 +42,7 @@ export async function generateMetadata({
 			images: [
 				image
 					? urlFor(image).width(1200).url()
-					: `${process.env.NEXT_PUBLIC_BASE_URL}/api/og?title=${title}`,
+					: `${process.env.NEXT_PUBLIC_BASE_URL}/api/og?slug=${slug?.join('/')}`,
 			],
 		},
 		robots: {
