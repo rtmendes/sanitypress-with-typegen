@@ -54,7 +54,7 @@ Install required packages and dependencies with your desired package manager (e.
 npm run install
 ```
 
-Once installed, start run the development script:
+Once installed, run the development script:
 
 ```sh
 npm run dev
