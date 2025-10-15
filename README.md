@@ -22,17 +22,52 @@ An improved successor to the acclaimed Next.js + Sanity.io starter template—no
 
 ### 1. Initialize the project
 
-[Create a new Sanity project](https://www.sanity.io/get-started?template=sanitypress-with-typegen&ref=templates-sanitypress-with-typegen) -- OR -- install with the Sanity CLI:
+Click the [Sanity template link](<(https://www.sanity.io/get-started?template=sanitypress-with-typegen&ref=templates-sanitypress-with-typegen)>) -- OR -- install with the Sanity CLI:
 
 ```sh
 npm create sanity@latest -- --template=nuotsu/sanitypress-with-typegen
 ```
 
-Environment variables should automatically get configured onto your local codebase.
+### 2. Set environment variables#
 
-### 2. Add content in your Sanity Studio
+If initialized via the Sanity template link, the .env.local file should be created automatically.
 
-Publish the **required** `site` and `page` (with the slug "index" for the Homepage) documents:
+If initialized via the CLI, duplicate the .env.example file as .env.local and assign the variables to your project:
+
+```sh
+# .env.local
+NEXT_PUBLIC_BASE_URL="https://example.com" # your website's domain
+
+NEXT_PUBLIC_SANITY_PROJECT_ID="abcd1234" # Sanity project id
+NEXT_PUBLIC_SANITY_DATASET="production" # Sanity dataset name
+
+SANITY_API_READ_TOKEN="..." # API token with "Viewer" permissions
+```
+
+⚠️ **Required**: Assign NEXT_PUBLIC_BASE_URL your website's final domain.
+
+### 3. Install and start local server
+
+Install required packages and dependencies with your desired package manager (e.g. npm, pnpm, deno, bun, etc.).
+
+```sh
+npm run install
+```
+
+Once installed, start run the development script:
+
+```sh
+npm run dev
+```
+
+and open:
+
+- Next.js frontend: http://localhost:3000
+- Sanity Studio: http://localhost:3000/admin
+
+### 4. Add content in your Sanity Studio
+
+Publish the **required** documents: `site` and `page` (with the slug "index"). More details below:
 
 | Document        | Slug or Path | Usage              | Required? | Notes                                |
 | --------------- | ------------ | ------------------ | :-------: | ------------------------------------ |
@@ -42,25 +77,21 @@ Publish the **required** `site` and `page` (with the slug "index" for the Homepa
 | `page`          | `blog`       | Blog listing route |           | Add the **Blog frontpage** module    |
 | `global-module` | `blog/`      | Blog post template |           | Add the **Blog post content** module |
 
-### 3. Set up deployments
+### 5. Set up deployments
 
-Add a [Vercel](https://www.sanity.io/plugins/vercel-dashboard-widget) or [Netlify widget](https://www.sanity.io/plugins/sanity-plugin-dashboard-widget-netlify) to enable deployments from the Studio.
+Add a [Vercel](https://www.sanity.io/plugins/vercel-dashboard-widget) (default) or [Netlify widget](https://www.sanity.io/plugins/sanity-plugin-dashboard-widget-netlify) to enable deployments from the Studio.
 
-### 4. Customize
+### 6. Customize
 
 Adjust frontend styles to your liking, edit or add new schema and modules, etc.
 
 ## Roadmap / To-do
 
-- OG image generation
 - Modules
-  - stat list
   - step list
   - announcement bar
 - Blog
   - featured/large post preview
-- Sanity Images
-  - responsive images (breakpoints)
 - improved error handling
 
 ## \*Not included
