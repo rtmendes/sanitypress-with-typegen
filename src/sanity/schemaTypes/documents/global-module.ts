@@ -16,7 +16,7 @@ export default defineType({
 		{
 			name: 'path',
 			description:
-				'Use "*" to target all pages. A trailing slash (.../) excludes the parent path.',
+				'Use "*" to target all pages. A trailing slash ".../" excludes the parent path.',
 			options: { columns: 2 },
 		},
 	],
@@ -60,7 +60,7 @@ export default defineType({
 			after: 'after',
 		},
 		prepare: ({ path, before, after }) => ({
-			title: count([...(before ?? []), ...(after ?? [])], 'module'),
+			title: count([...(before ?? []), ...(after ?? [])], 'global module'),
 			subtitle: path,
 			media: after ? InsertBelowIcon : InsertAboveIcon,
 		}),
