@@ -44,6 +44,7 @@ export default defineType({
 				}),
 				defineArrayMember({
 					type: 'code',
+					name: 'Code block',
 					options: {
 						withFilename: true,
 					},
