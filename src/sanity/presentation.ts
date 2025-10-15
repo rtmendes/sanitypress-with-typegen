@@ -1,5 +1,4 @@
 import { presentationTool, defineLocations } from 'sanity/presentation'
-import { groq } from 'next-sanity'
 import { BLOG_DIR } from '@/lib/env'
 
 export default presentationTool({
