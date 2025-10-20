@@ -9,11 +9,11 @@ import { MODULES_QUERY } from '@/sanity/lib/queries'
 import type { Metadata } from 'next'
 import type { BLOG_POST_QUERYResult } from '@/sanity/types'
 
-export default async function ({
-	params,
-}: {
+type Props = {
 	params: Promise<{ slug: string }>
-}) {
+}
+
+export default async function Page({ params }: Props) {
 	const { slug } = await params
 	const post = await getPost(slug)
 	if (!post) notFound()
@@ -21,11 +21,7 @@ export default async function ({
 	return <ModulesResolver post={post} />
 }
 
-export async function generateMetadata({
-	params,
-}: {
-	params: Promise<{ slug: string }>
-}): Promise<Metadata> {
+export async function generateMetadata({ params, }: Props): Promise<Metadata> {
 	const { slug } = await params
 	const post = await getPost(slug)
 	const { title, description, image, noIndex } = post?.metadata ?? {}

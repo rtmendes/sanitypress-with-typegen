@@ -9,11 +9,11 @@ import { GLOBAL_MODULE_PATH_QUERY, MODULES_QUERY } from '@/sanity/lib/queries'
 import type { Metadata } from 'next'
 import type { PAGE_QUERYResult } from '@/sanity/types'
 
-export default async function Page({
-	params,
-}: {
+type Props = {
 	params: Promise<{ slug?: string[] }>
-}) {
+}
+
+export default async function Page({ params }: Props) {
 	const { slug } = await params
 	const page = await getPage(slug)
 	if (!page) notFound()
@@ -21,11 +21,7 @@ export default async function Page({
 	return <ModulesResolver page={page} />
 }
 
-export async function generateMetadata({
-	params,
-}: {
-	params: Promise<{ slug?: string[] }>
-}): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
 	const { slug } = await params
 	const page = await getPage(slug)
 	const { title, description, image, noIndex } = page?.metadata ?? {}
