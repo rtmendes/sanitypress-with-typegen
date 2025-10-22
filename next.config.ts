@@ -5,11 +5,13 @@ import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
 	experimental: {
-		reactCompiler: true,
-		// viewTransition: true,
+		viewTransition: true,
 	},
 
+	reactCompiler: true,
+
 	images: {
+		localPatterns: [{ pathname: '/api/og' }],
 		remotePatterns: [{ protocol: 'https', hostname: 'cdn.sanity.io' }],
 	},
 
