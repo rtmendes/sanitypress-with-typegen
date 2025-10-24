@@ -16,7 +16,6 @@ export default async function ({
 	const posts = await sanityFetchLive<BLOG_POST_LIST_QUERYResult>({
 		query: BLOG_POST_LIST_QUERY,
 		params: { limit },
-		tags: ['blog-post-list'],
 	})
 
 	return (

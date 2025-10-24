@@ -74,7 +74,6 @@ async function getPage(slug?: string[]) {
 		params: {
 			slug: slug ? slug.join('/') : 'index',
 		},
-		tags: ['page'],
 	})
 }
 

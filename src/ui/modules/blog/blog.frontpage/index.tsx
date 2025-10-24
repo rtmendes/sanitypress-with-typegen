@@ -11,7 +11,6 @@ import type { BLOG_FRONTPAGE_QUERYResult, BlogFrontpage } from '@/sanity/types'
 export default async function ({ intro = [], postsPerPage }: BlogFrontpage) {
 	const posts = await sanityFetchLive<BLOG_FRONTPAGE_QUERYResult>({
 		query: BLOG_FRONTPAGE_QUERY,
-		tags: ['blog.frontpage'],
 	})
 
 	return (

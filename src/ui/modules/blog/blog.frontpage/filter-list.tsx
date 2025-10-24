@@ -6,7 +6,6 @@ import { CATEGORIES_QUERYResult } from '@/sanity/types'
 export default async function () {
 	const categories = await sanityFetchLive<CATEGORIES_QUERYResult>({
 		query: CATEGORIES_QUERY,
-		tags: ['blog.category'],
 	})
 
 	return (

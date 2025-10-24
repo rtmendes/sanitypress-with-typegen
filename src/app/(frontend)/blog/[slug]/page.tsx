@@ -21,7 +21,7 @@ export default async function Page({ params }: Props) {
 	return <ModulesResolver post={post} />
 }
 
-export async function generateMetadata({ params, }: Props): Promise<Metadata> {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
 	const { slug } = await params
 	const post = await getPost(slug)
 	const { title, description, image, noIndex } = post?.metadata ?? {}
@@ -62,7 +62,6 @@ async function getPost(slug: string) {
 	return await sanityFetchLive<BLOG_POST_QUERYResult>({
 		query: BLOG_POST_QUERY,
 		params: { slug, blogDir: `${BLOG_DIR}/` },
-		tags: ['blog-post'],
 	})
 }
 

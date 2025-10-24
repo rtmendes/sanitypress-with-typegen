@@ -29,7 +29,6 @@ export async function generateMetadata(): Promise<Metadata> {
 async function getPage() {
 	return await sanityFetchLive<NOT_FOUND_QUERYResult>({
 		query: NOT_FOUND_QUERY,
-		tags: ['not-found'],
 	})
 }
 
