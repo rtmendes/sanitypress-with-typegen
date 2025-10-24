@@ -10,7 +10,7 @@ An improved successor to the acclaimed Next.js + Sanity.io starter template—no
 
 ## Key Features
 
-- Next.js 15 (App Router, Server Components, TypeScript) with Tailwind 4
+- Next.js 16 (App Router, Server Components, TypeScript) with Tailwind 4
 - Improved successor to the acclaimed [SanityPress](https://sanitypress.dev) starter template (over 350 stars)
 - GROQ TypeGen for your Sanity Schema types
 - [Perfect PageSpeed Insight scores](https://pagespeed.web.dev/analysis/https-typed-sanitypress-dev/78sjwe1x39?form_factor=desktop)
@@ -97,3 +97,4 @@ Adjust frontend styles to your liking, edit or add new schema and modules, etc.
 ## \*Not included
 
 - ~~Internationalization (i18n) and multi-lingual support~~
+- Turbopack support (pending issues with lightningcss)
