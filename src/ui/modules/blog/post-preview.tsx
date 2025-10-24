@@ -13,7 +13,7 @@ export default function ({
 	className,
 }: { post: BlogPost } & React.ComponentProps<'li'>) {
 	return (
-		<li className={cn('relative space-y-2', className)}>
+		<li className={cn('relative grid gap-2', className)}>
 			<figure className="bg-foreground/5 aspect-video">
 				{post.metadata?.image ? (
 					<Img
@@ -45,14 +45,18 @@ export default function ({
 				<p className="line-clamp-3">{post.metadata?.description}</p>
 			)}
 
-			<div className="flex flex-wrap items-center justify-between gap-x-4">
+			<div className="mt-auto flex flex-wrap items-center justify-between gap-x-4">
 				<Byline author={post.author as unknown as Person} />
 				<Date date={post.publishDate} />
 			</div>
 
-			<div>
-				<Categories categories={post.categories as unknown as BlogCategory[]} />
-			</div>
+			{post.categories && (
+				<div>
+					<Categories
+						categories={post.categories as unknown as BlogCategory[]}
+					/>
+				</div>
+			)}
 		</li>
 	)
 }
