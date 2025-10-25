@@ -1,10 +1,10 @@
-import { codeToHtml, splitLines, bundledThemes } from 'shiki'
-import ClickToCopy from '@/ui/click-to-copy'
 import { stegaClean } from 'next-sanity'
-import { cn } from '@/lib/utils'
-import css from './code.module.css'
 import type { ComponentProps } from 'react'
+import { bundledThemes, codeToHtml, splitLines } from 'shiki'
+import { cn } from '@/lib/utils'
 import type { Code } from '@/sanity/types'
+import ClickToCopy from '@/ui/click-to-copy'
+import css from './code.module.css'
 
 export default async function ({
 	value,

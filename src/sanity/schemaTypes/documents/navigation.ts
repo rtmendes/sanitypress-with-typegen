@@ -1,6 +1,6 @@
 import { defineField, defineType } from 'sanity'
-import { VscMap, VscLayoutMenubar, VscLayoutPanelOff } from 'react-icons/vsc'
 import { IoShareSocialOutline } from 'react-icons/io5'
+import { VscLayoutMenubar, VscLayoutPanelOff, VscMap } from 'react-icons/vsc'
 import { count } from '@/lib/utils'
 
 export default defineType({

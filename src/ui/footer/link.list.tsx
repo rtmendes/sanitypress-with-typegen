@@ -1,5 +1,5 @@
-import SanityLink, { type SanityLinkType } from '@/ui/sanity-link'
 import type { LinkList } from '@/sanity/types'
+import SanityLink, { type SanityLinkType } from '@/ui/sanity-link'
 
 export default function ({
 	_key,

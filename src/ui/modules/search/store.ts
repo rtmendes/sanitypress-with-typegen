@@ -1,7 +1,7 @@
-import { create } from 'zustand'
-import { sanityFetchLive } from '@/sanity/lib/live'
 import { groq } from 'next-sanity'
+import { create } from 'zustand'
 import { BLOG_DIR } from '@/lib/env'
+import { sanityFetchLive } from '@/sanity/lib/live'
 import type { SEARCH_QUERYResult, SearchModule } from '@/sanity/types'
 
 export const useSearchStore = create<{

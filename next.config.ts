@@ -1,7 +1,7 @@
-import { client } from './src/sanity/lib/client'
+import type { NextConfig } from 'next'
 import { groq } from 'next-sanity'
 import { BLOG_DIR } from './src/lib/env'
-import type { NextConfig } from 'next'
+import { client } from './src/sanity/lib/client'
 
 const nextConfig: NextConfig = {
 	experimental: {

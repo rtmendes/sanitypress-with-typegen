@@ -1,13 +1,12 @@
-import { moduleAttributes } from '..'
-import TableOfContents from '../table-of-contents'
 import { PortableText, stegaClean } from 'next-sanity'
 import { cn } from '@/lib/utils'
 import type { Prose } from '@/sanity/types'
-
-import AnchoredHeading from './anchored-heading'
-import Image from './image'
-import Code from './code'
 import CustomHTML from '@/ui/modules/custom-html'
+import { moduleAttributes } from '..'
+import TableOfContents from '../table-of-contents'
+import AnchoredHeading from './anchored-heading'
+import Code from './code'
+import Image from './image'
 
 export default function ({
 	content,

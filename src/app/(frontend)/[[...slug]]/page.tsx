@@ -1,13 +1,13 @@
-import { sanityFetchLive } from '@/sanity/lib/live'
-import { client } from '@/sanity/lib/client'
+import type { Metadata } from 'next'
 import { groq } from 'next-sanity'
 import { notFound } from 'next/navigation'
-import ModulesResolver from '@/ui/modules'
-import { urlFor } from '@/sanity/lib/image'
 import { BLOG_DIR } from '@/lib/env'
+import { client } from '@/sanity/lib/client'
+import { urlFor } from '@/sanity/lib/image'
+import { sanityFetchLive } from '@/sanity/lib/live'
 import { GLOBAL_MODULE_PATH_QUERY, MODULES_QUERY } from '@/sanity/lib/queries'
-import type { Metadata } from 'next'
 import type { PAGE_QUERYResult } from '@/sanity/types'
+import ModulesResolver from '@/ui/modules'
 
 type Props = {
 	params: Promise<{ slug?: string[] }>

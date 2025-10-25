@@ -1,7 +1,7 @@
 'use client'
 
-import { useEffect, useState, type ComponentProps } from 'react'
 import { usePathname } from 'next/navigation'
+import { useEffect, useState, type ComponentProps } from 'react'
 import { cn } from '@/lib/utils'
 import css from './hover-details.module.css'
 

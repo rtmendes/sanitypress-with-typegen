@@ -1,5 +1,5 @@
-import { slug } from '@/lib/utils'
 import type { PortableTextBlock, PortableTextComponentProps } from 'next-sanity'
+import { slug } from '@/lib/utils'
 
 export default function ({
 	as: Tag = 'h1',

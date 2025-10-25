@@ -1,8 +1,8 @@
 'use client'
 
-import { useBlogFrontpageStore } from './store'
 import { cn } from '@/lib/utils'
 import type { BlogCategory } from '@/sanity/types'
+import { useBlogFrontpageStore } from './store'
 
 export default function ({
 	category,

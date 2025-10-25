@@ -4,11 +4,10 @@ import type {
 	ModuleAttributes,
 	PAGE_QUERYResult,
 } from '@/sanity/types'
-
 import AccordionList from './accordion-list'
-import BlogFrontpage from './blog/blog.frontpage'
 import BlogPostContent from './blog/blog-post-content'
 import BlogPostList from './blog/blog-post-list'
+import BlogFrontpage from './blog/blog.frontpage'
 import Breadcrumbs from './breadcrumbs'
 import Callout from './callout'
 import CustomHTML from './custom-html'

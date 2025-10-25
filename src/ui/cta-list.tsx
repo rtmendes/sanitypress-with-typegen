@@ -1,7 +1,7 @@
-import SanityLink from './sanity-link'
 import { stegaClean } from 'next-sanity'
 import { cn } from '@/lib/utils'
 import type { Cta } from '@/sanity/types'
+import SanityLink from './sanity-link'
 
 export default function ({
 	ctas,

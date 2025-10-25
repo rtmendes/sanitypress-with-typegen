@@ -1,5 +1,5 @@
 import { defineField, defineType } from 'sanity'
-import { LogoJsIcon, JsonIcon, CodeIcon } from '@sanity/icons'
+import { CodeIcon, JsonIcon, LogoJsIcon } from '@sanity/icons'
 
 export default defineType({
 	name: 'custom-html',

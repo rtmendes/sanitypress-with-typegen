@@ -4,8 +4,8 @@ import {
 	InsertAboveIcon,
 	InsertBelowIcon,
 } from '@sanity/icons'
-import modules from '../fragments/modules'
 import { count } from '@/lib/utils'
+import modules from '../fragments/modules'
 
 export default defineType({
 	name: 'global-module',

@@ -1,7 +1,7 @@
-import { moduleAttributes } from '.'
-import SanityLink from '@/ui/sanity-link'
 import type { ComponentProps } from 'react'
 import type { Breadcrumbs, Page } from '@/sanity/types'
+import SanityLink from '@/ui/sanity-link'
+import { moduleAttributes } from '.'
 
 export default function ({
 	crumbs,

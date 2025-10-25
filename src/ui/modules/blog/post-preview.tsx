@@ -1,12 +1,12 @@
-import { BLOG_DIR } from '@/lib/env'
-import SanityLink from '@/ui/sanity-link'
-import Img from '@/ui/img'
 import Image from 'next/image'
-import Date from './date'
+import { BLOG_DIR } from '@/lib/env'
+import { cn } from '@/lib/utils'
+import type { BlogCategory, BlogPost, Person } from '@/sanity/types'
+import Img from '@/ui/img'
+import SanityLink from '@/ui/sanity-link'
 import Byline from './byline'
 import Categories from './categories'
-import { cn } from '@/lib/utils'
-import type { BlogCategory, Person, BlogPost } from '@/sanity/types'
+import Date from './date'
 
 export default function ({
 	post,

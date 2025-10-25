@@ -1,6 +1,6 @@
 'use client'
 
-import { useQueryState, parseAsInteger } from 'nuqs'
+import { parseAsInteger, useQueryState } from 'nuqs'
 
 type PaginationProps = React.ComponentProps<'div'> &
 	Partial<{

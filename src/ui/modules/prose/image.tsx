@@ -1,5 +1,5 @@
-import Img from '@/ui/img'
 import { PortableText, type PortableTextTypeComponentProps } from 'next-sanity'
+import Img from '@/ui/img'
 
 export default function ({
 	value: { figcaption, ...image },

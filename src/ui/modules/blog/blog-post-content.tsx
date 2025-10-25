@@ -1,21 +1,20 @@
-import { moduleAttributes } from '..'
-import Byline from '@/ui/modules/blog/byline'
-import Categories from '@/ui/modules/blog/categories'
-import Date from '@/ui/modules/blog/date'
-import TableOfContents from '@/ui/modules/table-of-contents'
 import { PortableText } from 'next-sanity'
-import css from './blog-post-content.module.css'
 import { cn } from '@/lib/utils'
 import type {
 	BLOG_POST_QUERYResult,
-	Person,
 	BlogCategory,
+	Person,
 } from '@/sanity/types'
-
-import AnchoredHeading from '@/ui/modules/prose/anchored-heading'
-import Image from '@/ui/modules/prose/image'
-import Code from '@/ui/modules/prose/code'
+import Byline from '@/ui/modules/blog/byline'
+import Categories from '@/ui/modules/blog/categories'
+import Date from '@/ui/modules/blog/date'
 import CustomHTML from '@/ui/modules/custom-html'
+import AnchoredHeading from '@/ui/modules/prose/anchored-heading'
+import Code from '@/ui/modules/prose/code'
+import Image from '@/ui/modules/prose/image'
+import TableOfContents from '@/ui/modules/table-of-contents'
+import { moduleAttributes } from '..'
+import css from './blog-post-content.module.css'
 
 export default function ({ post, ...props }: { post: BLOG_POST_QUERYResult }) {
 	if (!post) return null

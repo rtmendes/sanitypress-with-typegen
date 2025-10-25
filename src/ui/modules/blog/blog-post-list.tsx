@@ -1,12 +1,12 @@
-import { sanityFetchLive } from '@/sanity/lib/live'
 import { groq, PortableText } from 'next-sanity'
-import PostPreview from './post-preview'
 import { BLOG_DIR } from '@/lib/env'
+import { sanityFetchLive } from '@/sanity/lib/live'
 import type {
 	BLOG_POST_LIST_QUERYResult,
 	BlogPost,
 	BlogPostList,
 } from '@/sanity/types'
+import PostPreview from './post-preview'
 
 export default async function ({
 	intro = [],

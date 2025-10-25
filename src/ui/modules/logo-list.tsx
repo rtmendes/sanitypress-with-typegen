@@ -1,8 +1,8 @@
 import { PortableText } from 'next-sanity'
-import Img from '@/ui/img'
 import { cn } from '@/lib/utils'
-import css from './logo-list.module.css'
 import type { Logo, LogoList } from '@/sanity/types'
+import Img from '@/ui/img'
+import css from './logo-list.module.css'
 
 export default function ({
 	intro = [],

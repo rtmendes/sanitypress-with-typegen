@@ -1,9 +1,9 @@
-import { moduleAttributes } from '.'
 import { PortableText } from 'next-sanity'
-import CTAList from '@/ui/cta-list'
-import Img from '@/ui/img'
 import { cn } from '@/lib/utils'
 import type { HeroSplit } from '@/sanity/types'
+import CTAList from '@/ui/cta-list'
+import Img from '@/ui/img'
+import { moduleAttributes } from '.'
 
 export default function ({ content = [], ctas, image, ...props }: HeroSplit) {
 	return (

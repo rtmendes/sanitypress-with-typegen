@@ -1,11 +1,11 @@
-import { getSite } from '@/sanity/lib/queries'
-import Wrapper from './wrapper'
-import Logo from '@/ui/logo'
-import Navigation from './navigation'
-import CTAList from '@/ui/cta-list'
-import MobileToggle from './mobile-toggle'
 import { cn } from '@/lib/utils'
+import { getSite } from '@/sanity/lib/queries'
+import CTAList from '@/ui/cta-list'
+import Logo from '@/ui/logo'
 import css from './header.module.css'
+import MobileToggle from './mobile-toggle'
+import Navigation from './navigation'
+import Wrapper from './wrapper'
 
 export default async function () {
 	const site = await getSite()

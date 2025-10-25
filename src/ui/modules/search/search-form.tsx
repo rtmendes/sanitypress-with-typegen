@@ -1,13 +1,13 @@
 'use client'
 
-import { VscSearch } from 'react-icons/vsc'
 import { useQueryState } from 'nuqs'
-import { handleSearch, useSearchStore } from './store'
+import { VscSearch } from 'react-icons/vsc'
 import { count, debounce } from '@/lib/utils'
-import Loading from '@/ui/loading'
-import SearchResults from './search-results'
-import GoogleResults from './google-results'
 import type { SearchModule } from '@/sanity/types'
+import Loading from '@/ui/loading'
+import GoogleResults from './google-results'
+import SearchResults from './search-results'
+import { handleSearch, useSearchStore } from './store'
 
 export default function ({ scope }: Partial<SearchModule>) {
 	const [query, setQuery] = useQueryState('query', { defaultValue: '' })

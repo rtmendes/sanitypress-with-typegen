@@ -1,8 +1,8 @@
-import { getSite } from '@/sanity/lib/queries'
 import { PortableText } from 'next-sanity'
-import Navigation from './navigation'
-import SocialNavigation from '@/ui/social-navigation'
+import { getSite } from '@/sanity/lib/queries'
 import Logo from '@/ui/logo'
+import SocialNavigation from '@/ui/social-navigation'
+import Navigation from './navigation'
 
 export default async function () {
 	const site = await getSite()

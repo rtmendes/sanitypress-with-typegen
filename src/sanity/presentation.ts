@@ -1,4 +1,4 @@
-import { presentationTool, defineLocations } from 'sanity/presentation'
+import { defineLocations, presentationTool } from 'sanity/presentation'
 import { BLOG_DIR } from '@/lib/env'
 
 export default presentationTool({

@@ -1,5 +1,5 @@
-import ToCItem from './toc-item'
 import { cn } from '@/lib/utils'
+import ToCItem from './toc-item'
 
 export default function ({
 	headings,

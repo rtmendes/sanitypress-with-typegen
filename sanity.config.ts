@@ -3,22 +3,20 @@
 /**
  * This configuration is used to for the Sanity Studio that’s mounted on the `/app/admin/[[...tool]]/page.tsx` route
  */
-
-import { visionTool } from '@sanity/vision'
-import { defineConfig } from 'sanity'
-
 // Go to https://www.sanity.io/docs/api-versioning to learn how API versioning works
-import { apiVersion, dataset, projectId } from './src/sanity/env'
-import { schema } from './src/sanity/schemaTypes'
-import structure from './src/sanity/structure'
-import presentation from './src/sanity/presentation'
+import { defineConfig } from 'sanity'
+import { codeInput } from '@sanity/code-input'
 import {
 	dashboardTool,
 	projectInfoWidget,
 	projectUsersWidget,
 } from '@sanity/dashboard'
+import { visionTool } from '@sanity/vision'
 import { vercelWidget } from 'sanity-plugin-dashboard-widget-vercel'
-import { codeInput } from '@sanity/code-input'
+import { apiVersion, dataset, projectId } from './src/sanity/env'
+import presentation from './src/sanity/presentation'
+import { schema } from './src/sanity/schemaTypes'
+import structure from './src/sanity/structure'
 
 export default defineConfig({
 	title: 'SanityPress',

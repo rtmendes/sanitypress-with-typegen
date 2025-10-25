@@ -1,12 +1,12 @@
-import { sanityFetchLive } from '@/sanity/lib/live'
 import { groq, PortableText } from 'next-sanity'
-import { BLOG_DIR } from '@/lib/env'
 import { Suspense } from 'react'
-import FilterList from './filter-list'
-import SortBy from './sort-by'
-import Loading from '@/ui/loading'
-import PaginatedPosts from './paginated-posts'
+import { BLOG_DIR } from '@/lib/env'
+import { sanityFetchLive } from '@/sanity/lib/live'
 import type { BLOG_FRONTPAGE_QUERYResult, BlogFrontpage } from '@/sanity/types'
+import Loading from '@/ui/loading'
+import FilterList from './filter-list'
+import PaginatedPosts from './paginated-posts'
+import SortBy from './sort-by'
 
 export default async function ({ intro = [], postsPerPage }: BlogFrontpage) {
 	const posts = await sanityFetchLive<BLOG_FRONTPAGE_QUERYResult>({

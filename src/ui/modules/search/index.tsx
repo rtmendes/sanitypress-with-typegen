@@ -1,8 +1,8 @@
 import { PortableText, stegaClean } from 'next-sanity'
 import { Suspense } from 'react'
-import SearchForm from './search-form'
-import Loading from '@/ui/loading'
 import type { SearchModule } from '@/sanity/types'
+import Loading from '@/ui/loading'
+import SearchForm from './search-form'
 
 export default function ({ intro = [], scope }: SearchModule) {
 	return (

@@ -1,4 +1,4 @@
-import type { StructureBuilder, ListBuilder } from 'sanity/structure'
+import type { ListBuilder, StructureBuilder } from 'sanity/structure'
 
 export const singleton = (S: StructureBuilder, id: string) =>
 	S.listItem().id(id).child(S.editor().id(id).schemaType(id).documentId(id))

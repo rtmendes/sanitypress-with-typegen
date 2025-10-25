@@ -1,8 +1,8 @@
-import { moduleAttributes } from '..'
 import { stegaClean } from 'next-sanity'
+import type { CustomHtml } from '@/sanity/types'
+import { moduleAttributes } from '..'
 import CSS from './css'
 import WithScript from './with-script'
-import type { CustomHtml } from '@/sanity/types'
 
 export default function ({ className, html, css, ...props }: CustomHtml) {
 	if (!html?.code && !css?.code) return null

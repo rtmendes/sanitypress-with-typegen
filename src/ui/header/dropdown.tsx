@@ -1,6 +1,6 @@
+import type { LinkList, Page } from '@/sanity/types'
 import HoverDetails from '@/ui/hover-details'
 import SanityLink from '@/ui/sanity-link'
-import type { LinkList, Page } from '@/sanity/types'
 
 export default function (props: LinkList | any) {
 	const { link: summary, links } = props as LinkList

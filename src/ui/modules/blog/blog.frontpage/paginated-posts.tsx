@@ -3,8 +3,8 @@
 import { useQueryState } from 'nuqs'
 import { useMemo } from 'react'
 import { usePagination } from '@/hooks/use-pagination'
-import PostPreview from '@/ui/modules/blog/post-preview'
 import type { BLOG_FRONTPAGE_QUERYResult } from '@/sanity/types'
+import PostPreview from '@/ui/modules/blog/post-preview'
 
 export default function ({
 	posts,

@@ -1,6 +1,6 @@
-import React from 'react'
-import { Stack, Text, TextInput, TextArea, Flex } from '@sanity/ui'
 import type { StringInputProps, StringSchemaType } from 'sanity'
+import { Flex, Stack, Text, TextArea, TextInput } from '@sanity/ui'
+import React from 'react'
 
 export default function ({
 	elementProps,

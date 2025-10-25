@@ -1,9 +1,9 @@
-import { sanityFetchLive } from '@/sanity/lib/live'
+import { escapeHTML, toHTML } from '@portabletext/to-html'
 import { groq } from 'next-sanity'
 import { BLOG_DIR } from '@/lib/env'
-import { escapeHTML, toHTML } from '@portabletext/to-html'
 import { getBlockText } from '@/lib/utils'
 import { urlFor } from '@/sanity/lib/image'
+import { sanityFetchLive } from '@/sanity/lib/live'
 import type { BLOG_RSS_QUERYResult } from '@/sanity/types'
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL

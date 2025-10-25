@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useEffect, useState, type ComponentProps } from 'react'
+import { useEffect, useRef, useState, type ComponentProps } from 'react'
 import { cn, slug } from '@/lib/utils'
 import css from './toc-item.module.css'
 

@@ -1,7 +1,7 @@
-import { sanityFetchLive } from '@/sanity/lib/live'
+import type { MetadataRoute } from 'next'
 import { groq } from 'next-sanity'
 import { BLOG_DIR } from '@/lib/env'
-import type { MetadataRoute } from 'next'
+import { sanityFetchLive } from '@/sanity/lib/live'
 
 export const dynamic = 'force-dynamic'
 

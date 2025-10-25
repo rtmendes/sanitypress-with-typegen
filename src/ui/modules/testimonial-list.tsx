@@ -1,6 +1,6 @@
 import { PortableText } from 'next-sanity'
-import Img from '@/ui/img'
 import type { TestimonialList } from '@/sanity/types'
+import Img from '@/ui/img'
 
 export default function ({
 	intro = [],

@@ -1,7 +1,7 @@
-import { moduleAttributes } from '.'
 import { PortableText } from 'next-sanity'
-import CTAList from '@/ui/cta-list'
 import type { Callout } from '@/sanity/types'
+import CTAList from '@/ui/cta-list'
+import { moduleAttributes } from '.'
 
 export default function ({ intro = [], ctas, ...props }: Callout) {
 	return (

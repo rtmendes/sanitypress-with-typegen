@@ -1,6 +1,6 @@
-import { sanityFetchLive } from './live'
 import { groq } from 'next-sanity'
 import type { SITE_QUERYResult } from '@/sanity/types'
+import { sanityFetchLive } from './live'
 
 /* fragments */
 

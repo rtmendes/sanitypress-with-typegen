@@ -1,15 +1,15 @@
-import { getSite } from '@/sanity/lib/queries'
-import SanityLink from './sanity-link'
 import {
 	FaFacebook,
 	FaGithub,
 	FaInstagram,
+	FaLink,
 	FaLinkedinIn,
 	FaTiktok,
 	FaXTwitter,
 	FaYoutube,
-	FaLink,
 } from 'react-icons/fa6'
+import { getSite } from '@/sanity/lib/queries'
+import SanityLink from './sanity-link'
 
 export default async function (props: React.ComponentProps<'nav'>) {
 	const site = await getSite()

@@ -1,26 +1,21 @@
 import type { SchemaPluginOptions } from 'sanity'
-
+import blogCategory from './documents/blog.category'
+import blogPost from './documents/blog.post'
+import globalModule from './documents/global-module'
+// references
+import logo from './documents/logo'
+import navigation from './documents/navigation'
+import page from './documents/page'
+import person from './documents/person'
+import redirect from './documents/redirect'
 // documents
 import site from './documents/site'
-import page from './documents/page'
-import globalModule from './documents/global-module'
-import blogPost from './documents/blog.post'
-import blogCategory from './documents/blog.category'
-import navigation from './documents/navigation'
-import redirect from './documents/redirect'
-
-// objects
-import cta from './objects/cta'
-import link from './objects/link'
-import linkList from './objects/link.list'
-import metadata from './objects/metadata'
-import moduleAttributes from './objects/module-attributes'
-
+import testimonial from './documents/testimonial'
 // modules
 import accordionList from './modules/accordion-list'
-import blogFrontpage from './modules/blog.frontpage'
 import blogPostContent from './modules/blog-post-content'
 import blogPostList from './modules/blog-post-list'
+import blogFrontpage from './modules/blog.frontpage'
 import breadcrumbs from './modules/breadcrumbs'
 import callout from './modules/callout'
 import customHtml from './modules/custom-html'
@@ -31,11 +26,12 @@ import prose from './modules/prose'
 import searchModule from './modules/search-module'
 import statList from './modules/stat-list'
 import testimonialList from './modules/testimonial-list'
-
-// references
-import logo from './documents/logo'
-import person from './documents/person'
-import testimonial from './documents/testimonial'
+// objects
+import cta from './objects/cta'
+import link from './objects/link'
+import linkList from './objects/link.list'
+import metadata from './objects/metadata'
+import moduleAttributes from './objects/module-attributes'
 
 export const schema: SchemaPluginOptions = {
 	types: [

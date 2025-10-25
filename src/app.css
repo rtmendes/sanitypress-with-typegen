@@ -102,7 +102,7 @@
 }
 
 @utility action-outline {
-	@apply action-base border bg-background border-stroke text-foreground hover:border-current;
+	@apply action-base bg-background border border-stroke text-foreground hover:border-current;
 }
 
 @utility ghost {
@@ -151,11 +151,11 @@
 /* components */
 
 @utility section {
-	@apply mx-auto max-w-7xl px-4 md:px-8 py-12;
+	@apply mx-auto max-w-7xl px-4 py-12 md:px-8;
 }
 
 @utility prose {
-	@apply space-y-4 leading-relaxed headings:not-first:mt-[1em];
+	@apply headings:not-first:mt-[1em] space-y-4 leading-relaxed;
 
 	& h1 {
 		@apply h1;
@@ -199,7 +199,7 @@
 	}
 
 	& :not(pre)>code {
-		padding-inline: .25em;
+		padding-inline: 0.25em;
 		font-size: 0.875em;
 		@apply bg-foreground/5 rounded-sm;
 	}
@@ -250,7 +250,7 @@
 			display: block;
 			aspect-ratio: 1;
 			width: 1.5lh;
-			margin-inline: .5lh;
+			margin-inline: 0.5lh;
 			translate: 0 -50%;
 			background-color: currentColor;
 		}
@@ -275,7 +275,7 @@
 		justify-self: center;
 		display: flex;
 		align-items: center;
-		gap: .5ch;
+		gap: 0.5ch;
 	}
 
 	&>* {
@@ -283,7 +283,7 @@
 
 		&::scroll-marker {
 			content: '';
-			@apply block size-1 rounded-full bg-foreground/25;
+			@apply bg-foreground/25 block size-1 rounded-full;
 		}
 
 		&::scroll-marker:target-current {
@@ -297,7 +297,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		gap: .5em;
+		gap: 0.5em;
 
 		&::after {
 			content: '+';

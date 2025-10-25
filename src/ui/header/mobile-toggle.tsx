@@ -1,4 +1,4 @@
-import { VscMenu, VscChromeClose } from 'react-icons/vsc'
+import { VscChromeClose, VscMenu } from 'react-icons/vsc'
 
 export default function () {
 	return (

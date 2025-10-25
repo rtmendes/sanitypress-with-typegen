@@ -1,7 +1,7 @@
-import { getSite } from '@/sanity/lib/queries'
 import Link from 'next/link'
-import Img from './img'
 import { cn } from '@/lib/utils'
+import { getSite } from '@/sanity/lib/queries'
+import Img from './img'
 
 export default async function ({
 	style = 'default',

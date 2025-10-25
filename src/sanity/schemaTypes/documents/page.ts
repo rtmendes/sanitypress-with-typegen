@@ -1,6 +1,6 @@
 import { defineField, defineType } from 'sanity'
+import { EditIcon, ErrorScreenIcon, HomeIcon, SearchIcon } from '@sanity/icons'
 import { VscEyeClosed } from 'react-icons/vsc'
-import { HomeIcon, EditIcon, SearchIcon, ErrorScreenIcon } from '@sanity/icons'
 import modules from '../fragments/modules'
 
 export default defineType({
