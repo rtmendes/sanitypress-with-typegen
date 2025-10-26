@@ -21,7 +21,7 @@ export default function ({
 					<Img
 						className="aspect-video w-full object-cover"
 						image={post.metadata?.image}
-						width={400}
+						width={600}
 						alt={post.title ?? ''}
 					/>
 				) : (
