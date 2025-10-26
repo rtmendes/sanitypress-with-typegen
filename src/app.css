@@ -311,6 +311,10 @@
 	}
 }
 
+@utility skeleton {
+	@apply block bg-foreground/5 h-lh;
+}
+
 /* utilities */
 
 @utility full-bleed {

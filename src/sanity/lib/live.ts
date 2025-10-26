@@ -25,8 +25,8 @@ export async function sanityFetchLive<T>(
 	const preview = dev || (await draftMode()).isEnabled
 
 	const { data } = await sanityFetch({
-		...args,
 		perspective: preview ? 'drafts' : 'published',
+		...args,
 	})
 
 	return data as T

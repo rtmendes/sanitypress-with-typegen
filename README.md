@@ -15,20 +15,20 @@ An improved successor to the acclaimed Next.js + Sanity.io starter template—no
 - GROQ TypeGen for your Sanity Schema types
 - [Perfect PageSpeed Insight scores](https://pagespeed.web.dev/analysis/https-typed-sanitypress-dev/78sjwe1x39?form_factor=desktop)
 - Live Content API with Visual Editing
-- Opitmized images with Next Image component and Sanity CDN
+- Optimized images with Next Image component and Sanity CDN
 - Auto-generated sitemap.xml and blog RSS feed
 
 ## Getting Started
 
 ### 1. Initialize the project
 
-Click the [Sanity template link](<(https://www.sanity.io/get-started?template=sanitypress-with-typegen&ref=templates-sanitypress-with-typegen)>) -- OR -- install with the Sanity CLI:
+Click the [Sanity template link](https://www.sanity.io/get-started?template=sanitypress-with-typegen&ref=templates-sanitypress-with-typegen) or install with the Sanity CLI:
 
 ```sh
 npm create sanity@latest -- --template=nuotsu/sanitypress-with-typegen
 ```
 
-### 2. Set environment variables#
+### 2. Set environment variables
 
 If initialized via the Sanity template link, the .env.local file should be created automatically.
 
@@ -51,7 +51,7 @@ SANITY_API_READ_TOKEN="..." # API token with "Viewer" permissions
 Install required packages and dependencies with your desired package manager (e.g. npm, pnpm, deno, bun, etc.).
 
 ```sh
-npm run install
+npm install
 ```
 
 Once installed, run the development script:
@@ -60,7 +60,7 @@ Once installed, run the development script:
 npm run dev
 ```
 
-and open:
+Then open:
 
 - Next.js frontend: http://localhost:3000
 - Sanity Studio: http://localhost:3000/admin
@@ -88,13 +88,14 @@ Adjust frontend styles to your liking, edit or add new schema and modules, etc.
 ## Roadmap / To-do
 
 - Modules
-  - step list
-  - announcement bar
+  - Step list
+  - Announcement bar
 - Blog
-  - featured/large post preview
-- improved error handling
+  - Featured/large post preview
+- Improved error handling
 
 ## \*Not included
 
-- ~~Internationalization (i18n) and multi-lingual support~~
-- Turbopack support (pending issues with lightningcss)
+- Internationalization (i18n) and multi-lingual support
+- Turbopack support ([pending issue with lightningcss](https://github.com/parcel-bundler/lightningcss/issues/1072))
+- Next.js 16 Cache Components (not suitable for Sanity Live Content API's real-time updates)

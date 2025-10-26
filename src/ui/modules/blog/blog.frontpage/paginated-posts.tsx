@@ -1,10 +1,11 @@
 'use client'
 
 import { useQueryState } from 'nuqs'
-import { useMemo } from 'react'
 import { usePagination } from '@/hooks/use-pagination'
-import type { BLOG_FRONTPAGE_QUERYResult } from '@/sanity/types'
+import { cn } from '@/lib/utils'
+import type { BLOG_FRONTPAGE_QUERYResult, BlogPost } from '@/sanity/types'
 import PostPreview from '@/ui/modules/blog/post-preview'
+import PostPreviewLarge from '@/ui/modules/blog/post-preview-large'
 
 export default function ({
 	posts,
@@ -16,41 +17,42 @@ export default function ({
 	const [category] = useQueryState('category')
 	const [sortBy] = useQueryState('sortBy')
 
-	const processedPosts = useMemo(
-		() =>
-			posts
-				?.filter(
-					(post) =>
-						!category ||
-						post.categories?.some((c) => c.slug?.current === category),
-				)
-				?.sort((a, b) => {
-					if (sortBy === 'publishDate_desc')
-						return b.publishDate!.localeCompare(a.publishDate!)
-					if (sortBy === 'publishDate_asc')
-						return a.publishDate!.localeCompare(b.publishDate!)
-					if (sortBy === 'title_asc') return a.title!.localeCompare(b.title!)
-					if (sortBy === 'title_desc') return b.title!.localeCompare(a.title!)
-					return 0
-				}),
-		[category, sortBy],
-	)
+	const processedPosts = posts
+		?.filter(
+			(post) =>
+				!category || post.categories?.some((c) => c.slug?.current === category),
+		)
+		?.sort((a, b) => {
+			if (sortBy === 'publishDate_desc')
+				return b.publishDate!.localeCompare(a.publishDate!)
+			if (sortBy === 'publishDate_asc')
+				return a.publishDate!.localeCompare(b.publishDate!)
+			if (sortBy === 'title_asc') return a.title!.localeCompare(b.title!)
+			if (sortBy === 'title_desc') return b.title!.localeCompare(a.title!)
+			return 0
+		})
 
-	const { paginatedItems, Pagination } = usePagination({
+	const { paginatedItems, Pagination, currentPage } = usePagination({
 		items: processedPosts,
 		itemsPerPage: postsPerPage,
 	})
 
 	return (
 		<>
-			<ul className="grid gap-4 sm:grid-cols-[repeat(auto-fill,minmax(var(--container-sm),1fr))]">
+			{currentPage === 1 && !category && (
+				<>
+					<PostPreviewLarge
+						post={paginatedItems?.[0] as unknown as BlogPost}
+						className="md:order-first"
+					/>
+					<hr className="max-md:full-bleed border-stroke md:order-first" />
+				</>
+			)}
+
+			<ul className="grid items-start gap-x-4 gap-y-8 sm:grid-cols-[repeat(auto-fill,minmax(var(--container-sm),1fr))]">
 				{paginatedItems?.map((post) => (
 					<PostPreview
-						post={
-							post as unknown as React.ComponentProps<
-								typeof PostPreview
-							>['post']
-						}
+						post={post as unknown as BlogPost}
 						className="anim-fade"
 						key={post._id}
 					/>

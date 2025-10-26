@@ -41,22 +41,16 @@ export default function ({
 				<span className="absolute inset-0" />
 			</SanityLink>
 
-			{post.metadata?.description && (
+			{/* {post.metadata?.description && (
 				<p className="line-clamp-3">{post.metadata?.description}</p>
-			)}
+			)} */}
 
-			<div className="mt-auto flex flex-wrap items-center justify-between gap-x-4">
-				<Byline author={post.author as unknown as Person} />
+			<div className="flex flex-wrap items-center justify-between gap-x-4">
 				<Date date={post.publishDate} />
+				<Categories categories={post.categories as unknown as BlogCategory[]} />
 			</div>
 
-			{post.categories && (
-				<div>
-					<Categories
-						categories={post.categories as unknown as BlogCategory[]}
-					/>
-				</div>
-			)}
+			<Byline author={post.author as unknown as Person} />
 		</li>
 	)
 }

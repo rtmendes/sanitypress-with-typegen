@@ -1,38 +1,49 @@
 import { groq, PortableText } from 'next-sanity'
 import { Suspense } from 'react'
 import { BLOG_DIR } from '@/lib/env'
+import { cn } from '@/lib/utils'
 import { sanityFetchLive } from '@/sanity/lib/live'
 import type { BLOG_FRONTPAGE_QUERYResult, BlogFrontpage } from '@/sanity/types'
 import Loading from '@/ui/loading'
 import FilterList from './filter-list'
 import PaginatedPosts from './paginated-posts'
+import Skeleton from './skeleton'
 import SortBy from './sort-by'
 
-export default async function ({ intro = [], postsPerPage }: BlogFrontpage) {
+export default async function ({
+	intro = [],
+	postsPerPage = 6,
+}: BlogFrontpage) {
 	const posts = await sanityFetchLive<BLOG_FRONTPAGE_QUERYResult>({
 		query: BLOG_FRONTPAGE_QUERY,
 	})
 
 	return (
-		<section className="section space-y-4">
-			<header className="prose">
-				<PortableText value={intro} />
-			</header>
+		<section className={cn('section space-y-4', intro && 'pt-4')}>
+			{intro && (
+				<header className="prose">
+					<PortableText value={intro} />
+				</header>
+			)}
 
-			<fieldset className="flex flex-wrap items-end justify-between gap-4">
-				<Suspense
-					fallback={
-						<Loading className="p-[.25em_.5em]">Loading categories...</Loading>
-					}
-				>
-					<FilterList />
-					<SortBy />
+			<div className="grid gap-4">
+				<fieldset className="flex flex-wrap items-end justify-between gap-4">
+					<Suspense
+						fallback={
+							<Loading className="p-[.25em_.5em]">
+								Loading categories...
+							</Loading>
+						}
+					>
+						<FilterList />
+						<SortBy />
+					</Suspense>
+				</fieldset>
+
+				<Suspense fallback={<Skeleton postsPerPage={postsPerPage} />}>
+					<PaginatedPosts posts={posts} postsPerPage={postsPerPage} />
 				</Suspense>
-			</fieldset>
-
-			<Suspense fallback={<Loading>Loading posts...</Loading>}>
-				<PaginatedPosts posts={posts} postsPerPage={postsPerPage} />
-			</Suspense>
+			</div>
 		</section>
 	)
 }
