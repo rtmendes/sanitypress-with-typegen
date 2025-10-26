@@ -205,7 +205,8 @@
 		"scope": "typescriptreact",
 		"body": [
 			"import { PortableText } from 'next-sanity'\n",
-			"export default function ${TM_FILENAME_BASE/^([a-z])|[-.]([a-z])/${1:/upcase}${2:/upcase}/g}({ intro }: Partial<{ intro: any }>) {",
+			"import type { ${TM_FILENAME_BASE/^([a-z])|[-.]([a-z])/${1:/upcase}${2:/upcase}/g} } from '@/sanity/types'\n",
+			"export default function ({ intro = [] }: ${TM_FILENAME_BASE/^([a-z])|[-.]([a-z])/${1:/upcase}${2:/upcase}/g}) {",
 			"\treturn (",
 			"\t\t<section className=\"section\">",
 			"\t\t\t{intro && (",
