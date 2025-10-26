@@ -2,18 +2,21 @@ import NextLink, { type LinkProps } from 'next/link'
 import type { Link, Page } from '@/sanity/types'
 
 export type SanityLinkType = Omit<Link, 'internal'> & {
-	_key: string
+	_type?: 'link'
+	_key?: string
 	internal?: Omit<Page, 'metadata'> & { slug: string }
 }
 
 export default function ({
-	link: { label, type, internal, external, params } = {},
+	link,
 	children,
 	...props
-}: { link: SanityLinkType | any } & Omit<
+}: { link?: SanityLinkType } & Omit<
 	React.ComponentProps<typeof NextLink>,
 	'href'
 >) {
+	const { label, type, internal, external, params } = link ?? {}
+
 	const linkProps: Omit<LinkProps, 'href'> | React.ComponentProps<'a'> = {
 		...props,
 		children: children || label || internal?.title || external,

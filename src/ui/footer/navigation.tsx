@@ -1,5 +1,6 @@
 import { getSite } from '@/sanity/lib/queries'
-import SanityLink from '@/ui/sanity-link'
+import type { LinkList as LinkListType } from '@/sanity/types'
+import SanityLink, { type SanityLinkType } from '@/ui/sanity-link'
 import LinkList from './link.list'
 
 export default async function () {
@@ -13,13 +14,17 @@ export default async function () {
 						case 'link':
 							return (
 								<li key={item._key}>
-									<SanityLink link={item} className="link" />
+									<SanityLink link={item as SanityLinkType} className="link" />
 								</li>
 							)
 
 						case 'link.list':
 							return (
-								<LinkList {...item} className="text-left" key={item._key} />
+								<LinkList
+									{...(item as unknown as LinkListType)}
+									className="text-left"
+									key={item._key}
+								/>
 							)
 
 						default:

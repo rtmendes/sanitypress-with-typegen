@@ -1,12 +1,14 @@
 import { stegaClean } from 'next-sanity'
 import { cn } from '@/lib/utils'
 import type { Cta } from '@/sanity/types'
-import SanityLink from './sanity-link'
+import SanityLink, { type SanityLinkType } from './sanity-link'
 
 export default function ({
 	ctas,
 	className,
-}: { ctas?: Cta[] | any } & React.ComponentProps<'div'>) {
+}: {
+	ctas?: (Cta & { _key?: string })[]
+} & React.ComponentProps<'div'>) {
 	if (!ctas?.length) return null
 
 	return (
@@ -16,9 +18,9 @@ export default function ({
 				className,
 			)}
 		>
-			{ctas.map((cta: Cta & { _key: string }) => (
+			{ctas.map((cta) => (
 				<SanityLink
-					link={cta.link}
+					link={cta.link as SanityLinkType}
 					className={stegaClean(cta.style)}
 					key={cta._key}
 				/>

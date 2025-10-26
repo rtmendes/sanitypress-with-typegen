@@ -3,7 +3,7 @@ import { ROUTES } from '@/lib/env'
 import { cn } from '@/lib/utils'
 import type { BlogCategory, BlogPost, Person } from '@/sanity/types'
 import Img from '@/ui/img'
-import SanityLink from '@/ui/sanity-link'
+import SanityLink, { type SanityLinkType } from '@/ui/sanity-link'
 import Byline from './byline'
 import Categories from './categories'
 import Date from './date'
@@ -35,7 +35,7 @@ export default function ({
 
 			<SanityLink
 				className="link block"
-				link={{ type: 'internal', internal: post }}
+				link={{ type: 'internal', internal: post } as unknown as SanityLinkType}
 			>
 				<strong>{post.title}</strong>
 				<span className="absolute inset-0" />

@@ -1,6 +1,6 @@
 import type { ComponentProps } from 'react'
 import type { Breadcrumbs, Page } from '@/sanity/types'
-import SanityLink from '@/ui/sanity-link'
+import SanityLink, { type SanityLinkType } from '@/ui/sanity-link'
 import { moduleAttributes } from '.'
 
 export default function ({
@@ -16,7 +16,11 @@ export default function ({
 				itemType="https://schema.org/BreadcrumbList"
 			>
 				{crumbs?.map((crumb, index) => (
-					<Crumb link={crumb} position={index + 1} key={crumb._key} />
+					<Crumb
+						link={crumb as SanityLinkType}
+						position={index + 1}
+						key={crumb._key}
+					/>
 				))}
 
 				<Crumb position={(crumbs?.length ?? 0) + 2}>{currentPage?.title}</Crumb>
@@ -50,7 +54,11 @@ function Crumb({
 			itemType="https://schema.org/ListItem"
 		>
 			{link ? (
-				<SanityLink link={link} className="link" itemProp="item">
+				<SanityLink
+					link={link as SanityLinkType}
+					className="link"
+					itemProp="item"
+				>
 					{Content}
 				</SanityLink>
 			) : (

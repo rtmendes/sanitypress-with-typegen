@@ -9,7 +9,7 @@ import {
 	FaYoutube,
 } from 'react-icons/fa6'
 import { getSite } from '@/sanity/lib/queries'
-import SanityLink from './sanity-link'
+import SanityLink, { type SanityLinkType } from './sanity-link'
 
 export default async function (props: React.ComponentProps<'nav'>) {
 	const site = await getSite()
@@ -23,7 +23,7 @@ export default async function (props: React.ComponentProps<'nav'>) {
 
 						return (
 							<SanityLink
-								link={link}
+								link={link as SanityLinkType}
 								className="text-current"
 								aria-label={link.label || url}
 								key={link._key}

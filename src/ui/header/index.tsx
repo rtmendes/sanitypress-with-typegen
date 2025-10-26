@@ -1,5 +1,6 @@
 import { cn } from '@/lib/utils'
 import { getSite } from '@/sanity/lib/queries'
+import type { Cta } from '@/sanity/types'
 import CTAList from '@/ui/cta-list'
 import Logo from '@/ui/logo'
 import css from './header.module.css'
@@ -18,7 +19,7 @@ export default async function () {
 				<Navigation />
 
 				<CTAList
-					ctas={site?.ctas}
+					ctas={site?.ctas as Cta[]}
 					className="max-md:header-not-open:hidden [grid-area:ctas] *:max-md:w-full"
 				/>
 

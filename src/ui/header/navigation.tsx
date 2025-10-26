@@ -1,5 +1,6 @@
 import { getSite } from '@/sanity/lib/queries'
-import SanityLink from '@/ui/sanity-link'
+import type { LinkList } from '@/sanity/types'
+import SanityLink, { type SanityLinkType } from '@/ui/sanity-link'
 import Dropdown from './dropdown'
 
 export default async function () {
@@ -10,10 +11,16 @@ export default async function () {
 			{site?.header?.items?.map((item) => {
 				switch (item._type) {
 					case 'link':
-						return <SanityLink link={item} className="link" key={item._key} />
+						return (
+							<SanityLink
+								link={item as SanityLinkType}
+								className="link"
+								key={item._key}
+							/>
+						)
 
 					case 'link.list':
-						return <Dropdown {...item} key={item._key} />
+						return <Dropdown {...(item as LinkList)} key={item._key} />
 
 					default:
 						return null
