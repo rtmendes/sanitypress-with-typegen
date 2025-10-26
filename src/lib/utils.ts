@@ -26,29 +26,24 @@ export function slug(
 	return result
 }
 
-export function count(
-	arr: any[] | number,
+export function count<T = any>(
+	arr: T[] | number,
 	singular: string = 'item',
 	plural?: string,
 ) {
 	const n = typeof arr === 'number' ? arr : (arr?.length ?? 0)
-	return `${n || 0} ${n === 1 ? singular : plural || singular + 's'}`
+	return `${n} ${n === 1 ? singular : plural || singular + 's'}`
 }
 
 export function debounce<T extends (...args: any[]) => void>(
-	func: T,
+	fn: T,
 	delay: number = 1000, // 1 sec
 ): (...args: Parameters<T>) => void {
 	let timeoutId: NodeJS.Timeout | null = null
 
 	return function (this: any, ...args: Parameters<T>) {
-		if (timeoutId) {
-			clearTimeout(timeoutId)
-		}
-
-		timeoutId = setTimeout(() => {
-			func.apply(this, args)
-		}, delay)
+		if (timeoutId) clearTimeout(timeoutId)
+		timeoutId = setTimeout(() => fn.apply(this, args), delay)
 	}
 }
 
