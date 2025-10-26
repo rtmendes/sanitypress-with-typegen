@@ -1,5 +1,6 @@
 'use client'
 
+import { stegaClean } from 'next-sanity'
 import { useEffect, useRef, useState, type ComponentProps } from 'react'
 import { cn, slug } from '@/lib/utils'
 import css from './toc-item.module.css'
@@ -63,10 +64,10 @@ export default function ({
 			<a
 				href={`#${slug(heading.text, { removeLeadingNumberAndHyphen: true })}`}
 				className={cn('link block py-1 leading-tight', {
-					'pl-ch': heading.style === 'h3',
-					'pl-[2ch]': heading.style === 'h4',
-					'pl-[3ch]': heading.style === 'h5',
-					'pl-[4ch]': heading.style === 'h6',
+					'pl-ch': stegaClean(heading.style) === 'h3',
+					'pl-[2ch]': stegaClean(heading.style) === 'h4',
+					'pl-[3ch]': stegaClean(heading.style) === 'h5',
+					'pl-[4ch]': stegaClean(heading.style) === 'h6',
 				})}
 			>
 				{heading.text}
