@@ -4,7 +4,8 @@ import { sanityFetchLive } from './live'
 
 /* fragments */
 
-const LINK_QUERY = /* groq */ `
+// @sanity-typegen-ignore
+const LINK_QUERY = groq`
 	...,
 	type == 'internal' => {
 		internal->{
@@ -18,7 +19,8 @@ const LINK_QUERY = /* groq */ `
 	}
 `
 
-const NAVIGATION_QUERY = /* groq */ `
+// @sanity-typegen-ignore
+const NAVIGATION_QUERY = groq`
 	items[]{
 		${LINK_QUERY},
 		defined(link) => { link{ ${LINK_QUERY} } },
@@ -45,7 +47,8 @@ export const GLOBAL_MODULE_PATH_QUERY = groq`
 	)
 `
 
-export const MODULES_QUERY = /* groq */ `
+// @sanity-typegen-ignore
+export const MODULES_QUERY = groq`
 	...,
 	ctas[]{
 		...,
