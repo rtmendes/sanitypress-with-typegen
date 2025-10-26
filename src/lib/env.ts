@@ -1,4 +1,8 @@
 export const dev =
 	process.env.NODE_ENV === 'development' || process.env.VERCEL_ENV === 'preview'
 
-export const BLOG_DIR = 'blog'
+export const ROUTES = {
+	blog: 'blog',
+	// etc. services: 'services',
+	// etc. caseStudies: 'case-studies',
+} as const

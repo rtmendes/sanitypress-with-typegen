@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next'
 import { groq } from 'next-sanity'
-import { BLOG_DIR } from '@/lib/env'
+import { ROUTES } from '@/lib/env'
 import { sanityFetchLive } from '@/sanity/lib/live'
 
 export const dynamic = 'force-dynamic'
@@ -39,7 +39,7 @@ export default async function (): Promise<MetadataRoute.Sitemap> {
 		}`,
 		params: {
 			baseUrl: process.env.NEXT_PUBLIC_BASE_URL,
-			blogDir: BLOG_DIR,
+			blogDir: ROUTES.blog,
 		},
 	})
 

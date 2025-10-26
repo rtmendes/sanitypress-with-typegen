@@ -21,6 +21,10 @@
 @variant headings (& :is(h1, h2, h3, h4, h5, h6));
 
 @layer base {
+	@view-transition {
+		navigation: auto;
+	}
+
 	@supports (interpolate-size: allow-keywords) {
 		:root {
 			interpolate-size: allow-keywords;

@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { BLOG_DIR } from '@/lib/env'
+import { ROUTES } from '@/lib/env'
 import { cn } from '@/lib/utils'
 import type { BlogCategory, BlogPost, Person } from '@/sanity/types'
 import Img from '@/ui/img'
@@ -24,7 +24,7 @@ export default function ({
 					/>
 				) : (
 					<Image
-						src={`/api/og?slug=${BLOG_DIR}/${post.metadata?.slug?.current}&invert=1`}
+						src={`/api/og?slug=${ROUTES.blog}/${post.metadata?.slug?.current}&invert=1`}
 						className="aspect-video w-full object-cover"
 						alt={post.title ?? ''}
 						width={400}

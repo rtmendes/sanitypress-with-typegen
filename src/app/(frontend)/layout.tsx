@@ -27,18 +27,18 @@ export default async function RootLayout({
 	preconnect('https://ic0n.dev')
 
 	return (
-		<html lang="en">
+		<html lang="en" className={fontSans.className}>
 			<NuqsAdapter>
-				<ViewTransition>
-					<body className="bg-background text-foreground antialiased">
+				<body className="bg-background text-foreground antialiased">
+					<ViewTransition>
 						<Header />
 						<main>{children}</main>
 						<Footer />
 
 						<VisualEditing />
 						{!dev && <Analytics />}
-					</body>
-				</ViewTransition>
+					</ViewTransition>
+				</body>
 			</NuqsAdapter>
 		</html>
 	)

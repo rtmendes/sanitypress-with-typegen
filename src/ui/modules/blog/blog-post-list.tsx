@@ -1,5 +1,5 @@
 import { groq, PortableText } from 'next-sanity'
-import { BLOG_DIR } from '@/lib/env'
+import { ROUTES } from '@/lib/env'
 import { sanityFetchLive } from '@/sanity/lib/live'
 import type {
 	BLOG_POST_LIST_QUERYResult,
@@ -61,6 +61,6 @@ const BLOG_POST_LIST_QUERY = groq`
 				asset->
 			}
 		},
-		'slug': '/${BLOG_DIR}/' + metadata.slug.current,
+		'slug': '/${ROUTES.blog}/' + metadata.slug.current,
 	}
 `

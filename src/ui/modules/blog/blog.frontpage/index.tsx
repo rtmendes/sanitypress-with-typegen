@@ -1,6 +1,6 @@
 import { groq, PortableText } from 'next-sanity'
 import { Suspense } from 'react'
-import { BLOG_DIR } from '@/lib/env'
+import { ROUTES } from '@/lib/env'
 import { cn } from '@/lib/utils'
 import { sanityFetchLive } from '@/sanity/lib/live'
 import type { BLOG_FRONTPAGE_QUERYResult, BlogFrontpage } from '@/sanity/types'
@@ -66,6 +66,6 @@ const BLOG_FRONTPAGE_QUERY = groq`
 				asset->
 			}
 		},
-		'slug': '/${BLOG_DIR}/' + metadata.slug.current,
+		'slug': '/${ROUTES.blog}/' + metadata.slug.current,
 	}
 `

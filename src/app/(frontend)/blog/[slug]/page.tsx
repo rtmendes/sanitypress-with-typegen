@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { groq } from 'next-sanity'
 import { notFound } from 'next/navigation'
-import { BLOG_DIR } from '@/lib/env'
+import { ROUTES } from '@/lib/env'
 import { client } from '@/sanity/lib/client'
 import { urlFor } from '@/sanity/lib/image'
 import { sanityFetchLive } from '@/sanity/lib/live'
@@ -32,11 +32,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 		openGraph: {
 			title: title,
 			description: description,
-			url: `${process.env.NEXT_PUBLIC_BASE_URL}/${BLOG_DIR}/${slug}`,
+			url: `${process.env.NEXT_PUBLIC_BASE_URL}/${ROUTES.blog}/${slug}`,
 			images: [
 				image
 					? urlFor(image).width(1200).url()
-					: `${process.env.NEXT_PUBLIC_BASE_URL}/api/og?slug=${BLOG_DIR}/${slug}`,
+					: `${process.env.NEXT_PUBLIC_BASE_URL}/api/og?slug=${ROUTES.blog}/${slug}`,
 			],
 		},
 		robots: {
@@ -44,7 +44,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 		},
 		alternates: {
 			types: {
-				'application/rss+xml': `/${BLOG_DIR}/rss.xml`,
+				'application/rss+xml': `/${ROUTES.blog}/rss.xml`,
 			},
 		},
 	}
@@ -61,7 +61,7 @@ export async function generateStaticParams() {
 async function getPost(slug: string) {
 	return await sanityFetchLive<BLOG_POST_QUERYResult>({
 		query: BLOG_POST_QUERY,
-		params: { slug, blogDir: `${BLOG_DIR}/` },
+		params: { slug, blogDir: `${ROUTES.blog}/` },
 	})
 }
 

@@ -1,6 +1,6 @@
 import type { NextConfig } from 'next'
 import { groq } from 'next-sanity'
-import { BLOG_DIR } from './src/lib/env'
+import { ROUTES } from './src/lib/env'
 import { client } from './src/sanity/lib/client'
 
 const nextConfig: NextConfig = {
@@ -21,7 +21,7 @@ const nextConfig: NextConfig = {
 			'destination': select(
 				destination.type == 'internal' =>
 					select(
-						destination.internal->._type == 'blog.post' => '/${BLOG_DIR}/',
+						destination.internal->._type == 'blog.post' => '/${ROUTES.blog}/',
 						''
 					) + select(
 						destination.internal->.metadata.slug.current == 'index' => '/',

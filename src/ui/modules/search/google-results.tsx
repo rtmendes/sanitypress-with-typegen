@@ -1,7 +1,7 @@
 'use client'
 
 import { useQueryState } from 'nuqs'
-import { BLOG_DIR } from '@/lib/env'
+import { ROUTES } from '@/lib/env'
 import type { SearchModule } from '@/sanity/types'
 
 export default function ({ scope }: { scope: SearchModule['scope'] }) {
@@ -10,7 +10,7 @@ export default function ({ scope }: { scope: SearchModule['scope'] }) {
 	const href = [
 		`https://www.google.com/search?q=${query} `,
 		`site:${process.env.NEXT_PUBLIC_BASE_URL}`,
-		scope === 'blog posts' ? `/${BLOG_DIR}` : '',
+		scope === 'blog posts' ? `/${ROUTES.blog}` : '',
 	].join('')
 
 	return (

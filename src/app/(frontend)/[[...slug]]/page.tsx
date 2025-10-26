@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { groq } from 'next-sanity'
 import { notFound } from 'next/navigation'
-import { BLOG_DIR } from '@/lib/env'
+import { ROUTES } from '@/lib/env'
 import { client } from '@/sanity/lib/client'
 import { urlFor } from '@/sanity/lib/image'
 import { sanityFetchLive } from '@/sanity/lib/live'
@@ -46,7 +46,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 		},
 		alternates: {
 			types: {
-				'application/rss+xml': `/${BLOG_DIR}/rss.xml`,
+				'application/rss+xml': `/${ROUTES.blog}/rss.xml`,
 			},
 		},
 	}

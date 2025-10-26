@@ -1,6 +1,6 @@
 import { escapeHTML, toHTML } from '@portabletext/to-html'
 import { groq } from 'next-sanity'
-import { BLOG_DIR } from '@/lib/env'
+import { ROUTES } from '@/lib/env'
 import { getBlockText } from '@/lib/utils'
 import { urlFor } from '@/sanity/lib/image'
 import { sanityFetchLive } from '@/sanity/lib/live'
@@ -12,14 +12,14 @@ export async function GET() {
 	const { blog, posts } = await sanityFetchLive<BLOG_RSS_QUERYResult>({
 		query: BLOG_RSS_QUERY,
 		params: {
-			blogDir: BLOG_DIR,
+			blogDir: ROUTES.blog,
 		},
 	})
 
 	const rssXML = `<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel>
 		<title>${blog?.metadata?.title}</title>
 		<description>${blog?.metadata?.description}</description>
-		<link>${BASE_URL}/${BLOG_DIR}</link>
+		<link>${BASE_URL}/${ROUTES.blog}</link>
 		<language>en-US</language>
 		<lastBuildDate>${new Date().toISOString()}</lastBuildDate>
 		${posts.map((post) => Item({ post })).join('')}</channel></rss>`
@@ -32,7 +32,7 @@ export async function GET() {
 }
 
 function Item({ post }: { post: BLOG_RSS_QUERYResult['posts'][number] }) {
-	const url = `${BASE_URL}/${BLOG_DIR}/${post.metadata?.slug?.current}`
+	const url = `${BASE_URL}/${ROUTES.blog}/${post.metadata?.slug?.current}`
 
 	return `<item>
 		<title><![CDATA[${escapeHTML(post.title!)}]]></title>

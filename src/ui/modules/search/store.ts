@@ -1,6 +1,6 @@
 import { groq } from 'next-sanity'
 import { create } from 'zustand'
-import { BLOG_DIR } from '@/lib/env'
+import { ROUTES } from '@/lib/env'
 import { sanityFetchLive } from '@/sanity/lib/live'
 import type { SEARCH_QUERYResult, SearchModule } from '@/sanity/types'
 
@@ -47,7 +47,7 @@ export async function handleSearch({
 		params: {
 			queryMatch: `*${query}*`,
 			scope: scope === 'all' ? Object.values(SCOPE_MAP) : [scopeValue],
-			blogDir: `/${BLOG_DIR}/`,
+			blogDir: `/${ROUTES.blog}/`,
 		},
 	})
 

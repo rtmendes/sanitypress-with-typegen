@@ -1,5 +1,5 @@
 import { defineLocations, presentationTool } from 'sanity/presentation'
-import { BLOG_DIR } from '@/lib/env'
+import { ROUTES } from '@/lib/env'
 
 export default presentationTool({
 	previewUrl: {
@@ -36,7 +36,7 @@ export default presentationTool({
 					locations: [
 						{
 							title: doc?.title,
-							href: doc?.slug ? `/${BLOG_DIR}/${doc.slug}` : `/${BLOG_DIR}`,
+							href: doc?.slug ? `/${ROUTES.blog}/${doc.slug}` : `/${ROUTES.blog}`,
 						},
 					],
 				}),
