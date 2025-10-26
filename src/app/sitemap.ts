@@ -6,7 +6,10 @@ import { sanityFetchLive } from '@/sanity/lib/live'
 export const dynamic = 'force-dynamic'
 
 export default async function (): Promise<MetadataRoute.Sitemap> {
-	const data = await sanityFetchLive<Record<string, MetadataRoute.Sitemap>>({
+	const data = await sanityFetchLive<{
+		pages: MetadataRoute.Sitemap
+		posts: MetadataRoute.Sitemap
+	}>({
 		query: groq`{
 			'pages': *[
 				_type == 'page'

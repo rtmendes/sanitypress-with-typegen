@@ -22,56 +22,57 @@ export async function GET() {
 		<link>${BASE_URL}/${BLOG_DIR}</link>
 		<language>en-US</language>
 		<lastBuildDate>${new Date().toISOString()}</lastBuildDate>
-		${posts
-			.map((post) => {
-				const url = `${BASE_URL}/${BLOG_DIR}/${post.metadata?.slug?.current}`
-				return `<item>
-					<title><![CDATA[${escapeHTML(post.title!)}]]></title>
-					<description><![CDATA[${escapeHTML(post.metadata?.description ?? '')}]]></description>
-					<link>${url}</link>
-					<guid isPermaLink="true">${url}</guid>
-					${[
-						post.publishDate &&
-							`<pubDate>${new Date(post.publishDate).toISOString()}</pubDate>`,
-						post.categories
-							?.map((category) => `<category>${category.title}</category>`)
-							.join(''),
-						post.author && `<dc:creator>${post.author.name}</dc:creator>`,
-						post.metadata?.image &&
-							`<enclosure url="${urlFor(post.metadata.image).format('jpg').url()}" length="0" type="image/jpeg" />`,
-						post.content &&
-							`<content:encoded><![CDATA[${toHTML(post.content, {
-								components: {
-									marks: {
-										code: ({ text }) => `<code>${escapeHTML(text)}</code>`,
-									},
-									types: {
-										image: ({ value: { alt = '', figcaption, ...value } }) =>
-											`<figure>${[
-												`<img src="${urlFor(value).url()}" alt="${escapeHTML(alt)}" />`,
-												figcaption &&
-													`<figcaption>${escapeHTML(getBlockText(figcaption))}</figcaption>`,
-											]
-												.filter(Boolean)
-												.join('')}</figure>`,
-										code: ({ value: { code } }) =>
-											code && `<pre><code>${code}</code></pre>`,
-										'custom-html': ({ value: { html } }) => html?.code,
-									},
-								},
-							})}]]></content:encoded>`,
-					]
-						.filter(Boolean)
-						.join('')}
-				</item>`
-			})
-			.join('')}</channel></rss>`
+		${posts.map((post) => Item({ post })).join('')}</channel></rss>`
 
 	return new Response(rssXML, {
 		headers: {
 			'Content-Type': 'application/rss+xml',
 		},
 	})
+}
+
+function Item({ post }: { post: BLOG_RSS_QUERYResult['posts'][number] }) {
+	const url = `${BASE_URL}/${BLOG_DIR}/${post.metadata?.slug?.current}`
+
+	return `<item>
+		<title><![CDATA[${escapeHTML(post.title!)}]]></title>
+		<description><![CDATA[${escapeHTML(post.metadata?.description ?? '')}]]></description>
+		<link>${url}</link>
+		<guid isPermaLink="true">${url}</guid>
+		${[
+			post.publishDate &&
+				`<pubDate>${new Date(post.publishDate).toISOString()}</pubDate>`,
+			post.categories
+				?.map((category) => `<category>${category.title}</category>`)
+				.join(''),
+			post.author && `<dc:creator>${post.author.name}</dc:creator>`,
+			post.metadata?.image &&
+				`<enclosure url="${urlFor(post.metadata.image).format('jpg').url()}" length="0" type="image/jpeg" />`,
+			post.content &&
+				`<content:encoded><![CDATA[${toHTML(post.content, {
+					components: {
+						marks: {
+							code: ({ text }) => `<code>${escapeHTML(text)}</code>`,
+						},
+						types: {
+							image: ({ value: { alt = '', figcaption, ...value } }) =>
+								`<figure>${[
+									`<img src="${urlFor(value).url()}" alt="${escapeHTML(alt)}" />`,
+									figcaption &&
+										`<figcaption>${escapeHTML(getBlockText(figcaption))}</figcaption>`,
+								]
+									.filter(Boolean)
+									.join('')}</figure>`,
+							code: ({ value: { code } }) =>
+								code && `<pre><code>${code}</code></pre>`,
+							'custom-html': ({ value: { html } }) => html?.code,
+						},
+					},
+				})}]]></content:encoded>`,
+		]
+			.filter(Boolean)
+			.join('')}
+	</item>`
 }
 
 const BLOG_RSS_QUERY = groq`{
