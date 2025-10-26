@@ -1,4 +1,4 @@
-'ues client'
+'use client'
 
 import { useSearchStore } from './store'
 
@@ -8,7 +8,7 @@ export default function ({ query }: { query: string }) {
 	if (!results.length) return null
 
 	return (
-		<ul>
+		<ul aria-live="polite">
 			{results.map(
 				(result) =>
 					!!result.slug && (

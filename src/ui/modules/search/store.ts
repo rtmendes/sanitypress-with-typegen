@@ -32,7 +32,11 @@ export async function handleSearch({
 	setLoading: (loading: boolean) => void
 	setResults: (results: SEARCH_QUERYResult) => void
 }) {
-	if (!query) setResults([])
+	if (!query) {
+		setResults([])
+		setLoading(false)
+		return
+	}
 
 	setLoading(true)
 
@@ -41,7 +45,7 @@ export async function handleSearch({
 	const results = await sanityFetchLive<SEARCH_QUERYResult>({
 		query: SEARCH_QUERY,
 		params: {
-			query: `*${query}*` as any,
+			queryMatch: `*${query}*`,
 			scope: scope === 'all' ? Object.values(SCOPE_MAP) : [scopeValue],
 			blogDir: `/${BLOG_DIR}/`,
 		},
@@ -53,6 +57,7 @@ export async function handleSearch({
 
 const SEARCH_QUERY = groq`*[
 	_type in $scope
+	&& defined(metadata.slug.current)
 	&& metadata.noIndex != true
 	&& !(metadata.slug.current in ['404'])
 	&& [
@@ -62,7 +67,7 @@ const SEARCH_QUERY = groq`*[
 		title,
 		metadata.title,
 		metadata.description
-	] match $query
+	] match $queryMatch
 ]{
 	_id,
 	_type,
