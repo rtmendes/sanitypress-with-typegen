@@ -1,8 +1,9 @@
 'use client'
 
 import { parseAsInteger, useQueryState } from 'nuqs'
+import { useCallback, useEffect } from 'react'
 
-type PaginationProps = React.ComponentProps<'div'> &
+type PaginationProps = React.ComponentProps<'nav'> &
 	Partial<{
 		buttonClassName: string
 		prevClassName: string
@@ -13,7 +14,7 @@ type PaginationProps = React.ComponentProps<'div'> &
 		onClick: () => void
 	}>
 
-export function usePagination<T extends unknown>({
+export function usePagination<T>({
 	items = [],
 	itemsPerPage = 3,
 }: {
@@ -22,20 +23,31 @@ export function usePagination<T extends unknown>({
 }) {
 	const { page, setPage } = usePageState()
 
-	const atStart = page === 1
-	const atEnd = page === Math.ceil(items.length / itemsPerPage)
+	const totalPages = Math.max(1, Math.ceil(items.length / itemsPerPage))
 
-	const onPrev = () => setPage(Math.max(1, page - 1))
-	const onNext = () =>
-		setPage(Math.min(Math.ceil(items.length / itemsPerPage), page + 1))
+	// Reset to last valid page if current page exceeds total
+	useEffect(() => {
+		if (page > totalPages) {
+			setPage(totalPages)
+		}
+	}, [page, totalPages, setPage])
+
+	const atStart = page === 1
+	const atEnd = page >= totalPages
+
+	const onPrev = useCallback(
+		() => setPage(Math.max(1, page - 1)),
+		[page, setPage],
+	)
+	const onNext = useCallback(
+		() => setPage(Math.min(totalPages, page + 1)),
+		[totalPages, page, setPage],
+	)
 
 	const paginatedItems = items.slice(
 		itemsPerPage * (page - 1),
 		itemsPerPage * page,
 	)
-
-	const currentPage = page
-	const totalPages = Math.ceil(items.length / itemsPerPage)
 
 	const Pagination = ({
 		buttonClassName,
@@ -47,7 +59,7 @@ export function usePagination<T extends unknown>({
 		onClick = () => {},
 		...props
 	}: PaginationProps) => {
-		if ((atStart && atEnd) || !paginatedItems?.length) return null
+		if (atStart && atEnd) return null
 
 		return (
 			<nav {...props}>
@@ -64,7 +76,7 @@ export function usePagination<T extends unknown>({
 
 				{!hidePage && (
 					<span>
-						{currentPage} of {totalPages}
+						{page} of {totalPages}
 					</span>
 				)}
 
@@ -89,7 +101,7 @@ export function usePagination<T extends unknown>({
 		onNext,
 		paginatedItems,
 		Pagination,
-		currentPage,
+		currentPage: page,
 		totalPages,
 	}
 }
