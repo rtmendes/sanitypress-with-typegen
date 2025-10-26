@@ -23,10 +23,10 @@ export default function ({
 				copied && 'copied pointer-events-none',
 				className,
 			)}
-			onClick={() => {
+			onClick={async () => {
 				if (typeof window === 'undefined' || !value) return
 
-				navigator.clipboard.writeText(value)
+				await navigator.clipboard.writeText(value)
 
 				setCopied(true)
 				setTimeout(() => setCopied(false), 1000)
