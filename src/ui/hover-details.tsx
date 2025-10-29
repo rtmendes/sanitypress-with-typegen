@@ -2,6 +2,7 @@
 
 import { usePathname } from 'next/navigation'
 import { useEffect, useState, type ComponentProps } from 'react'
+import { useIsDesktop } from '@/hooks/useMatchMedia'
 import { cn } from '@/lib/utils'
 import css from './hover-details.module.css'
 
@@ -20,21 +21,11 @@ export default function ({
 	closeAfterNavigate?: boolean
 	delay?: number
 } & ComponentProps<'details'>) {
-	const [matchMedia, setMatchMedia] = useState(false)
+	const isDesktop = useIsDesktop()
 	const [open, setOpen] = useState(false)
 	let timeout: NodeJS.Timeout
 
-	useEffect(() => {
-		if (typeof window === 'undefined') return
-		function handleMatchMedia() {
-			setMatchMedia(window.matchMedia('(hover: hover)').matches)
-		}
-		handleMatchMedia()
-		window.addEventListener('resize', handleMatchMedia)
-		return () => window.removeEventListener('resize', handleMatchMedia)
-	}, [matchMedia])
-
-	const events = matchMedia
+	const events = isDesktop
 		? {
 				onMouseEnter: () => {
 					if (delay) {
