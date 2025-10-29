@@ -297,7 +297,7 @@
 }
 
 @utility accordion {
-	& summary {
+	&>summary {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
@@ -310,7 +310,7 @@
 		}
 	}
 
-	&[open] summary::after {
+	&[open]>summary::after {
 		content: '-';
 	}
 }
