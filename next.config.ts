@@ -16,21 +16,24 @@ const nextConfig: NextConfig = {
 	},
 
 	async redirects() {
-		return await client.fetch(groq`*[_type == 'redirect']{
-			source,
-			'destination': select(
-				destination.type == 'internal' =>
-					select(
-						destination.internal->._type == 'blog.post' => '/${ROUTES.blog}/',
-						''
-					) + select(
-						destination.internal->.metadata.slug.current == 'index' => '/',
-						'/' + destination.internal->.metadata.slug.current
-					),
-				destination.external
-			),
-			'permanent': true
-		}`)
+		return await client.fetch(
+			groq`*[_type == 'redirect']{
+				source,
+				'destination': select(
+					destination.type == 'internal' =>
+						select(
+							destination.internal->._type == 'blog.post' => $blogDir,
+							''
+						) + select(
+							destination.internal->.metadata.slug.current == 'index' => '/',
+							'/' + destination.internal->.metadata.slug.current
+						),
+					destination.external
+				),
+				'permanent': true
+			}`,
+			{ blogDir: `${ROUTES.blog}` },
+		)
 	},
 }
 

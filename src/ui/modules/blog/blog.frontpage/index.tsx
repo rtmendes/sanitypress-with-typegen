@@ -3,7 +3,7 @@ import { Suspense } from 'react'
 import { ROUTES } from '@/lib/env'
 import { cn } from '@/lib/utils'
 import { sanityFetchLive } from '@/sanity/lib/live'
-import type { BLOG_FRONTPAGE_QUERYResult, BlogFrontpage } from '@/sanity/types'
+import type { BlogFrontpage } from '@/sanity/types'
 import Loading from '@/ui/loading'
 import FilterList from '@/ui/modules/blog/filter-list'
 import PaginatedPosts from './paginated-posts'
@@ -14,8 +14,9 @@ export default async function ({
 	intro = [],
 	postsPerPage = 6,
 }: BlogFrontpage) {
-	const posts = await sanityFetchLive<BLOG_FRONTPAGE_QUERYResult>({
+	const posts = await sanityFetchLive<any>({
 		query: BLOG_FRONTPAGE_QUERY,
+		params: { blogDir: `${ROUTES.blog}` },
 	})
 
 	return (
@@ -48,6 +49,7 @@ export default async function ({
 	)
 }
 
+// @sanity-typegen-ignore
 const BLOG_FRONTPAGE_QUERY = groq`
 	*[_type == 'blog.post']|order(publishDate desc){
 		...,
@@ -66,6 +68,6 @@ const BLOG_FRONTPAGE_QUERY = groq`
 				asset->
 			}
 		},
-		'slug': '/${ROUTES.blog}/' + metadata.slug.current,
+		'slug': $blogDir + metadata.slug.current,
 	}
 `
