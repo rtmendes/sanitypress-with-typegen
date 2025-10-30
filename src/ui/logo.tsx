@@ -22,7 +22,7 @@ export default async function ({
 				<Img
 					image={logo}
 					width={100}
-					className="inline-block size-auto object-contain"
+					className="inline-block h-full w-auto object-contain"
 					alt={site?.title ?? ''}
 				/>
 			) : (

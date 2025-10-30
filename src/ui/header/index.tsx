@@ -14,7 +14,10 @@ export default async function () {
 	return (
 		<Wrapper className="bg-background/80 max-md:header-open:shadow-xl sticky top-0 z-10 backdrop-blur">
 			<div className={cn(css.root, 'section grid items-center gap-x-4 p-4')}>
-				<Logo className="[grid-area:logo] max-md:mr-auto [&_img]:-my-2 [&_img]:h-[2lh]" />
+				<div className="just between flex items-center gap-4 [grid-area:top]">
+					<Logo className="-my-2 h-[2lh] grow" />
+					<MobileToggle />
+				</div>
 
 				<Navigation />
 
@@ -22,8 +25,6 @@ export default async function () {
 					ctas={site?.ctas as Cta[]}
 					className="max-md:header-not-open:hidden [grid-area:ctas] *:max-md:w-full"
 				/>
-
-				<MobileToggle />
 			</div>
 		</Wrapper>
 	)

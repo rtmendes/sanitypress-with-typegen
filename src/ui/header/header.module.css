@@ -1,10 +1,11 @@
 .root {
-	grid-template:
-		'logo toggle' auto
-		'navigation navigation' auto
-		'ctas ctas' auto / 1fr auto;
+	grid-template-areas:
+		'top'
+		'navigation'
+		'ctas';
 
 	@media (width >=48rem) {
-		grid-template: 'logo navigation ctas' auto / auto 1fr auto;
+		grid-template-areas: 'top navigation ctas';
+		grid-template-columns: auto 1fr auto;
 	}
 }
