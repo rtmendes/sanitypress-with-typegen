@@ -16,7 +16,7 @@ export default async function ({
 }: BlogFrontpage) {
 	const posts = await sanityFetchLive<any>({
 		query: BLOG_FRONTPAGE_QUERY,
-		params: { blogDir: `${ROUTES.blog}` },
+		params: { blogDir: `/${ROUTES.blog}/` },
 	})
 
 	return (

@@ -32,7 +32,7 @@ const nextConfig: NextConfig = {
 				),
 				'permanent': true
 			}`,
-			{ blogDir: `${ROUTES.blog}` },
+			{ blogDir: `/${ROUTES.blog}/` },
 		)
 	},
 }

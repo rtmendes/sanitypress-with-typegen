@@ -11,7 +11,7 @@ export default async function ({
 }: BlogPostList & { _key: string }) {
 	const posts = await sanityFetchLive<any>({
 		query: BLOG_POST_LIST_QUERY,
-		params: { limit, blogDir: `${ROUTES.blog}` },
+		params: { limit, blogDir: `/${ROUTES.blog}/` },
 	})
 
 	return (
