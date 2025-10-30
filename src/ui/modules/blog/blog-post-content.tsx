@@ -1,6 +1,5 @@
 import { PortableText, stegaClean } from 'next-sanity'
 import { cn } from '@/lib/utils'
-import { urlFor } from '@/sanity/lib/image'
 import type {
 	BLOG_POST_QUERYResult,
 	BlogCategory,
