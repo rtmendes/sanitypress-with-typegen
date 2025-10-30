@@ -1,4 +1,5 @@
 import { getImageDimensions } from '@sanity/asset-utils'
+import type { ImageUrlBuilderOptionsWithAliases } from '@sanity/image-url/lib/types/types'
 import { stegaClean } from 'next-sanity'
 import Image, { type ImageProps } from 'next/image'
 import { urlFor } from '@/sanity/lib/image'
@@ -12,6 +13,7 @@ export default function ({
 	image,
 	width,
 	height,
+	imageOptions,
 	...props
 }: {
 	image?:
@@ -21,6 +23,7 @@ export default function ({
 				hotspot?: SanityImageHotspot
 		  }
 		| any
+	imageOptions?: Partial<ImageUrlBuilderOptionsWithAliases>
 } & Omit<ImageProps, 'src'>) {
 	if (!image?.asset) return null
 
@@ -37,8 +40,9 @@ export default function ({
 	return (
 		<Image
 			src={
-				urlFor(image).withOptions({ auto: 'format', q: 100 }).url() ??
-				image.asset.url!
+				urlFor(image)
+					.withOptions({ auto: 'format', q: 100, ...imageOptions })
+					.url() ?? image.asset.url!
 			}
 			width={width ?? Math.round(height ? (Number(height) * w) / h : w)}
 			height={height ?? Math.round(width ? (Number(width) * h) / w : h)}
