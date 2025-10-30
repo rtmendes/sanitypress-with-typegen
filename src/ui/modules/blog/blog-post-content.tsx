@@ -1,10 +1,13 @@
-import { PortableText } from 'next-sanity'
+import { PortableText, stegaClean } from 'next-sanity'
 import { cn } from '@/lib/utils'
+import { urlFor } from '@/sanity/lib/image'
 import type {
 	BLOG_POST_QUERYResult,
 	BlogCategory,
+	BlogPostContent,
 	Person,
 } from '@/sanity/types'
+import Img from '@/ui/img'
 import Byline from '@/ui/modules/blog/byline'
 import Categories from '@/ui/modules/blog/categories'
 import Date from '@/ui/modules/blog/date'
@@ -26,13 +29,30 @@ export default function ({
 	const toc = stegaClean(tableOfContents)
 
 	return (
-		<article className="section space-y-4" {...moduleAttributes(props)}>
-			<header className="space-y-4 text-center">
-				<h1 className="h1">{post.title || post.metadata?.title}</h1>
-				<div className="flex flex-wrap items-center justify-center gap-x-4">
-					<Byline author={post.author as unknown as Person} />
-					<Date date={post.publishDate} />
-					<Categories categories={post.categories as BlogCategory[]} />
+		<article {...moduleAttributes(props)}>
+			<header
+				className={cn(
+					'section text-center',
+					post.metadata?.image && 'relative',
+				)}
+			>
+				<Img
+					image={post.metadata?.image}
+					imageOptions={{ blur: 30 }}
+					width={1000}
+					className="absolute inset-0 size-full object-cover opacity-10 delay-1000 duration-2000 starting:opacity-0"
+					alt={post.metadata?.title ?? ''}
+					draggable={false}
+					loading="eager"
+				/>
+
+				<div className="relative space-y-4">
+					<h1 className="h1">{post.title || post.metadata?.title}</h1>
+					<div className="flex flex-wrap items-center justify-center gap-x-4">
+						<Byline author={post.author as unknown as Person} />
+						<Date date={post.publishDate} />
+						<Categories categories={post.categories as BlogCategory[]} />
+					</div>
 				</div>
 			</header>
 
