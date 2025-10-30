@@ -12,8 +12,14 @@ export default function ({
 	}> | null
 } & React.ComponentProps<'details'>) {
 	return (
-		<details className={cn('accordion', className)} {...props}>
-			<summary className="font-bold md:after:content-['']!">
+		<details
+			className={cn(
+				'accordion max-h-[calc(100svh-var(--header-height)-var(--offset))] overflow-y-auto',
+				className,
+			)}
+			{...props}
+		>
+			<summary className="bg-background sticky top-0 font-bold md:after:content-['']!">
 				Table of Contents
 			</summary>
 

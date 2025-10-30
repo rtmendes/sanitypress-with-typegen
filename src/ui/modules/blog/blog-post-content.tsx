@@ -15,7 +15,7 @@ import CustomHTML from '@/ui/modules/custom-html'
 import AnchoredHeading from '@/ui/modules/prose/anchored-heading'
 import Code from '@/ui/modules/prose/code'
 import Image from '@/ui/modules/prose/image'
-import TableOfContents from '@/ui/modules/table-of-contents'
+import TableOfContents from '@/ui/table-of-contents'
 import { moduleAttributes } from '..'
 import css from './blog-post-content.module.css'
 
