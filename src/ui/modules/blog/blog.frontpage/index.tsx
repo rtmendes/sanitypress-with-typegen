@@ -49,7 +49,6 @@ export default async function ({
 	)
 }
 
-// @sanity-typegen-ignore
 const BLOG_FRONTPAGE_QUERY = groq`
 	*[_type == 'blog.post']|order(publishDate desc){
 		...,
