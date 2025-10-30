@@ -6,11 +6,22 @@ export default defineType({
 	title: 'Blog post content',
 	type: 'object',
 	icon: EditIcon,
+	groups: [{ name: 'layout', default: true }, { name: 'options' }],
 	fields: [
 		defineField({
 			name: 'attributes',
 			title: 'Module attributes',
 			type: 'module-attributes',
+			group: 'options',
+		}),
+		defineField({
+			name: 'tableOfContents',
+			title: 'Table of contents (position)',
+			type: 'string',
+			options: {
+				list: ['left', 'right'],
+			},
+			group: 'layout',
 		}),
 	],
 	preview: {

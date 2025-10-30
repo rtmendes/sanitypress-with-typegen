@@ -16,8 +16,14 @@ import TableOfContents from '@/ui/modules/table-of-contents'
 import { moduleAttributes } from '..'
 import css from './blog-post-content.module.css'
 
-export default function ({ post, ...props }: { post: BLOG_POST_QUERYResult }) {
+export default function ({
+	post,
+	tableOfContents,
+	...props
+}: { post: BLOG_POST_QUERYResult } & BlogPostContent) {
 	if (!post) return null
+
+	const toc = stegaClean(tableOfContents)
 
 	return (
 		<article className="section space-y-4" {...moduleAttributes(props)}>
@@ -30,12 +36,17 @@ export default function ({ post, ...props }: { post: BLOG_POST_QUERYResult }) {
 				</div>
 			</header>
 
-			<section className="flex gap-4 max-md:flex-col md:items-start">
-				<TableOfContents
-					headings={post.headings}
-					className="top-(--header-height) shrink-0 md:sticky md:w-[20ch]"
-					open
-				/>
+			<section className="section flex gap-4 max-md:flex-col md:items-start">
+				{(toc === 'left' || toc === 'right') && (
+					<TableOfContents
+						headings={post.headings}
+						className={cn(
+							'md:sticky-below-header shrink-0 [--offset:1rem] md:w-[20ch]',
+							toc === 'right' && 'md:order-last',
+						)}
+						open
+					/>
+				)}
 
 				<div className={cn(css.body, 'prose mx-auto grid w-full max-w-4xl')}>
 					<PortableText

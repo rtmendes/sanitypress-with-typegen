@@ -54,7 +54,7 @@ export default defineType({
 		}),
 		defineField({
 			name: 'tableOfContents',
-			title: 'Table of contents',
+			title: 'Table of contents (position)',
 			type: 'string',
 			options: {
 				list: ['left', 'right'],
