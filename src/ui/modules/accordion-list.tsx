@@ -43,7 +43,7 @@ export default function ({
 						</summary>
 
 						<div
-							className="not-supports-[interpolate-size:allow-keywords]:anim-fade-to-b pb-2"
+							className="not-supports-[interpolate-size:allow-keywords]:anim-fade-to-b pb-lh"
 							{...(enableSchema && {
 								itemScope: true,
 								itemProp: 'acceptedAnswer',

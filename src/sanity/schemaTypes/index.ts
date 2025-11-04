@@ -1,14 +1,13 @@
 import type { SchemaPluginOptions } from 'sanity'
+// documents
 import blogCategory from './documents/blog.category'
 import blogPost from './documents/blog.post'
 import globalModule from './documents/global-module'
-// references
 import logo from './documents/logo'
 import navigation from './documents/navigation'
 import page from './documents/page'
 import person from './documents/person'
 import redirect from './documents/redirect'
-// documents
 import site from './documents/site'
 import testimonial from './documents/testimonial'
 // modules
@@ -40,9 +39,14 @@ export const schema: SchemaPluginOptions = {
 		page,
 		globalModule,
 		blogPost,
-		blogCategory,
-		navigation,
 		redirect,
+
+		// references
+		blogCategory,
+		logo,
+		navigation,
+		person,
+		testimonial,
 
 		// objects
 		cta,
@@ -66,11 +70,6 @@ export const schema: SchemaPluginOptions = {
 		searchModule,
 		statList,
 		testimonialList,
-
-		// references
-		logo,
-		person,
-		testimonial,
 	],
 
 	templates: (templates) =>
