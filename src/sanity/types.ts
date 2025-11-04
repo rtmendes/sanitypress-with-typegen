@@ -16,95 +16,6 @@ import '@sanity/client'
  */
 
 // Source: schema.json
-export type Testimonial = {
-	_id: string
-	_type: 'testimonial'
-	_createdAt: string
-	_updatedAt: string
-	_rev: string
-	quote?: Array<{
-		children?: Array<{
-			marks?: Array<string>
-			text?: string
-			_type: 'span'
-			_key: string
-		}>
-		style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote'
-		listItem?: 'bullet' | 'number'
-		markDefs?: Array<{
-			href?: string
-			_type: 'link'
-			_key: string
-		}>
-		level?: number
-		_type: 'block'
-		_key: string
-	}>
-	author?: {
-		name?: string
-		title?: string
-		image?: {
-			asset?: {
-				_ref: string
-				_type: 'reference'
-				_weak?: boolean
-				[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-			}
-			media?: unknown
-			hotspot?: SanityImageHotspot
-			crop?: SanityImageCrop
-			_type: 'image'
-		}
-	}
-}
-
-export type Logo = {
-	_id: string
-	_type: 'logo'
-	_createdAt: string
-	_updatedAt: string
-	_rev: string
-	title?: string
-	image?: {
-		default?: {
-			asset?: {
-				_ref: string
-				_type: 'reference'
-				_weak?: boolean
-				[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-			}
-			media?: unknown
-			hotspot?: SanityImageHotspot
-			crop?: SanityImageCrop
-			_type: 'image'
-		}
-		light?: {
-			asset?: {
-				_ref: string
-				_type: 'reference'
-				_weak?: boolean
-				[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-			}
-			media?: unknown
-			hotspot?: SanityImageHotspot
-			crop?: SanityImageCrop
-			_type: 'image'
-		}
-		dark?: {
-			asset?: {
-				_ref: string
-				_type: 'reference'
-				_weak?: boolean
-				[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-			}
-			media?: unknown
-			hotspot?: SanityImageHotspot
-			crop?: SanityImageCrop
-			_type: 'image'
-		}
-	}
-}
-
 export type TestimonialList = {
 	_type: 'testimonial-list'
 	intro?: Array<{
@@ -659,6 +570,105 @@ export type Cta = {
 	style?: 'action' | 'action-outline' | 'ghost' | 'link'
 }
 
+export type Testimonial = {
+	_id: string
+	_type: 'testimonial'
+	_createdAt: string
+	_updatedAt: string
+	_rev: string
+	quote?: Array<{
+		children?: Array<{
+			marks?: Array<string>
+			text?: string
+			_type: 'span'
+			_key: string
+		}>
+		style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote'
+		listItem?: 'bullet' | 'number'
+		markDefs?: Array<{
+			href?: string
+			_type: 'link'
+			_key: string
+		}>
+		level?: number
+		_type: 'block'
+		_key: string
+	}>
+	author?: {
+		name?: string
+		title?: string
+		image?: {
+			asset?: {
+				_ref: string
+				_type: 'reference'
+				_weak?: boolean
+				[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+			}
+			media?: unknown
+			hotspot?: SanityImageHotspot
+			crop?: SanityImageCrop
+			_type: 'image'
+		}
+	}
+}
+
+export type Logo = {
+	_id: string
+	_type: 'logo'
+	_createdAt: string
+	_updatedAt: string
+	_rev: string
+	title?: string
+	image?: {
+		default?: {
+			asset?: {
+				_ref: string
+				_type: 'reference'
+				_weak?: boolean
+				[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+			}
+			media?: unknown
+			hotspot?: SanityImageHotspot
+			crop?: SanityImageCrop
+			_type: 'image'
+		}
+		light?: {
+			asset?: {
+				_ref: string
+				_type: 'reference'
+				_weak?: boolean
+				[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+			}
+			media?: unknown
+			hotspot?: SanityImageHotspot
+			crop?: SanityImageCrop
+			_type: 'image'
+		}
+		dark?: {
+			asset?: {
+				_ref: string
+				_type: 'reference'
+				_weak?: boolean
+				[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+			}
+			media?: unknown
+			hotspot?: SanityImageHotspot
+			crop?: SanityImageCrop
+			_type: 'image'
+		}
+	}
+}
+
+export type BlogCategory = {
+	_id: string
+	_type: 'blog.category'
+	_createdAt: string
+	_updatedAt: string
+	_rev: string
+	title?: string
+	slug?: Slug
+}
+
 export type Redirect = {
 	_id: string
 	_type: 'redirect'
@@ -681,16 +691,6 @@ export type Link = {
 	}
 	external?: string
 	params?: string
-}
-
-export type BlogCategory = {
-	_id: string
-	_type: 'blog.category'
-	_createdAt: string
-	_updatedAt: string
-	_rev: string
-	title?: string
-	slug?: Slug
 }
 
 export type BlogPost = {
@@ -1230,8 +1230,6 @@ export type SanityAssetSourceData = {
 }
 
 export type AllSanitySchemaTypes =
-	| Testimonial
-	| Logo
 	| TestimonialList
 	| StatList
 	| SearchModule
@@ -1249,9 +1247,11 @@ export type AllSanitySchemaTypes =
 	| ModuleAttributes
 	| LinkList
 	| Cta
+	| Testimonial
+	| Logo
+	| BlogCategory
 	| Redirect
 	| Link
-	| BlogCategory
 	| BlogPost
 	| Person
 	| GlobalModule
