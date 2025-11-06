@@ -18,7 +18,7 @@ export default function ({
 			{Tag !== 'h1' && (
 				<a
 					href={`#${id}`}
-					className="ml-ch inline-block pointer-fine:not-group-hover:invisible"
+					className="text-primary ml-ch inline-block pointer-fine:not-group-hover:invisible"
 				>
 					#
 				</a>

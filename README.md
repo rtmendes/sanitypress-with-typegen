@@ -88,6 +88,7 @@ Adjust frontend styles to your liking, edit or add new schema and modules, etc.
 ## Roadmap / To-do
 
 - read time for blog posts
+- Header > Megamenu
 - Modules
   - Step list
   - Announcement bar

@@ -16,10 +16,10 @@ export function slug(
 		.normalize('NFD') // Decompose combined characters (é → e + ´)
 		.replace(/[\u0300-\u036f]/g, '') // Remove diacritical marks (accents)
 		.replace(/[^\w\s-]/g, '') // Remove non-word characters except spaces and hyphens
-		.trim()
 		.replace(/[\s_]+/g, '-') // Replace spaces and underscores with hyphens
 		.replace(/-+/g, '-') // Collapse multiple hyphens
 		.replace(/^-+|-+$/g, '') // Remove leading/trailing hyphens
+		.trim()
 
 	if (removeLeadingNumberAndHyphen) return result.replace(/^\d+-/, '')
 

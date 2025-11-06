@@ -6,7 +6,7 @@ export default function ({
 }: PortableTextTypeComponentProps<any>) {
 	return (
 		<figure className="max-md:full-bleed my-6 space-y-2 text-center first:mt-0 md:col-[bleed]!">
-			<Img className="mx-auto" image={image} width={900} alt={image.alt} />
+			<Img className="mx-auto" image={image} width={900} alt={image.alt ?? ''} />
 
 			{figcaption && (
 				<figcaption className="text-foreground/50 italic max-md:px-4">

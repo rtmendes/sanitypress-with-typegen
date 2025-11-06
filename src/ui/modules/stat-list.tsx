@@ -1,7 +1,7 @@
 import { PortableText } from 'next-sanity'
 import type { StatList } from '@/sanity/types'
 
-export default function ({ intro = [], stats }: StatList) {
+export default function ({ intro, stats }: StatList) {
 	return (
 		<section className="section space-y-4">
 			{intro && (

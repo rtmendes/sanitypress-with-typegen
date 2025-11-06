@@ -10,10 +10,7 @@ import PaginatedPosts from './paginated-posts'
 import Skeleton from './skeleton'
 import SortBy from './sort-by'
 
-export default async function ({
-	intro = [],
-	postsPerPage = 6,
-}: BlogFrontpage) {
+export default async function ({ intro, postsPerPage = 6 }: BlogFrontpage) {
 	const posts = await sanityFetchLive<any>({
 		query: BLOG_FRONTPAGE_QUERY,
 		params: { blogDir: `/${ROUTES.blog}/` },
