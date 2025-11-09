@@ -87,13 +87,13 @@ Adjust frontend styles to your liking, edit or add new schema and modules, etc.
 
 ## Roadmap / To-do
 
+- featured post
+  - reference to blog.post on blog.frontpage, blog-post-list
+  - OR as `featured: true` on blog.post
 - read time for blog posts
 - Header > Megamenu
 - Modules
-  - Step list
   - Announcement bar
-- Blog
-  - Featured/large post preview
 - Improved error handling
 
 ## \*Not included

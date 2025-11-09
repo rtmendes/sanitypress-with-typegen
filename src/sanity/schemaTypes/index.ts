@@ -24,6 +24,7 @@ import personList from './modules/person-list'
 import prose from './modules/prose'
 import searchModule from './modules/search-module'
 import statList from './modules/stat-list'
+import stepList from './modules/step-list'
 import testimonialList from './modules/testimonial-list'
 // objects
 import cta from './objects/cta'
@@ -69,6 +70,7 @@ export const schema: SchemaPluginOptions = {
 		prose,
 		searchModule,
 		statList,
+		stepList,
 		testimonialList,
 	],
 

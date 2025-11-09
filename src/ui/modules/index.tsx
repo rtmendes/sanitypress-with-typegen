@@ -17,6 +17,7 @@ import PersonList from './person-list'
 import Prose from './prose'
 import SearchModule from './search'
 import StatList from './stat-list'
+import StepList from './step-list'
 import TestimonialList from './testimonial-list'
 
 const MODULES_MAP = {
@@ -33,6 +34,7 @@ const MODULES_MAP = {
 	prose: Prose,
 	'search-module': SearchModule,
 	'stat-list': StatList,
+	'step-list': StepList,
 	'testimonial-list': TestimonialList,
 } as const
 

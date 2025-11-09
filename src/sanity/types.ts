@@ -93,6 +93,50 @@ export type TestimonialList = {
 	>
 }
 
+export type StepList = {
+	_type: 'step-list'
+	intro?: Array<{
+		children?: Array<{
+			marks?: Array<string>
+			text?: string
+			_type: 'span'
+			_key: string
+		}>
+		style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote'
+		listItem?: 'bullet' | 'number'
+		markDefs?: Array<{
+			href?: string
+			_type: 'link'
+			_key: string
+		}>
+		level?: number
+		_type: 'block'
+		_key: string
+	}>
+	steps?: Array<{
+		content?: Array<{
+			children?: Array<{
+				marks?: Array<string>
+				text?: string
+				_type: 'span'
+				_key: string
+			}>
+			style?: 'normal' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'blockquote'
+			listItem?: 'bullet' | 'number'
+			markDefs?: Array<{
+				href?: string
+				_type: 'link'
+				_key: string
+			}>
+			level?: number
+			_type: 'block'
+			_key: string
+		}>
+		_type: 'step'
+		_key: string
+	}>
+}
+
 export type StatList = {
 	_type: 'stat-list'
 	intro?: Array<{
@@ -854,6 +898,9 @@ export type GlobalModule = {
 		  } & StatList)
 		| ({
 				_key: string
+		  } & StepList)
+		| ({
+				_key: string
 		  } & TestimonialList)
 	>
 	after?: Array<
@@ -896,6 +943,9 @@ export type GlobalModule = {
 		| ({
 				_key: string
 		  } & StatList)
+		| ({
+				_key: string
+		  } & StepList)
 		| ({
 				_key: string
 		  } & TestimonialList)
@@ -949,6 +999,9 @@ export type Page = {
 		| ({
 				_key: string
 		  } & StatList)
+		| ({
+				_key: string
+		  } & StepList)
 		| ({
 				_key: string
 		  } & TestimonialList)
@@ -1231,6 +1284,7 @@ export type SanityAssetSourceData = {
 
 export type AllSanitySchemaTypes =
 	| TestimonialList
+	| StepList
 	| StatList
 	| SearchModule
 	| Prose
@@ -2008,6 +2062,67 @@ export type PAGE_QUERYResult = {
 						_key: string
 					}>
 					_type: 'stat'
+					_key: string
+				}>
+				ctas: null
+		  }
+		| {
+				_key: string
+				_type: 'step-list'
+				intro?: Array<{
+					children?: Array<{
+						marks?: Array<string>
+						text?: string
+						_type: 'span'
+						_key: string
+					}>
+					style?:
+						| 'blockquote'
+						| 'h1'
+						| 'h2'
+						| 'h3'
+						| 'h4'
+						| 'h5'
+						| 'h6'
+						| 'normal'
+					listItem?: 'bullet' | 'number'
+					markDefs?: Array<{
+						href?: string
+						_type: 'link'
+						_key: string
+					}>
+					level?: number
+					_type: 'block'
+					_key: string
+				}>
+				steps?: Array<{
+					content?: Array<{
+						children?: Array<{
+							marks?: Array<string>
+							text?: string
+							_type: 'span'
+							_key: string
+						}>
+						style?:
+							| 'blockquote'
+							| 'h1'
+							| 'h2'
+							| 'h3'
+							| 'h4'
+							| 'h5'
+							| 'h6'
+							| 'normal'
+						listItem?: 'bullet' | 'number'
+						markDefs?: Array<{
+							href?: string
+							_type: 'link'
+							_key: string
+						}>
+						level?: number
+						_type: 'block'
+						_key: string
+					}>
+					_type: 'step'
 					_key: string
 				}>
 				ctas: null
@@ -3047,6 +3162,67 @@ export type BLOG_POST_QUERYResult = {
 		  }
 		| {
 				_key: string
+				_type: 'step-list'
+				intro?: Array<{
+					children?: Array<{
+						marks?: Array<string>
+						text?: string
+						_type: 'span'
+						_key: string
+					}>
+					style?:
+						| 'blockquote'
+						| 'h1'
+						| 'h2'
+						| 'h3'
+						| 'h4'
+						| 'h5'
+						| 'h6'
+						| 'normal'
+					listItem?: 'bullet' | 'number'
+					markDefs?: Array<{
+						href?: string
+						_type: 'link'
+						_key: string
+					}>
+					level?: number
+					_type: 'block'
+					_key: string
+				}>
+				steps?: Array<{
+					content?: Array<{
+						children?: Array<{
+							marks?: Array<string>
+							text?: string
+							_type: 'span'
+							_key: string
+						}>
+						style?:
+							| 'blockquote'
+							| 'h1'
+							| 'h2'
+							| 'h3'
+							| 'h4'
+							| 'h5'
+							| 'h6'
+							| 'normal'
+						listItem?: 'bullet' | 'number'
+						markDefs?: Array<{
+							href?: string
+							_type: 'link'
+							_key: string
+						}>
+						level?: number
+						_type: 'block'
+						_key: string
+					}>
+					_type: 'step'
+					_key: string
+				}>
+				ctas: null
+		  }
+		| {
+				_key: string
 				_type: 'testimonial-list'
 				intro?: Array<{
 					children?: Array<{
@@ -4002,6 +4178,67 @@ export type NOT_FOUND_QUERYResult = {
 						_key: string
 					}>
 					_type: 'stat'
+					_key: string
+				}>
+				ctas: null
+		  }
+		| {
+				_key: string
+				_type: 'step-list'
+				intro?: Array<{
+					children?: Array<{
+						marks?: Array<string>
+						text?: string
+						_type: 'span'
+						_key: string
+					}>
+					style?:
+						| 'blockquote'
+						| 'h1'
+						| 'h2'
+						| 'h3'
+						| 'h4'
+						| 'h5'
+						| 'h6'
+						| 'normal'
+					listItem?: 'bullet' | 'number'
+					markDefs?: Array<{
+						href?: string
+						_type: 'link'
+						_key: string
+					}>
+					level?: number
+					_type: 'block'
+					_key: string
+				}>
+				steps?: Array<{
+					content?: Array<{
+						children?: Array<{
+							marks?: Array<string>
+							text?: string
+							_type: 'span'
+							_key: string
+						}>
+						style?:
+							| 'blockquote'
+							| 'h1'
+							| 'h2'
+							| 'h3'
+							| 'h4'
+							| 'h5'
+							| 'h6'
+							| 'normal'
+						listItem?: 'bullet' | 'number'
+						markDefs?: Array<{
+							href?: string
+							_type: 'link'
+							_key: string
+						}>
+						level?: number
+						_type: 'block'
+						_key: string
+					}>
+					_type: 'step'
 					_key: string
 				}>
 				ctas: null
