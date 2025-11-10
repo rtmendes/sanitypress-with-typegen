@@ -91,7 +91,6 @@ Adjust frontend styles to your liking, edit or add new schema and modules, etc.
   - reference to blog.post on blog.frontpage, blog-post-list
   - OR as `featured: true` on blog.post
 - read time for blog posts
-- Header > Megamenu
 - Modules
   - Announcement bar
 - Improved error handling

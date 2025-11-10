@@ -598,6 +598,16 @@ export type ModuleAttributes = {
 	hidden?: boolean
 }
 
+export type Megamenu = {
+	_type: 'megamenu'
+	link?: Link
+	items?: Array<
+		{
+			_key: string
+		} & LinkList
+	>
+}
+
 export type LinkList = {
 	_type: 'link.list'
 	link?: Link
@@ -1153,6 +1163,9 @@ export type Navigation = {
 		| ({
 				_key: string
 		  } & LinkList)
+		| ({
+				_key: string
+		  } & Megamenu)
 	>
 }
 
@@ -1299,6 +1312,7 @@ export type AllSanitySchemaTypes =
 	| BlogFrontpage
 	| AccordionList
 	| ModuleAttributes
+	| Megamenu
 	| LinkList
 	| Cta
 	| Testimonial
@@ -4599,6 +4613,52 @@ export type SITE_QUERYResult = {
 					external?: string
 					params?: string
 			  }
+			| {
+					_key: string
+					_type: 'megamenu'
+					link?: Link
+					items?: Array<
+						{
+							_key: string
+						} & LinkList
+					>
+			  }
+			| {
+					_key: string
+					_type: 'megamenu'
+					link:
+						| {
+								_type: 'link'
+								label?: string
+								type?: 'external' | 'internal'
+								internal?: {
+									_ref: string
+									_type: 'reference'
+									_weak?: boolean
+									[internalGroqTypeReferenceTo]?: 'page'
+								}
+								external?: string
+								params?: string
+						  }
+						| {
+								_type: 'link'
+								label?: string
+								type?: 'external' | 'internal'
+								internal: {
+									_type: 'page'
+									title: string | null
+									slug: string | '/' | null
+								} | null
+								external?: string
+								params?: string
+						  }
+						| null
+					items?: Array<
+						{
+							_key: string
+						} & LinkList
+					>
+			  }
 		> | null
 	} | null
 	ctas: Array<{
@@ -4802,6 +4862,52 @@ export type SITE_QUERYResult = {
 					external?: string
 					params?: string
 			  }
+			| {
+					_key: string
+					_type: 'megamenu'
+					link?: Link
+					items?: Array<
+						{
+							_key: string
+						} & LinkList
+					>
+			  }
+			| {
+					_key: string
+					_type: 'megamenu'
+					link:
+						| {
+								_type: 'link'
+								label?: string
+								type?: 'external' | 'internal'
+								internal?: {
+									_ref: string
+									_type: 'reference'
+									_weak?: boolean
+									[internalGroqTypeReferenceTo]?: 'page'
+								}
+								external?: string
+								params?: string
+						  }
+						| {
+								_type: 'link'
+								label?: string
+								type?: 'external' | 'internal'
+								internal: {
+									_type: 'page'
+									title: string | null
+									slug: string | '/' | null
+								} | null
+								external?: string
+								params?: string
+						  }
+						| null
+					items?: Array<
+						{
+							_key: string
+						} & LinkList
+					>
+			  }
 		> | null
 	} | null
 	social: {
@@ -4972,6 +5078,52 @@ export type SITE_QUERYResult = {
 					} | null
 					external?: string
 					params?: string
+			  }
+			| {
+					_key: string
+					_type: 'megamenu'
+					link?: Link
+					items?: Array<
+						{
+							_key: string
+						} & LinkList
+					>
+			  }
+			| {
+					_key: string
+					_type: 'megamenu'
+					link:
+						| {
+								_type: 'link'
+								label?: string
+								type?: 'external' | 'internal'
+								internal?: {
+									_ref: string
+									_type: 'reference'
+									_weak?: boolean
+									[internalGroqTypeReferenceTo]?: 'page'
+								}
+								external?: string
+								params?: string
+						  }
+						| {
+								_type: 'link'
+								label?: string
+								type?: 'external' | 'internal'
+								internal: {
+									_type: 'page'
+									title: string | null
+									slug: string | '/' | null
+								} | null
+								external?: string
+								params?: string
+						  }
+						| null
+					items?: Array<
+						{
+							_key: string
+						} & LinkList
+					>
 			  }
 		> | null
 	} | null

@@ -30,6 +30,7 @@ import testimonialList from './modules/testimonial-list'
 import cta from './objects/cta'
 import link from './objects/link'
 import linkList from './objects/link.list'
+import megamenu from './objects/megamenu'
 import metadata from './objects/metadata'
 import moduleAttributes from './objects/module-attributes'
 
@@ -53,6 +54,7 @@ export const schema: SchemaPluginOptions = {
 		cta,
 		link,
 		linkList,
+		megamenu,
 		metadata,
 		moduleAttributes,
 

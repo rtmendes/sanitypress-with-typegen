@@ -1,7 +1,8 @@
 import { getSite } from '@/sanity/lib/queries'
-import type { LinkList } from '@/sanity/types'
+import type { LinkList, Megamenu as MegamenuType } from '@/sanity/types'
 import SanityLink, { type SanityLinkType } from '@/ui/sanity-link'
 import Dropdown from './dropdown'
+import Megamenu from './megamenu'
 
 export default async function () {
 	const site = await getSite()
@@ -21,6 +22,9 @@ export default async function () {
 
 					case 'link.list':
 						return <Dropdown {...(item as LinkList)} key={item._key} />
+
+					case 'megamenu':
+						return <Megamenu {...(item as MegamenuType)} key={item._key} />
 
 					default:
 						return null
