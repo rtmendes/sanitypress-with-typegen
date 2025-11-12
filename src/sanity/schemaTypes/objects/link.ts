@@ -20,10 +20,7 @@ export default defineType({
 			type: 'string',
 			options: {
 				layout: 'radio',
-				list: [
-					{ title: 'internal', value: 'internal' },
-					{ title: 'external', value: 'external' },
-				],
+				list: ['internal', 'external'],
 			},
 		}),
 		defineField({
