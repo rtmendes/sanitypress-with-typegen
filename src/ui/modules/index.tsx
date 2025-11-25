@@ -45,7 +45,7 @@ export default function ({
 	page?: PAGE_QUERYResult
 	post?: BLOG_POST_QUERYResult
 }) {
-	const modules = [...(page?.modules ?? []), ...(post?.modules ?? [])]
+	const modules = [page, post].flatMap((item) => item?.modules ?? [])
 
 	const moduleSpecificProps = (module: ModuleProps) => {
 		switch (module._type) {

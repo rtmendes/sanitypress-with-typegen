@@ -13,7 +13,7 @@ type Props = {
 	params: Promise<{ slug: string }>
 }
 
-export default async function Page({ params }: Props) {
+export default async function ({ params }: Props) {
 	const { slug } = await params
 	const post = await getPost(slug)
 	if (!post) notFound()
@@ -53,7 +53,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export async function generateStaticParams() {
 	return await client.fetch<{ slug: string }[]>(
 		groq`*[_type == 'blog.post' && defined(metadata.slug.current)]{
-			'slug': select(metadata.slug.current == 'index' => '/', '/' + metadata.slug.current)
+			'slug': '/' + metadata.slug.current
 		}`,
 	)
 }

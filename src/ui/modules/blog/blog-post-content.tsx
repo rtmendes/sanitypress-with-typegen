@@ -29,12 +29,7 @@ export default function ({
 
 	return (
 		<article {...moduleAttributes(props)}>
-			<header
-				className={cn(
-					'section text-center',
-					post.metadata?.image && 'relative',
-				)}
-			>
+			<header className="section relative text-center">
 				<Img
 					image={post.metadata?.image}
 					imageOptions={{ blur: 30 }}

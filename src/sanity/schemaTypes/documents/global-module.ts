@@ -43,12 +43,16 @@ export default defineType({
 			fieldset: 'path',
 		}),
 		defineField({
-			...modules,
+			...modules({
+				of: [{ type: 'blog-post-content' }],
+			}),
 			name: 'before',
 			description: 'Added before all page modules',
 		}),
 		defineField({
-			...modules,
+			...modules({
+				of: [{ type: 'blog-post-content' }],
+			}),
 			name: 'after',
 			description: 'Added after all page modules',
 		}),

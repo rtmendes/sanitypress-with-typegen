@@ -94,6 +94,7 @@ Adjust frontend styles to your liking, edit or add new schema and modules, etc.
 - Modules
   - Announcement bar
 - Improved error handling
+- rename `global-module` to `module.global`
 
 ## \*Not included
 

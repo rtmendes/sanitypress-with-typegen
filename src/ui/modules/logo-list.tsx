@@ -5,7 +5,7 @@ import Img from '@/ui/img'
 import css from './logo-list.module.css'
 
 export default function ({
-	intro = [],
+	intro,
 	logos,
 	logoType = 'default',
 	autoScroll,
@@ -13,9 +13,11 @@ export default function ({
 }: LogoList) {
 	return (
 		<section className="section space-y-4 text-center">
-			<header className="prose">
-				<PortableText value={intro} />
-			</header>
+			{intro && (
+				<header className="prose">
+					<PortableText value={intro} />
+				</header>
+			)}
 
 			<figure
 				className={cn(

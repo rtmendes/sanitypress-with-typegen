@@ -16,7 +16,7 @@ export default defineType({
 			validation: (Rule) => Rule.required(),
 		}),
 		defineField({
-			...modules,
+			...modules(),
 			group: 'content',
 		}),
 		defineField({
