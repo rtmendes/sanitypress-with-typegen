@@ -36,7 +36,9 @@ export default presentationTool({
 					locations: [
 						{
 							title: doc?.title,
-							href: doc?.slug ? `/${ROUTES.blog}/${doc.slug}` : `/${ROUTES.blog}`,
+							href: doc?.slug
+								? `/${ROUTES.blog}/${doc.slug}`
+								: `/${ROUTES.blog}`,
 						},
 					],
 				}),

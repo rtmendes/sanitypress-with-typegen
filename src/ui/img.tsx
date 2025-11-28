@@ -1,5 +1,5 @@
 import { getImageDimensions } from '@sanity/asset-utils'
-import type { ImageUrlBuilderOptionsWithAliases } from '@sanity/image-url/lib/types/types'
+import type { ImageUrlBuilderOptionsWithAliases } from '@sanity/image-url'
 import { stegaClean } from 'next-sanity'
 import Image, { type ImageProps } from 'next/image'
 import { urlFor } from '@/sanity/lib/image'

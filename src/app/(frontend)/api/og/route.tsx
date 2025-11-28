@@ -36,22 +36,20 @@ export async function GET(request: Request) {
 	const text = [...new Set([...h1, ...h2, ...hostname])].join('')
 
 	return new ImageResponse(
-		(
-			<div
-				tw={cn(
-					'flex h-full w-full flex-col justify-between px-24 py-16',
-					invert
-						? 'bg-neutral-900 text-neutral-100'
-						: 'bg-neutral-100 text-neutral-900',
-				)}
-			>
-				<hgroup tw="flex flex-col">
-					<h1 tw="text-7xl leading-[1.1] font-bold">{h1}</h1>
-					{h2 && <h2 tw="text-4xl font-bold">{h2}</h2>}
-				</hgroup>
-				<p tw="text-4xl">{hostname}</p>
-			</div>
-		),
+		<div
+			tw={cn(
+				'flex h-full w-full flex-col justify-between px-24 py-16',
+				invert
+					? 'bg-neutral-900 text-neutral-100'
+					: 'bg-neutral-100 text-neutral-900',
+			)}
+		>
+			<hgroup tw="flex flex-col">
+				<h1 tw="text-7xl leading-[1.1] font-bold">{h1}</h1>
+				{h2 && <h2 tw="text-4xl font-bold">{h2}</h2>}
+			</hgroup>
+			<p tw="text-4xl">{hostname}</p>
+		</div>,
 		{
 			width: 1200,
 			height: 630,
