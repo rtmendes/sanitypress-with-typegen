@@ -37,52 +37,9 @@ export type TestimonialList = {
 		_key: string
 	}>
 	testimonials?: Array<
-		| {
-				quote?: Array<{
-					children?: Array<{
-						marks?: Array<string>
-						text?: string
-						_type: 'span'
-						_key: string
-					}>
-					style?:
-						| 'normal'
-						| 'h1'
-						| 'h2'
-						| 'h3'
-						| 'h4'
-						| 'h5'
-						| 'h6'
-						| 'blockquote'
-					listItem?: 'bullet' | 'number'
-					markDefs?: Array<{
-						href?: string
-						_type: 'link'
-						_key: string
-					}>
-					level?: number
-					_type: 'block'
-					_key: string
-				}>
-				author?: {
-					name?: string
-					title?: string
-					image?: {
-						asset?: {
-							_ref: string
-							_type: 'reference'
-							_weak?: boolean
-							[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-						}
-						media?: unknown
-						hotspot?: SanityImageHotspot
-						crop?: SanityImageCrop
-						_type: 'image'
-					}
-				}
-				_type: 'testimonial'
+		| ({
 				_key: string
-		  }
+		  } & Testimonial)
 		| {
 				_ref: string
 				_type: 'reference'
@@ -299,23 +256,9 @@ export type PersonList = {
 		_key: string
 	}>
 	people?: Array<
-		| {
-				name?: string
-				image?: {
-					asset?: {
-						_ref: string
-						_type: 'reference'
-						_weak?: boolean
-						[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-					}
-					media?: unknown
-					hotspot?: SanityImageHotspot
-					crop?: SanityImageCrop
-					_type: 'image'
-				}
-				_type: 'person'
+		| ({
 				_key: string
-		  }
+		  } & Person)
 		| {
 				_ref: string
 				_type: 'reference'
@@ -347,49 +290,9 @@ export type LogoList = {
 		_key: string
 	}>
 	logos?: Array<
-		| {
-				title?: string
-				image?: {
-					default?: {
-						asset?: {
-							_ref: string
-							_type: 'reference'
-							_weak?: boolean
-							[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-						}
-						media?: unknown
-						hotspot?: SanityImageHotspot
-						crop?: SanityImageCrop
-						_type: 'image'
-					}
-					light?: {
-						asset?: {
-							_ref: string
-							_type: 'reference'
-							_weak?: boolean
-							[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-						}
-						media?: unknown
-						hotspot?: SanityImageHotspot
-						crop?: SanityImageCrop
-						_type: 'image'
-					}
-					dark?: {
-						asset?: {
-							_ref: string
-							_type: 'reference'
-							_weak?: boolean
-							[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-						}
-						media?: unknown
-						hotspot?: SanityImageHotspot
-						crop?: SanityImageCrop
-						_type: 'image'
-					}
-				}
-				_type: 'logo'
+		| ({
 				_key: string
-		  }
+		  } & Logo)
 		| {
 				_ref: string
 				_type: 'reference'
@@ -598,6 +501,26 @@ export type ModuleAttributes = {
 	hidden?: boolean
 }
 
+export type Metadata = {
+	_type: 'metadata'
+	title?: string
+	description?: string
+	slug?: Slug
+	image?: {
+		asset?: {
+			_ref: string
+			_type: 'reference'
+			_weak?: boolean
+			[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+		}
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		_type: 'image'
+	}
+	noIndex?: boolean
+}
+
 export type Megamenu = {
 	_type: 'megamenu'
 	link?: Link
@@ -616,6 +539,20 @@ export type LinkList = {
 			_key: string
 		} & Link
 	>
+}
+
+export type Link = {
+	_type: 'link'
+	label?: string
+	type?: 'internal' | 'external'
+	internal?: {
+		_ref: string
+		_type: 'reference'
+		_weak?: boolean
+		[internalGroqTypeReferenceTo]?: 'page'
+	}
+	external?: string
+	params?: string
 }
 
 export type Cta = {
@@ -723,6 +660,12 @@ export type BlogCategory = {
 	slug?: Slug
 }
 
+export type Slug = {
+	_type: 'slug'
+	current?: string
+	source?: string
+}
+
 export type Redirect = {
 	_id: string
 	_type: 'redirect'
@@ -731,20 +674,6 @@ export type Redirect = {
 	_rev: string
 	source?: string
 	destination?: Link
-}
-
-export type Link = {
-	_type: 'link'
-	label?: string
-	type?: 'internal' | 'external'
-	internal?: {
-		_ref: string
-		_type: 'reference'
-		_weak?: boolean
-		[internalGroqTypeReferenceTo]?: 'page'
-	}
-	external?: string
-	params?: string
 }
 
 export type BlogPost = {
@@ -858,6 +787,22 @@ export type Person = {
 	}
 }
 
+export type SanityImageCrop = {
+	_type: 'sanity.imageCrop'
+	top?: number
+	bottom?: number
+	left?: number
+	right?: number
+}
+
+export type SanityImageHotspot = {
+	_type: 'sanity.imageHotspot'
+	x?: number
+	y?: number
+	height?: number
+	width?: number
+}
+
 export type GlobalModule = {
 	_id: string
 	_type: 'global-module'
@@ -875,9 +820,6 @@ export type GlobalModule = {
 		  } & BlogFrontpage)
 		| ({
 				_key: string
-		  } & BlogPostContent)
-		| ({
-				_key: string
 		  } & BlogPostList)
 		| ({
 				_key: string
@@ -912,6 +854,9 @@ export type GlobalModule = {
 		| ({
 				_key: string
 		  } & TestimonialList)
+		| ({
+				_key: string
+		  } & BlogPostContent)
 	>
 	after?: Array<
 		| ({
@@ -922,9 +867,6 @@ export type GlobalModule = {
 		  } & BlogFrontpage)
 		| ({
 				_key: string
-		  } & BlogPostContent)
-		| ({
-				_key: string
 		  } & BlogPostList)
 		| ({
 				_key: string
@@ -959,6 +901,9 @@ export type GlobalModule = {
 		| ({
 				_key: string
 		  } & TestimonialList)
+		| ({
+				_key: string
+		  } & BlogPostContent)
 	>
 }
 
@@ -976,9 +921,6 @@ export type Page = {
 		| ({
 				_key: string
 		  } & BlogFrontpage)
-		| ({
-				_key: string
-		  } & BlogPostContent)
 		| ({
 				_key: string
 		  } & BlogPostList)
@@ -1019,24 +961,12 @@ export type Page = {
 	metadata?: Metadata
 }
 
-export type Metadata = {
-	_type: 'metadata'
-	title?: string
-	description?: string
-	slug?: Slug
-	image?: {
-		asset?: {
-			_ref: string
-			_type: 'reference'
-			_weak?: boolean
-			[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-		}
-		media?: unknown
-		hotspot?: SanityImageHotspot
-		crop?: SanityImageCrop
-		_type: 'image'
-	}
-	noIndex?: boolean
+export type Code = {
+	_type: 'code'
+	language?: string
+	filename?: string
+	code?: string
+	highlightedLines?: Array<number>
 }
 
 export type Site = {
@@ -1046,48 +976,7 @@ export type Site = {
 	_updatedAt: string
 	_rev: string
 	title?: string
-	logo?: {
-		title?: string
-		image?: {
-			default?: {
-				asset?: {
-					_ref: string
-					_type: 'reference'
-					_weak?: boolean
-					[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-				}
-				media?: unknown
-				hotspot?: SanityImageHotspot
-				crop?: SanityImageCrop
-				_type: 'image'
-			}
-			light?: {
-				asset?: {
-					_ref: string
-					_type: 'reference'
-					_weak?: boolean
-					[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-				}
-				media?: unknown
-				hotspot?: SanityImageHotspot
-				crop?: SanityImageCrop
-				_type: 'image'
-			}
-			dark?: {
-				asset?: {
-					_ref: string
-					_type: 'reference'
-					_weak?: boolean
-					[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-				}
-				media?: unknown
-				hotspot?: SanityImageHotspot
-				crop?: SanityImageCrop
-				_type: 'image'
-			}
-		}
-		_type: 'logo'
-	}
+	logo?: Logo
 	header?: {
 		_ref: string
 		_type: 'reference'
@@ -1169,14 +1058,6 @@ export type Navigation = {
 	>
 }
 
-export type Code = {
-	_type: 'code'
-	language?: string
-	filename?: string
-	code?: string
-	highlightedLines?: Array<number>
-}
-
 export type SanityImagePaletteSwatch = {
 	_type: 'sanity.imagePaletteSwatch'
 	background?: string
@@ -1203,20 +1084,15 @@ export type SanityImageDimensions = {
 	aspectRatio?: number
 }
 
-export type SanityImageHotspot = {
-	_type: 'sanity.imageHotspot'
-	x?: number
-	y?: number
-	height?: number
-	width?: number
-}
-
-export type SanityImageCrop = {
-	_type: 'sanity.imageCrop'
-	top?: number
-	bottom?: number
-	left?: number
-	right?: number
+export type SanityImageMetadata = {
+	_type: 'sanity.imageMetadata'
+	location?: Geopoint
+	dimensions?: SanityImageDimensions
+	palette?: SanityImagePalette
+	lqip?: string
+	blurHash?: string
+	hasAlpha?: boolean
+	isOpaque?: boolean
 }
 
 export type SanityFileAsset = {
@@ -1239,6 +1115,13 @@ export type SanityFileAsset = {
 	path?: string
 	url?: string
 	source?: SanityAssetSourceData
+}
+
+export type SanityAssetSourceData = {
+	_type: 'sanity.assetSourceData'
+	name?: string
+	id?: string
+	url?: string
 }
 
 export type SanityImageAsset = {
@@ -1264,35 +1147,11 @@ export type SanityImageAsset = {
 	source?: SanityAssetSourceData
 }
 
-export type SanityImageMetadata = {
-	_type: 'sanity.imageMetadata'
-	location?: Geopoint
-	dimensions?: SanityImageDimensions
-	palette?: SanityImagePalette
-	lqip?: string
-	blurHash?: string
-	hasAlpha?: boolean
-	isOpaque?: boolean
-}
-
 export type Geopoint = {
 	_type: 'geopoint'
 	lat?: number
 	lng?: number
 	alt?: number
-}
-
-export type Slug = {
-	_type: 'slug'
-	current?: string
-	source?: string
-}
-
-export type SanityAssetSourceData = {
-	_type: 'sanity.assetSourceData'
-	name?: string
-	id?: string
-	url?: string
 }
 
 export type AllSanitySchemaTypes =
@@ -1312,33 +1171,33 @@ export type AllSanitySchemaTypes =
 	| BlogFrontpage
 	| AccordionList
 	| ModuleAttributes
+	| Metadata
 	| Megamenu
 	| LinkList
+	| Link
 	| Cta
 	| Testimonial
 	| Logo
 	| BlogCategory
+	| Slug
 	| Redirect
-	| Link
 	| BlogPost
 	| Person
+	| SanityImageCrop
+	| SanityImageHotspot
 	| GlobalModule
 	| Page
-	| Metadata
+	| Code
 	| Site
 	| Navigation
-	| Code
 	| SanityImagePaletteSwatch
 	| SanityImagePalette
 	| SanityImageDimensions
-	| SanityImageHotspot
-	| SanityImageCrop
-	| SanityFileAsset
-	| SanityImageAsset
 	| SanityImageMetadata
-	| Geopoint
-	| Slug
+	| SanityFileAsset
 	| SanityAssetSourceData
+	| SanityImageAsset
+	| Geopoint
 export declare const internalGroqTypeReferenceTo: unique symbol
 // Source: ./src/app/(frontend)/[[...slug]]/page.tsx
 // Variable: PAGE_QUERY
@@ -1751,49 +1610,7 @@ export type PAGE_QUERYResult = {
 								}
 							}
 					  }
-					| {
-							title?: string
-							image?: {
-								default?: {
-									asset?: {
-										_ref: string
-										_type: 'reference'
-										_weak?: boolean
-										[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-									}
-									media?: unknown
-									hotspot?: SanityImageHotspot
-									crop?: SanityImageCrop
-									_type: 'image'
-								}
-								light?: {
-									asset?: {
-										_ref: string
-										_type: 'reference'
-										_weak?: boolean
-										[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-									}
-									media?: unknown
-									hotspot?: SanityImageHotspot
-									crop?: SanityImageCrop
-									_type: 'image'
-								}
-								dark?: {
-									asset?: {
-										_ref: string
-										_type: 'reference'
-										_weak?: boolean
-										[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-									}
-									media?: unknown
-									hotspot?: SanityImageHotspot
-									crop?: SanityImageCrop
-									_type: 'image'
-								}
-							}
-							_type: 'logo'
-							_key: string
-					  }
+					| unknown
 				> | null
 				logoType?: 'dark' | 'default' | 'light'
 				autoScroll?: boolean
@@ -1853,23 +1670,7 @@ export type PAGE_QUERYResult = {
 								_type: 'image'
 							}
 					  }
-					| {
-							name?: string
-							image?: {
-								asset?: {
-									_ref: string
-									_type: 'reference'
-									_weak?: boolean
-									[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-								}
-								media?: unknown
-								hotspot?: SanityImageHotspot
-								crop?: SanityImageCrop
-								_type: 'image'
-							}
-							_type: 'person'
-							_key: string
-					  }
+					| unknown
 				> | null
 				ctas: null
 		  }
@@ -2223,52 +2024,7 @@ export type PAGE_QUERYResult = {
 								}
 							}
 					  }
-					| {
-							quote?: Array<{
-								children?: Array<{
-									marks?: Array<string>
-									text?: string
-									_type: 'span'
-									_key: string
-								}>
-								style?:
-									| 'blockquote'
-									| 'h1'
-									| 'h2'
-									| 'h3'
-									| 'h4'
-									| 'h5'
-									| 'h6'
-									| 'normal'
-								listItem?: 'bullet' | 'number'
-								markDefs?: Array<{
-									href?: string
-									_type: 'link'
-									_key: string
-								}>
-								level?: number
-								_type: 'block'
-								_key: string
-							}>
-							author?: {
-								name?: string
-								title?: string
-								image?: {
-									asset?: {
-										_ref: string
-										_type: 'reference'
-										_weak?: boolean
-										[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-									}
-									media?: unknown
-									hotspot?: SanityImageHotspot
-									crop?: SanityImageCrop
-									_type: 'image'
-								}
-							}
-							_type: 'testimonial'
-							_key: string
-					  }
+					| unknown
 				> | null
 				ctas: null
 		  }
@@ -2845,49 +2601,7 @@ export type BLOG_POST_QUERYResult = {
 								}
 							}
 					  }
-					| {
-							title?: string
-							image?: {
-								default?: {
-									asset?: {
-										_ref: string
-										_type: 'reference'
-										_weak?: boolean
-										[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-									}
-									media?: unknown
-									hotspot?: SanityImageHotspot
-									crop?: SanityImageCrop
-									_type: 'image'
-								}
-								light?: {
-									asset?: {
-										_ref: string
-										_type: 'reference'
-										_weak?: boolean
-										[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-									}
-									media?: unknown
-									hotspot?: SanityImageHotspot
-									crop?: SanityImageCrop
-									_type: 'image'
-								}
-								dark?: {
-									asset?: {
-										_ref: string
-										_type: 'reference'
-										_weak?: boolean
-										[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-									}
-									media?: unknown
-									hotspot?: SanityImageHotspot
-									crop?: SanityImageCrop
-									_type: 'image'
-								}
-							}
-							_type: 'logo'
-							_key: string
-					  }
+					| unknown
 				> | null
 				logoType?: 'dark' | 'default' | 'light'
 				autoScroll?: boolean
@@ -2947,23 +2661,7 @@ export type BLOG_POST_QUERYResult = {
 								_type: 'image'
 							}
 					  }
-					| {
-							name?: string
-							image?: {
-								asset?: {
-									_ref: string
-									_type: 'reference'
-									_weak?: boolean
-									[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-								}
-								media?: unknown
-								hotspot?: SanityImageHotspot
-								crop?: SanityImageCrop
-								_type: 'image'
-							}
-							_type: 'person'
-							_key: string
-					  }
+					| unknown
 				> | null
 				ctas: null
 		  }
@@ -3317,52 +3015,7 @@ export type BLOG_POST_QUERYResult = {
 								}
 							}
 					  }
-					| {
-							quote?: Array<{
-								children?: Array<{
-									marks?: Array<string>
-									text?: string
-									_type: 'span'
-									_key: string
-								}>
-								style?:
-									| 'blockquote'
-									| 'h1'
-									| 'h2'
-									| 'h3'
-									| 'h4'
-									| 'h5'
-									| 'h6'
-									| 'normal'
-								listItem?: 'bullet' | 'number'
-								markDefs?: Array<{
-									href?: string
-									_type: 'link'
-									_key: string
-								}>
-								level?: number
-								_type: 'block'
-								_key: string
-							}>
-							author?: {
-								name?: string
-								title?: string
-								image?: {
-									asset?: {
-										_ref: string
-										_type: 'reference'
-										_weak?: boolean
-										[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-									}
-									media?: unknown
-									hotspot?: SanityImageHotspot
-									crop?: SanityImageCrop
-									_type: 'image'
-								}
-							}
-							_type: 'testimonial'
-							_key: string
-					  }
+					| unknown
 				> | null
 				ctas: null
 		  }
@@ -3530,13 +3183,6 @@ export type NOT_FOUND_QUERYResult = {
 				}>
 				exclusive?: boolean
 				enableSchema?: boolean
-				ctas: null
-		  }
-		| {
-				_key: string
-				_type: 'blog-post-content'
-				attributes?: ModuleAttributes
-				tableOfContents?: 'left' | 'right'
 				ctas: null
 		  }
 		| {
@@ -3867,49 +3513,7 @@ export type NOT_FOUND_QUERYResult = {
 								}
 							}
 					  }
-					| {
-							title?: string
-							image?: {
-								default?: {
-									asset?: {
-										_ref: string
-										_type: 'reference'
-										_weak?: boolean
-										[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-									}
-									media?: unknown
-									hotspot?: SanityImageHotspot
-									crop?: SanityImageCrop
-									_type: 'image'
-								}
-								light?: {
-									asset?: {
-										_ref: string
-										_type: 'reference'
-										_weak?: boolean
-										[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-									}
-									media?: unknown
-									hotspot?: SanityImageHotspot
-									crop?: SanityImageCrop
-									_type: 'image'
-								}
-								dark?: {
-									asset?: {
-										_ref: string
-										_type: 'reference'
-										_weak?: boolean
-										[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-									}
-									media?: unknown
-									hotspot?: SanityImageHotspot
-									crop?: SanityImageCrop
-									_type: 'image'
-								}
-							}
-							_type: 'logo'
-							_key: string
-					  }
+					| unknown
 				> | null
 				logoType?: 'dark' | 'default' | 'light'
 				autoScroll?: boolean
@@ -3969,23 +3573,7 @@ export type NOT_FOUND_QUERYResult = {
 								_type: 'image'
 							}
 					  }
-					| {
-							name?: string
-							image?: {
-								asset?: {
-									_ref: string
-									_type: 'reference'
-									_weak?: boolean
-									[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-								}
-								media?: unknown
-								hotspot?: SanityImageHotspot
-								crop?: SanityImageCrop
-								_type: 'image'
-							}
-							_type: 'person'
-							_key: string
-					  }
+					| unknown
 				> | null
 				ctas: null
 		  }
@@ -4339,52 +3927,7 @@ export type NOT_FOUND_QUERYResult = {
 								}
 							}
 					  }
-					| {
-							quote?: Array<{
-								children?: Array<{
-									marks?: Array<string>
-									text?: string
-									_type: 'span'
-									_key: string
-								}>
-								style?:
-									| 'blockquote'
-									| 'h1'
-									| 'h2'
-									| 'h3'
-									| 'h4'
-									| 'h5'
-									| 'h6'
-									| 'normal'
-								listItem?: 'bullet' | 'number'
-								markDefs?: Array<{
-									href?: string
-									_type: 'link'
-									_key: string
-								}>
-								level?: number
-								_type: 'block'
-								_key: string
-							}>
-							author?: {
-								name?: string
-								title?: string
-								image?: {
-									asset?: {
-										_ref: string
-										_type: 'reference'
-										_weak?: boolean
-										[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-									}
-									media?: unknown
-									hotspot?: SanityImageHotspot
-									crop?: SanityImageCrop
-									_type: 'image'
-								}
-							}
-							_type: 'testimonial'
-							_key: string
-					  }
+					| unknown
 				> | null
 				ctas: null
 		  }
@@ -4402,48 +3945,7 @@ export type SITE_QUERYResult = {
 	_updatedAt: string
 	_rev: string
 	title?: string
-	logo?: {
-		title?: string
-		image?: {
-			default?: {
-				asset?: {
-					_ref: string
-					_type: 'reference'
-					_weak?: boolean
-					[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-				}
-				media?: unknown
-				hotspot?: SanityImageHotspot
-				crop?: SanityImageCrop
-				_type: 'image'
-			}
-			light?: {
-				asset?: {
-					_ref: string
-					_type: 'reference'
-					_weak?: boolean
-					[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-				}
-				media?: unknown
-				hotspot?: SanityImageHotspot
-				crop?: SanityImageCrop
-				_type: 'image'
-			}
-			dark?: {
-				asset?: {
-					_ref: string
-					_type: 'reference'
-					_weak?: boolean
-					[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-				}
-				media?: unknown
-				hotspot?: SanityImageHotspot
-				crop?: SanityImageCrop
-				_type: 'image'
-			}
-		}
-		_type: 'logo'
-	}
+	logo?: Logo
 	header: {
 		items: Array<
 			| {

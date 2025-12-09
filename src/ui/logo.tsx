@@ -4,10 +4,10 @@ import { getSite } from '@/sanity/lib/queries'
 import Img from './img'
 
 export default async function ({
-	style = 'default',
+	variant: style = 'default',
 	className,
 }: {
-	style?: 'default' | 'light' | 'dark'
+	variant?: 'default' | 'light' | 'dark'
 	className?: string
 }) {
 	const site = await getSite()
