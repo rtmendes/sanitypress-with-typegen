@@ -1,13 +1,22 @@
 import { getImageDimensions } from '@sanity/asset-utils'
 import type { ImageUrlBuilderOptionsWithAliases } from '@sanity/image-url'
 import { stegaClean } from 'next-sanity'
-import Image, { type ImageProps } from 'next/image'
+import Image, { getImageProps, type ImageProps } from 'next/image'
+import { preload } from 'react-dom'
 import { urlFor } from '@/sanity/lib/image'
 import type {
 	SanityImageAsset,
 	SanityImageCrop,
 	SanityImageHotspot,
 } from '@/sanity/types'
+
+type Image =
+	| {
+			asset: SanityImageAsset
+			crop?: SanityImageCrop
+			hotspot?: SanityImageHotspot
+	  }
+	| any
 
 export default function ({
 	image,
@@ -16,13 +25,7 @@ export default function ({
 	imageOptions,
 	...props
 }: {
-	image?:
-		| {
-				asset: SanityImageAsset
-				crop?: SanityImageCrop
-				hotspot?: SanityImageHotspot
-		  }
-		| any
+	image?: Image
 	imageOptions?: Partial<ImageUrlBuilderOptionsWithAliases>
 } & Omit<ImageProps, 'src'>) {
 	if (!image?.asset) return null
@@ -55,4 +58,72 @@ export default function ({
 			{...props}
 		/>
 	)
+}
+
+export function Source({
+	image,
+	width: targetWidth,
+	height: targetHeight,
+	media = '(width < 768px)',
+	options,
+	...props
+}: {
+	image: Image
+	options?: ImageUrlBuilderOptionsWithAliases
+} & React.ComponentProps<'source'>) {
+	if (!image?.asset) return null
+
+	const { src, width, height } = generateSrc(
+		image,
+		targetWidth,
+		targetHeight,
+		options,
+	)
+	const { props: imageProps } = getImageProps({ src, width, height, alt: '' })
+
+	if (stegaClean(image.loading) === 'eager') {
+		preload(imageProps.src, { as: 'image' })
+	}
+
+	return (
+		<source
+			srcSet={imageProps.src}
+			width={imageProps.width}
+			height={imageProps.height}
+			media={media}
+			{...props}
+		/>
+	)
+}
+
+function generateSrc(
+	image: Image,
+	w?: number | `${number}` | string,
+	h?: number | `${number}` | string,
+	options?: ImageUrlBuilderOptionsWithAliases,
+) {
+	const { width: w_orig, height: h_orig } = getImageDimensions(image)
+
+	const w_calc = !!w // if width is provided
+		? Number(w)
+		: // if height is provided, calculate width
+			!!h && Math.floor((Number(h) * w_orig) / h_orig)
+
+	const h_calc = !!h // if height is provided
+		? Number(h)
+		: // if width is provided, calculate height
+			!!w && Math.floor((Number(w) * h_orig) / w_orig)
+
+	return {
+		src: urlFor(image)
+			.withOptions({
+				width: !!w ? Number(w) : undefined,
+				height: !!h ? Number(h) : undefined,
+				auto: 'format',
+				...options,
+			})
+			.url(),
+		width: w_calc || w_orig,
+		height: h_calc || h_orig,
+	}
 }
