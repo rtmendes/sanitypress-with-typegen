@@ -3,7 +3,7 @@
 	"version": "0.0.36",
 	"private": true,
 	"scripts": {
-		"dev": "next dev --webpack",
+		"dev": "bun run --bun next dev --webpack",
 		"dev:turbopack": "next dev",
 		"build": "next build --webpack",
 		"start": "next start",
