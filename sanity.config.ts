@@ -5,6 +5,7 @@
  */
 // Go to https://www.sanity.io/docs/api-versioning to learn how API versioning works
 import { defineConfig } from 'sanity'
+import { assist } from '@sanity/assist'
 import { codeInput } from '@sanity/code-input'
 import {
 	dashboardTool,
@@ -37,5 +38,6 @@ export default defineConfig({
 		// https://www.sanity.io/docs/the-vision-plugin
 		visionTool({ defaultApiVersion: apiVersion }),
 		codeInput(),
+		assist(),
 	],
 })

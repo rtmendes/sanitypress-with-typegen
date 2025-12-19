@@ -11,11 +11,7 @@ export default defineType({
 			type: 'string',
 			validation: (Rule) => Rule.max(60).warning(),
 			components: {
-				input: (props) => (
-					<CharacterCount max={60} {...props}>
-						{/* <PreviewOG title={props.elementProps.value} /> */}
-					</CharacterCount>
-				),
+				input: (props) => <CharacterCount max={60} {...props} />,
 			},
 		}),
 		defineField({
