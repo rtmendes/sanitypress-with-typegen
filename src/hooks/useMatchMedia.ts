@@ -17,5 +17,5 @@ export default function useMatchMedia(query: string) {
 }
 
 export function useIsDesktop() {
-	return useMatchMedia('(pointer: fine)')
+	return useMatchMedia('(pointer: fine), (width >= 48rem)')
 }

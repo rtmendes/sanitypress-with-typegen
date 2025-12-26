@@ -21,7 +21,7 @@ export default function ({ link, items }: Megamenu) {
 							case 'link.list':
 								return (
 									<MobileOnlyDetails
-										className="max-md:accordion group/megamenu-linklist break-inside-avoid"
+										className="max-md:accordion group/megamenu-linklist break-inside-avoid md:details-content:h-[initial]"
 										name="megamenu-linklist"
 										key={item._key}
 									>
