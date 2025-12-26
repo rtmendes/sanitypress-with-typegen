@@ -1,9 +1,9 @@
 {
 	"name": "typed-sanitypress",
-	"version": "0.0.37",
+	"version": "0.0.38",
 	"private": true,
 	"scripts": {
-		"dev": "bun run --bun next dev --webpack",
+		"dev": "next dev --webpack",
 		"dev:turbopack": "next dev",
 		"build": "next build --webpack",
 		"start": "next start",

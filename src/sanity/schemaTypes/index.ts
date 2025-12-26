@@ -17,6 +17,7 @@ import blogPostContent from './modules/blog-post-content'
 import blogPostList from './modules/blog-post-list'
 import breadcrumbs from './modules/breadcrumbs'
 import callout from './modules/callout'
+import cardList from './modules/card-list'
 import customHtml from './modules/custom-html'
 import heroSplit from './modules/hero.split'
 import logoList from './modules/logo-list'
@@ -65,6 +66,7 @@ export const schema: SchemaPluginOptions = {
 		blogPostList,
 		breadcrumbs,
 		callout,
+		cardList,
 		customHtml,
 		heroSplit,
 		logoList,

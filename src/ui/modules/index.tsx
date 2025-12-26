@@ -10,6 +10,7 @@ import BlogPostContent from './blog/blog-post-content'
 import BlogPostList from './blog/blog-post-list'
 import Breadcrumbs from './breadcrumbs'
 import Callout from './callout'
+import CardList from './card-list'
 import CustomHTML from './custom-html'
 import HeroSplit from './hero.split'
 import LogoList from './logo-list'
@@ -27,6 +28,7 @@ const MODULES_MAP = {
 	'blog-post-list': BlogPostList,
 	breadcrumbs: Breadcrumbs,
 	callout: Callout,
+	'card-list': CardList,
 	'custom-html': CustomHTML,
 	'hero.split': HeroSplit,
 	'logo-list': LogoList,

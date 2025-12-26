@@ -10,6 +10,7 @@ export default ({ of = [] }: { of?: Array<{ type: string }> } = {}) =>
 			{ type: 'blog-post-list' },
 			{ type: 'breadcrumbs' },
 			{ type: 'callout' },
+			{ type: 'card-list' },
 			{ type: 'custom-html' },
 			{ type: 'hero.split' },
 			{ type: 'logo-list' },
