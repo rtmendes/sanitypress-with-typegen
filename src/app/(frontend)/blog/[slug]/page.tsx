@@ -6,7 +6,7 @@ import { client } from '@/sanity/lib/client'
 import { urlFor } from '@/sanity/lib/image'
 import { sanityFetchLive } from '@/sanity/lib/live'
 import { MODULES_QUERY } from '@/sanity/lib/queries'
-import type { BLOG_POST_QUERYResult } from '@/sanity/types'
+import type { BLOG_POST_QUERY_RESULT } from '@/sanity/types'
 import ModulesResolver from '@/ui/modules'
 
 type Props = {
@@ -59,7 +59,7 @@ export async function generateStaticParams() {
 }
 
 async function getPost(slug: string) {
-	return await sanityFetchLive<BLOG_POST_QUERYResult>({
+	return await sanityFetchLive<BLOG_POST_QUERY_RESULT>({
 		query: BLOG_POST_QUERY,
 		params: { slug, blogDir: `${ROUTES.blog}/` },
 	})

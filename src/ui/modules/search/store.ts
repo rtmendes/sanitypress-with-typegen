@@ -2,13 +2,13 @@ import { groq } from 'next-sanity'
 import { create } from 'zustand'
 import { ROUTES } from '@/lib/env'
 import { sanityFetchLive } from '@/sanity/lib/live'
-import type { SEARCH_QUERYResult, SearchModule } from '@/sanity/types'
+import type { SEARCH_QUERY_RESULT, SearchModule } from '@/sanity/types'
 
 export const useSearchStore = create<{
 	loading: boolean
 	setLoading: (loading: boolean) => void
-	results: SEARCH_QUERYResult
-	setResults: (results: SEARCH_QUERYResult) => void
+	results: SEARCH_QUERY_RESULT
+	setResults: (results: SEARCH_QUERY_RESULT) => void
 }>((set) => ({
 	loading: false,
 	setLoading: (loading) => set({ loading }),
@@ -30,7 +30,7 @@ export async function handleSearch({
 	scope: SearchModule['scope']
 	query: string
 	setLoading: (loading: boolean) => void
-	setResults: (results: SEARCH_QUERYResult) => void
+	setResults: (results: SEARCH_QUERY_RESULT) => void
 }) {
 	if (!query) {
 		setResults([])
@@ -42,7 +42,7 @@ export async function handleSearch({
 
 	const scopeValue = SCOPE_MAP[scope as keyof typeof SCOPE_MAP]
 
-	const results = await sanityFetchLive<SEARCH_QUERYResult>({
+	const results = await sanityFetchLive<SEARCH_QUERY_RESULT>({
 		query: SEARCH_QUERY,
 		params: {
 			queryMatch: `*${query}*`,

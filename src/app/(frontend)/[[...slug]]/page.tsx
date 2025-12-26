@@ -6,7 +6,7 @@ import { client } from '@/sanity/lib/client'
 import { urlFor } from '@/sanity/lib/image'
 import { sanityFetchLive } from '@/sanity/lib/live'
 import { GLOBAL_MODULE_PATH_QUERY, MODULES_QUERY } from '@/sanity/lib/queries'
-import type { PAGE_QUERYResult } from '@/sanity/types'
+import type { PAGE_QUERY_RESULT } from '@/sanity/types'
 import ModulesResolver from '@/ui/modules'
 
 type Props = {
@@ -69,7 +69,7 @@ export async function generateStaticParams() {
 }
 
 async function getPage(slug?: string[]) {
-	return await sanityFetchLive<PAGE_QUERYResult>({
+	return await sanityFetchLive<PAGE_QUERY_RESULT>({
 		query: PAGE_QUERY,
 		params: {
 			slug: slug ? slug.join('/') : 'index',

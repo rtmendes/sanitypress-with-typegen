@@ -1,5 +1,5 @@
 import { groq } from 'next-sanity'
-import type { SITE_QUERYResult } from '@/sanity/types'
+import type { SITE_QUERY_RESULT } from '@/sanity/types'
 import { sanityFetchLive } from './live'
 
 /* fragments */
@@ -108,7 +108,7 @@ export const MODULES_QUERY = groq`
 /* queries */
 
 export async function getSite() {
-	return await sanityFetchLive<SITE_QUERYResult>({
+	return await sanityFetchLive<SITE_QUERY_RESULT>({
 		query: SITE_QUERY,
 	})
 }

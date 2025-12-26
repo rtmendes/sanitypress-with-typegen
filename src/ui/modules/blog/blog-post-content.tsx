@@ -1,7 +1,7 @@
 import { PortableText, stegaClean } from 'next-sanity'
 import { cn } from '@/lib/utils'
 import type {
-	BLOG_POST_QUERYResult,
+	BLOG_POST_QUERY_RESULT,
 	BlogCategory,
 	BlogPostContent,
 	Person,
@@ -22,7 +22,7 @@ export default function ({
 	post,
 	tableOfContents,
 	...props
-}: { post: BLOG_POST_QUERYResult } & BlogPostContent) {
+}: { post: BLOG_POST_QUERY_RESULT } & BlogPostContent) {
 	if (!post) return null
 
 	const toc = stegaClean(tableOfContents)

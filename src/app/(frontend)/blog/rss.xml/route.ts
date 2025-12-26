@@ -4,12 +4,12 @@ import { ROUTES } from '@/lib/env'
 import { getBlockText } from '@/lib/utils'
 import { urlFor } from '@/sanity/lib/image'
 import { sanityFetchLive } from '@/sanity/lib/live'
-import type { BLOG_RSS_QUERYResult } from '@/sanity/types'
+import type { BLOG_RSS_QUERY_RESULT } from '@/sanity/types'
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
 
 export async function GET() {
-	const { blog, posts } = await sanityFetchLive<BLOG_RSS_QUERYResult>({
+	const { blog, posts } = await sanityFetchLive<BLOG_RSS_QUERY_RESULT>({
 		query: BLOG_RSS_QUERY,
 		params: {
 			blogDir: ROUTES.blog,
@@ -31,7 +31,7 @@ export async function GET() {
 	})
 }
 
-function Item({ post }: { post: BLOG_RSS_QUERYResult['posts'][number] }) {
+function Item({ post }: { post: BLOG_RSS_QUERY_RESULT['posts'][number] }) {
 	const url = `${BASE_URL}/${ROUTES.blog}/${post.metadata?.slug?.current}`
 
 	return `<item>

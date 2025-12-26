@@ -1,10 +1,10 @@
 import { groq } from 'next-sanity'
 import { sanityFetchLive } from '@/sanity/lib/live'
-import { CATEGORIES_QUERYResult } from '@/sanity/types'
+import { CATEGORIES_QUERY_RESULT } from '@/sanity/types'
 import Filter from './filter'
 
 export default async function () {
-	const categories = await sanityFetchLive<CATEGORIES_QUERYResult>({
+	const categories = await sanityFetchLive<CATEGORIES_QUERY_RESULT>({
 		query: CATEGORIES_QUERY,
 	})
 

@@ -4,7 +4,7 @@ import { ROUTES } from '@/lib/env'
 import { cn } from '@/lib/utils'
 import { sanityFetchLive } from '@/sanity/lib/live'
 import { getSite } from '@/sanity/lib/queries'
-import type { OG_QUERYResult } from '@/sanity/types'
+import type { OG_QUERY_RESULT } from '@/sanity/types'
 
 const { hostname } = new URL(process.env.NEXT_PUBLIC_BASE_URL!)
 const blogDir = `${ROUTES.blog}/`
@@ -21,7 +21,7 @@ export async function GET(request: Request) {
 	const type = slug.startsWith(blogDir) ? 'blog.post' : 'page'
 
 	const [page, site] = await Promise.all([
-		sanityFetchLive<OG_QUERYResult>({
+		sanityFetchLive<OG_QUERY_RESULT>({
 			query: OG_QUERY,
 			params: {
 				type,

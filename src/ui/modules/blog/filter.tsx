@@ -2,7 +2,7 @@
 
 import { cn } from '@/lib/utils'
 import type { BlogCategory } from '@/sanity/types'
-import { useBlogFrontpageStore } from './blog-index/store'
+import { useBlogIndexStore } from './blog-index/store'
 
 export default function ({
 	category,
@@ -10,7 +10,7 @@ export default function ({
 }: {
 	category?: BlogCategory
 } & React.ComponentProps<'button'>) {
-	const { categoryParam, setCategoryParam } = useBlogFrontpageStore()
+	const { categoryParam, setCategoryParam } = useBlogIndexStore()
 	const slug = category?.slug?.current
 
 	return (

@@ -1,11 +1,11 @@
 import { createDataAttribute, stegaClean } from 'next-sanity'
 import type {
-	BLOG_POST_QUERYResult,
+	BLOG_POST_QUERY_RESULT,
 	ModuleAttributes,
-	PAGE_QUERYResult,
+	PAGE_QUERY_RESULT,
 } from '@/sanity/types'
 import AccordionList from './accordion-list'
-import BlogFrontpage from './blog/blog-index'
+import BlogIndex from './blog/blog-index'
 import BlogPostContent from './blog/blog-post-content'
 import BlogPostList from './blog/blog-post-list'
 import Breadcrumbs from './breadcrumbs'
@@ -22,7 +22,7 @@ import TestimonialList from './testimonial-list'
 
 const MODULES_MAP = {
 	'accordion-list': AccordionList,
-	'blog-index': BlogFrontpage,
+	'blog-index': BlogIndex,
 	'blog-post-content': BlogPostContent,
 	'blog-post-list': BlogPostList,
 	breadcrumbs: Breadcrumbs,
@@ -42,8 +42,8 @@ export default function ({
 	page,
 	post,
 }: {
-	page?: PAGE_QUERYResult
-	post?: BLOG_POST_QUERYResult
+	page?: PAGE_QUERY_RESULT
+	post?: BLOG_POST_QUERY_RESULT
 }) {
 	const modules = [page, post].flatMap((item) => item?.modules ?? [])
 
@@ -98,7 +98,7 @@ export default function ({
 
 export type ModuleProps = Partial<
 	NonNullable<
-		NonNullable<PAGE_QUERYResult | BLOG_POST_QUERYResult>['modules']
+		NonNullable<PAGE_QUERY_RESULT | BLOG_POST_QUERY_RESULT>['modules']
 	>[number]
 > & { attributes?: ModuleAttributes }
 

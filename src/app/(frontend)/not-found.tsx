@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { groq } from 'next-sanity'
 import { sanityFetchLive } from '@/sanity/lib/live'
 import { MODULES_QUERY } from '@/sanity/lib/queries'
-import type { NOT_FOUND_QUERYResult } from '@/sanity/types'
+import type { NOT_FOUND_QUERY_RESULT } from '@/sanity/types'
 import ModulesResolver from '@/ui/modules'
 
 export default async function () {
@@ -27,7 +27,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 async function getPage() {
-	return await sanityFetchLive<NOT_FOUND_QUERYResult>({
+	return await sanityFetchLive<NOT_FOUND_QUERY_RESULT>({
 		query: NOT_FOUND_QUERY,
 	})
 }
