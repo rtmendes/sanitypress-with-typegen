@@ -3,16 +3,16 @@ import { Suspense } from 'react'
 import { ROUTES } from '@/lib/env'
 import { cn } from '@/lib/utils'
 import { sanityFetchLive } from '@/sanity/lib/live'
-import type { BlogFrontpage } from '@/sanity/types'
+import type { BlogIndex } from '@/sanity/types'
 import Loading from '@/ui/loading'
 import FilterList from '@/ui/modules/blog/filter-list'
 import PaginatedPosts from './paginated-posts'
 import Skeleton from './skeleton'
 import SortBy from './sort-by'
 
-export default async function ({ intro, postsPerPage = 6 }: BlogFrontpage) {
+export default async function ({ intro, postsPerPage = 6 }: BlogIndex) {
 	const posts = await sanityFetchLive<any>({
-		query: BLOG_FRONTPAGE_QUERY,
+		query: BLOG_INDEX_QUERY,
 		params: { blogDir: `/${ROUTES.blog}/` },
 	})
 
@@ -46,7 +46,7 @@ export default async function ({ intro, postsPerPage = 6 }: BlogFrontpage) {
 	)
 }
 
-const BLOG_FRONTPAGE_QUERY = groq`
+const BLOG_INDEX_QUERY = groq`
 	*[_type == 'blog.post']|order(publishDate desc){
 		...,
 		categories[]->,

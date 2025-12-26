@@ -6,7 +6,7 @@ export default ({ of = [] }: { of?: Array<{ type: string }> } = {}) =>
 		type: 'array',
 		of: [
 			{ type: 'accordion-list' },
-			{ type: 'blog.frontpage' },
+			{ type: 'blog-index' },
 			{ type: 'blog-post-list' },
 			{ type: 'breadcrumbs' },
 			{ type: 'callout' },
@@ -26,7 +26,7 @@ export default ({ of = [] }: { of?: Array<{ type: string }> } = {}) =>
 				groups: [
 					{
 						name: 'blog',
-						of: ['blog.frontpage', 'blog-post-content', 'blog-post-list'],
+						of: ['blog-index', 'blog-post-content', 'blog-post-list'],
 					},
 				],
 			},

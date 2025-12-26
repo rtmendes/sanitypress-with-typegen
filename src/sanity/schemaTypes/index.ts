@@ -12,9 +12,9 @@ import site from './documents/site'
 import testimonial from './documents/testimonial'
 // modules
 import accordionList from './modules/accordion-list'
+import blogIndex from './modules/blog-index'
 import blogPostContent from './modules/blog-post-content'
 import blogPostList from './modules/blog-post-list'
-import blogFrontpage from './modules/blog.frontpage'
 import breadcrumbs from './modules/breadcrumbs'
 import callout from './modules/callout'
 import customHtml from './modules/custom-html'
@@ -60,7 +60,7 @@ export const schema: SchemaPluginOptions = {
 
 		// modules
 		accordionList,
-		blogFrontpage,
+		blogIndex,
 		blogPostContent,
 		blogPostList,
 		breadcrumbs,

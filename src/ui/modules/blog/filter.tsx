@@ -2,7 +2,7 @@
 
 import { cn } from '@/lib/utils'
 import type { BlogCategory } from '@/sanity/types'
-import { useBlogFrontpageStore } from './blog.frontpage/store'
+import { useBlogFrontpageStore } from './blog-index/store'
 
 export default function ({
 	category,

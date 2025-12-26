@@ -7,7 +7,7 @@ export const SORT_BY_OPTIONS = [
 	{ label: 'Title (Z-A)', value: 'title_desc' },
 ]
 
-export function useBlogFrontpageStore() {
+export function useBlogIndexStore() {
 	const [categoryParam, setCategoryParam] = useQueryState('category', {
 		defaultValue: '',
 	})

@@ -74,7 +74,7 @@ Publish the **required** documents: `site` and `page` (with the slug "index"). M
 | `site`          |              | Global settings    |    Yes    |                                      |
 | `page`          | `index`      | Homepage route     |    Yes    |                                      |
 | `page`          | `404`        | Not found route    |           |                                      |
-| `page`          | `blog`       | Blog listing route |           | Add the **Blog frontpage** module    |
+| `page`          | `blog`       | Blog listing route |           | Add the **Blog index** module        |
 | `global-module` | `blog/`      | Blog post template |           | Add the **Blog post content** module |
 
 ### 5. Set up deployments
@@ -88,7 +88,7 @@ Adjust frontend styles to your liking, edit or add new schema and modules, etc.
 ## Roadmap / To-do
 
 - featured post
-  - reference to blog.post on blog.frontpage, blog-post-list
+  - reference to blog.post on blog-index, blog-post-list
   - OR as `featured: true` on blog.post
 - read time for blog posts
 - Modules

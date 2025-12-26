@@ -3,8 +3,8 @@ import { EditIcon } from '@sanity/icons'
 import { getBlockText } from '@/lib/utils'
 
 export default defineType({
-	name: 'blog.frontpage',
-	title: 'Blog (frontpage)',
+	name: 'blog-index',
+	title: 'Blog index',
 	type: 'object',
 	icon: EditIcon,
 	fields: [
@@ -26,7 +26,7 @@ export default defineType({
 		},
 		prepare: ({ intro }) => ({
 			title: getBlockText(intro),
-			subtitle: 'Blog (frontpage)',
+			subtitle: 'Blog index',
 		}),
 	},
 })

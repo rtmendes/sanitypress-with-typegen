@@ -14,6 +14,11 @@ export default defineType({
 			of: [{ type: 'block' }],
 		}),
 		defineField({
+			name: 'ctas',
+			type: 'array',
+			of: [{ type: 'cta' }],
+		}),
+		defineField({
 			name: 'limit',
 			description: 'Number of posts to display',
 			type: 'number',

@@ -2,7 +2,7 @@
 
 import { useQueryState } from 'nuqs'
 import { usePagination } from '@/hooks/usePagination'
-import type { BLOG_FRONTPAGE_QUERYResult, BlogPost } from '@/sanity/types'
+import type { BLOG_INDEX_QUERY_RESULT, BlogPost } from '@/sanity/types'
 import PostPreview from '@/ui/modules/blog/post-preview'
 import PostPreviewLarge from '@/ui/modules/blog/post-preview-large'
 
@@ -10,7 +10,7 @@ export default function ({
 	posts,
 	postsPerPage,
 }: {
-	posts: BLOG_FRONTPAGE_QUERYResult
+	posts: BLOG_INDEX_QUERY_RESULT
 	postsPerPage?: number
 }) {
 	const [category] = useQueryState('category')

@@ -1,9 +1,9 @@
 'use client'
 
-import { SORT_BY_OPTIONS, useBlogFrontpageStore } from './store'
+import { SORT_BY_OPTIONS, useBlogIndexStore } from './store'
 
 export default function () {
-	const { setSortBy } = useBlogFrontpageStore()
+	const { setSortBy } = useBlogIndexStore()
 
 	return (
 		<label className="flex items-center gap-[.5ch]">

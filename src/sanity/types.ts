@@ -15,7 +15,65 @@ import '@sanity/client'
  * ---------------------------------------------------------------------------------
  */
 
-// Source: schema.json
+// Source: src/sanity/extract.json
+export type LogoImage = {
+	default?: Default
+	light?: Light
+	dark?: Dark
+}
+
+export type Author = {
+	name?: string
+	title?: string
+	image?: AuthorImage
+}
+
+export type SanityImageAssetReference = {
+	_ref: string
+	_type: 'reference'
+	_weak?: boolean
+	[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
+}
+
+export type Default = {
+	asset?: SanityImageAssetReference
+	media?: unknown // Unable to locate the referenced type "default.media" in schema
+	hotspot?: SanityImageHotspot
+	crop?: SanityImageCrop
+	_type: 'image'
+}
+
+export type Light = {
+	asset?: SanityImageAssetReference
+	media?: unknown // Unable to locate the referenced type "light.media" in schema
+	hotspot?: SanityImageHotspot
+	crop?: SanityImageCrop
+	_type: 'image'
+}
+
+export type Dark = {
+	asset?: SanityImageAssetReference
+	media?: unknown // Unable to locate the referenced type "dark.media" in schema
+	hotspot?: SanityImageHotspot
+	crop?: SanityImageCrop
+	_type: 'image'
+}
+
+export type AuthorImage = {
+	asset?: SanityImageAssetReference
+	media?: unknown // Unable to locate the referenced type "author.image.media" in schema
+	hotspot?: SanityImageHotspot
+	crop?: SanityImageCrop
+	_type: 'image'
+}
+
+export type TestimonialReference = {
+	_ref: string
+	_type: 'reference'
+	_weak?: boolean
+	[internalGroqTypeReferenceTo]?: 'testimonial'
+}
+
 export type TestimonialList = {
 	_type: 'testimonial-list'
 	intro?: Array<{
@@ -40,13 +98,9 @@ export type TestimonialList = {
 		| ({
 				_key: string
 		  } & Testimonial)
-		| {
-				_ref: string
-				_type: 'reference'
-				_weak?: boolean
+		| ({
 				_key: string
-				[internalGroqTypeReferenceTo]?: 'testimonial'
-		  }
+		  } & TestimonialReference)
 	>
 }
 
@@ -194,12 +248,7 @@ export type Prose = {
 				_key: string
 		  }
 		| {
-				asset?: {
-					_ref: string
-					_type: 'reference'
-					_weak?: boolean
-					[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-				}
+				asset?: SanityImageAssetReference
 				media?: unknown
 				hotspot?: SanityImageHotspot
 				crop?: SanityImageCrop
@@ -235,6 +284,13 @@ export type Prose = {
 	tableOfContents?: 'left' | 'right'
 }
 
+export type PersonReference = {
+	_ref: string
+	_type: 'reference'
+	_weak?: boolean
+	[internalGroqTypeReferenceTo]?: 'person'
+}
+
 export type PersonList = {
 	_type: 'person-list'
 	intro?: Array<{
@@ -259,14 +315,17 @@ export type PersonList = {
 		| ({
 				_key: string
 		  } & Person)
-		| {
-				_ref: string
-				_type: 'reference'
-				_weak?: boolean
+		| ({
 				_key: string
-				[internalGroqTypeReferenceTo]?: 'person'
-		  }
+		  } & PersonReference)
 	>
+}
+
+export type LogoReference = {
+	_ref: string
+	_type: 'reference'
+	_weak?: boolean
+	[internalGroqTypeReferenceTo]?: 'logo'
 }
 
 export type LogoList = {
@@ -293,13 +352,9 @@ export type LogoList = {
 		| ({
 				_key: string
 		  } & Logo)
-		| {
-				_ref: string
-				_type: 'reference'
-				_weak?: boolean
+		| ({
 				_key: string
-				[internalGroqTypeReferenceTo]?: 'logo'
-		  }
+		  } & LogoReference)
 	>
 	logoType?: 'default' | 'dark' | 'light'
 	autoScroll?: boolean
@@ -333,12 +388,7 @@ export type HeroSplit = {
 		} & Cta
 	>
 	image?: {
-		asset?: {
-			_ref: string
-			_type: 'reference'
-			_weak?: boolean
-			[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-		}
+		asset?: SanityImageAssetReference
 		media?: unknown
 		hotspot?: SanityImageHotspot
 		crop?: SanityImageCrop
@@ -415,6 +465,11 @@ export type BlogPostList = {
 		_type: 'block'
 		_key: string
 	}>
+	ctas?: Array<
+		{
+			_key: string
+		} & Cta
+	>
 	limit?: number
 }
 
@@ -424,8 +479,8 @@ export type BlogPostContent = {
 	tableOfContents?: 'left' | 'right'
 }
 
-export type BlogFrontpage = {
-	_type: 'blog.frontpage'
+export type BlogIndex = {
+	_type: 'blog-index'
 	intro?: Array<{
 		children?: Array<{
 			marks?: Array<string>
@@ -507,12 +562,7 @@ export type Metadata = {
 	description?: string
 	slug?: Slug
 	image?: {
-		asset?: {
-			_ref: string
-			_type: 'reference'
-			_weak?: boolean
-			[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-		}
+		asset?: SanityImageAssetReference
 		media?: unknown
 		hotspot?: SanityImageHotspot
 		crop?: SanityImageCrop
@@ -541,16 +591,18 @@ export type LinkList = {
 	>
 }
 
+export type PageReference = {
+	_ref: string
+	_type: 'reference'
+	_weak?: boolean
+	[internalGroqTypeReferenceTo]?: 'page'
+}
+
 export type Link = {
 	_type: 'link'
 	label?: string
 	type?: 'internal' | 'external'
-	internal?: {
-		_ref: string
-		_type: 'reference'
-		_weak?: boolean
-		[internalGroqTypeReferenceTo]?: 'page'
-	}
+	internal?: PageReference
 	external?: string
 	params?: string
 }
@@ -585,22 +637,7 @@ export type Testimonial = {
 		_type: 'block'
 		_key: string
 	}>
-	author?: {
-		name?: string
-		title?: string
-		image?: {
-			asset?: {
-				_ref: string
-				_type: 'reference'
-				_weak?: boolean
-				[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-			}
-			media?: unknown
-			hotspot?: SanityImageHotspot
-			crop?: SanityImageCrop
-			_type: 'image'
-		}
-	}
+	author?: Author
 }
 
 export type Logo = {
@@ -610,44 +647,7 @@ export type Logo = {
 	_updatedAt: string
 	_rev: string
 	title?: string
-	image?: {
-		default?: {
-			asset?: {
-				_ref: string
-				_type: 'reference'
-				_weak?: boolean
-				[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-			}
-			media?: unknown
-			hotspot?: SanityImageHotspot
-			crop?: SanityImageCrop
-			_type: 'image'
-		}
-		light?: {
-			asset?: {
-				_ref: string
-				_type: 'reference'
-				_weak?: boolean
-				[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-			}
-			media?: unknown
-			hotspot?: SanityImageHotspot
-			crop?: SanityImageCrop
-			_type: 'image'
-		}
-		dark?: {
-			asset?: {
-				_ref: string
-				_type: 'reference'
-				_weak?: boolean
-				[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-			}
-			media?: unknown
-			hotspot?: SanityImageHotspot
-			crop?: SanityImageCrop
-			_type: 'image'
-		}
-	}
+	image?: LogoImage
 }
 
 export type BlogCategory = {
@@ -674,6 +674,13 @@ export type Redirect = {
 	_rev: string
 	source?: string
 	destination?: Link
+}
+
+export type BlogCategoryReference = {
+	_ref: string
+	_type: 'reference'
+	_weak?: boolean
+	[internalGroqTypeReferenceTo]?: 'blog.category'
 }
 
 export type BlogPost = {
@@ -711,12 +718,7 @@ export type BlogPost = {
 				_key: string
 		  }
 		| {
-				asset?: {
-					_ref: string
-					_type: 'reference'
-					_weak?: boolean
-					[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-				}
+				asset?: SanityImageAssetReference
 				media?: unknown
 				hotspot?: SanityImageHotspot
 				crop?: SanityImageCrop
@@ -750,19 +752,12 @@ export type BlogPost = {
 		  } & CustomHtml)
 	>
 	publishDate?: string
-	categories?: Array<{
-		_ref: string
-		_type: 'reference'
-		_weak?: boolean
-		_key: string
-		[internalGroqTypeReferenceTo]?: 'blog.category'
-	}>
-	author?: {
-		_ref: string
-		_type: 'reference'
-		_weak?: boolean
-		[internalGroqTypeReferenceTo]?: 'person'
-	}
+	categories?: Array<
+		{
+			_key: string
+		} & BlogCategoryReference
+	>
+	author?: PersonReference
 	metadata?: Metadata
 }
 
@@ -774,12 +769,7 @@ export type Person = {
 	_rev: string
 	name?: string
 	image?: {
-		asset?: {
-			_ref: string
-			_type: 'reference'
-			_weak?: boolean
-			[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-		}
+		asset?: SanityImageAssetReference
 		media?: unknown
 		hotspot?: SanityImageHotspot
 		crop?: SanityImageCrop
@@ -817,7 +807,7 @@ export type GlobalModule = {
 		  } & AccordionList)
 		| ({
 				_key: string
-		  } & BlogFrontpage)
+		  } & BlogIndex)
 		| ({
 				_key: string
 		  } & BlogPostList)
@@ -864,7 +854,7 @@ export type GlobalModule = {
 		  } & AccordionList)
 		| ({
 				_key: string
-		  } & BlogFrontpage)
+		  } & BlogIndex)
 		| ({
 				_key: string
 		  } & BlogPostList)
@@ -920,7 +910,7 @@ export type Page = {
 		  } & AccordionList)
 		| ({
 				_key: string
-		  } & BlogFrontpage)
+		  } & BlogIndex)
 		| ({
 				_key: string
 		  } & BlogPostList)
@@ -969,6 +959,13 @@ export type Code = {
 	highlightedLines?: Array<number>
 }
 
+export type NavigationReference = {
+	_ref: string
+	_type: 'reference'
+	_weak?: boolean
+	[internalGroqTypeReferenceTo]?: 'navigation'
+}
+
 export type Site = {
 	_id: string
 	_type: 'site'
@@ -977,29 +974,14 @@ export type Site = {
 	_rev: string
 	title?: string
 	logo?: Logo
-	header?: {
-		_ref: string
-		_type: 'reference'
-		_weak?: boolean
-		[internalGroqTypeReferenceTo]?: 'navigation'
-	}
+	header?: NavigationReference
 	ctas?: Array<
 		{
 			_key: string
 		} & Cta
 	>
-	footer?: {
-		_ref: string
-		_type: 'reference'
-		_weak?: boolean
-		[internalGroqTypeReferenceTo]?: 'navigation'
-	}
-	social?: {
-		_ref: string
-		_type: 'reference'
-		_weak?: boolean
-		[internalGroqTypeReferenceTo]?: 'navigation'
-	}
+	footer?: NavigationReference
+	social?: NavigationReference
 	footerContent?: Array<{
 		children?: Array<{
 			marks?: Array<string>
@@ -1055,6 +1037,143 @@ export type Navigation = {
 		| ({
 				_key: string
 		  } & Megamenu)
+	>
+}
+
+export type SanityAssistInstructionTask = {
+	_type: 'sanity.assist.instructionTask'
+	path?: string
+	instructionKey?: string
+	started?: string
+	updated?: string
+	info?: string
+}
+
+export type SanityAssistTaskStatus = {
+	_type: 'sanity.assist.task.status'
+	tasks?: Array<
+		{
+			_key: string
+		} & SanityAssistInstructionTask
+	>
+}
+
+export type SanityAssistSchemaTypeAnnotations = {
+	_type: 'sanity.assist.schemaType.annotations'
+	title?: string
+	fields?: Array<
+		{
+			_key: string
+		} & SanityAssistSchemaTypeField
+	>
+}
+
+export type SanityAssistOutputType = {
+	_type: 'sanity.assist.output.type'
+	type?: string
+}
+
+export type SanityAssistOutputField = {
+	_type: 'sanity.assist.output.field'
+	path?: string
+}
+
+export type AssistInstructionContextReference = {
+	_ref: string
+	_type: 'reference'
+	_weak?: boolean
+	[internalGroqTypeReferenceTo]?: 'assist.instruction.context'
+}
+
+export type SanityAssistInstructionContext = {
+	_type: 'sanity.assist.instruction.context'
+	reference?: AssistInstructionContextReference
+}
+
+export type AssistInstructionContext = {
+	_id: string
+	_type: 'assist.instruction.context'
+	_createdAt: string
+	_updatedAt: string
+	_rev: string
+	title?: string
+	context?: Array<{
+		children?: Array<{
+			marks?: Array<string>
+			text?: string
+			_type: 'span'
+			_key: string
+		}>
+		style?: 'normal'
+		listItem?: never
+		markDefs?: null
+		level?: number
+		_type: 'block'
+		_key: string
+	}>
+}
+
+export type SanityAssistInstructionUserInput = {
+	_type: 'sanity.assist.instruction.userInput'
+	message?: string
+	description?: string
+}
+
+export type SanityAssistInstructionPrompt = Array<{
+	children?: Array<
+		| {
+				marks?: Array<string>
+				text?: string
+				_type: 'span'
+				_key: string
+		  }
+		| ({
+				_key: string
+		  } & SanityAssistInstructionFieldRef)
+		| ({
+				_key: string
+		  } & SanityAssistInstructionContext)
+		| ({
+				_key: string
+		  } & SanityAssistInstructionUserInput)
+	>
+	style?: 'normal'
+	listItem?: never
+	markDefs?: null
+	level?: number
+	_type: 'block'
+	_key: string
+}>
+
+export type SanityAssistInstructionFieldRef = {
+	_type: 'sanity.assist.instruction.fieldRef'
+	path?: string
+}
+
+export type SanityAssistInstruction = {
+	_type: 'sanity.assist.instruction'
+	prompt?: SanityAssistInstructionPrompt
+	icon?: string
+	title?: string
+	userId?: string
+	createdById?: string
+	output?: Array<
+		| ({
+				_key: string
+		  } & SanityAssistOutputField)
+		| ({
+				_key: string
+		  } & SanityAssistOutputType)
+	>
+}
+
+export type SanityAssistSchemaTypeField = {
+	_type: 'sanity.assist.schemaType.field'
+	path?: string
+	instructions?: Array<
+		{
+			_key: string
+		} & SanityAssistInstruction
 	>
 }
 
@@ -1155,12 +1274,22 @@ export type Geopoint = {
 }
 
 export type AllSanitySchemaTypes =
+	| LogoImage
+	| Author
+	| SanityImageAssetReference
+	| Default
+	| Light
+	| Dark
+	| AuthorImage
+	| TestimonialReference
 	| TestimonialList
 	| StepList
 	| StatList
 	| SearchModule
 	| Prose
+	| PersonReference
 	| PersonList
+	| LogoReference
 	| LogoList
 	| HeroSplit
 	| CustomHtml
@@ -1168,12 +1297,13 @@ export type AllSanitySchemaTypes =
 	| Breadcrumbs
 	| BlogPostList
 	| BlogPostContent
-	| BlogFrontpage
+	| BlogIndex
 	| AccordionList
 	| ModuleAttributes
 	| Metadata
 	| Megamenu
 	| LinkList
+	| PageReference
 	| Link
 	| Cta
 	| Testimonial
@@ -1181,6 +1311,7 @@ export type AllSanitySchemaTypes =
 	| BlogCategory
 	| Slug
 	| Redirect
+	| BlogCategoryReference
 	| BlogPost
 	| Person
 	| SanityImageCrop
@@ -1188,8 +1319,22 @@ export type AllSanitySchemaTypes =
 	| GlobalModule
 	| Page
 	| Code
+	| NavigationReference
 	| Site
 	| Navigation
+	| SanityAssistInstructionTask
+	| SanityAssistTaskStatus
+	| SanityAssistSchemaTypeAnnotations
+	| SanityAssistOutputType
+	| SanityAssistOutputField
+	| AssistInstructionContextReference
+	| SanityAssistInstructionContext
+	| AssistInstructionContext
+	| SanityAssistInstructionUserInput
+	| SanityAssistInstructionPrompt
+	| SanityAssistInstructionFieldRef
+	| SanityAssistInstruction
+	| SanityAssistSchemaTypeField
 	| SanityImagePaletteSwatch
 	| SanityImagePalette
 	| SanityImageDimensions
@@ -1198,11 +1343,13 @@ export type AllSanitySchemaTypes =
 	| SanityAssetSourceData
 	| SanityImageAsset
 	| Geopoint
+
 export declare const internalGroqTypeReferenceTo: unique symbol
-// Source: ./src/app/(frontend)/[[...slug]]/page.tsx
+
+// Source: src/app/(frontend)/[[...slug]]/page.tsx
 // Variable: PAGE_QUERY
 // Query: *[_type == 'page' && metadata.slug.current == $slug][0]{		...,		'modules': (			// global moddules (before)			*[_type == 'global-module' && path == '*'].before[]{ 	...,	ctas[]{		...,		link{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} }	},	_type == 'breadcrumbs' => {		crumbs[]{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} }	},	_type == 'logo-list' => {		logos[]{			...,			_type == 'reference' => @->		}	},	_type == 'person-list' => {		people[]{			...,			_type == 'reference' => @->		}	},	_type == 'prose' => {		content[]{			...,			_type == 'image' => {				...,				asset->{					...,					metadata				}			}		},		'headings': select(			tableOfContents in ['left', 'right'] => content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{				style,				'text': pt::text(@)			}		)	},	_type == 'testimonial-list' => {		testimonials[]{			...,			_type == 'reference' => @->		}	}, }			// path modules (before)			+ *[_type == 'global-module' && path != '*' && 	string::startsWith($slug, path)	&& select(		defined(excludePaths) => count(excludePaths[string::startsWith($slug, @)]) == 0,		true	)].before[]{ 	...,	ctas[]{		...,		link{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} }	},	_type == 'breadcrumbs' => {		crumbs[]{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} }	},	_type == 'logo-list' => {		logos[]{			...,			_type == 'reference' => @->		}	},	_type == 'person-list' => {		people[]{			...,			_type == 'reference' => @->		}	},	_type == 'prose' => {		content[]{			...,			_type == 'image' => {				...,				asset->{					...,					metadata				}			}		},		'headings': select(			tableOfContents in ['left', 'right'] => content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{				style,				'text': pt::text(@)			}		)	},	_type == 'testimonial-list' => {		testimonials[]{			...,			_type == 'reference' => @->		}	}, }			// page modules			+ modules[]{ 	...,	ctas[]{		...,		link{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} }	},	_type == 'breadcrumbs' => {		crumbs[]{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} }	},	_type == 'logo-list' => {		logos[]{			...,			_type == 'reference' => @->		}	},	_type == 'person-list' => {		people[]{			...,			_type == 'reference' => @->		}	},	_type == 'prose' => {		content[]{			...,			_type == 'image' => {				...,				asset->{					...,					metadata				}			}		},		'headings': select(			tableOfContents in ['left', 'right'] => content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{				style,				'text': pt::text(@)			}		)	},	_type == 'testimonial-list' => {		testimonials[]{			...,			_type == 'reference' => @->		}	}, }			// path modules (after)			+ *[_type == 'global-module' && path != '*' && 	string::startsWith($slug, path)	&& select(		defined(excludePaths) => count(excludePaths[string::startsWith($slug, @)]) == 0,		true	)].after[]{ 	...,	ctas[]{		...,		link{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} }	},	_type == 'breadcrumbs' => {		crumbs[]{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} }	},	_type == 'logo-list' => {		logos[]{			...,			_type == 'reference' => @->		}	},	_type == 'person-list' => {		people[]{			...,			_type == 'reference' => @->		}	},	_type == 'prose' => {		content[]{			...,			_type == 'image' => {				...,				asset->{					...,					metadata				}			}		},		'headings': select(			tableOfContents in ['left', 'right'] => content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{				style,				'text': pt::text(@)			}		)	},	_type == 'testimonial-list' => {		testimonials[]{			...,			_type == 'reference' => @->		}	}, }			// global moddules (after)			+ *[_type == 'global-module' && path == '*'].after[]{ 	...,	ctas[]{		...,		link{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} }	},	_type == 'breadcrumbs' => {		crumbs[]{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} }	},	_type == 'logo-list' => {		logos[]{			...,			_type == 'reference' => @->		}	},	_type == 'person-list' => {		people[]{			...,			_type == 'reference' => @->		}	},	_type == 'prose' => {		content[]{			...,			_type == 'image' => {				...,				asset->{					...,					metadata				}			}		},		'headings': select(			tableOfContents in ['left', 'right'] => content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{				style,				'text': pt::text(@)			}		)	},	_type == 'testimonial-list' => {		testimonials[]{			...,			_type == 'reference' => @->		}	}, }		)	}
-export type PAGE_QUERYResult = {
+export type PAGE_QUERY_RESULT = {
 	_id: string
 	_type: 'page'
 	_createdAt: string
@@ -1277,6 +1424,38 @@ export type PAGE_QUERYResult = {
 		  }
 		| {
 				_key: string
+				_type: 'blog-index'
+				intro?: Array<{
+					children?: Array<{
+						marks?: Array<string>
+						text?: string
+						_type: 'span'
+						_key: string
+					}>
+					style?:
+						| 'blockquote'
+						| 'h1'
+						| 'h2'
+						| 'h3'
+						| 'h4'
+						| 'h5'
+						| 'h6'
+						| 'normal'
+					listItem?: 'bullet' | 'number'
+					markDefs?: Array<{
+						href?: string
+						_type: 'link'
+						_key: string
+					}>
+					level?: number
+					_type: 'block'
+					_key: string
+				}>
+				postsPerPage?: number
+				ctas: null
+		  }
+		| {
+				_key: string
 				_type: 'blog-post-content'
 				attributes?: ModuleAttributes
 				tableOfContents?: 'left' | 'right'
@@ -1311,40 +1490,34 @@ export type PAGE_QUERYResult = {
 					_type: 'block'
 					_key: string
 				}>
-				limit?: number
-				ctas: null
-		  }
-		| {
-				_key: string
-				_type: 'blog.frontpage'
-				intro?: Array<{
-					children?: Array<{
-						marks?: Array<string>
-						text?: string
-						_type: 'span'
-						_key: string
-					}>
-					style?:
-						| 'blockquote'
-						| 'h1'
-						| 'h2'
-						| 'h3'
-						| 'h4'
-						| 'h5'
-						| 'h6'
-						| 'normal'
-					listItem?: 'bullet' | 'number'
-					markDefs?: Array<{
-						href?: string
-						_type: 'link'
-						_key: string
-					}>
-					level?: number
-					_type: 'block'
+				ctas: Array<{
 					_key: string
-				}>
-				postsPerPage?: number
-				ctas: null
+					_type: 'cta'
+					link:
+						| {
+								_type: 'link'
+								label?: string
+								type?: 'external' | 'internal'
+								internal?: PageReference
+								external?: string
+								params?: string
+						  }
+						| {
+								_type: 'link'
+								label?: string
+								type?: 'external' | 'internal'
+								internal: {
+									_type: 'page'
+									title: string | null
+									slug: string | '/' | null
+								} | null
+								external?: string
+								params?: string
+						  }
+						| null
+					style?: 'action-outline' | 'action' | 'ghost' | 'link'
+				}> | null
+				limit?: number
 		  }
 		| {
 				_key: string
@@ -1355,12 +1528,7 @@ export type PAGE_QUERYResult = {
 							_type: 'link'
 							label?: string
 							type?: 'external' | 'internal'
-							internal?: {
-								_ref: string
-								_type: 'reference'
-								_weak?: boolean
-								[internalGroqTypeReferenceTo]?: 'page'
-							}
+							internal?: PageReference
 							external?: string
 							params?: string
 					  }
@@ -1418,12 +1586,7 @@ export type PAGE_QUERYResult = {
 								_type: 'link'
 								label?: string
 								type?: 'external' | 'internal'
-								internal?: {
-									_ref: string
-									_type: 'reference'
-									_weak?: boolean
-									[internalGroqTypeReferenceTo]?: 'page'
-								}
+								internal?: PageReference
 								external?: string
 								params?: string
 						  }
@@ -1490,12 +1653,7 @@ export type PAGE_QUERYResult = {
 								_type: 'link'
 								label?: string
 								type?: 'external' | 'internal'
-								internal?: {
-									_ref: string
-									_type: 'reference'
-									_weak?: boolean
-									[internalGroqTypeReferenceTo]?: 'page'
-								}
+								internal?: PageReference
 								external?: string
 								params?: string
 						  }
@@ -1515,12 +1673,7 @@ export type PAGE_QUERYResult = {
 					style?: 'action-outline' | 'action' | 'ghost' | 'link'
 				}> | null
 				image?: {
-					asset?: {
-						_ref: string
-						_type: 'reference'
-						_weak?: boolean
-						[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-					}
+					asset?: SanityImageAssetReference
 					media?: unknown
 					hotspot?: SanityImageHotspot
 					crop?: SanityImageCrop
@@ -1562,53 +1715,16 @@ export type PAGE_QUERYResult = {
 				}>
 				logos: Array<
 					| {
+							_key: string
 							_ref: string
 							_type: 'logo'
 							_weak?: boolean
-							_key: string
 							_id: string
 							_createdAt: string
 							_updatedAt: string
 							_rev: string
 							title?: string
-							image?: {
-								default?: {
-									asset?: {
-										_ref: string
-										_type: 'reference'
-										_weak?: boolean
-										[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-									}
-									media?: unknown
-									hotspot?: SanityImageHotspot
-									crop?: SanityImageCrop
-									_type: 'image'
-								}
-								light?: {
-									asset?: {
-										_ref: string
-										_type: 'reference'
-										_weak?: boolean
-										[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-									}
-									media?: unknown
-									hotspot?: SanityImageHotspot
-									crop?: SanityImageCrop
-									_type: 'image'
-								}
-								dark?: {
-									asset?: {
-										_ref: string
-										_type: 'reference'
-										_weak?: boolean
-										[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-									}
-									media?: unknown
-									hotspot?: SanityImageHotspot
-									crop?: SanityImageCrop
-									_type: 'image'
-								}
-							}
+							image?: LogoImage
 					  }
 					| unknown
 				> | null
@@ -1648,22 +1764,17 @@ export type PAGE_QUERYResult = {
 				}>
 				people: Array<
 					| {
+							_key: string
 							_ref: string
 							_type: 'person'
 							_weak?: boolean
-							_key: string
 							_id: string
 							_createdAt: string
 							_updatedAt: string
 							_rev: string
 							name?: string
 							image?: {
-								asset?: {
-									_ref: string
-									_type: 'reference'
-									_weak?: boolean
-									[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-								}
+								asset?: SanityImageAssetReference
 								media?: unknown
 								hotspot?: SanityImageHotspot
 								crop?: SanityImageCrop
@@ -1973,10 +2084,10 @@ export type PAGE_QUERYResult = {
 				}>
 				testimonials: Array<
 					| {
+							_key: string
 							_ref: string
 							_type: 'testimonial'
 							_weak?: boolean
-							_key: string
 							_id: string
 							_createdAt: string
 							_updatedAt: string
@@ -2007,22 +2118,7 @@ export type PAGE_QUERYResult = {
 								_type: 'block'
 								_key: string
 							}>
-							author?: {
-								name?: string
-								title?: string
-								image?: {
-									asset?: {
-										_ref: string
-										_type: 'reference'
-										_weak?: boolean
-										[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-									}
-									media?: unknown
-									hotspot?: SanityImageHotspot
-									crop?: SanityImageCrop
-									_type: 'image'
-								}
-							}
+							author?: Author
 					  }
 					| unknown
 				> | null
@@ -2033,10 +2129,10 @@ export type PAGE_QUERYResult = {
 	metadata?: Metadata
 } | null
 
-// Source: ./src/app/(frontend)/api/og/route.tsx
+// Source: src/app/(frontend)/api/og/route.tsx
 // Variable: OG_QUERY
 // Query: *[_type == $type && metadata.slug.current == $slug][0]{	'title': coalesce(metadata.title, title),}
-export type OG_QUERYResult =
+export type OG_QUERY_RESULT =
 	| {
 			title: null
 	  }
@@ -2048,10 +2144,10 @@ export type OG_QUERYResult =
 	  }
 	| null
 
-// Source: ./src/app/(frontend)/blog/[slug]/page.tsx
+// Source: src/app/(frontend)/blog/[slug]/page.tsx
 // Variable: BLOG_POST_QUERY
 // Query: *[_type == 'blog.post' && metadata.slug.current == $slug][0]{	...,	content[]{		...,		_type == 'image' => {			...,			asset->		}	},	'headings': content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{		style,		'text': pt::text(@)	},	categories[]->{		title,		slug	},	author->{		name,		image{			...,			asset->		}	},	'modules': (		// global modules (before)		*[_type == 'global-module' && path == '*'].before[]{ 	...,	ctas[]{		...,		link{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} }	},	_type == 'breadcrumbs' => {		crumbs[]{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} }	},	_type == 'logo-list' => {		logos[]{			...,			_type == 'reference' => @->		}	},	_type == 'person-list' => {		people[]{			...,			_type == 'reference' => @->		}	},	_type == 'prose' => {		content[]{			...,			_type == 'image' => {				...,				asset->{					...,					metadata				}			}		},		'headings': select(			tableOfContents in ['left', 'right'] => content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{				style,				'text': pt::text(@)			}		)	},	_type == 'testimonial-list' => {		testimonials[]{			...,			_type == 'reference' => @->		}	}, }		// path modules (before)		+ *[_type == 'global-module' && path == $blogDir].before[]{ 	...,	ctas[]{		...,		link{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} }	},	_type == 'breadcrumbs' => {		crumbs[]{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} }	},	_type == 'logo-list' => {		logos[]{			...,			_type == 'reference' => @->		}	},	_type == 'person-list' => {		people[]{			...,			_type == 'reference' => @->		}	},	_type == 'prose' => {		content[]{			...,			_type == 'image' => {				...,				asset->{					...,					metadata				}			}		},		'headings': select(			tableOfContents in ['left', 'right'] => content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{				style,				'text': pt::text(@)			}		)	},	_type == 'testimonial-list' => {		testimonials[]{			...,			_type == 'reference' => @->		}	}, }		// path modules (after)		+ *[_type == 'global-module' && path == $blogDir].after[]{ 	...,	ctas[]{		...,		link{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} }	},	_type == 'breadcrumbs' => {		crumbs[]{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} }	},	_type == 'logo-list' => {		logos[]{			...,			_type == 'reference' => @->		}	},	_type == 'person-list' => {		people[]{			...,			_type == 'reference' => @->		}	},	_type == 'prose' => {		content[]{			...,			_type == 'image' => {				...,				asset->{					...,					metadata				}			}		},		'headings': select(			tableOfContents in ['left', 'right'] => content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{				style,				'text': pt::text(@)			}		)	},	_type == 'testimonial-list' => {		testimonials[]{			...,			_type == 'reference' => @->		}	}, }		// global modules (after)		+ *[_type == 'global-module' && path == '*'].after[]{ 	...,	ctas[]{		...,		link{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} }	},	_type == 'breadcrumbs' => {		crumbs[]{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} }	},	_type == 'logo-list' => {		logos[]{			...,			_type == 'reference' => @->		}	},	_type == 'person-list' => {		people[]{			...,			_type == 'reference' => @->		}	},	_type == 'prose' => {		content[]{			...,			_type == 'image' => {				...,				asset->{					...,					metadata				}			}		},		'headings': select(			tableOfContents in ['left', 'right'] => content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{				style,				'text': pt::text(@)			}		)	},	_type == 'testimonial-list' => {		testimonials[]{			...,			_type == 'reference' => @->		}	}, }	)}
-export type BLOG_POST_QUERYResult = {
+export type BLOG_POST_QUERY_RESULT = {
 	_id: string
 	_type: 'blog.post'
 	_createdAt: string
@@ -2268,6 +2364,38 @@ export type BLOG_POST_QUERYResult = {
 		  }
 		| {
 				_key: string
+				_type: 'blog-index'
+				intro?: Array<{
+					children?: Array<{
+						marks?: Array<string>
+						text?: string
+						_type: 'span'
+						_key: string
+					}>
+					style?:
+						| 'blockquote'
+						| 'h1'
+						| 'h2'
+						| 'h3'
+						| 'h4'
+						| 'h5'
+						| 'h6'
+						| 'normal'
+					listItem?: 'bullet' | 'number'
+					markDefs?: Array<{
+						href?: string
+						_type: 'link'
+						_key: string
+					}>
+					level?: number
+					_type: 'block'
+					_key: string
+				}>
+				postsPerPage?: number
+				ctas: null
+		  }
+		| {
+				_key: string
 				_type: 'blog-post-content'
 				attributes?: ModuleAttributes
 				tableOfContents?: 'left' | 'right'
@@ -2302,40 +2430,34 @@ export type BLOG_POST_QUERYResult = {
 					_type: 'block'
 					_key: string
 				}>
-				limit?: number
-				ctas: null
-		  }
-		| {
-				_key: string
-				_type: 'blog.frontpage'
-				intro?: Array<{
-					children?: Array<{
-						marks?: Array<string>
-						text?: string
-						_type: 'span'
-						_key: string
-					}>
-					style?:
-						| 'blockquote'
-						| 'h1'
-						| 'h2'
-						| 'h3'
-						| 'h4'
-						| 'h5'
-						| 'h6'
-						| 'normal'
-					listItem?: 'bullet' | 'number'
-					markDefs?: Array<{
-						href?: string
-						_type: 'link'
-						_key: string
-					}>
-					level?: number
-					_type: 'block'
+				ctas: Array<{
 					_key: string
-				}>
-				postsPerPage?: number
-				ctas: null
+					_type: 'cta'
+					link:
+						| {
+								_type: 'link'
+								label?: string
+								type?: 'external' | 'internal'
+								internal?: PageReference
+								external?: string
+								params?: string
+						  }
+						| {
+								_type: 'link'
+								label?: string
+								type?: 'external' | 'internal'
+								internal: {
+									_type: 'page'
+									title: string | null
+									slug: string | '/' | null
+								} | null
+								external?: string
+								params?: string
+						  }
+						| null
+					style?: 'action-outline' | 'action' | 'ghost' | 'link'
+				}> | null
+				limit?: number
 		  }
 		| {
 				_key: string
@@ -2346,12 +2468,7 @@ export type BLOG_POST_QUERYResult = {
 							_type: 'link'
 							label?: string
 							type?: 'external' | 'internal'
-							internal?: {
-								_ref: string
-								_type: 'reference'
-								_weak?: boolean
-								[internalGroqTypeReferenceTo]?: 'page'
-							}
+							internal?: PageReference
 							external?: string
 							params?: string
 					  }
@@ -2409,12 +2526,7 @@ export type BLOG_POST_QUERYResult = {
 								_type: 'link'
 								label?: string
 								type?: 'external' | 'internal'
-								internal?: {
-									_ref: string
-									_type: 'reference'
-									_weak?: boolean
-									[internalGroqTypeReferenceTo]?: 'page'
-								}
+								internal?: PageReference
 								external?: string
 								params?: string
 						  }
@@ -2481,12 +2593,7 @@ export type BLOG_POST_QUERYResult = {
 								_type: 'link'
 								label?: string
 								type?: 'external' | 'internal'
-								internal?: {
-									_ref: string
-									_type: 'reference'
-									_weak?: boolean
-									[internalGroqTypeReferenceTo]?: 'page'
-								}
+								internal?: PageReference
 								external?: string
 								params?: string
 						  }
@@ -2506,12 +2613,7 @@ export type BLOG_POST_QUERYResult = {
 					style?: 'action-outline' | 'action' | 'ghost' | 'link'
 				}> | null
 				image?: {
-					asset?: {
-						_ref: string
-						_type: 'reference'
-						_weak?: boolean
-						[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-					}
+					asset?: SanityImageAssetReference
 					media?: unknown
 					hotspot?: SanityImageHotspot
 					crop?: SanityImageCrop
@@ -2553,53 +2655,16 @@ export type BLOG_POST_QUERYResult = {
 				}>
 				logos: Array<
 					| {
+							_key: string
 							_ref: string
 							_type: 'logo'
 							_weak?: boolean
-							_key: string
 							_id: string
 							_createdAt: string
 							_updatedAt: string
 							_rev: string
 							title?: string
-							image?: {
-								default?: {
-									asset?: {
-										_ref: string
-										_type: 'reference'
-										_weak?: boolean
-										[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-									}
-									media?: unknown
-									hotspot?: SanityImageHotspot
-									crop?: SanityImageCrop
-									_type: 'image'
-								}
-								light?: {
-									asset?: {
-										_ref: string
-										_type: 'reference'
-										_weak?: boolean
-										[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-									}
-									media?: unknown
-									hotspot?: SanityImageHotspot
-									crop?: SanityImageCrop
-									_type: 'image'
-								}
-								dark?: {
-									asset?: {
-										_ref: string
-										_type: 'reference'
-										_weak?: boolean
-										[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-									}
-									media?: unknown
-									hotspot?: SanityImageHotspot
-									crop?: SanityImageCrop
-									_type: 'image'
-								}
-							}
+							image?: LogoImage
 					  }
 					| unknown
 				> | null
@@ -2639,22 +2704,17 @@ export type BLOG_POST_QUERYResult = {
 				}>
 				people: Array<
 					| {
+							_key: string
 							_ref: string
 							_type: 'person'
 							_weak?: boolean
-							_key: string
 							_id: string
 							_createdAt: string
 							_updatedAt: string
 							_rev: string
 							name?: string
 							image?: {
-								asset?: {
-									_ref: string
-									_type: 'reference'
-									_weak?: boolean
-									[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-								}
+								asset?: SanityImageAssetReference
 								media?: unknown
 								hotspot?: SanityImageHotspot
 								crop?: SanityImageCrop
@@ -2964,10 +3024,10 @@ export type BLOG_POST_QUERYResult = {
 				}>
 				testimonials: Array<
 					| {
+							_key: string
 							_ref: string
 							_type: 'testimonial'
 							_weak?: boolean
-							_key: string
 							_id: string
 							_createdAt: string
 							_updatedAt: string
@@ -2998,22 +3058,7 @@ export type BLOG_POST_QUERYResult = {
 								_type: 'block'
 								_key: string
 							}>
-							author?: {
-								name?: string
-								title?: string
-								image?: {
-									asset?: {
-										_ref: string
-										_type: 'reference'
-										_weak?: boolean
-										[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-									}
-									media?: unknown
-									hotspot?: SanityImageHotspot
-									crop?: SanityImageCrop
-									_type: 'image'
-								}
-							}
+							author?: Author
 					  }
 					| unknown
 				> | null
@@ -3023,10 +3068,10 @@ export type BLOG_POST_QUERYResult = {
 	>
 } | null
 
-// Source: ./src/app/(frontend)/blog/rss.xml/route.ts
+// Source: src/app/(frontend)/blog/rss.xml/route.ts
 // Variable: BLOG_RSS_QUERY
 // Query: {	'blog': *[_type == 'page' && metadata.slug.current == $blogDir][0]{		metadata	},	'posts': *[_type == 'blog.post' && metadata.noIndex != true]|order(publishDate desc){		title,		content,		publishDate,		categories[]->{ title },		author->{ name },		metadata	}}
-export type BLOG_RSS_QUERYResult = {
+export type BLOG_RSS_QUERY_RESULT = {
 	blog: {
 		metadata: Metadata | null
 	} | null
@@ -3066,12 +3111,7 @@ export type BLOG_RSS_QUERYResult = {
 					_key: string
 			  }
 			| {
-					asset?: {
-						_ref: string
-						_type: 'reference'
-						_weak?: boolean
-						[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-					}
+					asset?: SanityImageAssetReference
 					media?: unknown
 					hotspot?: SanityImageHotspot
 					crop?: SanityImageCrop
@@ -3109,10 +3149,10 @@ export type BLOG_RSS_QUERYResult = {
 	}>
 }
 
-// Source: ./src/app/(frontend)/not-found.tsx
+// Source: src/app/(frontend)/not-found.tsx
 // Variable: NOT_FOUND_QUERY
 // Query: *[_type == 'page' && metadata.slug.current == '404'][0]{		...,		modules[]{ 	...,	ctas[]{		...,		link{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} }	},	_type == 'breadcrumbs' => {		crumbs[]{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} }	},	_type == 'logo-list' => {		logos[]{			...,			_type == 'reference' => @->		}	},	_type == 'person-list' => {		people[]{			...,			_type == 'reference' => @->		}	},	_type == 'prose' => {		content[]{			...,			_type == 'image' => {				...,				asset->{					...,					metadata				}			}		},		'headings': select(			tableOfContents in ['left', 'right'] => content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{				style,				'text': pt::text(@)			}		)	},	_type == 'testimonial-list' => {		testimonials[]{			...,			_type == 'reference' => @->		}	}, }	}
-export type NOT_FOUND_QUERYResult = {
+export type NOT_FOUND_QUERY_RESULT = {
 	_id: string
 	_type: 'page'
 	_createdAt: string
@@ -3187,39 +3227,7 @@ export type NOT_FOUND_QUERYResult = {
 		  }
 		| {
 				_key: string
-				_type: 'blog-post-list'
-				intro?: Array<{
-					children?: Array<{
-						marks?: Array<string>
-						text?: string
-						_type: 'span'
-						_key: string
-					}>
-					style?:
-						| 'blockquote'
-						| 'h1'
-						| 'h2'
-						| 'h3'
-						| 'h4'
-						| 'h5'
-						| 'h6'
-						| 'normal'
-					listItem?: 'bullet' | 'number'
-					markDefs?: Array<{
-						href?: string
-						_type: 'link'
-						_key: string
-					}>
-					level?: number
-					_type: 'block'
-					_key: string
-				}>
-				limit?: number
-				ctas: null
-		  }
-		| {
-				_key: string
-				_type: 'blog.frontpage'
+				_type: 'blog-index'
 				intro?: Array<{
 					children?: Array<{
 						marks?: Array<string>
@@ -3251,6 +3259,64 @@ export type NOT_FOUND_QUERYResult = {
 		  }
 		| {
 				_key: string
+				_type: 'blog-post-list'
+				intro?: Array<{
+					children?: Array<{
+						marks?: Array<string>
+						text?: string
+						_type: 'span'
+						_key: string
+					}>
+					style?:
+						| 'blockquote'
+						| 'h1'
+						| 'h2'
+						| 'h3'
+						| 'h4'
+						| 'h5'
+						| 'h6'
+						| 'normal'
+					listItem?: 'bullet' | 'number'
+					markDefs?: Array<{
+						href?: string
+						_type: 'link'
+						_key: string
+					}>
+					level?: number
+					_type: 'block'
+					_key: string
+				}>
+				ctas: Array<{
+					_key: string
+					_type: 'cta'
+					link:
+						| {
+								_type: 'link'
+								label?: string
+								type?: 'external' | 'internal'
+								internal?: PageReference
+								external?: string
+								params?: string
+						  }
+						| {
+								_type: 'link'
+								label?: string
+								type?: 'external' | 'internal'
+								internal: {
+									_type: 'page'
+									title: string | null
+									slug: string | '/' | null
+								} | null
+								external?: string
+								params?: string
+						  }
+						| null
+					style?: 'action-outline' | 'action' | 'ghost' | 'link'
+				}> | null
+				limit?: number
+		  }
+		| {
+				_key: string
 				_type: 'breadcrumbs'
 				crumbs: Array<
 					| {
@@ -3258,12 +3324,7 @@ export type NOT_FOUND_QUERYResult = {
 							_type: 'link'
 							label?: string
 							type?: 'external' | 'internal'
-							internal?: {
-								_ref: string
-								_type: 'reference'
-								_weak?: boolean
-								[internalGroqTypeReferenceTo]?: 'page'
-							}
+							internal?: PageReference
 							external?: string
 							params?: string
 					  }
@@ -3321,12 +3382,7 @@ export type NOT_FOUND_QUERYResult = {
 								_type: 'link'
 								label?: string
 								type?: 'external' | 'internal'
-								internal?: {
-									_ref: string
-									_type: 'reference'
-									_weak?: boolean
-									[internalGroqTypeReferenceTo]?: 'page'
-								}
+								internal?: PageReference
 								external?: string
 								params?: string
 						  }
@@ -3393,12 +3449,7 @@ export type NOT_FOUND_QUERYResult = {
 								_type: 'link'
 								label?: string
 								type?: 'external' | 'internal'
-								internal?: {
-									_ref: string
-									_type: 'reference'
-									_weak?: boolean
-									[internalGroqTypeReferenceTo]?: 'page'
-								}
+								internal?: PageReference
 								external?: string
 								params?: string
 						  }
@@ -3418,12 +3469,7 @@ export type NOT_FOUND_QUERYResult = {
 					style?: 'action-outline' | 'action' | 'ghost' | 'link'
 				}> | null
 				image?: {
-					asset?: {
-						_ref: string
-						_type: 'reference'
-						_weak?: boolean
-						[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-					}
+					asset?: SanityImageAssetReference
 					media?: unknown
 					hotspot?: SanityImageHotspot
 					crop?: SanityImageCrop
@@ -3465,53 +3511,16 @@ export type NOT_FOUND_QUERYResult = {
 				}>
 				logos: Array<
 					| {
+							_key: string
 							_ref: string
 							_type: 'logo'
 							_weak?: boolean
-							_key: string
 							_id: string
 							_createdAt: string
 							_updatedAt: string
 							_rev: string
 							title?: string
-							image?: {
-								default?: {
-									asset?: {
-										_ref: string
-										_type: 'reference'
-										_weak?: boolean
-										[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-									}
-									media?: unknown
-									hotspot?: SanityImageHotspot
-									crop?: SanityImageCrop
-									_type: 'image'
-								}
-								light?: {
-									asset?: {
-										_ref: string
-										_type: 'reference'
-										_weak?: boolean
-										[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-									}
-									media?: unknown
-									hotspot?: SanityImageHotspot
-									crop?: SanityImageCrop
-									_type: 'image'
-								}
-								dark?: {
-									asset?: {
-										_ref: string
-										_type: 'reference'
-										_weak?: boolean
-										[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-									}
-									media?: unknown
-									hotspot?: SanityImageHotspot
-									crop?: SanityImageCrop
-									_type: 'image'
-								}
-							}
+							image?: LogoImage
 					  }
 					| unknown
 				> | null
@@ -3551,22 +3560,17 @@ export type NOT_FOUND_QUERYResult = {
 				}>
 				people: Array<
 					| {
+							_key: string
 							_ref: string
 							_type: 'person'
 							_weak?: boolean
-							_key: string
 							_id: string
 							_createdAt: string
 							_updatedAt: string
 							_rev: string
 							name?: string
 							image?: {
-								asset?: {
-									_ref: string
-									_type: 'reference'
-									_weak?: boolean
-									[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-								}
+								asset?: SanityImageAssetReference
 								media?: unknown
 								hotspot?: SanityImageHotspot
 								crop?: SanityImageCrop
@@ -3876,10 +3880,10 @@ export type NOT_FOUND_QUERYResult = {
 				}>
 				testimonials: Array<
 					| {
+							_key: string
 							_ref: string
 							_type: 'testimonial'
 							_weak?: boolean
-							_key: string
 							_id: string
 							_createdAt: string
 							_updatedAt: string
@@ -3910,22 +3914,7 @@ export type NOT_FOUND_QUERYResult = {
 								_type: 'block'
 								_key: string
 							}>
-							author?: {
-								name?: string
-								title?: string
-								image?: {
-									asset?: {
-										_ref: string
-										_type: 'reference'
-										_weak?: boolean
-										[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-									}
-									media?: unknown
-									hotspot?: SanityImageHotspot
-									crop?: SanityImageCrop
-									_type: 'image'
-								}
-							}
+							author?: Author
 					  }
 					| unknown
 				> | null
@@ -3935,10 +3924,10 @@ export type NOT_FOUND_QUERYResult = {
 	metadata?: Metadata
 } | null
 
-// Source: ./src/sanity/lib/queries.ts
+// Source: src/sanity/lib/queries.ts
 // Variable: SITE_QUERY
 // Query: *[_type == 'site'][0]{	...,	header->{ 	items[]{			...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	},		defined(link) => { link{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} } },		defined(links[]) => { links[]{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} } },		_type == 'megamenu' => {			defined(link) => { link{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} } },			items[]{				...,				_type == 'link.list' => {					defined(link) => { link{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} } },					links[]{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} }				}			}		}	} },	ctas[]{		...,		link{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} }	},	footer->{ 	items[]{			...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	},		defined(link) => { link{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} } },		defined(links[]) => { links[]{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} } },		_type == 'megamenu' => {			defined(link) => { link{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} } },			items[]{				...,				_type == 'link.list' => {					defined(link) => { link{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} } },					links[]{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} }				}			}		}	} },	social->{ 	items[]{			...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	},		defined(link) => { link{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} } },		defined(links[]) => { links[]{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} } },		_type == 'megamenu' => {			defined(link) => { link{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} } },			items[]{				...,				_type == 'link.list' => {					defined(link) => { link{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} } },					links[]{ 	...,	type == 'internal' => {		internal->{			_type,			title,			'slug': select(				metadata.slug.current == 'index' => '/',				'/' + metadata.slug.current			)		}	} }				}			}		}	} },}
-export type SITE_QUERYResult = {
+export type SITE_QUERY_RESULT = {
 	_id: string
 	_type: 'site'
 	_createdAt: string
@@ -3968,12 +3957,7 @@ export type SITE_QUERYResult = {
 								_type: 'link'
 								label?: string
 								type?: 'external' | 'internal'
-								internal?: {
-									_ref: string
-									_type: 'reference'
-									_weak?: boolean
-									[internalGroqTypeReferenceTo]?: 'page'
-								}
+								internal?: PageReference
 								external?: string
 								params?: string
 						  }
@@ -4000,12 +3984,7 @@ export type SITE_QUERYResult = {
 								_type: 'link'
 								label?: string
 								type?: 'external' | 'internal'
-								internal?: {
-									_ref: string
-									_type: 'reference'
-									_weak?: boolean
-									[internalGroqTypeReferenceTo]?: 'page'
-								}
+								internal?: PageReference
 								external?: string
 								params?: string
 						  }
@@ -4036,12 +4015,7 @@ export type SITE_QUERYResult = {
 								_type: 'link'
 								label?: string
 								type?: 'external' | 'internal'
-								internal?: {
-									_ref: string
-									_type: 'reference'
-									_weak?: boolean
-									[internalGroqTypeReferenceTo]?: 'page'
-								}
+								internal?: PageReference
 								external?: string
 								params?: string
 						  }
@@ -4064,12 +4038,7 @@ export type SITE_QUERYResult = {
 								_type: 'link'
 								label?: string
 								type?: 'external' | 'internal'
-								internal?: {
-									_ref: string
-									_type: 'reference'
-									_weak?: boolean
-									[internalGroqTypeReferenceTo]?: 'page'
-								}
+								internal?: PageReference
 								external?: string
 								params?: string
 						  }
@@ -4093,12 +4062,7 @@ export type SITE_QUERYResult = {
 					_type: 'link'
 					label?: string
 					type?: 'external' | 'internal'
-					internal?: {
-						_ref: string
-						_type: 'reference'
-						_weak?: boolean
-						[internalGroqTypeReferenceTo]?: 'page'
-					}
+					internal?: PageReference
 					external?: string
 					params?: string
 			  }
@@ -4133,12 +4097,7 @@ export type SITE_QUERYResult = {
 								_type: 'link'
 								label?: string
 								type?: 'external' | 'internal'
-								internal?: {
-									_ref: string
-									_type: 'reference'
-									_weak?: boolean
-									[internalGroqTypeReferenceTo]?: 'page'
-								}
+								internal?: PageReference
 								external?: string
 								params?: string
 						  }
@@ -4176,12 +4135,7 @@ export type SITE_QUERYResult = {
 											_type: 'link'
 											label?: string
 											type?: 'external' | 'internal'
-											internal?: {
-												_ref: string
-												_type: 'reference'
-												_weak?: boolean
-												[internalGroqTypeReferenceTo]?: 'page'
-											}
+											internal?: PageReference
 											external?: string
 											params?: string
 									  }
@@ -4208,12 +4162,7 @@ export type SITE_QUERYResult = {
 											_type: 'link'
 											label?: string
 											type?: 'external' | 'internal'
-											internal?: {
-												_ref: string
-												_type: 'reference'
-												_weak?: boolean
-												[internalGroqTypeReferenceTo]?: 'page'
-											}
+											internal?: PageReference
 											external?: string
 											params?: string
 									  }
@@ -4236,12 +4185,7 @@ export type SITE_QUERYResult = {
 											_type: 'link'
 											label?: string
 											type?: 'external' | 'internal'
-											internal?: {
-												_ref: string
-												_type: 'reference'
-												_weak?: boolean
-												[internalGroqTypeReferenceTo]?: 'page'
-											}
+											internal?: PageReference
 											external?: string
 											params?: string
 									  }
@@ -4270,12 +4214,7 @@ export type SITE_QUERYResult = {
 								_type: 'link'
 								label?: string
 								type?: 'external' | 'internal'
-								internal?: {
-									_ref: string
-									_type: 'reference'
-									_weak?: boolean
-									[internalGroqTypeReferenceTo]?: 'page'
-								}
+								internal?: PageReference
 								external?: string
 								params?: string
 						  }
@@ -4303,12 +4242,7 @@ export type SITE_QUERYResult = {
 											_type: 'link'
 											label?: string
 											type?: 'external' | 'internal'
-											internal?: {
-												_ref: string
-												_type: 'reference'
-												_weak?: boolean
-												[internalGroqTypeReferenceTo]?: 'page'
-											}
+											internal?: PageReference
 											external?: string
 											params?: string
 									  }
@@ -4335,12 +4269,7 @@ export type SITE_QUERYResult = {
 											_type: 'link'
 											label?: string
 											type?: 'external' | 'internal'
-											internal?: {
-												_ref: string
-												_type: 'reference'
-												_weak?: boolean
-												[internalGroqTypeReferenceTo]?: 'page'
-											}
+											internal?: PageReference
 											external?: string
 											params?: string
 									  }
@@ -4363,12 +4292,7 @@ export type SITE_QUERYResult = {
 											_type: 'link'
 											label?: string
 											type?: 'external' | 'internal'
-											internal?: {
-												_ref: string
-												_type: 'reference'
-												_weak?: boolean
-												[internalGroqTypeReferenceTo]?: 'page'
-											}
+											internal?: PageReference
 											external?: string
 											params?: string
 									  }
@@ -4399,12 +4323,7 @@ export type SITE_QUERYResult = {
 					_type: 'link'
 					label?: string
 					type?: 'external' | 'internal'
-					internal?: {
-						_ref: string
-						_type: 'reference'
-						_weak?: boolean
-						[internalGroqTypeReferenceTo]?: 'page'
-					}
+					internal?: PageReference
 					external?: string
 					params?: string
 			  }
@@ -4445,12 +4364,7 @@ export type SITE_QUERYResult = {
 								_type: 'link'
 								label?: string
 								type?: 'external' | 'internal'
-								internal?: {
-									_ref: string
-									_type: 'reference'
-									_weak?: boolean
-									[internalGroqTypeReferenceTo]?: 'page'
-								}
+								internal?: PageReference
 								external?: string
 								params?: string
 						  }
@@ -4477,12 +4391,7 @@ export type SITE_QUERYResult = {
 								_type: 'link'
 								label?: string
 								type?: 'external' | 'internal'
-								internal?: {
-									_ref: string
-									_type: 'reference'
-									_weak?: boolean
-									[internalGroqTypeReferenceTo]?: 'page'
-								}
+								internal?: PageReference
 								external?: string
 								params?: string
 						  }
@@ -4513,12 +4422,7 @@ export type SITE_QUERYResult = {
 								_type: 'link'
 								label?: string
 								type?: 'external' | 'internal'
-								internal?: {
-									_ref: string
-									_type: 'reference'
-									_weak?: boolean
-									[internalGroqTypeReferenceTo]?: 'page'
-								}
+								internal?: PageReference
 								external?: string
 								params?: string
 						  }
@@ -4541,12 +4445,7 @@ export type SITE_QUERYResult = {
 								_type: 'link'
 								label?: string
 								type?: 'external' | 'internal'
-								internal?: {
-									_ref: string
-									_type: 'reference'
-									_weak?: boolean
-									[internalGroqTypeReferenceTo]?: 'page'
-								}
+								internal?: PageReference
 								external?: string
 								params?: string
 						  }
@@ -4570,12 +4469,7 @@ export type SITE_QUERYResult = {
 					_type: 'link'
 					label?: string
 					type?: 'external' | 'internal'
-					internal?: {
-						_ref: string
-						_type: 'reference'
-						_weak?: boolean
-						[internalGroqTypeReferenceTo]?: 'page'
-					}
+					internal?: PageReference
 					external?: string
 					params?: string
 			  }
@@ -4610,12 +4504,7 @@ export type SITE_QUERYResult = {
 								_type: 'link'
 								label?: string
 								type?: 'external' | 'internal'
-								internal?: {
-									_ref: string
-									_type: 'reference'
-									_weak?: boolean
-									[internalGroqTypeReferenceTo]?: 'page'
-								}
+								internal?: PageReference
 								external?: string
 								params?: string
 						  }
@@ -4653,12 +4542,7 @@ export type SITE_QUERYResult = {
 											_type: 'link'
 											label?: string
 											type?: 'external' | 'internal'
-											internal?: {
-												_ref: string
-												_type: 'reference'
-												_weak?: boolean
-												[internalGroqTypeReferenceTo]?: 'page'
-											}
+											internal?: PageReference
 											external?: string
 											params?: string
 									  }
@@ -4685,12 +4569,7 @@ export type SITE_QUERYResult = {
 											_type: 'link'
 											label?: string
 											type?: 'external' | 'internal'
-											internal?: {
-												_ref: string
-												_type: 'reference'
-												_weak?: boolean
-												[internalGroqTypeReferenceTo]?: 'page'
-											}
+											internal?: PageReference
 											external?: string
 											params?: string
 									  }
@@ -4713,12 +4592,7 @@ export type SITE_QUERYResult = {
 											_type: 'link'
 											label?: string
 											type?: 'external' | 'internal'
-											internal?: {
-												_ref: string
-												_type: 'reference'
-												_weak?: boolean
-												[internalGroqTypeReferenceTo]?: 'page'
-											}
+											internal?: PageReference
 											external?: string
 											params?: string
 									  }
@@ -4747,12 +4621,7 @@ export type SITE_QUERYResult = {
 								_type: 'link'
 								label?: string
 								type?: 'external' | 'internal'
-								internal?: {
-									_ref: string
-									_type: 'reference'
-									_weak?: boolean
-									[internalGroqTypeReferenceTo]?: 'page'
-								}
+								internal?: PageReference
 								external?: string
 								params?: string
 						  }
@@ -4780,12 +4649,7 @@ export type SITE_QUERYResult = {
 											_type: 'link'
 											label?: string
 											type?: 'external' | 'internal'
-											internal?: {
-												_ref: string
-												_type: 'reference'
-												_weak?: boolean
-												[internalGroqTypeReferenceTo]?: 'page'
-											}
+											internal?: PageReference
 											external?: string
 											params?: string
 									  }
@@ -4812,12 +4676,7 @@ export type SITE_QUERYResult = {
 											_type: 'link'
 											label?: string
 											type?: 'external' | 'internal'
-											internal?: {
-												_ref: string
-												_type: 'reference'
-												_weak?: boolean
-												[internalGroqTypeReferenceTo]?: 'page'
-											}
+											internal?: PageReference
 											external?: string
 											params?: string
 									  }
@@ -4840,12 +4699,7 @@ export type SITE_QUERYResult = {
 											_type: 'link'
 											label?: string
 											type?: 'external' | 'internal'
-											internal?: {
-												_ref: string
-												_type: 'reference'
-												_weak?: boolean
-												[internalGroqTypeReferenceTo]?: 'page'
-											}
+											internal?: PageReference
 											external?: string
 											params?: string
 									  }
@@ -4890,12 +4744,7 @@ export type SITE_QUERYResult = {
 								_type: 'link'
 								label?: string
 								type?: 'external' | 'internal'
-								internal?: {
-									_ref: string
-									_type: 'reference'
-									_weak?: boolean
-									[internalGroqTypeReferenceTo]?: 'page'
-								}
+								internal?: PageReference
 								external?: string
 								params?: string
 						  }
@@ -4922,12 +4771,7 @@ export type SITE_QUERYResult = {
 								_type: 'link'
 								label?: string
 								type?: 'external' | 'internal'
-								internal?: {
-									_ref: string
-									_type: 'reference'
-									_weak?: boolean
-									[internalGroqTypeReferenceTo]?: 'page'
-								}
+								internal?: PageReference
 								external?: string
 								params?: string
 						  }
@@ -4958,12 +4802,7 @@ export type SITE_QUERYResult = {
 								_type: 'link'
 								label?: string
 								type?: 'external' | 'internal'
-								internal?: {
-									_ref: string
-									_type: 'reference'
-									_weak?: boolean
-									[internalGroqTypeReferenceTo]?: 'page'
-								}
+								internal?: PageReference
 								external?: string
 								params?: string
 						  }
@@ -4986,12 +4825,7 @@ export type SITE_QUERYResult = {
 								_type: 'link'
 								label?: string
 								type?: 'external' | 'internal'
-								internal?: {
-									_ref: string
-									_type: 'reference'
-									_weak?: boolean
-									[internalGroqTypeReferenceTo]?: 'page'
-								}
+								internal?: PageReference
 								external?: string
 								params?: string
 						  }
@@ -5015,12 +4849,7 @@ export type SITE_QUERYResult = {
 					_type: 'link'
 					label?: string
 					type?: 'external' | 'internal'
-					internal?: {
-						_ref: string
-						_type: 'reference'
-						_weak?: boolean
-						[internalGroqTypeReferenceTo]?: 'page'
-					}
+					internal?: PageReference
 					external?: string
 					params?: string
 			  }
@@ -5055,12 +4884,7 @@ export type SITE_QUERYResult = {
 								_type: 'link'
 								label?: string
 								type?: 'external' | 'internal'
-								internal?: {
-									_ref: string
-									_type: 'reference'
-									_weak?: boolean
-									[internalGroqTypeReferenceTo]?: 'page'
-								}
+								internal?: PageReference
 								external?: string
 								params?: string
 						  }
@@ -5098,12 +4922,7 @@ export type SITE_QUERYResult = {
 											_type: 'link'
 											label?: string
 											type?: 'external' | 'internal'
-											internal?: {
-												_ref: string
-												_type: 'reference'
-												_weak?: boolean
-												[internalGroqTypeReferenceTo]?: 'page'
-											}
+											internal?: PageReference
 											external?: string
 											params?: string
 									  }
@@ -5130,12 +4949,7 @@ export type SITE_QUERYResult = {
 											_type: 'link'
 											label?: string
 											type?: 'external' | 'internal'
-											internal?: {
-												_ref: string
-												_type: 'reference'
-												_weak?: boolean
-												[internalGroqTypeReferenceTo]?: 'page'
-											}
+											internal?: PageReference
 											external?: string
 											params?: string
 									  }
@@ -5158,12 +4972,7 @@ export type SITE_QUERYResult = {
 											_type: 'link'
 											label?: string
 											type?: 'external' | 'internal'
-											internal?: {
-												_ref: string
-												_type: 'reference'
-												_weak?: boolean
-												[internalGroqTypeReferenceTo]?: 'page'
-											}
+											internal?: PageReference
 											external?: string
 											params?: string
 									  }
@@ -5192,12 +5001,7 @@ export type SITE_QUERYResult = {
 								_type: 'link'
 								label?: string
 								type?: 'external' | 'internal'
-								internal?: {
-									_ref: string
-									_type: 'reference'
-									_weak?: boolean
-									[internalGroqTypeReferenceTo]?: 'page'
-								}
+								internal?: PageReference
 								external?: string
 								params?: string
 						  }
@@ -5225,12 +5029,7 @@ export type SITE_QUERYResult = {
 											_type: 'link'
 											label?: string
 											type?: 'external' | 'internal'
-											internal?: {
-												_ref: string
-												_type: 'reference'
-												_weak?: boolean
-												[internalGroqTypeReferenceTo]?: 'page'
-											}
+											internal?: PageReference
 											external?: string
 											params?: string
 									  }
@@ -5257,12 +5056,7 @@ export type SITE_QUERYResult = {
 											_type: 'link'
 											label?: string
 											type?: 'external' | 'internal'
-											internal?: {
-												_ref: string
-												_type: 'reference'
-												_weak?: boolean
-												[internalGroqTypeReferenceTo]?: 'page'
-											}
+											internal?: PageReference
 											external?: string
 											params?: string
 									  }
@@ -5285,12 +5079,7 @@ export type SITE_QUERYResult = {
 											_type: 'link'
 											label?: string
 											type?: 'external' | 'internal'
-											internal?: {
-												_ref: string
-												_type: 'reference'
-												_weak?: boolean
-												[internalGroqTypeReferenceTo]?: 'page'
-											}
+											internal?: PageReference
 											external?: string
 											params?: string
 									  }
@@ -5350,14 +5139,16 @@ export type SITE_QUERYResult = {
 		_key: string
 	}>
 } | null
+
+// Source: src/sanity/lib/queries.ts
 // Variable: GLOBAL_MODULE_PATH_QUERY
 // Query: string::startsWith($slug, path)	&& select(		defined(excludePaths) => count(excludePaths[string::startsWith($slug, @)]) == 0,		true	)
-export type GLOBAL_MODULE_PATH_QUERYResult = never
+export type GLOBAL_MODULE_PATH_QUERY_RESULT = never
 
-// Source: ./src/ui/modules/blog/blog-post-list.tsx
+// Source: src/ui/modules/blog/blog-post-list.tsx
 // Variable: BLOG_POST_LIST_QUERY
 // Query: *[_type == 'blog.post']|order(publishDate desc)[0...$limit]{		...,		categories[]->{			title,			slug		},		author->{			name,			image{				...,				asset->			}		},		metadata{			...,			image{				...,				asset->			}		},		'slug': $blogDir + metadata.slug.current,	}
-export type BLOG_POST_LIST_QUERYResult = Array<{
+export type BLOG_POST_LIST_QUERY_RESULT = Array<{
 	_id: string
 	_type: 'blog.post'
 	_createdAt: string
@@ -5398,12 +5189,7 @@ export type BLOG_POST_LIST_QUERYResult = Array<{
 				_key: string
 		  }
 		| {
-				asset?: {
-					_ref: string
-					_type: 'reference'
-					_weak?: boolean
-					[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-				}
+				asset?: SanityImageAssetReference
 				media?: unknown
 				hotspot?: SanityImageHotspot
 				crop?: SanityImageCrop
@@ -5504,10 +5290,10 @@ export type BLOG_POST_LIST_QUERYResult = Array<{
 	slug: unknown
 }>
 
-// Source: ./src/ui/modules/blog/blog.frontpage/index.tsx
-// Variable: BLOG_FRONTPAGE_QUERY
+// Source: src/ui/modules/blog/blog.frontpage/index.tsx
+// Variable: BLOG_INDEX_QUERY
 // Query: *[_type == 'blog.post']|order(publishDate desc){		...,		categories[]->,		author->{			name,			image{				...,				asset->			}		},		metadata{			...,			image{				...,				asset->			}		},		'slug': $blogDir + metadata.slug.current,	}
-export type BLOG_FRONTPAGE_QUERYResult = Array<{
+export type BLOG_INDEX_QUERY_RESULT = Array<{
 	_id: string
 	_type: 'blog.post'
 	_createdAt: string
@@ -5548,12 +5334,7 @@ export type BLOG_FRONTPAGE_QUERYResult = Array<{
 				_key: string
 		  }
 		| {
-				asset?: {
-					_ref: string
-					_type: 'reference'
-					_weak?: boolean
-					[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
-				}
+				asset?: SanityImageAssetReference
 				media?: unknown
 				hotspot?: SanityImageHotspot
 				crop?: SanityImageCrop
@@ -5659,10 +5440,10 @@ export type BLOG_FRONTPAGE_QUERYResult = Array<{
 	slug: unknown
 }>
 
-// Source: ./src/ui/modules/blog/filter-list.tsx
+// Source: src/ui/modules/blog/filter-list.tsx
 // Variable: CATEGORIES_QUERY
 // Query: *[		_type == 'blog.category'		&& count(*[_type == 'blog.post' && references(^._id)]) > 0	]|order(title)
-export type CATEGORIES_QUERYResult = Array<{
+export type CATEGORIES_QUERY_RESULT = Array<{
 	_id: string
 	_type: 'blog.category'
 	_createdAt: string
@@ -5672,10 +5453,10 @@ export type CATEGORIES_QUERYResult = Array<{
 	slug?: Slug
 }>
 
-// Source: ./src/ui/modules/search/store.ts
+// Source: src/ui/modules/search/store.ts
 // Variable: SEARCH_QUERY
 // Query: *[	_type in $scope	&& defined(metadata.slug.current)	&& metadata.noIndex != true	&& !(metadata.slug.current in ['404'])	&& [		modules[].intro[].children[].text,		modules[].content[].children[].text,		content[].children[].text,		title,		metadata.title,		metadata.description	] match $queryMatch]{	_id,	_type,	title,	'slug': select(		_type == 'blog.post' => $blogDir + metadata.slug.current,		metadata.slug.current == 'index' => '/',		'/' + metadata.slug.current	)}
-export type SEARCH_QUERYResult = Array<
+export type SEARCH_QUERY_RESULT = Array<
 	| {
 			_id: string
 			_type: 'blog.post'
@@ -5692,16 +5473,16 @@ export type SEARCH_QUERYResult = Array<
 
 declare module '@sanity/client' {
 	interface SanityQueries {
-		"\n\t*[_type == 'page' && metadata.slug.current == $slug][0]{\n\t\t...,\n\t\t'modules': (\n\t\t\t// global moddules (before)\n\t\t\t*[_type == 'global-module' && path == '*'].before[]{ \n\t...,\n\tctas[]{\n\t\t...,\n\t\tlink{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t},\n\t_type == 'breadcrumbs' => {\n\t\tcrumbs[]{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t},\n\t_type == 'logo-list' => {\n\t\tlogos[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n\t_type == 'person-list' => {\n\t\tpeople[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n\t_type == 'prose' => {\n\t\tcontent[]{\n\t\t\t...,\n\t\t\t_type == 'image' => {\n\t\t\t\t...,\n\t\t\t\tasset->{\n\t\t\t\t\t...,\n\t\t\t\t\tmetadata\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t'headings': select(\n\t\t\ttableOfContents in ['left', 'right'] => content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{\n\t\t\t\tstyle,\n\t\t\t\t'text': pt::text(@)\n\t\t\t}\n\t\t)\n\t},\n\t_type == 'testimonial-list' => {\n\t\ttestimonials[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n }\n\t\t\t// path modules (before)\n\t\t\t+ *[_type == 'global-module' && path != '*' && \n\tstring::startsWith($slug, path)\n\t&& select(\n\t\tdefined(excludePaths) => count(excludePaths[string::startsWith($slug, @)]) == 0,\n\t\ttrue\n\t)\n].before[]{ \n\t...,\n\tctas[]{\n\t\t...,\n\t\tlink{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t},\n\t_type == 'breadcrumbs' => {\n\t\tcrumbs[]{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t},\n\t_type == 'logo-list' => {\n\t\tlogos[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n\t_type == 'person-list' => {\n\t\tpeople[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n\t_type == 'prose' => {\n\t\tcontent[]{\n\t\t\t...,\n\t\t\t_type == 'image' => {\n\t\t\t\t...,\n\t\t\t\tasset->{\n\t\t\t\t\t...,\n\t\t\t\t\tmetadata\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t'headings': select(\n\t\t\ttableOfContents in ['left', 'right'] => content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{\n\t\t\t\tstyle,\n\t\t\t\t'text': pt::text(@)\n\t\t\t}\n\t\t)\n\t},\n\t_type == 'testimonial-list' => {\n\t\ttestimonials[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n }\n\t\t\t// page modules\n\t\t\t+ modules[]{ \n\t...,\n\tctas[]{\n\t\t...,\n\t\tlink{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t},\n\t_type == 'breadcrumbs' => {\n\t\tcrumbs[]{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t},\n\t_type == 'logo-list' => {\n\t\tlogos[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n\t_type == 'person-list' => {\n\t\tpeople[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n\t_type == 'prose' => {\n\t\tcontent[]{\n\t\t\t...,\n\t\t\t_type == 'image' => {\n\t\t\t\t...,\n\t\t\t\tasset->{\n\t\t\t\t\t...,\n\t\t\t\t\tmetadata\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t'headings': select(\n\t\t\ttableOfContents in ['left', 'right'] => content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{\n\t\t\t\tstyle,\n\t\t\t\t'text': pt::text(@)\n\t\t\t}\n\t\t)\n\t},\n\t_type == 'testimonial-list' => {\n\t\ttestimonials[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n }\n\t\t\t// path modules (after)\n\t\t\t+ *[_type == 'global-module' && path != '*' && \n\tstring::startsWith($slug, path)\n\t&& select(\n\t\tdefined(excludePaths) => count(excludePaths[string::startsWith($slug, @)]) == 0,\n\t\ttrue\n\t)\n].after[]{ \n\t...,\n\tctas[]{\n\t\t...,\n\t\tlink{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t},\n\t_type == 'breadcrumbs' => {\n\t\tcrumbs[]{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t},\n\t_type == 'logo-list' => {\n\t\tlogos[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n\t_type == 'person-list' => {\n\t\tpeople[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n\t_type == 'prose' => {\n\t\tcontent[]{\n\t\t\t...,\n\t\t\t_type == 'image' => {\n\t\t\t\t...,\n\t\t\t\tasset->{\n\t\t\t\t\t...,\n\t\t\t\t\tmetadata\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t'headings': select(\n\t\t\ttableOfContents in ['left', 'right'] => content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{\n\t\t\t\tstyle,\n\t\t\t\t'text': pt::text(@)\n\t\t\t}\n\t\t)\n\t},\n\t_type == 'testimonial-list' => {\n\t\ttestimonials[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n }\n\t\t\t// global moddules (after)\n\t\t\t+ *[_type == 'global-module' && path == '*'].after[]{ \n\t...,\n\tctas[]{\n\t\t...,\n\t\tlink{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t},\n\t_type == 'breadcrumbs' => {\n\t\tcrumbs[]{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t},\n\t_type == 'logo-list' => {\n\t\tlogos[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n\t_type == 'person-list' => {\n\t\tpeople[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n\t_type == 'prose' => {\n\t\tcontent[]{\n\t\t\t...,\n\t\t\t_type == 'image' => {\n\t\t\t\t...,\n\t\t\t\tasset->{\n\t\t\t\t\t...,\n\t\t\t\t\tmetadata\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t'headings': select(\n\t\t\ttableOfContents in ['left', 'right'] => content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{\n\t\t\t\tstyle,\n\t\t\t\t'text': pt::text(@)\n\t\t\t}\n\t\t)\n\t},\n\t_type == 'testimonial-list' => {\n\t\ttestimonials[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n }\n\t\t)\n\t}\n": PAGE_QUERYResult
-		"*[_type == $type && metadata.slug.current == $slug][0]{\n\t'title': coalesce(metadata.title, title),\n}": OG_QUERYResult
-		"*[_type == 'blog.post' && metadata.slug.current == $slug][0]{\n\t...,\n\tcontent[]{\n\t\t...,\n\t\t_type == 'image' => {\n\t\t\t...,\n\t\t\tasset->\n\t\t}\n\t},\n\t'headings': content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{\n\t\tstyle,\n\t\t'text': pt::text(@)\n\t},\n\tcategories[]->{\n\t\ttitle,\n\t\tslug\n\t},\n\tauthor->{\n\t\tname,\n\t\timage{\n\t\t\t...,\n\t\t\tasset->\n\t\t}\n\t},\n\t'modules': (\n\t\t// global modules (before)\n\t\t*[_type == 'global-module' && path == '*'].before[]{ \n\t...,\n\tctas[]{\n\t\t...,\n\t\tlink{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t},\n\t_type == 'breadcrumbs' => {\n\t\tcrumbs[]{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t},\n\t_type == 'logo-list' => {\n\t\tlogos[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n\t_type == 'person-list' => {\n\t\tpeople[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n\t_type == 'prose' => {\n\t\tcontent[]{\n\t\t\t...,\n\t\t\t_type == 'image' => {\n\t\t\t\t...,\n\t\t\t\tasset->{\n\t\t\t\t\t...,\n\t\t\t\t\tmetadata\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t'headings': select(\n\t\t\ttableOfContents in ['left', 'right'] => content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{\n\t\t\t\tstyle,\n\t\t\t\t'text': pt::text(@)\n\t\t\t}\n\t\t)\n\t},\n\t_type == 'testimonial-list' => {\n\t\ttestimonials[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n }\n\t\t// path modules (before)\n\t\t+ *[_type == 'global-module' && path == $blogDir].before[]{ \n\t...,\n\tctas[]{\n\t\t...,\n\t\tlink{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t},\n\t_type == 'breadcrumbs' => {\n\t\tcrumbs[]{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t},\n\t_type == 'logo-list' => {\n\t\tlogos[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n\t_type == 'person-list' => {\n\t\tpeople[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n\t_type == 'prose' => {\n\t\tcontent[]{\n\t\t\t...,\n\t\t\t_type == 'image' => {\n\t\t\t\t...,\n\t\t\t\tasset->{\n\t\t\t\t\t...,\n\t\t\t\t\tmetadata\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t'headings': select(\n\t\t\ttableOfContents in ['left', 'right'] => content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{\n\t\t\t\tstyle,\n\t\t\t\t'text': pt::text(@)\n\t\t\t}\n\t\t)\n\t},\n\t_type == 'testimonial-list' => {\n\t\ttestimonials[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n }\n\t\t// path modules (after)\n\t\t+ *[_type == 'global-module' && path == $blogDir].after[]{ \n\t...,\n\tctas[]{\n\t\t...,\n\t\tlink{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t},\n\t_type == 'breadcrumbs' => {\n\t\tcrumbs[]{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t},\n\t_type == 'logo-list' => {\n\t\tlogos[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n\t_type == 'person-list' => {\n\t\tpeople[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n\t_type == 'prose' => {\n\t\tcontent[]{\n\t\t\t...,\n\t\t\t_type == 'image' => {\n\t\t\t\t...,\n\t\t\t\tasset->{\n\t\t\t\t\t...,\n\t\t\t\t\tmetadata\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t'headings': select(\n\t\t\ttableOfContents in ['left', 'right'] => content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{\n\t\t\t\tstyle,\n\t\t\t\t'text': pt::text(@)\n\t\t\t}\n\t\t)\n\t},\n\t_type == 'testimonial-list' => {\n\t\ttestimonials[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n }\n\t\t// global modules (after)\n\t\t+ *[_type == 'global-module' && path == '*'].after[]{ \n\t...,\n\tctas[]{\n\t\t...,\n\t\tlink{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t},\n\t_type == 'breadcrumbs' => {\n\t\tcrumbs[]{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t},\n\t_type == 'logo-list' => {\n\t\tlogos[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n\t_type == 'person-list' => {\n\t\tpeople[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n\t_type == 'prose' => {\n\t\tcontent[]{\n\t\t\t...,\n\t\t\t_type == 'image' => {\n\t\t\t\t...,\n\t\t\t\tasset->{\n\t\t\t\t\t...,\n\t\t\t\t\tmetadata\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t'headings': select(\n\t\t\ttableOfContents in ['left', 'right'] => content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{\n\t\t\t\tstyle,\n\t\t\t\t'text': pt::text(@)\n\t\t\t}\n\t\t)\n\t},\n\t_type == 'testimonial-list' => {\n\t\ttestimonials[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n }\n\t)\n}": BLOG_POST_QUERYResult
-		"{\n\t'blog': *[_type == 'page' && metadata.slug.current == $blogDir][0]{\n\t\tmetadata\n\t},\n\t'posts': *[_type == 'blog.post' && metadata.noIndex != true]|order(publishDate desc){\n\t\ttitle,\n\t\tcontent,\n\t\tpublishDate,\n\t\tcategories[]->{ title },\n\t\tauthor->{ name },\n\t\tmetadata\n\t}\n}": BLOG_RSS_QUERYResult
-		"\n\t*[_type == 'page' && metadata.slug.current == '404'][0]{\n\t\t...,\n\t\tmodules[]{ \n\t...,\n\tctas[]{\n\t\t...,\n\t\tlink{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t},\n\t_type == 'breadcrumbs' => {\n\t\tcrumbs[]{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t},\n\t_type == 'logo-list' => {\n\t\tlogos[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n\t_type == 'person-list' => {\n\t\tpeople[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n\t_type == 'prose' => {\n\t\tcontent[]{\n\t\t\t...,\n\t\t\t_type == 'image' => {\n\t\t\t\t...,\n\t\t\t\tasset->{\n\t\t\t\t\t...,\n\t\t\t\t\tmetadata\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t'headings': select(\n\t\t\ttableOfContents in ['left', 'right'] => content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{\n\t\t\t\tstyle,\n\t\t\t\t'text': pt::text(@)\n\t\t\t}\n\t\t)\n\t},\n\t_type == 'testimonial-list' => {\n\t\ttestimonials[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n }\n\t}\n": NOT_FOUND_QUERYResult
-		"*[_type == 'site'][0]{\n\t...,\n\theader->{ \n\titems[]{\n\t\t\n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n,\n\t\tdefined(link) => { link{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n } },\n\t\tdefined(links[]) => { links[]{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n } },\n\t\t_type == 'megamenu' => {\n\t\t\tdefined(link) => { link{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n } },\n\t\t\titems[]{\n\t\t\t\t...,\n\t\t\t\t_type == 'link.list' => {\n\t\t\t\t\tdefined(link) => { link{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n } },\n\t\t\t\t\tlinks[]{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n },\n\tctas[]{\n\t\t...,\n\t\tlink{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t},\n\tfooter->{ \n\titems[]{\n\t\t\n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n,\n\t\tdefined(link) => { link{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n } },\n\t\tdefined(links[]) => { links[]{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n } },\n\t\t_type == 'megamenu' => {\n\t\t\tdefined(link) => { link{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n } },\n\t\t\titems[]{\n\t\t\t\t...,\n\t\t\t\t_type == 'link.list' => {\n\t\t\t\t\tdefined(link) => { link{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n } },\n\t\t\t\t\tlinks[]{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n },\n\tsocial->{ \n\titems[]{\n\t\t\n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n,\n\t\tdefined(link) => { link{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n } },\n\t\tdefined(links[]) => { links[]{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n } },\n\t\t_type == 'megamenu' => {\n\t\t\tdefined(link) => { link{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n } },\n\t\t\titems[]{\n\t\t\t\t...,\n\t\t\t\t_type == 'link.list' => {\n\t\t\t\t\tdefined(link) => { link{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n } },\n\t\t\t\t\tlinks[]{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n },\n}": SITE_QUERYResult
-		'\n\tstring::startsWith($slug, path)\n\t&& select(\n\t\tdefined(excludePaths) => count(excludePaths[string::startsWith($slug, @)]) == 0,\n\t\ttrue\n\t)\n': GLOBAL_MODULE_PATH_QUERYResult
-		"\n\t*[_type == 'blog.post']|order(publishDate desc)[0...$limit]{\n\t\t...,\n\t\tcategories[]->{\n\t\t\ttitle,\n\t\t\tslug\n\t\t},\n\t\tauthor->{\n\t\t\tname,\n\t\t\timage{\n\t\t\t\t...,\n\t\t\t\tasset->\n\t\t\t}\n\t\t},\n\t\tmetadata{\n\t\t\t...,\n\t\t\timage{\n\t\t\t\t...,\n\t\t\t\tasset->\n\t\t\t}\n\t\t},\n\t\t'slug': $blogDir + metadata.slug.current,\n\t}\n": BLOG_POST_LIST_QUERYResult
-		"\n\t*[_type == 'blog.post']|order(publishDate desc){\n\t\t...,\n\t\tcategories[]->,\n\t\tauthor->{\n\t\t\tname,\n\t\t\timage{\n\t\t\t\t...,\n\t\t\t\tasset->\n\t\t\t}\n\t\t},\n\t\tmetadata{\n\t\t\t...,\n\t\t\timage{\n\t\t\t\t...,\n\t\t\t\tasset->\n\t\t\t}\n\t\t},\n\t\t'slug': $blogDir + metadata.slug.current,\n\t}\n": BLOG_FRONTPAGE_QUERYResult
-		"\n\t*[\n\t\t_type == 'blog.category'\n\t\t&& count(*[_type == 'blog.post' && references(^._id)]) > 0\n\t]|order(title)\n": CATEGORIES_QUERYResult
-		"*[\n\t_type in $scope\n\t&& defined(metadata.slug.current)\n\t&& metadata.noIndex != true\n\t&& !(metadata.slug.current in ['404'])\n\t&& [\n\t\tmodules[].intro[].children[].text,\n\t\tmodules[].content[].children[].text,\n\t\tcontent[].children[].text,\n\t\ttitle,\n\t\tmetadata.title,\n\t\tmetadata.description\n\t] match $queryMatch\n]{\n\t_id,\n\t_type,\n\ttitle,\n\t'slug': select(\n\t\t_type == 'blog.post' => $blogDir + metadata.slug.current,\n\t\tmetadata.slug.current == 'index' => '/',\n\t\t'/' + metadata.slug.current\n\t)\n}": SEARCH_QUERYResult
+		"\n\t*[_type == 'page' && metadata.slug.current == $slug][0]{\n\t\t...,\n\t\t'modules': (\n\t\t\t// global moddules (before)\n\t\t\t*[_type == 'global-module' && path == '*'].before[]{ \n\t...,\n\tctas[]{\n\t\t...,\n\t\tlink{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t},\n\t_type == 'breadcrumbs' => {\n\t\tcrumbs[]{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t},\n\t_type == 'logo-list' => {\n\t\tlogos[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n\t_type == 'person-list' => {\n\t\tpeople[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n\t_type == 'prose' => {\n\t\tcontent[]{\n\t\t\t...,\n\t\t\t_type == 'image' => {\n\t\t\t\t...,\n\t\t\t\tasset->{\n\t\t\t\t\t...,\n\t\t\t\t\tmetadata\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t'headings': select(\n\t\t\ttableOfContents in ['left', 'right'] => content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{\n\t\t\t\tstyle,\n\t\t\t\t'text': pt::text(@)\n\t\t\t}\n\t\t)\n\t},\n\t_type == 'testimonial-list' => {\n\t\ttestimonials[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n }\n\t\t\t// path modules (before)\n\t\t\t+ *[_type == 'global-module' && path != '*' && \n\tstring::startsWith($slug, path)\n\t&& select(\n\t\tdefined(excludePaths) => count(excludePaths[string::startsWith($slug, @)]) == 0,\n\t\ttrue\n\t)\n].before[]{ \n\t...,\n\tctas[]{\n\t\t...,\n\t\tlink{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t},\n\t_type == 'breadcrumbs' => {\n\t\tcrumbs[]{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t},\n\t_type == 'logo-list' => {\n\t\tlogos[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n\t_type == 'person-list' => {\n\t\tpeople[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n\t_type == 'prose' => {\n\t\tcontent[]{\n\t\t\t...,\n\t\t\t_type == 'image' => {\n\t\t\t\t...,\n\t\t\t\tasset->{\n\t\t\t\t\t...,\n\t\t\t\t\tmetadata\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t'headings': select(\n\t\t\ttableOfContents in ['left', 'right'] => content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{\n\t\t\t\tstyle,\n\t\t\t\t'text': pt::text(@)\n\t\t\t}\n\t\t)\n\t},\n\t_type == 'testimonial-list' => {\n\t\ttestimonials[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n }\n\t\t\t// page modules\n\t\t\t+ modules[]{ \n\t...,\n\tctas[]{\n\t\t...,\n\t\tlink{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t},\n\t_type == 'breadcrumbs' => {\n\t\tcrumbs[]{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t},\n\t_type == 'logo-list' => {\n\t\tlogos[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n\t_type == 'person-list' => {\n\t\tpeople[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n\t_type == 'prose' => {\n\t\tcontent[]{\n\t\t\t...,\n\t\t\t_type == 'image' => {\n\t\t\t\t...,\n\t\t\t\tasset->{\n\t\t\t\t\t...,\n\t\t\t\t\tmetadata\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t'headings': select(\n\t\t\ttableOfContents in ['left', 'right'] => content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{\n\t\t\t\tstyle,\n\t\t\t\t'text': pt::text(@)\n\t\t\t}\n\t\t)\n\t},\n\t_type == 'testimonial-list' => {\n\t\ttestimonials[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n }\n\t\t\t// path modules (after)\n\t\t\t+ *[_type == 'global-module' && path != '*' && \n\tstring::startsWith($slug, path)\n\t&& select(\n\t\tdefined(excludePaths) => count(excludePaths[string::startsWith($slug, @)]) == 0,\n\t\ttrue\n\t)\n].after[]{ \n\t...,\n\tctas[]{\n\t\t...,\n\t\tlink{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t},\n\t_type == 'breadcrumbs' => {\n\t\tcrumbs[]{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t},\n\t_type == 'logo-list' => {\n\t\tlogos[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n\t_type == 'person-list' => {\n\t\tpeople[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n\t_type == 'prose' => {\n\t\tcontent[]{\n\t\t\t...,\n\t\t\t_type == 'image' => {\n\t\t\t\t...,\n\t\t\t\tasset->{\n\t\t\t\t\t...,\n\t\t\t\t\tmetadata\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t'headings': select(\n\t\t\ttableOfContents in ['left', 'right'] => content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{\n\t\t\t\tstyle,\n\t\t\t\t'text': pt::text(@)\n\t\t\t}\n\t\t)\n\t},\n\t_type == 'testimonial-list' => {\n\t\ttestimonials[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n }\n\t\t\t// global moddules (after)\n\t\t\t+ *[_type == 'global-module' && path == '*'].after[]{ \n\t...,\n\tctas[]{\n\t\t...,\n\t\tlink{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t},\n\t_type == 'breadcrumbs' => {\n\t\tcrumbs[]{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t},\n\t_type == 'logo-list' => {\n\t\tlogos[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n\t_type == 'person-list' => {\n\t\tpeople[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n\t_type == 'prose' => {\n\t\tcontent[]{\n\t\t\t...,\n\t\t\t_type == 'image' => {\n\t\t\t\t...,\n\t\t\t\tasset->{\n\t\t\t\t\t...,\n\t\t\t\t\tmetadata\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t'headings': select(\n\t\t\ttableOfContents in ['left', 'right'] => content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{\n\t\t\t\tstyle,\n\t\t\t\t'text': pt::text(@)\n\t\t\t}\n\t\t)\n\t},\n\t_type == 'testimonial-list' => {\n\t\ttestimonials[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n }\n\t\t)\n\t}\n": PAGE_QUERY_RESULT
+		"*[_type == $type && metadata.slug.current == $slug][0]{\n\t'title': coalesce(metadata.title, title),\n}": OG_QUERY_RESULT
+		"*[_type == 'blog.post' && metadata.slug.current == $slug][0]{\n\t...,\n\tcontent[]{\n\t\t...,\n\t\t_type == 'image' => {\n\t\t\t...,\n\t\t\tasset->\n\t\t}\n\t},\n\t'headings': content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{\n\t\tstyle,\n\t\t'text': pt::text(@)\n\t},\n\tcategories[]->{\n\t\ttitle,\n\t\tslug\n\t},\n\tauthor->{\n\t\tname,\n\t\timage{\n\t\t\t...,\n\t\t\tasset->\n\t\t}\n\t},\n\t'modules': (\n\t\t// global modules (before)\n\t\t*[_type == 'global-module' && path == '*'].before[]{ \n\t...,\n\tctas[]{\n\t\t...,\n\t\tlink{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t},\n\t_type == 'breadcrumbs' => {\n\t\tcrumbs[]{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t},\n\t_type == 'logo-list' => {\n\t\tlogos[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n\t_type == 'person-list' => {\n\t\tpeople[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n\t_type == 'prose' => {\n\t\tcontent[]{\n\t\t\t...,\n\t\t\t_type == 'image' => {\n\t\t\t\t...,\n\t\t\t\tasset->{\n\t\t\t\t\t...,\n\t\t\t\t\tmetadata\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t'headings': select(\n\t\t\ttableOfContents in ['left', 'right'] => content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{\n\t\t\t\tstyle,\n\t\t\t\t'text': pt::text(@)\n\t\t\t}\n\t\t)\n\t},\n\t_type == 'testimonial-list' => {\n\t\ttestimonials[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n }\n\t\t// path modules (before)\n\t\t+ *[_type == 'global-module' && path == $blogDir].before[]{ \n\t...,\n\tctas[]{\n\t\t...,\n\t\tlink{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t},\n\t_type == 'breadcrumbs' => {\n\t\tcrumbs[]{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t},\n\t_type == 'logo-list' => {\n\t\tlogos[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n\t_type == 'person-list' => {\n\t\tpeople[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n\t_type == 'prose' => {\n\t\tcontent[]{\n\t\t\t...,\n\t\t\t_type == 'image' => {\n\t\t\t\t...,\n\t\t\t\tasset->{\n\t\t\t\t\t...,\n\t\t\t\t\tmetadata\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t'headings': select(\n\t\t\ttableOfContents in ['left', 'right'] => content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{\n\t\t\t\tstyle,\n\t\t\t\t'text': pt::text(@)\n\t\t\t}\n\t\t)\n\t},\n\t_type == 'testimonial-list' => {\n\t\ttestimonials[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n }\n\t\t// path modules (after)\n\t\t+ *[_type == 'global-module' && path == $blogDir].after[]{ \n\t...,\n\tctas[]{\n\t\t...,\n\t\tlink{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t},\n\t_type == 'breadcrumbs' => {\n\t\tcrumbs[]{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t},\n\t_type == 'logo-list' => {\n\t\tlogos[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n\t_type == 'person-list' => {\n\t\tpeople[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n\t_type == 'prose' => {\n\t\tcontent[]{\n\t\t\t...,\n\t\t\t_type == 'image' => {\n\t\t\t\t...,\n\t\t\t\tasset->{\n\t\t\t\t\t...,\n\t\t\t\t\tmetadata\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t'headings': select(\n\t\t\ttableOfContents in ['left', 'right'] => content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{\n\t\t\t\tstyle,\n\t\t\t\t'text': pt::text(@)\n\t\t\t}\n\t\t)\n\t},\n\t_type == 'testimonial-list' => {\n\t\ttestimonials[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n }\n\t\t// global modules (after)\n\t\t+ *[_type == 'global-module' && path == '*'].after[]{ \n\t...,\n\tctas[]{\n\t\t...,\n\t\tlink{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t},\n\t_type == 'breadcrumbs' => {\n\t\tcrumbs[]{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t},\n\t_type == 'logo-list' => {\n\t\tlogos[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n\t_type == 'person-list' => {\n\t\tpeople[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n\t_type == 'prose' => {\n\t\tcontent[]{\n\t\t\t...,\n\t\t\t_type == 'image' => {\n\t\t\t\t...,\n\t\t\t\tasset->{\n\t\t\t\t\t...,\n\t\t\t\t\tmetadata\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t'headings': select(\n\t\t\ttableOfContents in ['left', 'right'] => content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{\n\t\t\t\tstyle,\n\t\t\t\t'text': pt::text(@)\n\t\t\t}\n\t\t)\n\t},\n\t_type == 'testimonial-list' => {\n\t\ttestimonials[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n }\n\t)\n}": BLOG_POST_QUERY_RESULT
+		"{\n\t'blog': *[_type == 'page' && metadata.slug.current == $blogDir][0]{\n\t\tmetadata\n\t},\n\t'posts': *[_type == 'blog.post' && metadata.noIndex != true]|order(publishDate desc){\n\t\ttitle,\n\t\tcontent,\n\t\tpublishDate,\n\t\tcategories[]->{ title },\n\t\tauthor->{ name },\n\t\tmetadata\n\t}\n}": BLOG_RSS_QUERY_RESULT
+		"\n\t*[_type == 'page' && metadata.slug.current == '404'][0]{\n\t\t...,\n\t\tmodules[]{ \n\t...,\n\tctas[]{\n\t\t...,\n\t\tlink{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t},\n\t_type == 'breadcrumbs' => {\n\t\tcrumbs[]{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t},\n\t_type == 'logo-list' => {\n\t\tlogos[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n\t_type == 'person-list' => {\n\t\tpeople[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n\t_type == 'prose' => {\n\t\tcontent[]{\n\t\t\t...,\n\t\t\t_type == 'image' => {\n\t\t\t\t...,\n\t\t\t\tasset->{\n\t\t\t\t\t...,\n\t\t\t\t\tmetadata\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\t'headings': select(\n\t\t\ttableOfContents in ['left', 'right'] => content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{\n\t\t\t\tstyle,\n\t\t\t\t'text': pt::text(@)\n\t\t\t}\n\t\t)\n\t},\n\t_type == 'testimonial-list' => {\n\t\ttestimonials[]{\n\t\t\t...,\n\t\t\t_type == 'reference' => @->\n\t\t}\n\t},\n }\n\t}\n": NOT_FOUND_QUERY_RESULT
+		"*[_type == 'site'][0]{\n\t...,\n\theader->{ \n\titems[]{\n\t\t\n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n,\n\t\tdefined(link) => { link{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n } },\n\t\tdefined(links[]) => { links[]{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n } },\n\t\t_type == 'megamenu' => {\n\t\t\tdefined(link) => { link{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n } },\n\t\t\titems[]{\n\t\t\t\t...,\n\t\t\t\t_type == 'link.list' => {\n\t\t\t\t\tdefined(link) => { link{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n } },\n\t\t\t\t\tlinks[]{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n },\n\tctas[]{\n\t\t...,\n\t\tlink{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t},\n\tfooter->{ \n\titems[]{\n\t\t\n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n,\n\t\tdefined(link) => { link{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n } },\n\t\tdefined(links[]) => { links[]{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n } },\n\t\t_type == 'megamenu' => {\n\t\t\tdefined(link) => { link{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n } },\n\t\t\titems[]{\n\t\t\t\t...,\n\t\t\t\t_type == 'link.list' => {\n\t\t\t\t\tdefined(link) => { link{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n } },\n\t\t\t\t\tlinks[]{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n },\n\tsocial->{ \n\titems[]{\n\t\t\n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n,\n\t\tdefined(link) => { link{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n } },\n\t\tdefined(links[]) => { links[]{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n } },\n\t\t_type == 'megamenu' => {\n\t\t\tdefined(link) => { link{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n } },\n\t\t\titems[]{\n\t\t\t\t...,\n\t\t\t\t_type == 'link.list' => {\n\t\t\t\t\tdefined(link) => { link{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n } },\n\t\t\t\t\tlinks[]{ \n\t...,\n\ttype == 'internal' => {\n\t\tinternal->{\n\t\t\t_type,\n\t\t\ttitle,\n\t\t\t'slug': select(\n\t\t\t\tmetadata.slug.current == 'index' => '/',\n\t\t\t\t'/' + metadata.slug.current\n\t\t\t)\n\t\t}\n\t}\n }\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n },\n}": SITE_QUERY_RESULT
+		'\n\tstring::startsWith($slug, path)\n\t&& select(\n\t\tdefined(excludePaths) => count(excludePaths[string::startsWith($slug, @)]) == 0,\n\t\ttrue\n\t)\n': GLOBAL_MODULE_PATH_QUERY_RESULT
+		"\n\t*[_type == 'blog.post']|order(publishDate desc)[0...$limit]{\n\t\t...,\n\t\tcategories[]->{\n\t\t\ttitle,\n\t\t\tslug\n\t\t},\n\t\tauthor->{\n\t\t\tname,\n\t\t\timage{\n\t\t\t\t...,\n\t\t\t\tasset->\n\t\t\t}\n\t\t},\n\t\tmetadata{\n\t\t\t...,\n\t\t\timage{\n\t\t\t\t...,\n\t\t\t\tasset->\n\t\t\t}\n\t\t},\n\t\t'slug': $blogDir + metadata.slug.current,\n\t}\n": BLOG_POST_LIST_QUERY_RESULT
+		"\n\t*[_type == 'blog.post']|order(publishDate desc){\n\t\t...,\n\t\tcategories[]->,\n\t\tauthor->{\n\t\t\tname,\n\t\t\timage{\n\t\t\t\t...,\n\t\t\t\tasset->\n\t\t\t}\n\t\t},\n\t\tmetadata{\n\t\t\t...,\n\t\t\timage{\n\t\t\t\t...,\n\t\t\t\tasset->\n\t\t\t}\n\t\t},\n\t\t'slug': $blogDir + metadata.slug.current,\n\t}\n": BLOG_INDEX_QUERY_RESULT
+		"\n\t*[\n\t\t_type == 'blog.category'\n\t\t&& count(*[_type == 'blog.post' && references(^._id)]) > 0\n\t]|order(title)\n": CATEGORIES_QUERY_RESULT
+		"*[\n\t_type in $scope\n\t&& defined(metadata.slug.current)\n\t&& metadata.noIndex != true\n\t&& !(metadata.slug.current in ['404'])\n\t&& [\n\t\tmodules[].intro[].children[].text,\n\t\tmodules[].content[].children[].text,\n\t\tcontent[].children[].text,\n\t\ttitle,\n\t\tmetadata.title,\n\t\tmetadata.description\n\t] match $queryMatch\n]{\n\t_id,\n\t_type,\n\ttitle,\n\t'slug': select(\n\t\t_type == 'blog.post' => $blogDir + metadata.slug.current,\n\t\tmetadata.slug.current == 'index' => '/',\n\t\t'/' + metadata.slug.current\n\t)\n}": SEARCH_QUERY_RESULT
 	}
 }
