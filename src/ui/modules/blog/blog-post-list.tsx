@@ -18,9 +18,11 @@ export default async function ({
 
 	return (
 		<section className="section space-y-4">
-			<header className="prose">
-				<PortableText value={intro} />
-			</header>
+			{intro && (
+				<header className="prose text-center">
+					<PortableText value={intro} />
+				</header>
+			)}
 
 			<ul
 				className="carousel max-md:full-bleed items-start gap-4 pb-2 max-md:px-4 md:mask-r-from-[calc(100%-2rem)] md:pr-4"
@@ -35,7 +37,7 @@ export default async function ({
 				))}
 			</ul>
 
-			<CTAList ctas={ctas} />
+			<CTAList ctas={ctas} className="justify-center" />
 		</section>
 	)
 }

@@ -9,9 +9,11 @@ export default function ({
 }: TestimonialList & { _key: string }) {
 	return (
 		<section className="section space-y-4">
-			<header className="prose">
-				<PortableText value={intro} />
-			</header>
+			{intro && (
+				<header className="prose text-center">
+					<PortableText value={intro} />
+				</header>
+			)}
 
 			<ul
 				className="carousel max-md:full-bleed items-stretch gap-4 pb-2 max-md:px-4 md:mask-r-from-[calc(100%-2rem)] md:pr-4"
