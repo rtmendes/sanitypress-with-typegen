@@ -15,7 +15,9 @@ export default function ({
 	if (!post) return null
 
 	return (
-		<article className={cn('relative grid gap-4 md:grid-cols-2', className)}>
+		<article
+			className={cn('relative grid gap-x-8 gap-y-4 md:grid-cols-2', className)}
+		>
 			<figure className="bg-foreground/5 max-md:full-bleed aspect-video self-start">
 				{post.metadata?.image ? (
 					<Img

@@ -3,7 +3,7 @@ import type { StepList } from '@/sanity/types'
 
 export default function ({ intro = [], steps }: StepList) {
 	return (
-		<section className="section grid items-start gap-4 md:grid-cols-2">
+		<section className="section grid items-start gap-8 md:grid-cols-2">
 			{intro && (
 				<header className="prose md:sticky-below-header [--offset:1rem]">
 					<PortableText value={intro} />

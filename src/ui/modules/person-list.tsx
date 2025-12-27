@@ -9,7 +9,7 @@ export default function ({ intro = [], people }: PersonList) {
 				<PortableText value={intro} />
 			</header>
 
-			<ul className="carousel max-md:full-bleed gap-4 pb-2 max-md:px-4">
+			<ul className="carousel max-md:full-bleed gap-8 pb-2 max-md:px-4">
 				{(people as Partial<Person>[])?.map((person, key) => (
 					<li key={key}>
 						<article className="space-y-4">

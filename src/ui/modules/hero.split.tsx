@@ -8,7 +8,7 @@ import { moduleAttributes } from '.'
 export default function ({ content = [], ctas, image, ...props }: HeroSplit) {
 	return (
 		<section
-			className="section grid items-center gap-4 md:grid-cols-2"
+			className="section grid items-center gap-8 md:grid-cols-2"
 			{...moduleAttributes(props)}
 		>
 			<figure

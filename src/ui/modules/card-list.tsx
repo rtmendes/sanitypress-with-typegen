@@ -13,7 +13,7 @@ export default function ({ intro = [], items, ctas }: CardList) {
 			)}
 
 			{items && items.length > 0 && (
-				<ul className="grid gap-x-4 gap-y-8 md:grid-cols-[repeat(auto-fill,minmax(var(--container-2xs),1fr))]">
+				<ul className="grid gap-8 md:grid-cols-2 lg:grid-cols-[repeat(auto-fit,minmax(var(--container-3xs),1fr))]">
 					{items.map((item) => (
 						<li key={item._key} className="prose">
 							<Img
