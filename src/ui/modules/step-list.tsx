@@ -10,7 +10,7 @@ export default function ({ intro = [], steps }: StepList) {
 				</header>
 			)}
 
-			<ol className="gap-lh grid">
+			<ol className="grid gap-8">
 				{steps?.map((step) => (
 					<li
 						className="gap-ch flex items-start [counter-increment:step]"
