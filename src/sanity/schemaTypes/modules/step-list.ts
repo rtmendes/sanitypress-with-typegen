@@ -7,11 +7,25 @@ export default defineType({
 	title: 'Step list',
 	type: 'object',
 	icon: OlistIcon,
+	groups: [{ name: 'content', default: true }, { name: 'options' }],
 	fields: [
+		defineField({
+			name: 'attributes',
+			type: 'module-attributes',
+			group: 'options',
+		}),
 		defineField({
 			name: 'intro',
 			type: 'array',
 			of: [{ type: 'block' }],
+			group: 'content',
+		}),
+		defineField({
+			name: 'ctas',
+			title: 'Call-to-actions',
+			type: 'array',
+			of: [{ type: 'cta' }],
+			group: 'content',
 		}),
 		defineField({
 			name: 'steps',
@@ -37,6 +51,7 @@ export default defineType({
 					},
 				}),
 			],
+			group: 'content',
 		}),
 	],
 	preview: {

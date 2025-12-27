@@ -122,6 +122,7 @@ export type TestimonialList = {
 
 export type StepList = {
 	_type: 'step-list'
+	attributes?: ModuleAttributes
 	intro?: Array<{
 		children?: Array<{
 			marks?: Array<string>
@@ -140,6 +141,11 @@ export type StepList = {
 		_type: 'block'
 		_key: string
 	}>
+	ctas?: Array<
+		{
+			_key: string
+		} & Cta
+	>
 	steps?: Array<{
 		content?: Array<{
 			children?: Array<{
@@ -2177,6 +2183,7 @@ export type PAGE_QUERY_RESULT = {
 		| {
 				_key: string
 				_type: 'step-list'
+				attributes?: ModuleAttributes
 				intro?: Array<{
 					children?: Array<{
 						marks?: Array<string>
@@ -2203,6 +2210,33 @@ export type PAGE_QUERY_RESULT = {
 					_type: 'block'
 					_key: string
 				}>
+				ctas: Array<{
+					_key: string
+					_type: 'cta'
+					link:
+						| {
+								_type: 'link'
+								label?: string
+								type?: 'external' | 'internal'
+								internal?: PageReference
+								external?: string
+								params?: string
+						  }
+						| {
+								_type: 'link'
+								label?: string
+								type?: 'external' | 'internal'
+								internal: {
+									_type: 'page'
+									title: string | null
+									slug: string | '/' | null
+								} | null
+								external?: string
+								params?: string
+						  }
+						| null
+					style?: 'action-outline' | 'action' | 'ghost' | 'link'
+				}> | null
 				steps?: Array<{
 					content?: Array<{
 						children?: Array<{
@@ -2233,7 +2267,6 @@ export type PAGE_QUERY_RESULT = {
 					_type: 'step'
 					_key: string
 				}>
-				ctas: null
 		  }
 		| {
 				_key: string
@@ -3213,6 +3246,7 @@ export type BLOG_POST_QUERY_RESULT = {
 		| {
 				_key: string
 				_type: 'step-list'
+				attributes?: ModuleAttributes
 				intro?: Array<{
 					children?: Array<{
 						marks?: Array<string>
@@ -3239,6 +3273,33 @@ export type BLOG_POST_QUERY_RESULT = {
 					_type: 'block'
 					_key: string
 				}>
+				ctas: Array<{
+					_key: string
+					_type: 'cta'
+					link:
+						| {
+								_type: 'link'
+								label?: string
+								type?: 'external' | 'internal'
+								internal?: PageReference
+								external?: string
+								params?: string
+						  }
+						| {
+								_type: 'link'
+								label?: string
+								type?: 'external' | 'internal'
+								internal: {
+									_type: 'page'
+									title: string | null
+									slug: string | '/' | null
+								} | null
+								external?: string
+								params?: string
+						  }
+						| null
+					style?: 'action-outline' | 'action' | 'ghost' | 'link'
+				}> | null
 				steps?: Array<{
 					content?: Array<{
 						children?: Array<{
@@ -3269,7 +3330,6 @@ export type BLOG_POST_QUERY_RESULT = {
 					_type: 'step'
 					_key: string
 				}>
-				ctas: null
 		  }
 		| {
 				_key: string
@@ -4165,6 +4225,7 @@ export type NOT_FOUND_QUERY_RESULT = {
 		| {
 				_key: string
 				_type: 'step-list'
+				attributes?: ModuleAttributes
 				intro?: Array<{
 					children?: Array<{
 						marks?: Array<string>
@@ -4191,6 +4252,33 @@ export type NOT_FOUND_QUERY_RESULT = {
 					_type: 'block'
 					_key: string
 				}>
+				ctas: Array<{
+					_key: string
+					_type: 'cta'
+					link:
+						| {
+								_type: 'link'
+								label?: string
+								type?: 'external' | 'internal'
+								internal?: PageReference
+								external?: string
+								params?: string
+						  }
+						| {
+								_type: 'link'
+								label?: string
+								type?: 'external' | 'internal'
+								internal: {
+									_type: 'page'
+									title: string | null
+									slug: string | '/' | null
+								} | null
+								external?: string
+								params?: string
+						  }
+						| null
+					style?: 'action-outline' | 'action' | 'ghost' | 'link'
+				}> | null
 				steps?: Array<{
 					content?: Array<{
 						children?: Array<{
@@ -4221,7 +4309,6 @@ export type NOT_FOUND_QUERY_RESULT = {
 					_type: 'step'
 					_key: string
 				}>
-				ctas: null
 		  }
 		| {
 				_key: string

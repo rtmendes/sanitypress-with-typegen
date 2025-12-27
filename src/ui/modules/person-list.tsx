@@ -4,7 +4,7 @@ import Img from '@/ui/img'
 
 export default function ({ intro = [], people }: PersonList) {
 	return (
-		<section className="section space-y-4">
+		<section className="section space-y-8">
 			<header className="prose">
 				<PortableText value={intro} />
 			</header>
@@ -12,7 +12,7 @@ export default function ({ intro = [], people }: PersonList) {
 			<ul className="carousel max-md:full-bleed gap-8 pb-2 max-md:px-4">
 				{(people as Partial<Person>[])?.map((person, key) => (
 					<li key={key}>
-						<article className="space-y-4">
+						<article className="space-y-8">
 							<Img
 								className="aspect-square w-full object-cover"
 								width={400}

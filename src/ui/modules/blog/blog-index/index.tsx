@@ -17,7 +17,7 @@ export default async function ({ intro, postsPerPage = 6 }: BlogIndex) {
 	})
 
 	return (
-		<section className={cn('section space-y-4', intro && 'pt-4')}>
+		<section className={cn('section space-y-8', intro && 'pt-4')}>
 			{intro && (
 				<header className="prose">
 					<PortableText value={intro} />

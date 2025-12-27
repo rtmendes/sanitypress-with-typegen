@@ -10,7 +10,7 @@ export default function ({
 }: AccordionList & { _key: string }) {
 	return (
 		<section
-			className="section space-y-4"
+			className="section space-y-8"
 			{...(enableSchema && {
 				itemScope: true,
 				itemType: 'https://schema.org/FAQPage',

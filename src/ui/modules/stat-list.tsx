@@ -3,7 +3,7 @@ import type { StatList } from '@/sanity/types'
 
 export default function ({ intro, stats }: StatList) {
 	return (
-		<section className="section space-y-4">
+		<section className="section space-y-8">
 			{intro && (
 				<header className="prose text-center">
 					<PortableText value={intro} />

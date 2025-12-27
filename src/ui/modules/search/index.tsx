@@ -7,7 +7,7 @@ import SearchForm from './search-form'
 export default function ({ intro = [], scope }: SearchModule) {
 	return (
 		<section className="section">
-			<div className="mx-auto max-w-2xl space-y-4">
+			<div className="mx-auto max-w-2xl space-y-8">
 				<header className="prose text-center">
 					<PortableText value={intro} />
 				</header>

@@ -1,14 +1,14 @@
 import { PortableText } from 'next-sanity'
 import type { StepList } from '@/sanity/types'
+import CTAList from '@/ui/cta-list'
 
-export default function ({ intro = [], steps }: StepList) {
+export default function ({ intro = [], ctas, steps }: StepList) {
 	return (
 		<section className="section grid items-start gap-8 md:grid-cols-2">
-			{intro && (
-				<header className="prose md:sticky-below-header [--offset:1rem]">
-					<PortableText value={intro} />
-				</header>
-			)}
+			<header className="prose md:sticky-below-header [--offset:1rem]">
+				<PortableText value={intro} />
+				<CTAList ctas={ctas} />
+			</header>
 
 			<ol className="grid gap-8">
 				{steps?.map((step) => (

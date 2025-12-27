@@ -6,7 +6,7 @@ import Img from '@/ui/img'
 
 export default function ({ intro = [], cards, ctas, columns }: CardList) {
 	return (
-		<section className="section space-y-4">
+		<section className="section space-y-8">
 			{intro && (
 				<header className="prose text-center">
 					<PortableText value={intro} />
@@ -16,10 +16,10 @@ export default function ({ intro = [], cards, ctas, columns }: CardList) {
 			{!!cards?.length && (
 				<ul
 					className={cn(
-						'grid gap-8',
+						'grid gap-8 md:grid-cols-2',
 						columns
-							? 'md:grid-cols-[repeat(var(--columns,1),minmax(0px,1fr))]'
-							: 'md:grid-cols-2 lg:grid-cols-[repeat(auto-fit,minmax(var(--container-3xs),1fr))]',
+							? 'lg:grid-cols-[repeat(var(--columns,1),minmax(0px,1fr))]'
+							: 'lg:grid-cols-[repeat(auto-fit,minmax(var(--container-3xs),1fr))]',
 					)}
 					style={{ '--columns': columns } as React.CSSProperties}
 				>
