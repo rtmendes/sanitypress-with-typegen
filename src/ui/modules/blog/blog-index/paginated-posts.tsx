@@ -17,9 +17,10 @@ export default function ({
 	const [sortBy] = useQueryState('sortBy')
 
 	const processedPosts = posts
-		?.filter(
-			(post) =>
-				!category || post.categories?.some((c) => c.slug?.current === category),
+		?.filter((post, i) =>
+			!category
+				? i !== 0
+				: post.categories?.some((c) => c.slug?.current === category),
 		)
 		?.sort((a, b) => {
 			if (sortBy === 'publishDate_desc')
@@ -41,7 +42,7 @@ export default function ({
 			{currentPage === 1 && !category && (
 				<>
 					<PostPreviewLarge
-						post={paginatedItems?.[0] as unknown as BlogPost}
+						post={posts?.[0] as unknown as BlogPost}
 						className="md:order-first"
 					/>
 					<hr className="max-md:full-bleed border-stroke md:order-first" />
