@@ -1,9 +1,10 @@
 import { PortableText } from 'next-sanity'
+import { cn } from '@/lib/utils'
 import type { CardList } from '@/sanity/types'
 import CTAList from '@/ui/cta-list'
 import Img from '@/ui/img'
 
-export default function ({ intro = [], items, ctas }: CardList) {
+export default function ({ intro = [], cards, ctas, columns }: CardList) {
 	return (
 		<section className="section space-y-4">
 			{intro && (
@@ -12,9 +13,17 @@ export default function ({ intro = [], items, ctas }: CardList) {
 				</header>
 			)}
 
-			{items && items.length > 0 && (
-				<ul className="grid gap-8 md:grid-cols-2 lg:grid-cols-[repeat(auto-fit,minmax(var(--container-3xs),1fr))]">
-					{items.map((item) => (
+			{!!cards?.length && (
+				<ul
+					className={cn(
+						'grid gap-8',
+						columns
+							? 'md:grid-cols-[repeat(var(--columns,1),minmax(0px,1fr))]'
+							: 'md:grid-cols-2 lg:grid-cols-[repeat(auto-fit,minmax(var(--container-3xs),1fr))]',
+					)}
+					style={{ '--columns': columns } as React.CSSProperties}
+				>
+					{cards.map((item) => (
 						<li key={item._key} className="prose">
 							<Img
 								className="aspect-video w-full object-cover"

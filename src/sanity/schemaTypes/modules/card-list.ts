@@ -7,14 +7,24 @@ export default defineType({
 	title: 'Card list',
 	type: 'object',
 	icon: TfiLayoutGrid2Thumb,
+	groups: [
+		{ name: 'content', default: true },
+		{ name: 'options' },
+	],
 	fields: [
+		defineField({
+			name: 'attributes',
+			type: 'module-attributes',
+			group: 'options',
+		}),
 		defineField({
 			name: 'intro',
 			type: 'array',
 			of: [{ type: 'block' }],
+			group: 'content',
 		}),
 		defineField({
-			name: 'items',
+			name: 'cards',
 			type: 'array',
 			of: [
 				defineArrayMember({
@@ -62,21 +72,30 @@ export default defineType({
 					},
 				}),
 			],
+			group: 'content',
 		}),
 		defineField({
 			name: 'ctas',
 			title: 'Call-to-actions',
 			type: 'array',
 			of: [{ type: 'cta' }],
+			group: 'content',
+		}),
+		defineField({
+			name: 'columns',
+			description: 'Overrides the default dynamic columns (~256px). Desktop only.',
+			validation: (Rule) => Rule.min(1),
+			type: 'number',
+			group: 'options',
 		}),
 	],
 	preview: {
 		select: {
 			intro: 'intro',
-			items: 'items',
+			cards: 'cards',
 		},
-		prepare: ({ intro, items }) => ({
-			title: getBlockText(intro) || count(items, 'card'),
+		prepare: ({ intro, cards }) => ({
+			title: getBlockText(intro) || count(cards, 'card'),
 			subtitle: 'Card list',
 		}),
 	},

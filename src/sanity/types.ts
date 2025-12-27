@@ -35,6 +35,22 @@ export type SanityImageAssetReference = {
 	[internalGroqTypeReferenceTo]?: 'sanity.imageAsset'
 }
 
+export type CardImage = {
+	asset?: SanityImageAssetReference
+	media?: unknown // Unable to locate the referenced type "media" in schema
+	hotspot?: SanityImageHotspot
+	crop?: SanityImageCrop
+	_type: 'image'
+}
+
+export type Icon = {
+	asset?: SanityImageAssetReference
+	media?: unknown // Unable to locate the referenced type "icon.media" in schema
+	hotspot?: SanityImageHotspot
+	crop?: SanityImageCrop
+	_type: 'image'
+}
+
 export type Default = {
 	asset?: SanityImageAssetReference
 	media?: unknown // Unable to locate the referenced type "default.media" in schema
@@ -62,14 +78,6 @@ export type Dark = {
 export type AuthorImage = {
 	asset?: SanityImageAssetReference
 	media?: unknown // Unable to locate the referenced type "author.image.media" in schema
-	hotspot?: SanityImageHotspot
-	crop?: SanityImageCrop
-	_type: 'image'
-}
-
-export type CardImage = {
-	asset?: SanityImageAssetReference
-	media?: unknown // Unable to locate the referenced type "card.image.media" in schema
 	hotspot?: SanityImageHotspot
 	crop?: SanityImageCrop
 	_type: 'image'
@@ -418,6 +426,7 @@ export type CustomHtml = {
 
 export type CardList = {
 	_type: 'card-list'
+	attributes?: ModuleAttributes
 	intro?: Array<{
 		children?: Array<{
 			marks?: Array<string>
@@ -436,9 +445,9 @@ export type CardList = {
 		_type: 'block'
 		_key: string
 	}>
-	items?: Array<{
+	cards?: Array<{
 		image?: CardImage
-		icon?: string
+		icon?: Icon
 		content?: Array<{
 			children?: Array<{
 				marks?: Array<string>
@@ -470,6 +479,7 @@ export type CardList = {
 			_key: string
 		} & Cta
 	>
+	columns?: number
 }
 
 export type Callout = {
@@ -866,14 +876,104 @@ export type GlobalModule = {
 	path?: string
 	ignorePaths?: Array<string>
 	before?: Array<
-		{
-			_key: string
-		} & BlogPostContent
+		| ({
+				_key: string
+		  } & AccordionList)
+		| ({
+				_key: string
+		  } & BlogIndex)
+		| ({
+				_key: string
+		  } & BlogPostList)
+		| ({
+				_key: string
+		  } & Breadcrumbs)
+		| ({
+				_key: string
+		  } & Callout)
+		| ({
+				_key: string
+		  } & CardList)
+		| ({
+				_key: string
+		  } & CustomHtml)
+		| ({
+				_key: string
+		  } & HeroSplit)
+		| ({
+				_key: string
+		  } & LogoList)
+		| ({
+				_key: string
+		  } & PersonList)
+		| ({
+				_key: string
+		  } & Prose)
+		| ({
+				_key: string
+		  } & SearchModule)
+		| ({
+				_key: string
+		  } & StatList)
+		| ({
+				_key: string
+		  } & StepList)
+		| ({
+				_key: string
+		  } & TestimonialList)
+		| ({
+				_key: string
+		  } & BlogPostContent)
 	>
 	after?: Array<
-		{
-			_key: string
-		} & BlogPostContent
+		| ({
+				_key: string
+		  } & AccordionList)
+		| ({
+				_key: string
+		  } & BlogIndex)
+		| ({
+				_key: string
+		  } & BlogPostList)
+		| ({
+				_key: string
+		  } & Breadcrumbs)
+		| ({
+				_key: string
+		  } & Callout)
+		| ({
+				_key: string
+		  } & CardList)
+		| ({
+				_key: string
+		  } & CustomHtml)
+		| ({
+				_key: string
+		  } & HeroSplit)
+		| ({
+				_key: string
+		  } & LogoList)
+		| ({
+				_key: string
+		  } & PersonList)
+		| ({
+				_key: string
+		  } & Prose)
+		| ({
+				_key: string
+		  } & SearchModule)
+		| ({
+				_key: string
+		  } & StatList)
+		| ({
+				_key: string
+		  } & StepList)
+		| ({
+				_key: string
+		  } & TestimonialList)
+		| ({
+				_key: string
+		  } & BlogPostContent)
 	>
 }
 
@@ -1260,11 +1360,12 @@ export type AllSanitySchemaTypes =
 	| LogoImage
 	| Author
 	| SanityImageAssetReference
+	| CardImage
+	| Icon
 	| Default
 	| Light
 	| Dark
 	| AuthorImage
-	| CardImage
 	| TestimonialReference
 	| TestimonialList
 	| StepList
@@ -1342,14 +1443,6 @@ export type PAGE_QUERY_RESULT = {
 	_rev: string
 	title?: string
 	modules: Array<
-		| {
-				_key: string
-				_type: 'blog-post-content'
-				attributes?: ModuleAttributes
-				tableOfContents?: 'left' | 'right'
-				ctas: null
-		  }
-		| null
 		| {
 				_key: string
 				_type: 'accordion-list'
@@ -1445,6 +1538,13 @@ export type PAGE_QUERY_RESULT = {
 					_key: string
 				}>
 				postsPerPage?: number
+				ctas: null
+		  }
+		| {
+				_key: string
+				_type: 'blog-post-content'
+				attributes?: ModuleAttributes
+				tableOfContents?: 'left' | 'right'
 				ctas: null
 		  }
 		| {
@@ -1595,6 +1695,7 @@ export type PAGE_QUERY_RESULT = {
 		| {
 				_key: string
 				_type: 'card-list'
+				attributes?: ModuleAttributes
 				intro?: Array<{
 					children?: Array<{
 						marks?: Array<string>
@@ -1621,9 +1722,9 @@ export type PAGE_QUERY_RESULT = {
 					_type: 'block'
 					_key: string
 				}>
-				items?: Array<{
+				cards?: Array<{
 					image?: CardImage
-					icon?: string
+					icon?: Icon
 					content?: Array<{
 						children?: Array<{
 							marks?: Array<string>
@@ -1685,6 +1786,7 @@ export type PAGE_QUERY_RESULT = {
 						| null
 					style?: 'action-outline' | 'action' | 'ghost' | 'link'
 				}> | null
+				columns?: number
 		  }
 		| {
 				_key: string
@@ -2204,6 +2306,7 @@ export type PAGE_QUERY_RESULT = {
 				> | null
 				ctas: null
 		  }
+		| null
 	> | null
 	metadata?: Metadata
 } | null
@@ -2375,13 +2478,872 @@ export type BLOG_POST_QUERY_RESULT = {
 			| null
 		text: string
 	}> | null
-	modules: Array<{
-		_key: string
-		_type: 'blog-post-content'
-		attributes?: ModuleAttributes
-		tableOfContents?: 'left' | 'right'
-		ctas: null
-	} | null>
+	modules: Array<
+		| {
+				_key: string
+				_type: 'accordion-list'
+				intro?: Array<{
+					children?: Array<{
+						marks?: Array<string>
+						text?: string
+						_type: 'span'
+						_key: string
+					}>
+					style?:
+						| 'blockquote'
+						| 'h1'
+						| 'h2'
+						| 'h3'
+						| 'h4'
+						| 'h5'
+						| 'h6'
+						| 'normal'
+					listItem?: 'bullet' | 'number'
+					markDefs?: Array<{
+						href?: string
+						_type: 'link'
+						_key: string
+					}>
+					level?: number
+					_type: 'block'
+					_key: string
+				}>
+				accordions?: Array<{
+					summary?: string
+					content?: Array<{
+						children?: Array<{
+							marks?: Array<string>
+							text?: string
+							_type: 'span'
+							_key: string
+						}>
+						style?:
+							| 'blockquote'
+							| 'h1'
+							| 'h2'
+							| 'h3'
+							| 'h4'
+							| 'h5'
+							| 'h6'
+							| 'normal'
+						listItem?: 'bullet' | 'number'
+						markDefs?: Array<{
+							href?: string
+							_type: 'link'
+							_key: string
+						}>
+						level?: number
+						_type: 'block'
+						_key: string
+					}>
+					open?: boolean
+					_type: 'accordion'
+					_key: string
+				}>
+				exclusive?: boolean
+				enableSchema?: boolean
+				ctas: null
+		  }
+		| {
+				_key: string
+				_type: 'blog-index'
+				intro?: Array<{
+					children?: Array<{
+						marks?: Array<string>
+						text?: string
+						_type: 'span'
+						_key: string
+					}>
+					style?:
+						| 'blockquote'
+						| 'h1'
+						| 'h2'
+						| 'h3'
+						| 'h4'
+						| 'h5'
+						| 'h6'
+						| 'normal'
+					listItem?: 'bullet' | 'number'
+					markDefs?: Array<{
+						href?: string
+						_type: 'link'
+						_key: string
+					}>
+					level?: number
+					_type: 'block'
+					_key: string
+				}>
+				postsPerPage?: number
+				ctas: null
+		  }
+		| {
+				_key: string
+				_type: 'blog-post-content'
+				attributes?: ModuleAttributes
+				tableOfContents?: 'left' | 'right'
+				ctas: null
+		  }
+		| {
+				_key: string
+				_type: 'blog-post-list'
+				intro?: Array<{
+					children?: Array<{
+						marks?: Array<string>
+						text?: string
+						_type: 'span'
+						_key: string
+					}>
+					style?:
+						| 'blockquote'
+						| 'h1'
+						| 'h2'
+						| 'h3'
+						| 'h4'
+						| 'h5'
+						| 'h6'
+						| 'normal'
+					listItem?: 'bullet' | 'number'
+					markDefs?: Array<{
+						href?: string
+						_type: 'link'
+						_key: string
+					}>
+					level?: number
+					_type: 'block'
+					_key: string
+				}>
+				ctas: Array<{
+					_key: string
+					_type: 'cta'
+					link:
+						| {
+								_type: 'link'
+								label?: string
+								type?: 'external' | 'internal'
+								internal?: PageReference
+								external?: string
+								params?: string
+						  }
+						| {
+								_type: 'link'
+								label?: string
+								type?: 'external' | 'internal'
+								internal: {
+									_type: 'page'
+									title: string | null
+									slug: string | '/' | null
+								} | null
+								external?: string
+								params?: string
+						  }
+						| null
+					style?: 'action-outline' | 'action' | 'ghost' | 'link'
+				}> | null
+				limit?: number
+		  }
+		| {
+				_key: string
+				_type: 'breadcrumbs'
+				crumbs: Array<
+					| {
+							_key: string
+							_type: 'link'
+							label?: string
+							type?: 'external' | 'internal'
+							internal?: PageReference
+							external?: string
+							params?: string
+					  }
+					| {
+							_key: string
+							_type: 'link'
+							label?: string
+							type?: 'external' | 'internal'
+							internal: {
+								_type: 'page'
+								title: string | null
+								slug: string | '/' | null
+							} | null
+							external?: string
+							params?: string
+					  }
+				> | null
+				ctas: null
+		  }
+		| {
+				_key: string
+				_type: 'callout'
+				attributes?: ModuleAttributes
+				intro?: Array<{
+					children?: Array<{
+						marks?: Array<string>
+						text?: string
+						_type: 'span'
+						_key: string
+					}>
+					style?:
+						| 'blockquote'
+						| 'h1'
+						| 'h2'
+						| 'h3'
+						| 'h4'
+						| 'h5'
+						| 'h6'
+						| 'normal'
+					listItem?: 'bullet' | 'number'
+					markDefs?: Array<{
+						href?: string
+						_type: 'link'
+						_key: string
+					}>
+					level?: number
+					_type: 'block'
+					_key: string
+				}>
+				ctas: Array<{
+					_key: string
+					_type: 'cta'
+					link:
+						| {
+								_type: 'link'
+								label?: string
+								type?: 'external' | 'internal'
+								internal?: PageReference
+								external?: string
+								params?: string
+						  }
+						| {
+								_type: 'link'
+								label?: string
+								type?: 'external' | 'internal'
+								internal: {
+									_type: 'page'
+									title: string | null
+									slug: string | '/' | null
+								} | null
+								external?: string
+								params?: string
+						  }
+						| null
+					style?: 'action-outline' | 'action' | 'ghost' | 'link'
+				}> | null
+		  }
+		| {
+				_key: string
+				_type: 'card-list'
+				attributes?: ModuleAttributes
+				intro?: Array<{
+					children?: Array<{
+						marks?: Array<string>
+						text?: string
+						_type: 'span'
+						_key: string
+					}>
+					style?:
+						| 'blockquote'
+						| 'h1'
+						| 'h2'
+						| 'h3'
+						| 'h4'
+						| 'h5'
+						| 'h6'
+						| 'normal'
+					listItem?: 'bullet' | 'number'
+					markDefs?: Array<{
+						href?: string
+						_type: 'link'
+						_key: string
+					}>
+					level?: number
+					_type: 'block'
+					_key: string
+				}>
+				cards?: Array<{
+					image?: CardImage
+					icon?: Icon
+					content?: Array<{
+						children?: Array<{
+							marks?: Array<string>
+							text?: string
+							_type: 'span'
+							_key: string
+						}>
+						style?:
+							| 'blockquote'
+							| 'h1'
+							| 'h2'
+							| 'h3'
+							| 'h4'
+							| 'h5'
+							| 'h6'
+							| 'normal'
+						listItem?: 'bullet' | 'number'
+						markDefs?: Array<{
+							href?: string
+							_type: 'link'
+							_key: string
+						}>
+						level?: number
+						_type: 'block'
+						_key: string
+					}>
+					ctas?: Array<
+						{
+							_key: string
+						} & Cta
+					>
+					_type: 'card'
+					_key: string
+				}>
+				ctas: Array<{
+					_key: string
+					_type: 'cta'
+					link:
+						| {
+								_type: 'link'
+								label?: string
+								type?: 'external' | 'internal'
+								internal?: PageReference
+								external?: string
+								params?: string
+						  }
+						| {
+								_type: 'link'
+								label?: string
+								type?: 'external' | 'internal'
+								internal: {
+									_type: 'page'
+									title: string | null
+									slug: string | '/' | null
+								} | null
+								external?: string
+								params?: string
+						  }
+						| null
+					style?: 'action-outline' | 'action' | 'ghost' | 'link'
+				}> | null
+				columns?: number
+		  }
+		| {
+				_key: string
+				_type: 'custom-html'
+				attributes?: ModuleAttributes
+				className?: string
+				html?: Code
+				css?: Code
+				ctas: null
+		  }
+		| {
+				_key: string
+				_type: 'hero.split'
+				attributes?: ModuleAttributes
+				content?: Array<{
+					children?: Array<{
+						marks?: Array<string>
+						text?: string
+						_type: 'span'
+						_key: string
+					}>
+					style?:
+						| 'blockquote'
+						| 'h1'
+						| 'h2'
+						| 'h3'
+						| 'h4'
+						| 'h5'
+						| 'h6'
+						| 'normal'
+					listItem?: 'bullet' | 'number'
+					markDefs?: Array<{
+						href?: string
+						_type: 'link'
+						_key: string
+					}>
+					level?: number
+					_type: 'block'
+					_key: string
+				}>
+				ctas: Array<{
+					_key: string
+					_type: 'cta'
+					link:
+						| {
+								_type: 'link'
+								label?: string
+								type?: 'external' | 'internal'
+								internal?: PageReference
+								external?: string
+								params?: string
+						  }
+						| {
+								_type: 'link'
+								label?: string
+								type?: 'external' | 'internal'
+								internal: {
+									_type: 'page'
+									title: string | null
+									slug: string | '/' | null
+								} | null
+								external?: string
+								params?: string
+						  }
+						| null
+					style?: 'action-outline' | 'action' | 'ghost' | 'link'
+				}> | null
+				image?: {
+					asset?: SanityImageAssetReference
+					media?: unknown
+					hotspot?: SanityImageHotspot
+					crop?: SanityImageCrop
+					alt?: string
+					loading?: 'eager' | 'lazy'
+					onRight?: boolean
+					afterContent?: boolean
+					_type: 'image'
+				}
+		  }
+		| {
+				_key: string
+				_type: 'logo-list'
+				intro?: Array<{
+					children?: Array<{
+						marks?: Array<string>
+						text?: string
+						_type: 'span'
+						_key: string
+					}>
+					style?:
+						| 'blockquote'
+						| 'h1'
+						| 'h2'
+						| 'h3'
+						| 'h4'
+						| 'h5'
+						| 'h6'
+						| 'normal'
+					listItem?: 'bullet' | 'number'
+					markDefs?: Array<{
+						href?: string
+						_type: 'link'
+						_key: string
+					}>
+					level?: number
+					_type: 'block'
+					_key: string
+				}>
+				logos: Array<
+					| {
+							_key: string
+							_ref: string
+							_type: 'logo'
+							_weak?: boolean
+							_id: string
+							_createdAt: string
+							_updatedAt: string
+							_rev: string
+							title?: string
+							image?: LogoImage
+					  }
+					| unknown
+				> | null
+				logoType?: 'dark' | 'default' | 'light'
+				autoScroll?: boolean
+				duration?: number
+				ctas: null
+		  }
+		| {
+				_key: string
+				_type: 'person-list'
+				intro?: Array<{
+					children?: Array<{
+						marks?: Array<string>
+						text?: string
+						_type: 'span'
+						_key: string
+					}>
+					style?:
+						| 'blockquote'
+						| 'h1'
+						| 'h2'
+						| 'h3'
+						| 'h4'
+						| 'h5'
+						| 'h6'
+						| 'normal'
+					listItem?: 'bullet' | 'number'
+					markDefs?: Array<{
+						href?: string
+						_type: 'link'
+						_key: string
+					}>
+					level?: number
+					_type: 'block'
+					_key: string
+				}>
+				people: Array<
+					| {
+							_key: string
+							_ref: string
+							_type: 'person'
+							_weak?: boolean
+							_id: string
+							_createdAt: string
+							_updatedAt: string
+							_rev: string
+							name?: string
+							image?: {
+								asset?: SanityImageAssetReference
+								media?: unknown
+								hotspot?: SanityImageHotspot
+								crop?: SanityImageCrop
+								_type: 'image'
+							}
+					  }
+					| unknown
+				> | null
+				ctas: null
+		  }
+		| {
+				_key: string
+				_type: 'prose'
+				attributes?: ModuleAttributes
+				content: Array<
+					| {
+							children?: Array<{
+								marks?: Array<string>
+								text?: string
+								_type: 'span'
+								_key: string
+							}>
+							style?:
+								| 'blockquote'
+								| 'h1'
+								| 'h2'
+								| 'h3'
+								| 'h4'
+								| 'h5'
+								| 'h6'
+								| 'normal'
+							listItem?: 'bullet' | 'number'
+							markDefs?: Array<{
+								href?: string
+								_type: 'link'
+								_key: string
+							}>
+							level?: number
+							_type: 'block'
+							_key: string
+					  }
+					| {
+							_key: string
+							_type: 'code'
+							language?: string
+							filename?: string
+							code?: string
+							highlightedLines?: Array<number>
+					  }
+					| {
+							_key: string
+							_type: 'custom-html'
+							attributes?: ModuleAttributes
+							className?: string
+							html?: Code
+							css?: Code
+					  }
+					| {
+							asset: {
+								_id: string
+								_type: 'sanity.imageAsset'
+								_createdAt: string
+								_updatedAt: string
+								_rev: string
+								originalFilename?: string
+								label?: string
+								title?: string
+								description?: string
+								altText?: string
+								sha1hash?: string
+								extension?: string
+								mimeType?: string
+								size?: number
+								assetId?: string
+								uploadId?: string
+								path?: string
+								url?: string
+								metadata: SanityImageMetadata | null
+								source?: SanityAssetSourceData
+							} | null
+							media?: unknown
+							hotspot?: SanityImageHotspot
+							crop?: SanityImageCrop
+							alt?: string
+							figcaption?: Array<{
+								children?: Array<{
+									marks?: Array<string>
+									text?: string
+									_type: 'span'
+									_key: string
+								}>
+								style?: 'normal'
+								listItem?: 'bullet' | 'number'
+								markDefs?: Array<{
+									href?: string
+									_type: 'link'
+									_key: string
+								}>
+								level?: number
+								_type: 'block'
+								_key: string
+							}>
+							_type: 'image'
+							_key: string
+					  }
+				> | null
+				tableOfContents?: 'left' | 'right'
+				ctas: null
+				headings: Array<{
+					style:
+						| 'blockquote'
+						| 'h1'
+						| 'h2'
+						| 'h3'
+						| 'h4'
+						| 'h5'
+						| 'h6'
+						| 'normal'
+						| null
+					text: string
+				}> | null
+		  }
+		| {
+				_key: string
+				_type: 'search-module'
+				intro?: Array<{
+					children?: Array<{
+						marks?: Array<string>
+						text?: string
+						_type: 'span'
+						_key: string
+					}>
+					style?:
+						| 'blockquote'
+						| 'h1'
+						| 'h2'
+						| 'h3'
+						| 'h4'
+						| 'h5'
+						| 'h6'
+						| 'normal'
+					listItem?: 'bullet' | 'number'
+					markDefs?: Array<{
+						href?: string
+						_type: 'link'
+						_key: string
+					}>
+					level?: number
+					_type: 'block'
+					_key: string
+				}>
+				scope?: 'all' | 'blog posts' | 'pages'
+				ctas: null
+		  }
+		| {
+				_key: string
+				_type: 'stat-list'
+				intro?: Array<{
+					children?: Array<{
+						marks?: Array<string>
+						text?: string
+						_type: 'span'
+						_key: string
+					}>
+					style?:
+						| 'blockquote'
+						| 'h1'
+						| 'h2'
+						| 'h3'
+						| 'h4'
+						| 'h5'
+						| 'h6'
+						| 'normal'
+					listItem?: 'bullet' | 'number'
+					markDefs?: Array<{
+						href?: string
+						_type: 'link'
+						_key: string
+					}>
+					level?: number
+					_type: 'block'
+					_key: string
+				}>
+				stats?: Array<{
+					value?: string
+					suffix?: string
+					content?: Array<{
+						children?: Array<{
+							marks?: Array<string>
+							text?: string
+							_type: 'span'
+							_key: string
+						}>
+						style?:
+							| 'blockquote'
+							| 'h1'
+							| 'h2'
+							| 'h3'
+							| 'h4'
+							| 'h5'
+							| 'h6'
+							| 'normal'
+						listItem?: 'bullet' | 'number'
+						markDefs?: Array<{
+							href?: string
+							_type: 'link'
+							_key: string
+						}>
+						level?: number
+						_type: 'block'
+						_key: string
+					}>
+					_type: 'stat'
+					_key: string
+				}>
+				ctas: null
+		  }
+		| {
+				_key: string
+				_type: 'step-list'
+				intro?: Array<{
+					children?: Array<{
+						marks?: Array<string>
+						text?: string
+						_type: 'span'
+						_key: string
+					}>
+					style?:
+						| 'blockquote'
+						| 'h1'
+						| 'h2'
+						| 'h3'
+						| 'h4'
+						| 'h5'
+						| 'h6'
+						| 'normal'
+					listItem?: 'bullet' | 'number'
+					markDefs?: Array<{
+						href?: string
+						_type: 'link'
+						_key: string
+					}>
+					level?: number
+					_type: 'block'
+					_key: string
+				}>
+				steps?: Array<{
+					content?: Array<{
+						children?: Array<{
+							marks?: Array<string>
+							text?: string
+							_type: 'span'
+							_key: string
+						}>
+						style?:
+							| 'blockquote'
+							| 'h1'
+							| 'h2'
+							| 'h3'
+							| 'h4'
+							| 'h5'
+							| 'h6'
+							| 'normal'
+						listItem?: 'bullet' | 'number'
+						markDefs?: Array<{
+							href?: string
+							_type: 'link'
+							_key: string
+						}>
+						level?: number
+						_type: 'block'
+						_key: string
+					}>
+					_type: 'step'
+					_key: string
+				}>
+				ctas: null
+		  }
+		| {
+				_key: string
+				_type: 'testimonial-list'
+				intro?: Array<{
+					children?: Array<{
+						marks?: Array<string>
+						text?: string
+						_type: 'span'
+						_key: string
+					}>
+					style?:
+						| 'blockquote'
+						| 'h1'
+						| 'h2'
+						| 'h3'
+						| 'h4'
+						| 'h5'
+						| 'h6'
+						| 'normal'
+					listItem?: 'bullet' | 'number'
+					markDefs?: Array<{
+						href?: string
+						_type: 'link'
+						_key: string
+					}>
+					level?: number
+					_type: 'block'
+					_key: string
+				}>
+				testimonials: Array<
+					| {
+							_key: string
+							_ref: string
+							_type: 'testimonial'
+							_weak?: boolean
+							_id: string
+							_createdAt: string
+							_updatedAt: string
+							_rev: string
+							quote?: Array<{
+								children?: Array<{
+									marks?: Array<string>
+									text?: string
+									_type: 'span'
+									_key: string
+								}>
+								style?:
+									| 'blockquote'
+									| 'h1'
+									| 'h2'
+									| 'h3'
+									| 'h4'
+									| 'h5'
+									| 'h6'
+									| 'normal'
+								listItem?: 'bullet' | 'number'
+								markDefs?: Array<{
+									href?: string
+									_type: 'link'
+									_key: string
+								}>
+								level?: number
+								_type: 'block'
+								_key: string
+							}>
+							author?: Author
+					  }
+					| unknown
+				> | null
+				ctas: null
+		  }
+		| null
+	>
 } | null
 
 // Source: src/app/(frontend)/blog/rss.xml/route.ts
@@ -2721,6 +3683,7 @@ export type NOT_FOUND_QUERY_RESULT = {
 		| {
 				_key: string
 				_type: 'card-list'
+				attributes?: ModuleAttributes
 				intro?: Array<{
 					children?: Array<{
 						marks?: Array<string>
@@ -2747,9 +3710,9 @@ export type NOT_FOUND_QUERY_RESULT = {
 					_type: 'block'
 					_key: string
 				}>
-				items?: Array<{
+				cards?: Array<{
 					image?: CardImage
-					icon?: string
+					icon?: Icon
 					content?: Array<{
 						children?: Array<{
 							marks?: Array<string>
@@ -2811,6 +3774,7 @@ export type NOT_FOUND_QUERY_RESULT = {
 						| null
 					style?: 'action-outline' | 'action' | 'ghost' | 'link'
 				}> | null
+				columns?: number
 		  }
 		| {
 				_key: string
