@@ -1,28 +1,45 @@
-import { PortableText } from 'next-sanity'
+import { PortableText, stegaClean } from 'next-sanity'
+import { cn } from '@/lib/utils'
 import type { AccordionList } from '@/sanity/types'
+import CTAList from '@/ui/cta-list'
 
 export default function ({
 	_key: _module_key,
 	intro,
+	ctas,
 	accordions,
 	exclusive,
-	enableSchema,
+	enableSchema = true,
+	layout: l,
 }: AccordionList & { _key: string }) {
+	const layout = stegaClean(l)
+
 	return (
 		<section
-			className="section space-y-8"
+			className={cn(
+				'section grid gap-8',
+				layout === 'horizontal' && 'items-start md:grid-cols-2',
+			)}
 			{...(enableSchema && {
 				itemScope: true,
 				itemType: 'https://schema.org/FAQPage',
 			})}
 		>
 			{intro && (
-				<header className="prose">
+				<header
+					className={cn(
+						'prose',
+						layout === 'horizontal'
+							? 'md:sticky-below-header [--offset:1rem]'
+							: 'text-center',
+					)}
+				>
 					<PortableText value={intro} />
+					<CTAList ctas={ctas} />
 				</header>
 			)}
 
-			<div>
+			<div className="mx-auto w-full max-w-3xl">
 				{accordions?.map(({ _key, summary, content, open }) => (
 					<details
 						className="accordion border-stroke not-last:border-b"

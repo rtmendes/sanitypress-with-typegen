@@ -10,9 +10,21 @@ export default defineType({
 	groups: [{ name: 'content', default: true }, { name: 'options' }],
 	fields: [
 		defineField({
+			name: 'attributes',
+			type: 'module-attributes',
+			group: 'options',
+		}),
+		defineField({
 			name: 'intro',
 			type: 'array',
 			of: [{ type: 'block' }],
+			group: 'content',
+		}),
+		defineField({
+			name: 'ctas',
+			title: 'Call-to-actions',
+			type: 'array',
+			of: [{ type: 'cta' }],
 			group: 'content',
 		}),
 		defineField({
@@ -60,7 +72,20 @@ export default defineType({
 			name: 'enableSchema',
 			title: 'Enable schema.org markup',
 			type: 'boolean',
-			initialValue: false,
+			initialValue: true,
+			group: 'options',
+		}),
+		defineField({
+			name: 'layout',
+			type: 'string',
+			options: {
+				list: [
+					{ value: 'vertical', title: 'Vertical (stacked)' },
+					{ value: 'horizontal', title: 'Horizontal (side-by-side)' },
+				],
+				layout: 'radio',
+			},
+			initialValue: 'vertical',
 			group: 'options',
 		}),
 	],
