@@ -67,6 +67,15 @@ export const MODULES_QUERY = groq`
 	_type == 'breadcrumbs' => {
 		crumbs[]{ ${LINK_QUERY} }
 	},
+	_type == 'card-list' => {
+		cards[]{
+			...,
+			ctas[]{
+				...,
+				link{ ${LINK_QUERY} }
+			}
+		}
+	},
 	_type == 'logo-list' => {
 		logos[]{
 			...,

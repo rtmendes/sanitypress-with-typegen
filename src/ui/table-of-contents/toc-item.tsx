@@ -60,14 +60,15 @@ export default function ({
 	}, [heading, thresholdHeight])
 
 	return (
-		<li ref={ref} {...props}>
+		<li className="border-stroke border-l" ref={ref} {...props}>
 			<a
 				href={`#${slug(heading.text, { removeLeadingNumberAndHyphen: true })}`}
-				className={cn('link block py-1 leading-tight', {
-					'pl-ch': stegaClean(heading.style) === 'h3',
-					'pl-[2ch]': stegaClean(heading.style) === 'h4',
-					'pl-[3ch]': stegaClean(heading.style) === 'h5',
-					'pl-[4ch]': stegaClean(heading.style) === 'h6',
+				className={cn('text-foreground block py-1 leading-tight', {
+					'pl-ch': stegaClean(heading.style) === 'h2',
+					'pl-[2ch]': stegaClean(heading.style) === 'h3',
+					'pl-[3ch]': stegaClean(heading.style) === 'h4',
+					'pl-[4ch]': stegaClean(heading.style) === 'h5',
+					'pl-[5ch]': stegaClean(heading.style) === 'h6',
 				})}
 			>
 				{heading.text}

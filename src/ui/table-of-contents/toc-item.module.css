@@ -1,5 +1,10 @@
-@media (width >= 48rem) {
+@media (width >=48rem) {
 	.inView:not(:has(~ .inView)) {
-		font-weight: bold;
+		color: var(--color-primary);
+		border-color: currentColor;
+
+		a {
+			color: currentColor;
+		}
 	}
 }

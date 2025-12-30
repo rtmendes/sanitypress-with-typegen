@@ -23,7 +23,7 @@ export default function ({
 				Table of Contents
 			</summary>
 
-			<ol className="border-stroke pl-ch border-l">
+			<ol>
 				{headings?.map((heading, key) => (
 					<ToCItem heading={heading} key={key} />
 				))}

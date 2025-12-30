@@ -114,7 +114,7 @@
 }
 
 @utility link {
-	@apply text-primary underline hover:decoration-2;
+	@apply cursor-pointer text-primary underline hover:decoration-2;
 }
 
 @utility input {
