@@ -199,7 +199,7 @@
 	}
 
 	& blockquote {
-		@apply border-l-4 pl-4;
+		@apply border-l-4 border-stroke pl-4;
 	}
 
 	& :not(pre)>code {
@@ -222,7 +222,7 @@
 		@apply max-md:full-bleed;
 
 		& :is(th, td) {
-			padding: 0.25em 1em;
+			padding: 0.5lh 1em;
 		}
 
 		& tbody tr:nth-child(odd) {

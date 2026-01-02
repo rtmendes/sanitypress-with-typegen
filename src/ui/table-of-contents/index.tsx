@@ -2,10 +2,12 @@ import { cn } from '@/lib/utils'
 import ToCItem from './toc-item'
 
 export default function ({
+	summary = 'Table of Contents',
 	headings,
 	className,
 	...props
 }: {
+	summary?: string
 	headings: Array<{
 		style: string | null
 		text: string | null
@@ -19,8 +21,8 @@ export default function ({
 			)}
 			{...props}
 		>
-			<summary className="bg-background sticky top-0 font-bold md:after:content-['']!">
-				Table of Contents
+			<summary className="md:bg-background sticky top-0 font-bold md:after:content-['']!">
+				{summary}
 			</summary>
 
 			<ol>
