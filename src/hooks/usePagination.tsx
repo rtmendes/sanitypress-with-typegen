@@ -62,7 +62,7 @@ export function usePagination<T>({
 		if (atStart && atEnd) return null
 
 		return (
-			<nav {...props}>
+			<nav aria-label="Pagination" {...props}>
 				<button
 					className={prevClassName || buttonClassName}
 					onClick={() => {
@@ -70,6 +70,7 @@ export function usePagination<T>({
 						onClick()
 					}}
 					disabled={atStart}
+					aria-label="Previous page"
 				>
 					{prev}
 				</button>
@@ -87,6 +88,7 @@ export function usePagination<T>({
 						onClick()
 					}}
 					disabled={atEnd}
+					aria-label="Next page"
 				>
 					{next}
 				</button>
