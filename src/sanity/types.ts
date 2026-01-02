@@ -168,6 +168,7 @@ export type StepList = {
 		_type: 'step'
 		_key: string
 	}>
+	enableSchema?: boolean
 }
 
 export type StatList = {
@@ -2324,6 +2325,7 @@ export type PAGE_QUERY_RESULT = {
 					_type: 'step'
 					_key: string
 				}>
+				enableSchema?: boolean
 		  }
 		| {
 				_key: string
@@ -3437,6 +3439,7 @@ export type BLOG_POST_QUERY_RESULT = {
 					_type: 'step'
 					_key: string
 				}>
+				enableSchema?: boolean
 		  }
 		| {
 				_key: string
@@ -4466,6 +4469,7 @@ export type NOT_FOUND_QUERY_RESULT = {
 					_type: 'step'
 					_key: string
 				}>
+				enableSchema?: boolean
 		  }
 		| {
 				_key: string

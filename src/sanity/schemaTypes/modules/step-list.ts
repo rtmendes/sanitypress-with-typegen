@@ -53,6 +53,13 @@ export default defineType({
 			],
 			group: 'content',
 		}),
+		defineField({
+			name: 'enableSchema',
+			title: 'Enable schema.org markup',
+			type: 'boolean',
+			initialValue: true,
+			group: 'options',
+		}),
 	],
 	preview: {
 		select: {
