@@ -25,7 +25,7 @@ export default function BlogPostSchema({
 		keywords:
 			post.categories?.map((category) => category.title).join(', ') ||
 			undefined,
-		articleBody: post.content_plain_text ?? undefined,
+		articleBody: post.contentPlainText ?? undefined,
 		...(post.author && {
 			author: {
 				'@type': 'Person',

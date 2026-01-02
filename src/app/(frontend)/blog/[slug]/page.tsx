@@ -74,7 +74,8 @@ const BLOG_POST_QUERY = groq`*[_type == 'blog.post' && metadata.slug.current == 
 			asset->
 		}
 	},
-	'content_plain_text': pt::text(content),
+	'contentPlainText': pt::text(content),
+	'readTime': length(string::split(pt::text(content), ' ')) / 200,
 	'headings': content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{
 		style,
 		'text': pt::text(@)

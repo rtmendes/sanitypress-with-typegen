@@ -7,10 +7,6 @@ import type {
 	Person,
 } from '@/sanity/types'
 import Img from '@/ui/img'
-import Byline from '@/ui/modules/blog/byline'
-import Categories from '@/ui/modules/blog/categories'
-import Date from '@/ui/modules/blog/date'
-import Schema from '@/ui/modules/blog/schema'
 import CustomHTML from '@/ui/modules/custom-html'
 import AnchoredHeading from '@/ui/modules/prose/anchored-heading'
 import Code from '@/ui/modules/prose/code'
@@ -18,6 +14,11 @@ import Image from '@/ui/modules/prose/image'
 import TableOfContents from '@/ui/table-of-contents'
 import { moduleAttributes } from '..'
 import css from './blog-post-content.module.css'
+import Byline from './byline'
+import Categories from './categories'
+import Date from './date'
+import ReadTime from './read-time'
+import Schema from './schema'
 
 export default function ({
 	post,
@@ -42,22 +43,30 @@ export default function ({
 						loading="eager"
 					/>
 
-					<div className="relative space-y-4">
-						<h1 className="h1">{post.title || post.metadata?.title}</h1>
-						<div className="flex flex-wrap items-center justify-center gap-x-4">
+					<div className="relative mx-auto max-w-5xl space-y-4">
+						<h1 className="h1 text-balance">
+							{post.title || post.metadata?.title}
+						</h1>
+
+						<div className="gap-x-lh flex flex-wrap items-center justify-center gap-y-1">
 							<Byline author={post.author as unknown as Person} />
 							<Date date={post.publishDate} />
-							<Categories categories={post.categories as BlogCategory[]} />
+							<Categories
+								categories={post.categories as BlogCategory[]}
+								linked
+							/>
+							<ReadTime value={post.readTime} />
 						</div>
 					</div>
 				</header>
 
-				<section className="section flex gap-4 max-md:flex-col md:items-start">
+				<section className="section gap-lh flex max-md:flex-col md:items-start">
 					{(toc === 'left' || toc === 'right') && (
 						<TableOfContents
+							summary="On this page"
 							headings={post.headings}
 							className={cn(
-								'md:sticky-below-header shrink-0 [--offset:1rem] md:w-[20ch]',
+								'md:sticky-below-header max-md:p-ch max-md:bg-stroke/50 shrink-0 [--offset:1rem] md:w-[20ch]',
 								toc === 'right' && 'md:order-last',
 							)}
 							open
