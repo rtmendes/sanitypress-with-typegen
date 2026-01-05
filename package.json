@@ -1,6 +1,6 @@
 {
 	"name": "typed-sanitypress",
-	"version": "0.0.42",
+	"version": "0.0.43",
 	"private": true,
 	"scripts": {
 		"dev": "next dev --webpack",
@@ -15,7 +15,7 @@
 	"dependencies": {
 		"@portabletext/to-html": "^5.0.1",
 		"@sanity/assist": "^5.0.3",
-		"@sanity/code-input": "^7.0.3",
+		"@sanity/code-input": "^7.0.4",
 		"@sanity/dashboard": "^5.0.1",
 		"@sanity/image-url": "^2.0.2",
 		"@sanity/vision": "^5.1.0",
