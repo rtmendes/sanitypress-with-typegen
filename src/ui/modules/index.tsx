@@ -19,7 +19,7 @@ import Prose from './prose'
 import SearchModule from './search'
 import StatList from './stat-list'
 import StepList from './step-list'
-import TestimonialList from './testimonial-list'
+import QuoteList from './quote-list'
 
 const MODULES_MAP = {
 	'accordion-list': AccordionList,
@@ -34,10 +34,10 @@ const MODULES_MAP = {
 	'logo-list': LogoList,
 	'person-list': PersonList,
 	prose: Prose,
+	'quote-list': QuoteList,
 	'search-module': SearchModule,
 	'stat-list': StatList,
 	'step-list': StepList,
-	'testimonial-list': TestimonialList,
 } as const
 
 export default function ({

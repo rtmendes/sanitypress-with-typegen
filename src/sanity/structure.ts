@@ -26,6 +26,6 @@ export default structureTool({
 				S.divider().title('References'),
 				S.documentTypeListItem('logo').title('Logos'),
 				S.documentTypeListItem('person').title('People'),
-				S.documentTypeListItem('testimonial').title('Testimonials'),
+				S.documentTypeListItem('quote').title('Quotes'),
 			]),
 })

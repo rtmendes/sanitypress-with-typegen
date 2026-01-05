@@ -3,8 +3,8 @@ import { FeedbackIcon } from '@sanity/icons'
 import { getBlockText } from '@/lib/utils'
 
 export default defineType({
-	name: 'testimonial',
-	title: 'Testimonial',
+	name: 'quote',
+	title: 'Quote',
 	type: 'document',
 	icon: FeedbackIcon,
 	fields: [

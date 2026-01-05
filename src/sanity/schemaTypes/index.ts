@@ -9,7 +9,7 @@ import page from './documents/page'
 import person from './documents/person'
 import redirect from './documents/redirect'
 import site from './documents/site'
-import testimonial from './documents/testimonial'
+import quote from './documents/quote'
 // modules
 import accordionList from './modules/accordion-list'
 import blogIndex from './modules/blog-index'
@@ -26,7 +26,7 @@ import prose from './modules/prose'
 import searchModule from './modules/search-module'
 import statList from './modules/stat-list'
 import stepList from './modules/step-list'
-import testimonialList from './modules/testimonial-list'
+import quoteList from './modules/quote-list'
 // objects
 import cta from './objects/cta'
 import link from './objects/link'
@@ -49,7 +49,7 @@ export const schema: SchemaPluginOptions = {
 		logo,
 		navigation,
 		person,
-		testimonial,
+		quote,
 
 		// objects
 		cta,
@@ -72,10 +72,10 @@ export const schema: SchemaPluginOptions = {
 		logoList,
 		personList,
 		prose,
+		quoteList,
 		searchModule,
 		statList,
 		stepList,
-		testimonialList,
 	],
 
 	templates: (templates) =>

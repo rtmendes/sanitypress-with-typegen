@@ -16,10 +16,10 @@ export default ({ of = [] }: { of?: Array<{ type: string }> } = {}) =>
 			{ type: 'logo-list' },
 			{ type: 'person-list' },
 			{ type: 'prose' },
+			{ type: 'quote-list' },
 			{ type: 'search-module' },
 			{ type: 'stat-list' },
 			{ type: 'step-list' },
-			{ type: 'testimonial-list' },
 			...of,
 		],
 		options: {

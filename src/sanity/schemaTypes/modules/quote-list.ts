@@ -3,8 +3,8 @@ import { FeedbackIcon } from '@sanity/icons'
 import { getBlockText } from '@/lib/utils'
 
 export default defineType({
-	name: 'testimonial-list',
-	title: 'Testimonial list',
+	name: 'quote-list',
+	title: 'Quote list',
 	type: 'object',
 	icon: FeedbackIcon,
 	fields: [
@@ -17,8 +17,8 @@ export default defineType({
 			name: 'testimonials',
 			type: 'array',
 			of: [
-				{ type: 'testimonial' },
-				{ type: 'reference', to: [{ type: 'testimonial' }] },
+				{ type: 'quote' },
+				{ type: 'reference', to: [{ type: 'quote' }] },
 			],
 		}),
 	],
@@ -28,7 +28,7 @@ export default defineType({
 		},
 		prepare: ({ intro }) => ({
 			title: getBlockText(intro),
-			subtitle: 'Testimonial list',
+			subtitle: 'Quote list',
 		}),
 	},
 })

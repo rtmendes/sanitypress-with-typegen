@@ -106,7 +106,7 @@ export const MODULES_QUERY = groq`
 			}
 		)
 	},
-	_type == 'testimonial-list' => {
+	_type == 'quote-list' => {
 		testimonials[]{
 			...,
 			_type == 'reference' => @->

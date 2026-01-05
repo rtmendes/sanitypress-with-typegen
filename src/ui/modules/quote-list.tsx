@@ -1,12 +1,12 @@
 import { PortableText } from 'next-sanity'
-import type { TestimonialList } from '@/sanity/types'
+import type { QuoteList } from '@/sanity/types'
 import Img from '@/ui/img'
 
 export default function ({
 	intro = [],
 	testimonials,
 	_key,
-}: TestimonialList & { _key: string }) {
+}: QuoteList & { _key: string }) {
 	return (
 		<section className="section space-y-8">
 			{intro && (
@@ -17,7 +17,7 @@ export default function ({
 
 			<ul
 				className="carousel max-md:full-bleed items-stretch gap-8 pb-2 max-md:px-4 md:mask-r-from-[calc(100%-2rem)] md:pr-4"
-				data-anchor-name={`--testimonial-list-${_key}`}
+				data-anchor-name={`--quote-list-${_key}`}
 			>
 				{testimonials?.map((testimonial: any) => (
 					<li
