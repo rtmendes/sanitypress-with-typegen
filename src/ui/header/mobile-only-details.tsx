@@ -11,7 +11,13 @@ export default function ({ name, ...props }: React.ComponentProps<'details'>) {
 	const detailsProps: React.ComponentProps<'details'> = isDesktop
 		? {
 				open: true,
-				onClick: (e) => e.preventDefault(),
+				onClick: (e) => {
+					const target = e.target as HTMLElement
+
+					if (target.closest('a, button')) return
+
+					e.preventDefault()
+				},
 			}
 		: { name }
 
