@@ -1,6 +1,6 @@
 {
 	"name": "typed-sanitypress",
-	"version": "0.0.44",
+	"version": "0.0.46",
 	"private": true,
 	"scripts": {
 		"dev": "next dev --webpack",

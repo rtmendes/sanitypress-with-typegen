@@ -1,3 +1,4 @@
+import pkg from '@@/package.json'
 import type { Metadata } from 'next'
 import { groq } from 'next-sanity'
 import { notFound } from 'next/navigation'
@@ -49,6 +50,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 				'application/rss+xml': `/${ROUTES.blog}/rss.xml`,
 			},
 		},
+		generator: `SanityPress v${pkg.version}`,
 	}
 }
 
