@@ -8,15 +8,10 @@ import Footer from '@/ui/footer'
 import Header from '@/ui/header'
 import VisualEditing from '@/ui/modules/visual-editing'
 import '@/app.css'
-import type { Metadata } from 'next'
 
 const fontSans = Geist({
 	subsets: ['latin'],
 })
-
-export const metadata: Metadata = {
-	icons: 'https://fav.farm/♣️',
-}
 
 export default async function RootLayout({
 	children,

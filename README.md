@@ -67,7 +67,9 @@ Then open:
 
 ### 4. Add content in your Sanity Studio
 
-Publish the **required** documents: `site` and `page` (with the slug "index"). More details below:
+Publish the **required** documents: `site` and `page` (with the slug "index"). Otherwise, you’ll just see a blank page on the Next.js frontend.
+
+What you'll need:
 
 | Document        | Slug or Path | Usage              | Required? | Notes                                |
 | --------------- | ------------ | ------------------ | :-------: | ------------------------------------ |
@@ -76,6 +78,12 @@ Publish the **required** documents: `site` and `page` (with the slug "index"). M
 | `page`          | `404`        | Not found route    |           |                                      |
 | `page`          | `blog`       | Blog listing route |           | Add the **Blog index** module        |
 | `global-module` | `blog/`      | Blog post template |           | Add the **Blog post content** module |
+
+Alternatively, you can run the following command to import a demo dataset with the required documents:
+
+```sh
+sanity dataset import demo.tar.gz
+```
 
 ### 5. Set up deployments
 
