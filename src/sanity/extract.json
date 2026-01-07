@@ -6335,7 +6335,7 @@
         },
         "optional": true
       },
-      "ignorePaths": {
+      "excludePaths": {
         "type": "objectAttribute",
         "value": {
           "type": "array",

@@ -30,8 +30,8 @@ export default defineType({
 			fieldset: 'path',
 		}),
 		defineField({
-			name: 'ignorePaths',
-			title: 'Paths to ignore',
+			name: 'excludePaths',
+			title: 'Paths to exclude',
 			type: 'array',
 			of: [
 				defineArrayMember({

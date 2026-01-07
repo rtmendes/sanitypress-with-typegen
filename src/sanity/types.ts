@@ -888,7 +888,7 @@ export type GlobalModule = {
 	_updatedAt: string
 	_rev: string
 	path?: string
-	ignorePaths?: Array<string>
+	excludePaths?: Array<string>
 	before?: Array<
 		| ({
 				_key: string
