@@ -1,7 +1,7 @@
 import { getImageDimensions } from '@sanity/asset-utils'
 import type { ImageUrlBuilderOptionsWithAliases } from '@sanity/image-url'
 import { stegaClean } from 'next-sanity'
-import Image, { getImageProps, type ImageProps } from 'next/image'
+import NextImage, { getImageProps, type ImageProps } from 'next/image'
 import { preload } from 'react-dom'
 import { urlFor } from '@/sanity/lib/image'
 import type {
@@ -41,7 +41,7 @@ export default function ({
 	const loading = stegaClean(props.loading || image.loading)
 
 	return (
-		<Image
+		<NextImage
 			src={
 				urlFor(image)
 					.withOptions({ auto: 'format', q: 100, ...imageOptions })
