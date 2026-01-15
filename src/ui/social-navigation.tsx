@@ -6,6 +6,7 @@ import {
 	FaLinkedinIn,
 	FaTiktok,
 	FaXTwitter,
+	FaYelp,
 	FaYoutube,
 } from 'react-icons/fa6'
 import { getSite } from '@/sanity/lib/queries'
@@ -30,18 +31,20 @@ export default async function (props: React.ComponentProps<'nav'>) {
 							>
 								{url?.includes('facebook.com') ? (
 									<FaFacebook />
+								) : url?.includes('github.com') ? (
+									<FaGithub />
 								) : url?.includes('instagram.com') ? (
 									<FaInstagram />
-								) : url?.includes('twitter.com') || url?.includes('x.com') ? (
-									<FaXTwitter />
-								) : url?.includes('youtube.com') ? (
-									<FaYoutube />
 								) : url?.includes('linkedin.com') ? (
 									<FaLinkedinIn />
 								) : url?.includes('tiktok.com') ? (
 									<FaTiktok />
-								) : url?.includes('github.com') ? (
-									<FaGithub />
+								) : url?.includes('twitter.com') || url?.includes('x.com') ? (
+									<FaXTwitter />
+								) : url?.includes('yelp.com') ? (
+									<FaYelp />
+								) : url?.includes('youtube.com') ? (
+									<FaYoutube />
 								) : (
 									<FaLink />
 								)}
