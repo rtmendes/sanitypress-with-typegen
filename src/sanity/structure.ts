@@ -1,10 +1,10 @@
-import { structureTool } from 'sanity/structure'
+import { StructureBuilder, structureTool } from 'sanity/structure'
 import { VscServerProcess } from 'react-icons/vsc'
 import { singleton } from './lib/builders'
 
 // https://www.sanity.io/docs/structure-builder-cheat-sheet
 export default structureTool({
-	structure: (S) =>
+	structure: (S: StructureBuilder) =>
 		S.list()
 			.title('Content')
 			.items([
