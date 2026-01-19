@@ -7,10 +7,7 @@ export default defineType({
 	title: 'Card list',
 	type: 'object',
 	icon: TfiLayoutGrid2Thumb,
-	groups: [
-		{ name: 'content', default: true },
-		{ name: 'options' },
-	],
+	groups: [{ name: 'content', default: true }, { name: 'options' }],
 	fields: [
 		defineField({
 			name: 'attributes',
@@ -83,7 +80,8 @@ export default defineType({
 		}),
 		defineField({
 			name: 'columns',
-			description: 'Overrides the default dynamic columns (~256px). Desktop only.',
+			description:
+				'Overrides the default dynamic columns (~256px). Desktop only.',
 			validation: (Rule) => Rule.min(1),
 			type: 'number',
 			group: 'options',

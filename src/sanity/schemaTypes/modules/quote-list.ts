@@ -16,10 +16,7 @@ export default defineType({
 		defineField({
 			name: 'testimonials',
 			type: 'array',
-			of: [
-				{ type: 'quote' },
-				{ type: 'reference', to: [{ type: 'quote' }] },
-			],
+			of: [{ type: 'quote' }, { type: 'reference', to: [{ type: 'quote' }] }],
 		}),
 	],
 	preview: {

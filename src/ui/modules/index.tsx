@@ -16,10 +16,10 @@ import HeroSplit from './hero.split'
 import LogoList from './logo-list'
 import PersonList from './person-list'
 import Prose from './prose'
+import QuoteList from './quote-list'
 import SearchModule from './search'
 import StatList from './stat-list'
 import StepList from './step-list'
-import QuoteList from './quote-list'
 
 const MODULES_MAP = {
 	'accordion-list': AccordionList,
