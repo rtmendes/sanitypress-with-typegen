@@ -231,9 +231,37 @@ export type QuoteList = {
 		_key: string
 	}>
 	testimonials?: Array<
-		| ({
+		| {
+				quote?: Array<{
+					children?: Array<{
+						marks?: Array<string>
+						text?: string
+						_type: 'span'
+						_key: string
+					}>
+					style?:
+						| 'normal'
+						| 'h1'
+						| 'h2'
+						| 'h3'
+						| 'h4'
+						| 'h5'
+						| 'h6'
+						| 'blockquote'
+					listItem?: 'bullet' | 'number'
+					markDefs?: Array<{
+						href?: string
+						_type: 'link'
+						_key: string
+					}>
+					level?: number
+					_type: 'block'
+					_key: string
+				}>
+				author?: Author
+				_type: 'quote'
 				_key: string
-		  } & Quote)
+		  }
 		| ({
 				_key: string
 		  } & QuoteReference)
@@ -335,9 +363,18 @@ export type PersonList = {
 		_key: string
 	}>
 	people?: Array<
-		| ({
+		| {
+				name?: string
+				image?: {
+					asset?: SanityImageAssetReference
+					media?: unknown
+					hotspot?: SanityImageHotspot
+					crop?: SanityImageCrop
+					_type: 'image'
+				}
+				_type: 'person'
 				_key: string
-		  } & Person)
+		  }
 		| ({
 				_key: string
 		  } & PersonReference)
@@ -372,9 +409,12 @@ export type LogoList = {
 		_key: string
 	}>
 	logos?: Array<
-		| ({
+		| {
+				title?: string
+				image?: LogoImage
+				_type: 'logo'
 				_key: string
-		  } & Logo)
+		  }
 		| ({
 				_key: string
 		  } & LogoReference)
@@ -1070,7 +1110,11 @@ export type Site = {
 	_updatedAt: string
 	_rev: string
 	title?: string
-	logo?: Logo
+	logo?: {
+		title?: string
+		image?: LogoImage
+		_type: 'logo'
+	}
 	header?: NavigationReference
 	ctas?: Array<
 		{
@@ -1307,6 +1351,7 @@ export type SanityImageMetadata = {
 	palette?: SanityImagePalette
 	lqip?: string
 	blurHash?: string
+	thumbHash?: string
 	hasAlpha?: boolean
 	isOpaque?: boolean
 }
@@ -1972,7 +2017,12 @@ export type PAGE_QUERY_RESULT = {
 							title?: string
 							image?: LogoImage
 					  }
-					| unknown
+					| {
+							title?: string
+							image?: LogoImage
+							_type: 'logo'
+							_key: string
+					  }
 				> | null
 				logoType?: 'dark' | 'default' | 'light'
 				autoScroll?: boolean
@@ -2027,7 +2077,18 @@ export type PAGE_QUERY_RESULT = {
 								_type: 'image'
 							}
 					  }
-					| unknown
+					| {
+							name?: string
+							image?: {
+								asset?: SanityImageAssetReference
+								media?: unknown
+								hotspot?: SanityImageHotspot
+								crop?: SanityImageCrop
+								_type: 'image'
+							}
+							_type: 'person'
+							_key: string
+					  }
 				> | null
 				ctas: null
 		  }
@@ -2210,7 +2271,37 @@ export type PAGE_QUERY_RESULT = {
 							}>
 							author?: Author
 					  }
-					| unknown
+					| {
+							quote?: Array<{
+								children?: Array<{
+									marks?: Array<string>
+									text?: string
+									_type: 'span'
+									_key: string
+								}>
+								style?:
+									| 'blockquote'
+									| 'h1'
+									| 'h2'
+									| 'h3'
+									| 'h4'
+									| 'h5'
+									| 'h6'
+									| 'normal'
+								listItem?: 'bullet' | 'number'
+								markDefs?: Array<{
+									href?: string
+									_type: 'link'
+									_key: string
+								}>
+								level?: number
+								_type: 'block'
+								_key: string
+							}>
+							author?: Author
+							_type: 'quote'
+							_key: string
+					  }
 				> | null
 				ctas: null
 		  }
@@ -3088,7 +3179,12 @@ export type BLOG_POST_QUERY_RESULT = {
 							title?: string
 							image?: LogoImage
 					  }
-					| unknown
+					| {
+							title?: string
+							image?: LogoImage
+							_type: 'logo'
+							_key: string
+					  }
 				> | null
 				logoType?: 'dark' | 'default' | 'light'
 				autoScroll?: boolean
@@ -3143,7 +3239,18 @@ export type BLOG_POST_QUERY_RESULT = {
 								_type: 'image'
 							}
 					  }
-					| unknown
+					| {
+							name?: string
+							image?: {
+								asset?: SanityImageAssetReference
+								media?: unknown
+								hotspot?: SanityImageHotspot
+								crop?: SanityImageCrop
+								_type: 'image'
+							}
+							_type: 'person'
+							_key: string
+					  }
 				> | null
 				ctas: null
 		  }
@@ -3326,7 +3433,37 @@ export type BLOG_POST_QUERY_RESULT = {
 							}>
 							author?: Author
 					  }
-					| unknown
+					| {
+							quote?: Array<{
+								children?: Array<{
+									marks?: Array<string>
+									text?: string
+									_type: 'span'
+									_key: string
+								}>
+								style?:
+									| 'blockquote'
+									| 'h1'
+									| 'h2'
+									| 'h3'
+									| 'h4'
+									| 'h5'
+									| 'h6'
+									| 'normal'
+								listItem?: 'bullet' | 'number'
+								markDefs?: Array<{
+									href?: string
+									_type: 'link'
+									_key: string
+								}>
+								level?: number
+								_type: 'block'
+								_key: string
+							}>
+							author?: Author
+							_type: 'quote'
+							_key: string
+					  }
 				> | null
 				ctas: null
 		  }
@@ -4118,7 +4255,12 @@ export type NOT_FOUND_QUERY_RESULT = {
 							title?: string
 							image?: LogoImage
 					  }
-					| unknown
+					| {
+							title?: string
+							image?: LogoImage
+							_type: 'logo'
+							_key: string
+					  }
 				> | null
 				logoType?: 'dark' | 'default' | 'light'
 				autoScroll?: boolean
@@ -4173,7 +4315,18 @@ export type NOT_FOUND_QUERY_RESULT = {
 								_type: 'image'
 							}
 					  }
-					| unknown
+					| {
+							name?: string
+							image?: {
+								asset?: SanityImageAssetReference
+								media?: unknown
+								hotspot?: SanityImageHotspot
+								crop?: SanityImageCrop
+								_type: 'image'
+							}
+							_type: 'person'
+							_key: string
+					  }
 				> | null
 				ctas: null
 		  }
@@ -4356,7 +4509,37 @@ export type NOT_FOUND_QUERY_RESULT = {
 							}>
 							author?: Author
 					  }
-					| unknown
+					| {
+							quote?: Array<{
+								children?: Array<{
+									marks?: Array<string>
+									text?: string
+									_type: 'span'
+									_key: string
+								}>
+								style?:
+									| 'blockquote'
+									| 'h1'
+									| 'h2'
+									| 'h3'
+									| 'h4'
+									| 'h5'
+									| 'h6'
+									| 'normal'
+								listItem?: 'bullet' | 'number'
+								markDefs?: Array<{
+									href?: string
+									_type: 'link'
+									_key: string
+								}>
+								level?: number
+								_type: 'block'
+								_key: string
+							}>
+							author?: Author
+							_type: 'quote'
+							_key: string
+					  }
 				> | null
 				ctas: null
 		  }
@@ -4558,7 +4741,11 @@ export type SITE_QUERY_RESULT = {
 	_updatedAt: string
 	_rev: string
 	title?: string
-	logo?: Logo
+	logo?: {
+		title?: string
+		image?: LogoImage
+		_type: 'logo'
+	}
 	header: {
 		items: Array<
 			| {
