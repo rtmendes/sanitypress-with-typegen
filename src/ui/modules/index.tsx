@@ -1,3 +1,4 @@
+import type { Get } from '@sanity/codegen'
 import { createDataAttribute, stegaClean } from 'next-sanity'
 import type {
 	BLOG_POST_QUERY_RESULT,
@@ -99,9 +100,7 @@ export default function ({
 }
 
 export type ModuleProps = Partial<
-	NonNullable<
-		NonNullable<PAGE_QUERY_RESULT | BLOG_POST_QUERY_RESULT>['modules']
-	>[number]
+	Get<PAGE_QUERY_RESULT | BLOG_POST_QUERY_RESULT, 'modules', 0>
 > & { attributes?: ModuleAttributes }
 
 export function moduleAttributes({ _key, _type, attributes }: ModuleProps) {

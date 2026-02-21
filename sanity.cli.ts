@@ -13,7 +13,12 @@ export default defineCliConfig({
 		dataset,
 	},
 	typegen: {
-		path: './src/**/*.{ts,tsx,js,jsx}',
+		enabled: true,
+		path: [
+			'./src/{app,ui}/**/*.{ts,tsx,js,jsx}',
+			'./src/sanity/schemaTypes/**/*.{ts,tsx,js,jsx}',
+			'./src/sanity/lib/queries.ts',
+		],
 		schema: './src/sanity/extract.json',
 		generates: './src/sanity/types.ts',
 	},
