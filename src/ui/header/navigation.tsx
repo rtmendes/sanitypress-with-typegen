@@ -15,13 +15,18 @@ export default async function () {
 						return (
 							<SanityLink
 								link={item as SanityLinkType}
-								className="link"
+								className="link grid md:place-content-center md:text-center"
 								key={item._key}
 							/>
 						)
 
 					case 'link.list':
-						return <Dropdown {...(item as LinkList)} key={item._key} />
+						return (
+							<Dropdown
+								{...(item as LinkList & { _key: string })}
+								key={item._key}
+							/>
+						)
 
 					case 'megamenu':
 						return <Megamenu {...(item as MegamenuType)} key={item._key} />

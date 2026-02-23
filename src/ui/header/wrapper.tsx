@@ -3,10 +3,7 @@
 import { usePathname } from 'next/navigation'
 import { useEffect, useRef } from 'react'
 
-export default function ({
-	className,
-	children,
-}: React.ComponentProps<'header'>) {
+export default function (props: React.ComponentProps<'header'>) {
 	const ref = useRef<HTMLDivElement>(null)
 	const pathname = usePathname()
 
@@ -39,9 +36,5 @@ export default function ({
 		})
 	}, [pathname])
 
-	return (
-		<header ref={ref} className={className} role="banner">
-			{children}
-		</header>
-	)
+	return <header ref={ref} role="banner" {...props} />
 }

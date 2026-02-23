@@ -10,7 +10,7 @@ export default function ({ link, items }: Megamenu) {
 			className="accordion group/megamenu [--safearea-x:20vw]!"
 			safeAreaOnHover
 		>
-			<summary className="group-open/megamenu:max-md:font-bold">
+			<summary className="grid h-full group-open/megamenu:max-md:font-bold md:place-content-center md:text-center md:text-balance">
 				{link?.label || (link?.internal as unknown as Page)?.title}
 			</summary>
 
