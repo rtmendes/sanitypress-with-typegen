@@ -249,25 +249,23 @@
 			cursor: pointer;
 			position: absolute;
 			position-anchor: var(--anchor-name);
-			top: anchor(center);
 			z-index: 1;
 			display: block;
 			aspect-ratio: 1;
 			width: 1.5lh;
-			margin-inline: 0.5lh;
-			translate: 0 -50%;
+			margin-inline: -100%;
 			background-color: currentColor;
 		}
 
 		&::scroll-button(left) {
 			content: '' / 'Scroll left';
-			left: anchor(left);
+			position-area: center start;
 			mask: url('https://ic0n.dev/io5/IoChevronBackCircleSharp') center / cover;
 		}
 
 		&::scroll-button(right) {
 			content: '' / 'Scroll right';
-			right: anchor(right);
+			position-area: center end;
 			mask: url('https://ic0n.dev/io5/IoChevronForwardCircleSharp') center / cover;
 		}
 	}
