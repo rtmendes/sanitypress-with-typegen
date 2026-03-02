@@ -40,12 +40,4 @@ export default defineConfig({
 		codeInput(),
 		assist(),
 	],
-
-	beta: {
-		form: {
-			enhancedObjectDialog: {
-				enabled: false,
-			},
-		},
-	},
 })
