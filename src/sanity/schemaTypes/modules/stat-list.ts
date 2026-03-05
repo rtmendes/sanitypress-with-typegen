@@ -7,11 +7,18 @@ export default defineType({
 	title: 'Stat list',
 	type: 'object',
 	icon: NumberIcon,
+	groups: [{ name: 'content', default: true }, { name: 'options' }],
 	fields: [
+		defineField({
+			name: 'attributes',
+			type: 'module-attributes',
+			group: 'options',
+		}),
 		defineField({
 			name: 'intro',
 			type: 'array',
 			of: [{ type: 'block' }],
+			group: 'content',
 		}),
 		defineField({
 			name: 'stats',
@@ -51,6 +58,7 @@ export default defineType({
 					},
 				}),
 			],
+			group: 'content',
 		}),
 	],
 	preview: {
