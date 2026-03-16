@@ -4,13 +4,10 @@
  **/
 import { defineCliConfig } from 'sanity/cli'
 
-const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
-const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET
-
 export default defineCliConfig({
 	api: {
-		projectId,
-		dataset,
+		projectId: 'cyu7k2r0',
+		dataset: 'production',
 	},
 	typegen: {
 		enabled: true,
@@ -19,7 +16,7 @@ export default defineCliConfig({
 			'./src/sanity/schemaTypes/**/*.{ts,tsx,js,jsx}',
 			'./src/sanity/lib/queries.ts',
 		],
-		schema: './src/sanity/extract.json',
+		schema: './src/sanity/schema.json',
 		generates: './src/sanity/types.ts',
 	},
 })

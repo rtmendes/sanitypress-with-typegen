@@ -15,7 +15,9 @@ import '@sanity/client'
  * ---------------------------------------------------------------------------------
  */
 
-// Source: src/sanity/extract.json
+export declare const internalGroqTypeReferenceTo: unique symbol
+
+// Source: src/sanity/schema.json
 export type LogoImage = {
 	default?: Default
 	light?: Light
@@ -1489,8 +1491,6 @@ export type AllSanitySchemaTypes =
 	| SanityAssetSourceData
 	| SanityImageAsset
 	| Geopoint
-
-export declare const internalGroqTypeReferenceTo: unique symbol
 
 // Source: src/app/(frontend)/[[...slug]]/page.tsx
 // Variable: PAGE_QUERY

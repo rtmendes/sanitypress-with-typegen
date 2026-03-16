@@ -14,7 +14,7 @@ import {
 } from '@sanity/dashboard'
 import { visionTool } from '@sanity/vision'
 import { vercelWidget } from 'sanity-plugin-dashboard-widget-vercel'
-import { apiVersion, dataset, projectId } from './src/sanity/env'
+import { apiVersion } from './src/sanity/env'
 import presentation from './src/sanity/presentation'
 import { schema } from './src/sanity/schemaTypes'
 import structure from './src/sanity/structure'
@@ -22,8 +22,8 @@ import structure from './src/sanity/structure'
 export default defineConfig({
 	title: 'SanityPress',
 	basePath: '/admin',
-	projectId,
-	dataset,
+	projectId: 'cyu7k2r0',
+	dataset: 'production',
 	// Add and edit the content schema in the './sanity/schemaTypes' folder
 	schema,
 	plugins: [
