@@ -22,7 +22,11 @@ export default async function RootLayout({
 	preconnect('https://ic0n.dev')
 
 	return (
-		<html lang="en" className={fontSans.className}>
+		<html
+			lang="en"
+			className={fontSans.className}
+			data-scroll-behavior="smooth"
+		>
 			<NuqsAdapter>
 				<body className="bg-background text-foreground antialiased">
 					<ViewTransition>
