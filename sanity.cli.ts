@@ -3,11 +3,12 @@
  * Go to https://www.sanity.io/docs/cli to learn more.
  **/
 import { defineCliConfig } from 'sanity/cli'
+import { dataset, projectId } from './src/sanity/env'
 
 export default defineCliConfig({
 	api: {
-		projectId: 'cyu7k2r0',
-		dataset: 'production',
+		projectId,
+		dataset,
 	},
 	typegen: {
 		enabled: true,
