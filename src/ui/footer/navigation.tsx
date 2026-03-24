@@ -22,7 +22,6 @@ export default async function () {
 							return (
 								<LinkList
 									{...(item as unknown as LinkListType)}
-									className="text-left"
 									key={item._key}
 								/>
 							)
