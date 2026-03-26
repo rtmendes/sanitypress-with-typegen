@@ -19,7 +19,6 @@ export default async function RootLayout({
 	children: React.ReactNode
 }>) {
 	preconnect('https://cdn.sanity.io')
-	preconnect('https://ic0n.dev')
 
 	return (
 		<html

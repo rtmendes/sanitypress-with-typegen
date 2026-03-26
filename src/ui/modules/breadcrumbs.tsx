@@ -1,15 +1,20 @@
 import type { ComponentProps } from 'react'
+import { cn } from '@/lib/utils'
 import type { Breadcrumbs, Page } from '@/sanity/types'
 import SanityLink, { type SanityLinkType } from '@/ui/sanity-link'
 import { moduleAttributes } from '.'
 
 export default function ({
+	structuredDataOnly,
 	crumbs,
 	currentPage,
 	...props
 }: Breadcrumbs & { currentPage?: Page }) {
 	return (
-		<nav className="section py-4 text-sm" {...moduleAttributes(props)}>
+		<nav
+			className={cn('section py-4 text-sm', structuredDataOnly && 'sr-only')}
+			{...moduleAttributes(props)}
+		>
 			<ol
 				className="flex items-center gap-x-2 gap-y-1"
 				itemScope
@@ -23,7 +28,7 @@ export default function ({
 					/>
 				))}
 
-				<Crumb position={(crumbs?.length ?? 0) + 2}>{currentPage?.title}</Crumb>
+				<Crumb position={(crumbs?.length ?? 0) + 1}>{currentPage?.title}</Crumb>
 			</ol>
 		</nav>
 	)

@@ -4121,6 +4121,13 @@
             "value": "breadcrumbs"
           }
         },
+        "structuredDataOnly": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "boolean"
+          },
+          "optional": true
+        },
         "crumbs": {
           "type": "objectAttribute",
           "value": {

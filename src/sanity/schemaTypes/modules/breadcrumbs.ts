@@ -10,6 +10,12 @@ export default defineType({
 	groups: [{ name: 'content', default: true }, { name: 'options' }],
 	fields: [
 		defineField({
+			name: 'structuredDataOnly',
+			type: 'boolean',
+			initialValue: false,
+			group: 'options',
+		}),
+		defineField({
 			name: 'crumbs',
 			type: 'array',
 			of: [{ type: 'link', initialValue: { type: 'internal' } }],

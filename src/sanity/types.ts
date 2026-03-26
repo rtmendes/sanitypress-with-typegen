@@ -562,6 +562,7 @@ export type Callout = {
 
 export type Breadcrumbs = {
 	_type: 'breadcrumbs'
+	structuredDataOnly?: boolean
 	crumbs?: Array<
 		{
 			_key: string
@@ -1696,6 +1697,7 @@ export type PAGE_QUERY_RESULT = {
 		| {
 				_key: string
 				_type: 'breadcrumbs'
+				structuredDataOnly?: boolean
 				crumbs: Array<
 					| {
 							_key: string
@@ -2859,6 +2861,7 @@ export type BLOG_POST_QUERY_RESULT = {
 		| {
 				_key: string
 				_type: 'breadcrumbs'
+				structuredDataOnly?: boolean
 				crumbs: Array<
 					| {
 							_key: string
@@ -3936,6 +3939,7 @@ export type NOT_FOUND_QUERY_RESULT = {
 		| {
 				_key: string
 				_type: 'breadcrumbs'
+				structuredDataOnly?: boolean
 				crumbs: Array<
 					| {
 							_key: string
