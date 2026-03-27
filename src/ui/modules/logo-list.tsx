@@ -26,12 +26,10 @@ export default function ({
 						? `${css.track} max-w-max overflow-hidden mask-x-from-[calc(100%-2rem)]`
 						: 'flex-wrap justify-center gap-x-4 gap-y-4',
 				)}
-				style={
-					{
-						'--count': logos?.length,
-						'--duration': `${duration}s`,
-					} as React.CSSProperties
-				}
+				style={{
+					'--count': logos?.length,
+					'--duration': `${duration}s`,
+				}}
 				key={logos?.length}
 			>
 				{(logos as Partial<Logo>[])?.map((logo, key) => {
@@ -40,7 +38,7 @@ export default function ({
 					return (
 						<Img
 							className="h-[2lh] w-[200px] shrink-0 object-contain px-4 max-sm:w-[150px]"
-							style={{ '--index': key } as React.CSSProperties}
+							style={{ '--index': key }}
 							image={logo.image[logoType] ?? logo.image.default}
 							width={200}
 							alt={logo.title ?? ''}

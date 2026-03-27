@@ -12,7 +12,7 @@ export default defineType({
 			type: 'link',
 		}),
 		defineField({
-			name: 'style',
+			name: 'theme',
 			type: 'string',
 			options: {
 				list: [

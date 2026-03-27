@@ -23,7 +23,7 @@ export default function ({
 			</summary>
 
 			<ul
-				className="md:bg-background anim-fade-to-b border-stroke max-md:pl-ch mb-ch md:-ml-ch z-1 max-md:border-l md:fixed md:min-w-max md:p-3 md:shadow-lg"
+				className="md:bg-background anim-fade-to-b border-stroke max-md:pl-ch mb-ch md:-ml-ch z-1 max-md:border-l md:absolute md:min-w-max md:p-3 md:shadow-lg"
 				style={{
 					positionAnchor: anchorName,
 					positionArea: 'end span-end',

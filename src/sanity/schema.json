@@ -5426,7 +5426,7 @@
           },
           "optional": true
         },
-        "style": {
+        "theme": {
           "type": "objectAttribute",
           "value": {
             "type": "union",

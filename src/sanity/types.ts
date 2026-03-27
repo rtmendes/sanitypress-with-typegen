@@ -742,7 +742,7 @@ export type Link = {
 export type Cta = {
 	_type: 'cta'
 	link?: Link
-	style?: 'action' | 'action-outline' | 'ghost' | 'link'
+	theme?: 'action' | 'action-outline' | 'ghost' | 'link'
 }
 
 export type Quote = {
@@ -1559,7 +1559,7 @@ export type PAGE_QUERY_RESULT = {
 								params?: string
 						  }
 						| null
-					style?: 'action-outline' | 'action' | 'ghost' | 'link'
+					theme?: 'action-outline' | 'action' | 'ghost' | 'link'
 				}> | null
 				accordions?: Array<{
 					summary?: string
@@ -1690,7 +1690,7 @@ export type PAGE_QUERY_RESULT = {
 								params?: string
 						  }
 						| null
-					style?: 'action-outline' | 'action' | 'ghost' | 'link'
+					theme?: 'action-outline' | 'action' | 'ghost' | 'link'
 				}> | null
 				limit?: number
 		  }
@@ -1779,7 +1779,7 @@ export type PAGE_QUERY_RESULT = {
 								params?: string
 						  }
 						| null
-					style?: 'action-outline' | 'action' | 'ghost' | 'link'
+					theme?: 'action-outline' | 'action' | 'ghost' | 'link'
 				}> | null
 		  }
 		| {
@@ -1866,7 +1866,7 @@ export type PAGE_QUERY_RESULT = {
 									params?: string
 							  }
 							| null
-						style?: 'action-outline' | 'action' | 'ghost' | 'link'
+						theme?: 'action-outline' | 'action' | 'ghost' | 'link'
 					}> | null
 					_type: 'card'
 					_key: string
@@ -1896,7 +1896,7 @@ export type PAGE_QUERY_RESULT = {
 								params?: string
 						  }
 						| null
-					style?: 'action-outline' | 'action' | 'ghost' | 'link'
+					theme?: 'action-outline' | 'action' | 'ghost' | 'link'
 				}> | null
 				columns?: number
 		  }
@@ -1964,7 +1964,7 @@ export type PAGE_QUERY_RESULT = {
 								params?: string
 						  }
 						| null
-					style?: 'action-outline' | 'action' | 'ghost' | 'link'
+					theme?: 'action-outline' | 'action' | 'ghost' | 'link'
 				}> | null
 				image?: {
 					asset?: SanityImageAssetReference
@@ -2459,7 +2459,7 @@ export type PAGE_QUERY_RESULT = {
 								params?: string
 						  }
 						| null
-					style?: 'action-outline' | 'action' | 'ghost' | 'link'
+					theme?: 'action-outline' | 'action' | 'ghost' | 'link'
 				}> | null
 				steps?: Array<{
 					content?: Array<{
@@ -2723,7 +2723,7 @@ export type BLOG_POST_QUERY_RESULT = {
 								params?: string
 						  }
 						| null
-					style?: 'action-outline' | 'action' | 'ghost' | 'link'
+					theme?: 'action-outline' | 'action' | 'ghost' | 'link'
 				}> | null
 				accordions?: Array<{
 					summary?: string
@@ -2854,7 +2854,7 @@ export type BLOG_POST_QUERY_RESULT = {
 								params?: string
 						  }
 						| null
-					style?: 'action-outline' | 'action' | 'ghost' | 'link'
+					theme?: 'action-outline' | 'action' | 'ghost' | 'link'
 				}> | null
 				limit?: number
 		  }
@@ -2943,7 +2943,7 @@ export type BLOG_POST_QUERY_RESULT = {
 								params?: string
 						  }
 						| null
-					style?: 'action-outline' | 'action' | 'ghost' | 'link'
+					theme?: 'action-outline' | 'action' | 'ghost' | 'link'
 				}> | null
 		  }
 		| {
@@ -3030,7 +3030,7 @@ export type BLOG_POST_QUERY_RESULT = {
 									params?: string
 							  }
 							| null
-						style?: 'action-outline' | 'action' | 'ghost' | 'link'
+						theme?: 'action-outline' | 'action' | 'ghost' | 'link'
 					}> | null
 					_type: 'card'
 					_key: string
@@ -3060,7 +3060,7 @@ export type BLOG_POST_QUERY_RESULT = {
 								params?: string
 						  }
 						| null
-					style?: 'action-outline' | 'action' | 'ghost' | 'link'
+					theme?: 'action-outline' | 'action' | 'ghost' | 'link'
 				}> | null
 				columns?: number
 		  }
@@ -3128,7 +3128,7 @@ export type BLOG_POST_QUERY_RESULT = {
 								params?: string
 						  }
 						| null
-					style?: 'action-outline' | 'action' | 'ghost' | 'link'
+					theme?: 'action-outline' | 'action' | 'ghost' | 'link'
 				}> | null
 				image?: {
 					asset?: SanityImageAssetReference
@@ -3623,7 +3623,7 @@ export type BLOG_POST_QUERY_RESULT = {
 								params?: string
 						  }
 						| null
-					style?: 'action-outline' | 'action' | 'ghost' | 'link'
+					theme?: 'action-outline' | 'action' | 'ghost' | 'link'
 				}> | null
 				steps?: Array<{
 					content?: Array<{
@@ -3808,7 +3808,7 @@ export type NOT_FOUND_QUERY_RESULT = {
 								params?: string
 						  }
 						| null
-					style?: 'action-outline' | 'action' | 'ghost' | 'link'
+					theme?: 'action-outline' | 'action' | 'ghost' | 'link'
 				}> | null
 				accordions?: Array<{
 					summary?: string
@@ -3932,7 +3932,7 @@ export type NOT_FOUND_QUERY_RESULT = {
 								params?: string
 						  }
 						| null
-					style?: 'action-outline' | 'action' | 'ghost' | 'link'
+					theme?: 'action-outline' | 'action' | 'ghost' | 'link'
 				}> | null
 				limit?: number
 		  }
@@ -4021,7 +4021,7 @@ export type NOT_FOUND_QUERY_RESULT = {
 								params?: string
 						  }
 						| null
-					style?: 'action-outline' | 'action' | 'ghost' | 'link'
+					theme?: 'action-outline' | 'action' | 'ghost' | 'link'
 				}> | null
 		  }
 		| {
@@ -4108,7 +4108,7 @@ export type NOT_FOUND_QUERY_RESULT = {
 									params?: string
 							  }
 							| null
-						style?: 'action-outline' | 'action' | 'ghost' | 'link'
+						theme?: 'action-outline' | 'action' | 'ghost' | 'link'
 					}> | null
 					_type: 'card'
 					_key: string
@@ -4138,7 +4138,7 @@ export type NOT_FOUND_QUERY_RESULT = {
 								params?: string
 						  }
 						| null
-					style?: 'action-outline' | 'action' | 'ghost' | 'link'
+					theme?: 'action-outline' | 'action' | 'ghost' | 'link'
 				}> | null
 				columns?: number
 		  }
@@ -4206,7 +4206,7 @@ export type NOT_FOUND_QUERY_RESULT = {
 								params?: string
 						  }
 						| null
-					style?: 'action-outline' | 'action' | 'ghost' | 'link'
+					theme?: 'action-outline' | 'action' | 'ghost' | 'link'
 				}> | null
 				image?: {
 					asset?: SanityImageAssetReference
@@ -4701,7 +4701,7 @@ export type NOT_FOUND_QUERY_RESULT = {
 								params?: string
 						  }
 						| null
-					style?: 'action-outline' | 'action' | 'ghost' | 'link'
+					theme?: 'action-outline' | 'action' | 'ghost' | 'link'
 				}> | null
 				steps?: Array<{
 					content?: Array<{
@@ -5159,7 +5159,7 @@ export type SITE_QUERY_RESULT = {
 					params?: string
 			  }
 			| null
-		style?: 'action-outline' | 'action' | 'ghost' | 'link'
+		theme?: 'action-outline' | 'action' | 'ghost' | 'link'
 	}> | null
 	footer: {
 		items: Array<

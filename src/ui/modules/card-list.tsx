@@ -21,7 +21,7 @@ export default function ({ intro = [], cards, ctas, columns }: CardList) {
 							? 'lg:grid-cols-[repeat(var(--columns,1),minmax(0px,1fr))]'
 							: 'lg:grid-cols-[repeat(auto-fit,minmax(var(--container-3xs),1fr))]',
 					)}
-					style={{ '--columns': columns } as React.CSSProperties}
+					style={{ '--columns': columns }}
 				>
 					{cards.map((item) => (
 						<li key={item._key} className="prose">
