@@ -10,7 +10,7 @@
         "@sanity/cli": "^6.2.1",
         "@sanity/code-input": "^7.0.12",
         "@sanity/dashboard": "^5.0.1",
-        "@sanity/image-url": "^2.1.0",
+        "@sanity/image-url": "^2.1.1",
         "@sanity/vision": "^5.18.0",
         "@vercel/analytics": "^2.0.1",
         "babel-plugin-react-compiler": "^1.0.0",
@@ -755,7 +755,7 @@
 
     "@sanity/id-utils": ["@sanity/id-utils@1.0.0", "", { "dependencies": { "@sanity/uuid": "^3.0.2", "lodash": "^4.17.21", "ts-brand": "^0.2.0" } }, "sha512-2sb7tbdMDuUuVyocJPKG0gZBiOML/ovCe+mJiLrv1j69ODOfa2LfUjDVR+dRw/A/+XuxoJSSP8ebG7NiwTOgIA=="],
 
-    "@sanity/image-url": ["@sanity/image-url@2.1.0", "", { "dependencies": { "@sanity/signed-urls": "^2.0.2" } }, "sha512-U6M8EF6i4HjzBLcpOie6JZuSj3PLUTK7mAkjK/ugVWm2xCo2BSW0kr5BQfcR5As1mW+uaRvXLVfN/xEVxppTTQ=="],
+    "@sanity/image-url": ["@sanity/image-url@2.1.1", "", { "dependencies": { "@sanity/signed-urls": "^2.0.2" } }, "sha512-qVXsF1teWR6FO3ZFAz46HDcRU+E6EQkpyncPnkGOzeJ1PgnaOiWMVbiSrZtX10s3txzzu/tAjKwbxbGHfDWgGw=="],
 
     "@sanity/import": ["@sanity/import@6.0.1", "", { "dependencies": { "@sanity/asset-utils": "^2.3.0", "@sanity/generate-help-url": "^4.0.0", "@sanity/mutator": "^5.18.0", "debug": "^4.4.3", "get-it": "^8.7.0", "gunzip-maybe": "^1.4.2", "p-map": "^7.0.3", "tar-fs": "^3.1.2", "tinyglobby": "^0.2.15" }, "peerDependencies": { "@sanity/client": "^5.0.0 || ^6.0.0 || ^7.0.0" } }, "sha512-fXeKxfRAOeOsykm/sBjhD3YJMeUuxxyK2/BZFm3jo7wCro4d19wdW1ZlRvT1NDaYPx1eEzKl2E4gDiqRRIxRRg=="],
 
@@ -2314,6 +2314,8 @@
     "read-pkg/unicorn-magic": ["unicorn-magic@0.4.0", "", {}, "sha512-wH590V9VNgYH9g3lH9wWjTrUoKsjLF6sGLjhR4sH1LWpLmCOH0Zf7PukhDA8BiS7KHe4oPNkcTHqYkj7SOGUOw=="],
 
     "readable-stream/isarray": ["isarray@1.0.0", "", {}, "sha512-VLghIWNM6ELQzo7zwmcg0NmTVyWKYjvIeM83yjp0wRDTmUnrM678fQbcKBo6n2CJEF0szoG//ytg+TKla89ALQ=="],
+
+    "sanity/@sanity/image-url": ["@sanity/image-url@2.1.0", "", { "dependencies": { "@sanity/signed-urls": "^2.0.2" } }, "sha512-U6M8EF6i4HjzBLcpOie6JZuSj3PLUTK7mAkjK/ugVWm2xCo2BSW0kr5BQfcR5As1mW+uaRvXLVfN/xEVxppTTQ=="],
 
     "sanity/@sanity/telemetry": ["@sanity/telemetry@0.9.0", "", { "dependencies": { "rxjs": "^7.8.1", "typeid-js": "^0.3.0" }, "peerDependencies": { "react": "^18.2 || ^19.0.0" } }, "sha512-CcV1VwcztIRUTv4JON7MK5mIuywcqoNEmYERNTzIqQHmF/HePU7wY3tR6i8A84Fd+4RrwqfG92Exgim2Q/7CcQ=="],
 
