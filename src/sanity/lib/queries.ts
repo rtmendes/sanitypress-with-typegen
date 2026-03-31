@@ -99,12 +99,10 @@ export const MODULES_QUERY = groq`
 				}
 			}
 		},
-		'headings': select(
-			tableOfContents in ['left', 'right'] => content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{
-				style,
-				'text': pt::text(@)
-			}
-		)
+		'headings': content[style in ['h2', 'h3', 'h4', 'h5', 'h6']]{
+			style,
+			'text': pt::text(@)
+		}
 	},
 	_type == 'quote-list' => {
 		testimonials[]{

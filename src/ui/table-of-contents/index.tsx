@@ -13,6 +13,8 @@ export default function ({
 		text: string | null
 	}> | null
 } & React.ComponentProps<'details'>) {
+	if (!headings?.length) return null
+
 	return (
 		<details
 			className={cn(
