@@ -3,7 +3,7 @@
 import { stegaClean } from 'next-sanity'
 import { useEffect, useRef, useState, type ComponentProps } from 'react'
 import { cn, slug } from '@/lib/utils'
-import css from './toc-item.module.css'
+import css from './toc.module.css'
 
 export default function ({
 	heading,
@@ -60,7 +60,7 @@ export default function ({
 	}, [heading, thresholdHeight])
 
 	return (
-		<li className="border-stroke border-l" ref={ref} {...props}>
+		<li ref={ref} {...props}>
 			<a
 				href={`#${slug(heading.text, { removeLeadingNumberAndHyphen: true })}`}
 				className={cn('text-foreground block py-1 leading-tight', {

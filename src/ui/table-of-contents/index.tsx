@@ -1,5 +1,6 @@
 import { cn } from '@/lib/utils'
 import ToCItem from './toc-item'
+import css from './toc.module.css'
 
 export default function ({
 	summary = 'Table of Contents',
@@ -27,7 +28,7 @@ export default function ({
 				{summary}
 			</summary>
 
-			<ol>
+			<ol className={css.list}>
 				{headings?.map((heading, key) => (
 					<ToCItem heading={heading} key={key} />
 				))}
