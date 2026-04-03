@@ -240,8 +240,13 @@
 	overflow-x: auto;
 	scroll-behavior: smooth;
 	scroll-snap-type: x mandatory;
-	scroll-marker-group: after;
 
+	&>* {
+		scroll-snap-align: center;
+	}
+}
+
+@utility carousel-scroll-buttons {
 	@supports (position-anchor: var(--anchor-name)) {
 		@apply no-scrollbar;
 
@@ -269,6 +274,11 @@
 			mask: url('https://ic0n.dev/io5/IoChevronForwardCircleSharp') center / cover;
 		}
 	}
+}
+
+@utility carousel-scroll-marker {
+	--size: 12px;
+	scroll-marker-group: after;
 
 	&::scroll-marker-group {
 		position: absolute;
@@ -281,8 +291,6 @@
 	}
 
 	&>* {
-		scroll-snap-align: center;
-
 		&::scroll-marker {
 			content: '';
 			@apply bg-foreground/25 block size-1 rounded-full;

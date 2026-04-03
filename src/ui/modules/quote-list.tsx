@@ -16,7 +16,7 @@ export default function ({
 			)}
 
 			<ul
-				className="carousel max-md:full-bleed items-stretch gap-8 pb-2 max-md:px-4 md:mask-r-from-[calc(100%-2rem)] md:pr-4"
+				className="carousel carousel-scroll-buttons carousel-scroll-marker max-md:full-bleed items-stretch gap-8 pb-2 max-md:px-4 md:mask-r-from-[calc(100%-2rem)] md:pr-4"
 				data-anchor-name={`--quote-list-${_key}`}
 			>
 				{testimonials?.map((testimonial: any) => (

@@ -1507,6 +1507,14 @@
             "value": "quote-list"
           }
         },
+        "attributes": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "inline",
+            "name": "module-attributes"
+          },
+          "optional": true
+        },
         "intro": {
           "type": "objectAttribute",
           "value": {
