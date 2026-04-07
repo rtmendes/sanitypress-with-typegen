@@ -2,6 +2,7 @@ import { PortableText, stegaClean } from 'next-sanity'
 import { cn } from '@/lib/utils'
 import type { AccordionList } from '@/sanity/types'
 import CTAList from '@/ui/cta-list'
+import { moduleAttributes } from '.'
 
 export default function ({
 	_key: _module_key,
@@ -11,6 +12,7 @@ export default function ({
 	exclusive,
 	enableSchema = true,
 	layout: l,
+	...props
 }: AccordionList & { _key: string }) {
 	const layout = stegaClean(l)
 
@@ -24,6 +26,7 @@ export default function ({
 				itemScope: true,
 				itemType: 'https://schema.org/FAQPage',
 			})}
+			{...moduleAttributes(props)}
 		>
 			{intro && (
 				<header
