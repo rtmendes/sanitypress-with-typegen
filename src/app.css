@@ -349,7 +349,9 @@
 /* anims */
 
 @utility anim-fade {
-	@apply starting:opacity-0 transition-[opacity,translate];
+	transition: var(--default-transition-duration) var(--default-transition-timing-function);
+	transition-property: opacity, translate;
+	@apply starting:opacity-0;
 }
 
 @utility anim-fade-to-l {
