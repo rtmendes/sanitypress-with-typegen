@@ -2773,6 +2773,13 @@
             "value": "logo-list"
           }
         },
+        "overline": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
+        },
         "intro": {
           "type": "objectAttribute",
           "value": {
@@ -3073,6 +3080,13 @@
           "value": {
             "type": "inline",
             "name": "module-attributes"
+          },
+          "optional": true
+        },
+        "overline": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
           },
           "optional": true
         },
@@ -3909,6 +3923,13 @@
           "value": {
             "type": "inline",
             "name": "module-attributes"
+          },
+          "optional": true
+        },
+        "overline": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
           },
           "optional": true
         },

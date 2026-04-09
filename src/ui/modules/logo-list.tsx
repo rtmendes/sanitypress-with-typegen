@@ -2,9 +2,11 @@ import { PortableText } from 'next-sanity'
 import { cn } from '@/lib/utils'
 import type { Logo, LogoList } from '@/sanity/types'
 import Img from '@/ui/img'
+import Overline from '@/ui/overline'
 import css from './logo-list.module.css'
 
 export default function ({
+	overline,
 	intro,
 	logos,
 	logoType = 'default',
@@ -13,9 +15,10 @@ export default function ({
 }: LogoList) {
 	return (
 		<section className="section space-y-8 text-center">
-			{intro && (
+			{(overline || intro) && (
 				<header className="prose">
-					<PortableText value={intro} />
+					<Overline value={overline} />
+					<PortableText value={intro ?? []} />
 				</header>
 			)}
 

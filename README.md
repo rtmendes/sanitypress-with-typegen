@@ -6,12 +6,12 @@ An improved successor to the acclaimed Next.js + Sanity.io starter template—no
 
 [Get started](https://www.sanity.io/get-started?template=sanitypress-with-typegen&ref=templates-sanitypress-with-typegen) | [Read more about TypeGen](https://typed.sanitypress.dev/blog/introducing-sanitypress-with-typegen) | [View on Sanity.io](https://www.sanity.io/templates/sanitypress-with-typegen)
 
-![](https://cdn.sanity.io/images/81pocpw8/production/83a1f41ece9f61f1b1f323f75dff2d6e9c4cd5f1-2400x1200.png)
+![](https://cdn.sanity.io/images/cyu7k2r0/production/24aee273834491b8706ab262d25dcda73b5a856b-2178x1085.png)
 
 ## Key Features
 
 - Next.js 16 (App Router, Server Components, TypeScript) with Tailwind 4
-- Improved successor to the acclaimed [SanityPress](https://sanitypress.dev) starter template (over 350 stars)
+- Improved successor to the acclaimed [SanityPress](https://sanitypress.dev) starter template (over 400 stars)
 - GROQ TypeGen for your Sanity Schema types
 - [Perfect PageSpeed Insight scores](https://pagespeed.web.dev/analysis/https-typed-sanitypress-dev/78sjwe1x39?form_factor=desktop)
 - Live Content API with Visual Editing
@@ -85,6 +85,8 @@ Alternatively, you can run the following command to import a demo dataset with t
 sanity dataset import demo.tar.gz
 ```
 
+> 📸 See what the Sanity Studio backend looks like on the [Screenshots page](https://typed.sanitypress.dev/sanity-studio-screenshots).
+
 ### 5. Set up deployments
 
 Add a [Vercel](https://www.sanity.io/plugins/vercel-dashboard-widget) (default) or [Netlify widget](https://www.sanity.io/plugins/sanity-plugin-dashboard-widget-netlify) to enable deployments from the Studio.
@@ -95,14 +97,14 @@ Adjust frontend styles to your liking, edit or add new schema and modules, etc.
 
 ## Roadmap / To-do
 
-- featured post
+- read time for blog posts
+- improved error handling
+- featured post?
   - reference to blog.post on blog-index, blog-post-list
   - OR as `featured: true` on blog.post
-- read time for blog posts
 - Modules
-  - Announcement bar
-- Improved error handling
-- rename `global-module` to `module.global`
+  - Announcement bar?
+- rename `global-module` to `module.global`?
 
 ## \*Not included
 

@@ -394,6 +394,7 @@ export type LogoReference = {
 
 export type LogoList = {
 	_type: 'logo-list'
+	overline?: string
 	intro?: Array<{
 		children?: Array<{
 			marks?: Array<string>
@@ -431,6 +432,7 @@ export type LogoList = {
 export type HeroSplit = {
 	_type: 'hero.split'
 	attributes?: ModuleAttributes
+	overline?: string
 	content?: Array<{
 		children?: Array<{
 			marks?: Array<string>
@@ -536,6 +538,7 @@ export type CardList = {
 export type Callout = {
 	_type: 'callout'
 	attributes?: ModuleAttributes
+	overline?: string
 	intro?: Array<{
 		children?: Array<{
 			marks?: Array<string>
@@ -1736,6 +1739,7 @@ export type PAGE_QUERY_RESULT = {
 				_key: string
 				_type: 'callout'
 				attributes?: ModuleAttributes
+				overline?: string
 				intro?: Array<{
 					children?: Array<{
 						marks?: Array<string>
@@ -1921,6 +1925,7 @@ export type PAGE_QUERY_RESULT = {
 				_key: string
 				_type: 'hero.split'
 				attributes?: ModuleAttributes
+				overline?: string
 				content?: Array<{
 					children?: Array<{
 						marks?: Array<string>
@@ -1989,6 +1994,7 @@ export type PAGE_QUERY_RESULT = {
 		| {
 				_key: string
 				_type: 'logo-list'
+				overline?: string
 				intro?: Array<{
 					children?: Array<{
 						marks?: Array<string>
@@ -2901,6 +2907,7 @@ export type BLOG_POST_QUERY_RESULT = {
 				_key: string
 				_type: 'callout'
 				attributes?: ModuleAttributes
+				overline?: string
 				intro?: Array<{
 					children?: Array<{
 						marks?: Array<string>
@@ -3086,6 +3093,7 @@ export type BLOG_POST_QUERY_RESULT = {
 				_key: string
 				_type: 'hero.split'
 				attributes?: ModuleAttributes
+				overline?: string
 				content?: Array<{
 					children?: Array<{
 						marks?: Array<string>
@@ -3154,6 +3162,7 @@ export type BLOG_POST_QUERY_RESULT = {
 		| {
 				_key: string
 				_type: 'logo-list'
+				overline?: string
 				intro?: Array<{
 					children?: Array<{
 						marks?: Array<string>
@@ -3980,6 +3989,7 @@ export type NOT_FOUND_QUERY_RESULT = {
 				_key: string
 				_type: 'callout'
 				attributes?: ModuleAttributes
+				overline?: string
 				intro?: Array<{
 					children?: Array<{
 						marks?: Array<string>
@@ -4165,6 +4175,7 @@ export type NOT_FOUND_QUERY_RESULT = {
 				_key: string
 				_type: 'hero.split'
 				attributes?: ModuleAttributes
+				overline?: string
 				content?: Array<{
 					children?: Array<{
 						marks?: Array<string>
@@ -4233,6 +4244,7 @@ export type NOT_FOUND_QUERY_RESULT = {
 		| {
 				_key: string
 				_type: 'logo-list'
+				overline?: string
 				intro?: Array<{
 					children?: Array<{
 						marks?: Array<string>

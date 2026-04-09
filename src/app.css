@@ -89,6 +89,44 @@
 	}
 }
 
+/* typography */
+
+@utility h-base {
+	@apply font-bold;
+}
+
+@utility h0 {
+	@apply h-base text-4xl;
+}
+
+@utility h1 {
+	@apply h-base text-3xl;
+}
+
+@utility h2 {
+	@apply h-base text-2xl;
+}
+
+@utility h3 {
+	@apply h-base text-xl;
+}
+
+@utility h4 {
+	@apply h-base text-lg;
+}
+
+@utility h5 {
+	@apply h-base text-base;
+}
+
+@utility h6 {
+	@apply h-base text-base;
+}
+
+@utility technical {
+	@apply uppercase font-bold tracking-widest font-mono;
+}
+
 /* ctas, links */
 
 @utility action-base {
@@ -119,37 +157,7 @@
 
 @utility input {
 	padding: 0.25em 0.5em;
-	@apply bg-background border border-foreground/10 focus-within:border-foreground/30;
-}
-
-/* typography */
-
-@utility h0 {
-	@apply text-4xl font-bold;
-}
-
-@utility h1 {
-	@apply text-3xl font-bold;
-}
-
-@utility h2 {
-	@apply text-2xl font-bold;
-}
-
-@utility h3 {
-	@apply text-xl font-bold;
-}
-
-@utility h4 {
-	@apply text-lg font-bold;
-}
-
-@utility h5 {
-	@apply text-base font-bold;
-}
-
-@utility h6 {
-	@apply text-base font-bold;
+	@apply leading-normal bg-background border border-foreground/10 focus-within:border-foreground/30;
 }
 
 /* components */
