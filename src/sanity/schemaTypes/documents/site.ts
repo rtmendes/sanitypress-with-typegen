@@ -22,6 +22,13 @@ export default defineType({
 			group: 'branding',
 		}),
 		defineField({
+			name: 'ogimage',
+			title: 'OpenGraph image (global)',
+			description: 'Used for social sharing previews',
+			type: 'image',
+			group: 'branding',
+		}),
+		defineField({
 			name: 'header',
 			type: 'reference',
 			to: [{ type: 'navigation' }],

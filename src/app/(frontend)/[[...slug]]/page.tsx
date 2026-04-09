@@ -6,7 +6,11 @@ import { ROUTES } from '@/lib/env'
 import { client } from '@/sanity/lib/client'
 import { urlFor } from '@/sanity/lib/image'
 import { sanityFetchLive } from '@/sanity/lib/live'
-import { GLOBAL_MODULE_PATH_QUERY, MODULES_QUERY } from '@/sanity/lib/queries'
+import {
+	getSite,
+	GLOBAL_MODULE_PATH_QUERY,
+	MODULES_QUERY,
+} from '@/sanity/lib/queries'
 import type { PAGE_QUERY_RESULT } from '@/sanity/types'
 import ModulesResolver from '@/ui/modules'
 
@@ -24,7 +28,7 @@ export default async function Page({ params }: Props) {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
 	const { slug } = await params
-	const page = await getPage(slug)
+	const [page, site] = await Promise.all([getPage(slug), getSite()])
 	const { title, description, image, noIndex } = page?.metadata ?? {}
 
 	return {
@@ -39,7 +43,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 			images: [
 				image
 					? urlFor(image).width(1200).url()
-					: `${process.env.NEXT_PUBLIC_BASE_URL}/api/og?slug=${slug?.join('/')}`,
+					: site?.ogimage
+						? urlFor(site.ogimage).width(1200).url()
+						: `${process.env.NEXT_PUBLIC_BASE_URL}/api/og?slug=${slug?.join('/')}`,
 			],
 		},
 		robots: {

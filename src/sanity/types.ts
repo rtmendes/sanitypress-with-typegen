@@ -1120,6 +1120,13 @@ export type Site = {
 		image?: LogoImage
 		_type: 'logo'
 	}
+	ogimage?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		_type: 'image'
+	}
 	header?: NavigationReference
 	ctas?: Array<
 		{
@@ -4757,6 +4764,13 @@ export type SITE_QUERY_RESULT = {
 		title?: string
 		image?: LogoImage
 		_type: 'logo'
+	}
+	ogimage?: {
+		asset?: SanityImageAssetReference
+		media?: unknown
+		hotspot?: SanityImageHotspot
+		crop?: SanityImageCrop
+		_type: 'image'
 	}
 	header: {
 		items: Array<
