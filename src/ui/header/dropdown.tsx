@@ -1,3 +1,4 @@
+import { cn } from '@/lib/utils'
 import type { LinkList, Page } from '@/sanity/types'
 import HoverDetails from '@/ui/hover-details'
 import SanityLink, { type SanityLinkType } from '@/ui/sanity-link'
@@ -6,7 +7,11 @@ export default function ({
 	link: summary,
 	links,
 	_key,
-}: LinkList & { _key: string }) {
+	summaryClassName,
+}: LinkList & {
+	_key: string
+	summaryClassName?: string
+}) {
 	const anchorName = `--dropdown-${_key}`
 
 	return (
@@ -16,7 +21,10 @@ export default function ({
 			safeAreaOnHover
 		>
 			<summary
-				className="grid h-full group-open/dropdown:max-md:font-bold md:place-content-center md:text-center md:text-balance"
+				className={cn(
+					'h-full group-open/dropdown:max-md:font-bold',
+					summaryClassName,
+				)}
 				style={{ anchorName }}
 			>
 				{summary?.label || (summary?.internal as unknown as Page)?.title}
@@ -27,6 +35,7 @@ export default function ({
 				style={{
 					positionAnchor: anchorName,
 					positionArea: 'end span-end',
+					positionTryFallbacks: 'end span-start',
 				}}
 			>
 				{links?.map((link, key) => (

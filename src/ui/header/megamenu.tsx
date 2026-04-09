@@ -1,16 +1,28 @@
+import { cn } from '@/lib/utils'
 import type { Megamenu, Page } from '@/sanity/types'
 import HoverDetails from '@/ui/hover-details'
 import SanityLink, { type SanityLinkType } from '@/ui/sanity-link'
 import MobileOnlyDetails from './mobile-only-details'
 
-export default function ({ link, items }: Megamenu) {
+export default function ({
+	link,
+	items,
+	summaryClassName,
+}: Megamenu & {
+	summaryClassName?: string
+}) {
 	return (
 		<HoverDetails
 			name="header"
 			className="accordion group/megamenu [--safearea-x:20vw]!"
 			safeAreaOnHover
 		>
-			<summary className="grid h-full group-open/megamenu:max-md:font-bold md:place-content-center md:text-center md:text-balance">
+			<summary
+				className={cn(
+					'h-full group-open/megamenu:max-md:font-bold',
+					summaryClassName,
+				)}
+			>
 				{link?.label || (link?.internal as unknown as Page)?.title}
 			</summary>
 
