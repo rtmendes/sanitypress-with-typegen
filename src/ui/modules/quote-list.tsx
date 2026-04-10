@@ -31,7 +31,7 @@ export default function ({
 						{testimonial.author?.name && (
 							<cite className="flex items-center gap-2">
 								<Img
-									className="aspect-square size-[2lh] shrink-0 rounded-full"
+									className="aspect-square size-[2lh] shrink-0 rounded-full object-cover"
 									image={testimonial.author?.image}
 									width={48}
 									alt={testimonial.author?.name}

@@ -29,6 +29,7 @@ const NAVIGATION_QUERY = groq`
 			defined(link) => { link{ ${LINK_QUERY} } },
 			items[]{
 				...,
+				_type == 'link' => { ${LINK_QUERY} },
 				_type == 'link.list' => {
 					defined(link) => { link{ ${LINK_QUERY} } },
 					links[]{ ${LINK_QUERY} }
