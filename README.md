@@ -134,7 +134,7 @@ Alternatively, you can run the following command to import a demo dataset with t
 sanity dataset import demo.tar.gz
 ```
 
-> 📸 See what the Sanity Studio backend looks like on the [Screenshots page](https://typed.sanitypress.dev/sanity-studio-screenshots).
+> 📸 See what the Sanity Studio backend looks like on the [Screenshots page](https://typed.sanitypress.dev/docs/sanity-studio-screenshots).
 
 ### 5. Set up deployments
 
