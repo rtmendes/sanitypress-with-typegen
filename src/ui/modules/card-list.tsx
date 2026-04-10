@@ -3,13 +3,23 @@ import { cn } from '@/lib/utils'
 import type { CardList } from '@/sanity/types'
 import CTAList from '@/ui/cta-list'
 import Img from '@/ui/img'
+import Overline from '@/ui/overline'
+import { moduleAttributes } from '.'
 
-export default function ({ intro = [], cards, ctas, columns }: CardList) {
+export default function ({
+	overline,
+	intro,
+	cards,
+	ctas,
+	columns,
+	...props
+}: CardList) {
 	return (
-		<section className="section space-y-8">
-			{intro && (
+		<section className="section space-y-8" {...moduleAttributes(props)}>
+			{(overline || intro) && (
 				<header className="prose text-center">
-					<PortableText value={intro} />
+					<Overline value={overline} />
+					<PortableText value={intro ?? []} />
 				</header>
 			)}
 

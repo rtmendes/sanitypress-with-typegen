@@ -58,6 +58,14 @@ export default function ({
 									</MobileOnlyDetails>
 								)
 
+							case 'link':
+								return (
+									<SanityLink
+										link={item as unknown as SanityLinkType}
+										className="link font-bold"
+									/>
+								)
+
 							default:
 								return null
 						}

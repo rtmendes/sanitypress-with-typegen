@@ -1,6 +1,6 @@
 {
 	"name": "typed-sanitypress",
-	"version": "0.0.76",
+	"version": "0.0.77",
 	"private": true,
 	"scripts": {
 		"dev": "next dev --webpack",
@@ -38,10 +38,10 @@
 	"devDependencies": {
 		"@ianvs/prettier-plugin-sort-imports": "^4.7.1",
 		"@tailwindcss/postcss": "^4.2.2",
-		"@types/node": "^25.5.2",
+		"@types/node": "^25.6.0",
 		"@types/react": "19.2.14",
 		"@types/react-dom": "19.2.3",
-		"prettier": "^3.8.1",
+		"prettier": "^3.8.2",
 		"prettier-plugin-tailwindcss": "^0.7.2",
 		"tailwindcss": "^4.2.2",
 		"typescript": "^6.0.2"

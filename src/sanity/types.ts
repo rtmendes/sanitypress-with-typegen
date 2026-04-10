@@ -185,6 +185,7 @@ export type StatList = {
 
 export type SearchModule = {
 	_type: 'search-module'
+	overline?: string
 	intro?: Array<{
 		children?: Array<{
 			marks?: Array<string>
@@ -480,6 +481,7 @@ export type CustomHtml = {
 export type CardList = {
 	_type: 'card-list'
 	attributes?: ModuleAttributes
+	overline?: string
 	intro?: Array<{
 		children?: Array<{
 			marks?: Array<string>
@@ -711,9 +713,12 @@ export type Megamenu = {
 	_type: 'megamenu'
 	link?: Link
 	items?: Array<
-		{
-			_key: string
-		} & LinkList
+		| ({
+				_key: string
+		  } & LinkList)
+		| ({
+				_key: string
+		  } & Link)
 	>
 }
 
@@ -1798,6 +1803,7 @@ export type PAGE_QUERY_RESULT = {
 				_key: string
 				_type: 'card-list'
 				attributes?: ModuleAttributes
+				overline?: string
 				intro?: Array<{
 					children?: Array<{
 						marks?: Array<string>
@@ -2326,6 +2332,7 @@ export type PAGE_QUERY_RESULT = {
 		| {
 				_key: string
 				_type: 'search-module'
+				overline?: string
 				intro?: Array<{
 					children?: Array<{
 						marks?: Array<string>
@@ -2966,6 +2973,7 @@ export type BLOG_POST_QUERY_RESULT = {
 				_key: string
 				_type: 'card-list'
 				attributes?: ModuleAttributes
+				overline?: string
 				intro?: Array<{
 					children?: Array<{
 						marks?: Array<string>
@@ -3494,6 +3502,7 @@ export type BLOG_POST_QUERY_RESULT = {
 		| {
 				_key: string
 				_type: 'search-module'
+				overline?: string
 				intro?: Array<{
 					children?: Array<{
 						marks?: Array<string>
@@ -4048,6 +4057,7 @@ export type NOT_FOUND_QUERY_RESULT = {
 				_key: string
 				_type: 'card-list'
 				attributes?: ModuleAttributes
+				overline?: string
 				intro?: Array<{
 					children?: Array<{
 						marks?: Array<string>
@@ -4576,6 +4586,7 @@ export type NOT_FOUND_QUERY_RESULT = {
 		| {
 				_key: string
 				_type: 'search-module'
+				overline?: string
 				intro?: Array<{
 					children?: Array<{
 						marks?: Array<string>
@@ -4933,9 +4944,12 @@ export type SITE_QUERY_RESULT = {
 					_type: 'megamenu'
 					link?: Link
 					items?: Array<
-						{
-							_key: string
-						} & LinkList
+						| ({
+								_key: string
+						  } & LinkList)
+						| ({
+								_key: string
+						  } & Link)
 					>
 			  }
 			| {
@@ -4964,9 +4978,12 @@ export type SITE_QUERY_RESULT = {
 						  }
 						| null
 					items?: Array<
-						{
-							_key: string
-						} & LinkList
+						| ({
+								_key: string
+						  } & LinkList)
+						| ({
+								_key: string
+						  } & Link)
 					>
 			  }
 			| {
@@ -5052,6 +5069,15 @@ export type SITE_QUERY_RESULT = {
 											params?: string
 									  }
 								> | null
+						  }
+						| {
+								_key: string
+								_type: 'link'
+								label?: string
+								type?: 'external' | 'internal'
+								internal?: PageReference
+								external?: string
+								params?: string
 						  }
 					> | null
 			  }
@@ -5159,6 +5185,15 @@ export type SITE_QUERY_RESULT = {
 											params?: string
 									  }
 								> | null
+						  }
+						| {
+								_key: string
+								_type: 'link'
+								label?: string
+								type?: 'external' | 'internal'
+								internal?: PageReference
+								external?: string
+								params?: string
 						  }
 					> | null
 			  }
@@ -5340,9 +5375,12 @@ export type SITE_QUERY_RESULT = {
 					_type: 'megamenu'
 					link?: Link
 					items?: Array<
-						{
-							_key: string
-						} & LinkList
+						| ({
+								_key: string
+						  } & LinkList)
+						| ({
+								_key: string
+						  } & Link)
 					>
 			  }
 			| {
@@ -5371,9 +5409,12 @@ export type SITE_QUERY_RESULT = {
 						  }
 						| null
 					items?: Array<
-						{
-							_key: string
-						} & LinkList
+						| ({
+								_key: string
+						  } & LinkList)
+						| ({
+								_key: string
+						  } & Link)
 					>
 			  }
 			| {
@@ -5459,6 +5500,15 @@ export type SITE_QUERY_RESULT = {
 											params?: string
 									  }
 								> | null
+						  }
+						| {
+								_key: string
+								_type: 'link'
+								label?: string
+								type?: 'external' | 'internal'
+								internal?: PageReference
+								external?: string
+								params?: string
 						  }
 					> | null
 			  }
@@ -5566,6 +5616,15 @@ export type SITE_QUERY_RESULT = {
 											params?: string
 									  }
 								> | null
+						  }
+						| {
+								_key: string
+								_type: 'link'
+								label?: string
+								type?: 'external' | 'internal'
+								internal?: PageReference
+								external?: string
+								params?: string
 						  }
 					> | null
 			  }
@@ -5720,9 +5779,12 @@ export type SITE_QUERY_RESULT = {
 					_type: 'megamenu'
 					link?: Link
 					items?: Array<
-						{
-							_key: string
-						} & LinkList
+						| ({
+								_key: string
+						  } & LinkList)
+						| ({
+								_key: string
+						  } & Link)
 					>
 			  }
 			| {
@@ -5751,9 +5813,12 @@ export type SITE_QUERY_RESULT = {
 						  }
 						| null
 					items?: Array<
-						{
-							_key: string
-						} & LinkList
+						| ({
+								_key: string
+						  } & LinkList)
+						| ({
+								_key: string
+						  } & Link)
 					>
 			  }
 			| {
@@ -5839,6 +5904,15 @@ export type SITE_QUERY_RESULT = {
 											params?: string
 									  }
 								> | null
+						  }
+						| {
+								_key: string
+								_type: 'link'
+								label?: string
+								type?: 'external' | 'internal'
+								internal?: PageReference
+								external?: string
+								params?: string
 						  }
 					> | null
 			  }
@@ -5946,6 +6020,15 @@ export type SITE_QUERY_RESULT = {
 											params?: string
 									  }
 								> | null
+						  }
+						| {
+								_key: string
+								_type: 'link'
+								label?: string
+								type?: 'external' | 'internal'
+								internal?: PageReference
+								external?: string
+								params?: string
 						  }
 					> | null
 			  }

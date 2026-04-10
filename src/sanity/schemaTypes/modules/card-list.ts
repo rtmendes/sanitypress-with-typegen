@@ -15,6 +15,11 @@ export default defineType({
 			group: 'options',
 		}),
 		defineField({
+			name: 'overline',
+			type: 'string',
+			group: 'content',
+		}),
+		defineField({
 			name: 'intro',
 			type: 'array',
 			of: [{ type: 'block' }],
