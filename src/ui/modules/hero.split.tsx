@@ -3,10 +3,16 @@ import { cn } from '@/lib/utils'
 import type { HeroSplit } from '@/sanity/types'
 import CTAList from '@/ui/cta-list'
 import Img from '@/ui/img'
-import { moduleAttributes } from '.'
 import Overline from '@/ui/overline'
+import { moduleAttributes } from '.'
 
-export default function ({ overline, content = [], ctas, image, ...props }: HeroSplit) {
+export default function ({
+	overline,
+	content = [],
+	ctas,
+	image,
+	...props
+}: HeroSplit) {
 	return (
 		<section
 			className="section grid items-center gap-8 md:grid-cols-2"

@@ -39,13 +39,12 @@ export default function ({
 
 			<div className="grid gap-2 self-center">
 				<SanityLink
-					className="link h1 block"
+					className="link h1 block before:absolute before:inset-0"
 					link={
 						{ type: 'internal', internal: post } as unknown as SanityLinkType
 					}
 				>
 					{post.title}
-					<span className="absolute inset-0" />
 				</SanityLink>
 
 				{post.metadata?.description && (

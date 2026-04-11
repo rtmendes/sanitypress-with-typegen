@@ -2,11 +2,11 @@
 	.safearea {
 		--safearea-x: 4rem;
 
-		&>summary {
+		& > summary {
 			position: relative;
 		}
 
-		&[open]>summary:hover::before {
+		&[open] > summary:hover::before {
 			content: '';
 			position: absolute;
 			z-index: 1;

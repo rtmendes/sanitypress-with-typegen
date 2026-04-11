@@ -34,11 +34,10 @@ export default function ({
 			</figure>
 
 			<SanityLink
-				className="link block"
+				className="link block before:absolute before:inset-0"
 				link={{ type: 'internal', internal: post } as unknown as SanityLinkType}
 			>
 				<strong>{post.title}</strong>
-				<span className="absolute inset-0" />
 			</SanityLink>
 
 			{/* {post.metadata?.description && (
