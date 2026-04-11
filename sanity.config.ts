@@ -15,6 +15,7 @@ import {
 import { visionTool } from '@sanity/vision'
 import { vercelWidget } from 'sanity-plugin-dashboard-widget-vercel'
 import { apiVersion, dataset, projectId } from './src/sanity/env'
+import icon from './src/sanity/icon'
 import presentation from './src/sanity/presentation'
 import { schema } from './src/sanity/schemaTypes'
 import structure from './src/sanity/structure'
@@ -24,6 +25,7 @@ export default defineConfig({
 	basePath: '/admin',
 	projectId,
 	dataset,
+	icon,
 	// Add and edit the content schema in the './sanity/schemaTypes' folder
 	schema,
 	plugins: [
