@@ -4,10 +4,6 @@ import { ROUTES } from './src/lib/env'
 import { client } from './src/sanity/lib/client'
 
 const nextConfig: NextConfig = {
-	experimental: {
-		viewTransition: true,
-	},
-
 	reactCompiler: true,
 
 	images: {
