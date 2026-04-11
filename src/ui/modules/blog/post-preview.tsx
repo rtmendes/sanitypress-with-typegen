@@ -34,7 +34,7 @@ export default function ({
 			</figure>
 
 			<SanityLink
-				className="link block before:absolute before:inset-0"
+				className="block leading-snug text-current before:absolute before:inset-0 hover:underline"
 				link={{ type: 'internal', internal: post } as unknown as SanityLinkType}
 			>
 				<strong>{post.title}</strong>
@@ -45,8 +45,8 @@ export default function ({
 			)} */}
 
 			<div className="flex flex-wrap items-center justify-between gap-x-4">
-				<Date date={post.publishDate} />
 				<Categories categories={post.categories as unknown as BlogCategory[]} />
+				<Date date={post.publishDate} className="text-foreground/50" />
 			</div>
 
 			<Byline author={post.author as unknown as Person} />

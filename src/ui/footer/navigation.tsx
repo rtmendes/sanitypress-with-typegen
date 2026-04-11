@@ -8,13 +8,16 @@ export default async function () {
 
 	return (
 		<nav>
-			<ul className="flex items-start justify-center gap-x-8 gap-y-4 max-md:flex-col">
+			<ul className="gap-y-lh flex items-start justify-center gap-x-[2lh] max-md:flex-col">
 				{site?.footer?.items?.map((item) => {
 					switch (item._type) {
 						case 'link':
 							return (
 								<li key={item._key}>
-									<SanityLink link={item as SanityLinkType} className="link" />
+									<SanityLink
+										link={item as SanityLinkType}
+										className="text-current hover:underline"
+									/>
 								</li>
 							)
 

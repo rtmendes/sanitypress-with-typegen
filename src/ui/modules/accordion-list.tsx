@@ -56,7 +56,7 @@ export default function ({
 						key={_key}
 					>
 						<summary
-							className="py-2 font-bold"
+							className="py-[.5lh] font-bold"
 							{...(enableSchema && { itemProp: 'name' })}
 						>
 							{summary}

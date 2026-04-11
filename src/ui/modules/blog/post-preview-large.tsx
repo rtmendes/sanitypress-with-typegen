@@ -39,7 +39,7 @@ export default function ({
 
 			<div className="grid gap-2 self-center">
 				<SanityLink
-					className="link h1 block before:absolute before:inset-0"
+					className="h1 block text-current before:absolute before:inset-0 hover:underline"
 					link={
 						{ type: 'internal', internal: post } as unknown as SanityLinkType
 					}

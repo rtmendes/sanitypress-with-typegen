@@ -199,6 +199,10 @@
 		}
 	}
 
+	& .cta-list {
+		@apply mt-6;
+	}
+
 	& a:not([class]) {
 		@apply link;
 	}

@@ -17,7 +17,6 @@ import css from './blog-post-content.module.css'
 import Byline from './byline'
 import Categories from './categories'
 import Date from './date'
-import ReadTime from './read-time'
 import Schema from './schema'
 
 export default function ({
@@ -48,14 +47,14 @@ export default function ({
 							{post.title || post.metadata?.title}
 						</h1>
 
-						<div className="gap-x-lh flex flex-wrap items-center justify-center gap-y-1">
+						<div className="gap-x-lh gap-y-ch flex flex-wrap items-center justify-center">
 							<Byline author={post.author as unknown as Person} />
-							<Date date={post.publishDate} />
 							<Categories
 								categories={post.categories as BlogCategory[]}
 								linked
 							/>
-							<ReadTime value={post.readTime} />
+							<Date date={post.publishDate} />
+							<span>{Math.ceil(post.readTime)} min read</span>
 						</div>
 					</div>
 				</header>

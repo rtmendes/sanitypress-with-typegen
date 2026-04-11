@@ -26,8 +26,8 @@ export default function ({
 				{link?.label || (link?.internal as unknown as Page)?.title}
 			</summary>
 
-			<div className="anim-fade-to-b md:bg-background inset-x-0 top-full md:absolute md:max-h-[calc(100vh-var(--header-height))] md:overflow-y-auto md:shadow-lg">
-				<div className="section md:py-lh gap-x-lh border-stroke max-md:pl-ch py-0 max-md:grid max-md:border-l sm:columns-3xs">
+			<div className="anim-fade-to-b md:bg-background border-stroke inset-x-0 top-full md:absolute md:max-h-[calc(100vh-var(--header-height))] md:overflow-y-auto md:border-b md:shadow-lg">
+				<div className="section md:py-lh gap-x-lh border-stroke max-md:pl-ch md:*:mb-lh py-0 max-md:grid max-md:border-l sm:columns-3xs">
 					{items?.map((item) => {
 						switch (item._type) {
 							case 'link.list':
@@ -37,19 +37,19 @@ export default function ({
 										name="megamenu-linklist"
 										key={item._key}
 									>
-										<summary className="group-open/megamenu-linklist:font-bold md:block">
+										<summary className="text-foreground/50 inline-block py-1 md:cursor-default">
 											<SanityLink
 												link={item.link as unknown as SanityLinkType}
 											/>
 										</summary>
 
-										<ul className="border-stroke max-md:pl-ch max-md:anim-fade-to-b mb-ch max-md:border-l">
+										<ul className="border-stroke max-md:pl-ch max-md:anim-fade-to-b mb-ch leading-tight max-md:border-l">
 											{item.links?.map((link) => {
 												return (
 													<li key={link._key}>
 														<SanityLink
 															link={link as unknown as SanityLinkType}
-															className="[:is(a)]:link"
+															className="inline-block py-1 text-current [[href]]:hover:underline"
 														/>
 													</li>
 												)
@@ -62,7 +62,7 @@ export default function ({
 								return (
 									<SanityLink
 										link={item as unknown as SanityLinkType}
-										className="link font-bold"
+										className="md:text-foreground/50 py-1 text-current hover:underline"
 									/>
 								)
 

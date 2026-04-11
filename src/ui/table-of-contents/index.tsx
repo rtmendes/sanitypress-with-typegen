@@ -28,7 +28,7 @@ export default function ({
 				{summary}
 			</summary>
 
-			<ol className={css.list}>
+			<ol className={cn(css.list, 'leading-tight')}>
 				{headings?.map((heading, key) => (
 					<ToCItem heading={heading} key={key} />
 				))}

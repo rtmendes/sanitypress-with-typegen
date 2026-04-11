@@ -11,15 +11,21 @@ export default function ({
 	...props
 }: LinkList & React.ComponentProps<'li'> & Partial<{ _key: string }>) {
 	return (
-		<li className={cn('text-left', className)} {...props}>
+		<li className={cn('grid gap-1 text-left', className)} {...props}>
 			<div>
-				<b>{link?.label}</b>
+				<SanityLink
+					className="text-foreground/50 [[href]]:hover:underline"
+					link={link as SanityLinkType}
+				/>
 			</div>
 
-			<ul>
+			<ul className="leading-tight">
 				{links?.map((item) => (
 					<li key={item._key}>
-						<SanityLink className="link" link={item as SanityLinkType} />
+						<SanityLink
+							className="inline-block py-[.3ch] text-current hover:underline"
+							link={item as SanityLinkType}
+						/>
 					</li>
 				))}
 			</ul>
