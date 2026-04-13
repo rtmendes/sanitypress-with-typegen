@@ -10,7 +10,7 @@ export default function ({ overline, intro = [], ctas, ...props }: Callout) {
 			<header className="prose mx-auto max-w-3xl text-balance">
 				<Overline value={overline} />
 				<PortableText value={intro} />
-				<CTAList ctas={ctas} className="justify-center" />
+				<CTAList ctas={ctas} className="justify-center max-md:*:w-full" />
 			</header>
 		</section>
 	)
