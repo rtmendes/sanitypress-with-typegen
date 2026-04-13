@@ -51,13 +51,13 @@ export default function ({
 
 							<PortableText value={item.content ?? []} />
 
-							<CTAList ctas={item.ctas} />
+							<CTAList ctas={item.ctas} className="max-md:*:w-full" />
 						</li>
 					))}
 				</ul>
 			)}
 
-			<CTAList ctas={ctas} className="justify-center" />
+			<CTAList ctas={ctas} className="justify-center max-md:*:w-full" />
 		</section>
 	)
 }

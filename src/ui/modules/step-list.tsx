@@ -23,7 +23,7 @@ export default function ({
 					</div>
 				)}
 				<PortableText value={intro} />
-				<CTAList ctas={ctas} />
+				<CTAList ctas={ctas} className="max-md:*:w-full" />
 			</header>
 
 			<ol className="grid gap-8">
