@@ -26,6 +26,25 @@ export default ({ of = [] }: { of?: Array<{ type: string }> } = {}) =>
 			insertMenu: {
 				groups: [
 					{
+						name: 'content',
+						of: [
+							'accordion-list',
+							'callout',
+							'card-list',
+							'hero-split',
+							'logo-list',
+							'person-list',
+							'prose',
+							'quote-list',
+							'stat-list',
+							'step-list',
+						],
+					},
+					{
+						name: 'utility',
+						of: ['breadcrumbs', 'custom-html', 'search-module'],
+					},
+					{
 						name: 'blog',
 						of: ['blog-index', 'blog-post-content', 'blog-post-list'],
 					},
