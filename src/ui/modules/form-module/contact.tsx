@@ -2,7 +2,7 @@ import type { Form } from '@/sanity/types'
 
 export default function ({ form }: { form: Form }) {
 	return (
-		<form className="gap-ch grid" action={form.endpoint}>
+		<form className="gap-ch grid" action={form.endpoint} method="POST">
 			<label>
 				<span>Name</span>
 				<input
@@ -33,7 +33,7 @@ export default function ({ form }: { form: Form }) {
 					name="message"
 					placeholder="Your message..."
 					rows={3}
-				></textarea>
+				/>
 			</label>
 
 			<div>

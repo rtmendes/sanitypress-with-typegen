@@ -12,7 +12,7 @@ export default function ({
 	)
 
 	return (
-		<Tag className="group grid-cols-[1fr_auto] max-md:grid" id={id}>
+		<Tag className="group" id={id}>
 			{children}
 
 			{Tag !== 'h1' && (
