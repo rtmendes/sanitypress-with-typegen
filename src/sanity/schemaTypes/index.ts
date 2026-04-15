@@ -2,6 +2,7 @@ import type { SchemaPluginOptions } from 'sanity'
 // documents
 import blogCategory from './documents/blog.category'
 import blogPost from './documents/blog.post'
+import form from './documents/form'
 import globalModule from './documents/global-module'
 import logo from './documents/logo'
 import navigation from './documents/navigation'
@@ -19,6 +20,7 @@ import breadcrumbs from './modules/breadcrumbs'
 import callout from './modules/callout'
 import cardList from './modules/card-list'
 import customHtml from './modules/custom-html'
+import formModule from './modules/form-module'
 import heroSplit from './modules/hero.split'
 import logoList from './modules/logo-list'
 import personList from './modules/person-list'
@@ -40,6 +42,7 @@ export const schema: SchemaPluginOptions = {
 		// documents
 		site,
 		page,
+		form,
 		globalModule,
 		blogPost,
 		redirect,
@@ -68,6 +71,7 @@ export const schema: SchemaPluginOptions = {
 		callout,
 		cardList,
 		customHtml,
+		formModule,
 		heroSplit,
 		logoList,
 		personList,

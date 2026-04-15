@@ -13,6 +13,7 @@ import Breadcrumbs from './breadcrumbs'
 import Callout from './callout'
 import CardList from './card-list'
 import CustomHTML from './custom-html'
+import FormModule from './form-module'
 import HeroSplit from './hero.split'
 import LogoList from './logo-list'
 import PersonList from './person-list'
@@ -31,6 +32,7 @@ const MODULES_MAP = {
 	callout: Callout,
 	'card-list': CardList,
 	'custom-html': CustomHTML,
+	'form-module': FormModule,
 	'hero.split': HeroSplit,
 	'logo-list': LogoList,
 	'person-list': PersonList,

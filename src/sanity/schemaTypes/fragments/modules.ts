@@ -12,6 +12,7 @@ export default ({ of = [] }: { of?: Array<{ type: string }> } = {}) =>
 			{ type: 'callout' },
 			{ type: 'card-list' },
 			{ type: 'custom-html' },
+			{ type: 'form-module' },
 			{ type: 'hero.split' },
 			{ type: 'logo-list' },
 			{ type: 'person-list' },
@@ -31,6 +32,7 @@ export default ({ of = [] }: { of?: Array<{ type: string }> } = {}) =>
 							'accordion-list',
 							'callout',
 							'card-list',
+							'form-module',
 							'hero-split',
 							'logo-list',
 							'person-list',
@@ -42,7 +44,7 @@ export default ({ of = [] }: { of?: Array<{ type: string }> } = {}) =>
 					},
 					{
 						name: 'utility',
-						of: ['breadcrumbs', 'custom-html', 'search-module'],
+						of: ['breadcrumbs', 'custom-html', 'form-module', 'search-module'],
 					},
 					{
 						name: 'blog',
