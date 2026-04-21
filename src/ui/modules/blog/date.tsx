@@ -6,7 +6,7 @@ export default function ({
 
 	return (
 		<time dateTime={date} {...props}>
-			{format(new Date(date + 'T00:00:00'))}
+			{format(new Date(date.replace('-', '/')))}
 		</time>
 	)
 }

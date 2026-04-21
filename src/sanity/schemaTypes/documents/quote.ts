@@ -45,8 +45,8 @@ export default defineType({
 			author: 'author',
 		},
 		prepare: ({ quote, author }) => ({
-			title: getBlockText(quote),
-			subtitle: [author?.name, author?.title].filter(Boolean).join(' / '),
+			title: [author?.name, author?.title].filter(Boolean).join(' / '),
+			subtitle: getBlockText(quote),
 			media: author?.image?.asset,
 		}),
 	},
