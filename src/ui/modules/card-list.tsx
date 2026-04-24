@@ -43,7 +43,7 @@ export default function ({
 							/>
 
 							<Img
-								className="h-12 object-cover"
+								className="h-12 w-auto object-cover"
 								image={item.icon}
 								width={60}
 								alt=""

@@ -14,6 +14,7 @@ import {
 } from '@sanity/dashboard'
 import { visionTool } from '@sanity/vision'
 import { vercelWidget } from 'sanity-plugin-dashboard-widget-vercel'
+import { media } from 'sanity-plugin-media'
 import { apiVersion, dataset, projectId } from './src/sanity/env'
 import icon from './src/sanity/icon'
 import presentation from './src/sanity/presentation'
@@ -40,6 +41,7 @@ export default defineConfig({
 		// https://www.sanity.io/docs/the-vision-plugin
 		visionTool({ defaultApiVersion: apiVersion }),
 		codeInput(),
+		media(),
 		assist(),
 	],
 })

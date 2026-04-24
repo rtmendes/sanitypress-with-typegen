@@ -74,25 +74,10 @@ export default function ({
 
 				if (!Module) return null
 
-				const attributes = page
-					? {
-							id: page._id,
-							type: page._type,
-							path: `page[_key == "${module._key}"]`,
-						}
-					: post
-						? {
-								id: post._id,
-								type: post._type,
-								path: `post[_key == "${module._key}"]`,
-							}
-						: {}
-
 				return (
 					<Module
 						{...module}
 						{...moduleSpecificProps(module)}
-						data-sanity={createDataAttribute(attributes)}
 						key={module._key}
 					/>
 				)
