@@ -1,19 +1,15 @@
-import { defineArrayMember, defineField, defineType } from 'sanity'
+import { defineArrayMember, defineField } from 'sanity'
 import { TfiLayoutGrid2Thumb } from 'react-icons/tfi'
 import { count, getBlockText } from '@/lib/utils'
+import defineModule from '@/sanity/schemaTypes/fragments/define-module'
 
-export default defineType({
+export default defineModule({
 	name: 'card-list',
 	title: 'Card list',
 	type: 'object',
 	icon: TfiLayoutGrid2Thumb,
-	groups: [{ name: 'content', default: true }, { name: 'options' }],
+	groups: [{ name: 'content', default: true }],
 	fields: [
-		defineField({
-			name: 'attributes',
-			type: 'module-attributes',
-			group: 'options',
-		}),
 		defineField({
 			name: 'overline',
 			type: 'string',

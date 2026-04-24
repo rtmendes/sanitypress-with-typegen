@@ -1,19 +1,15 @@
-import { defineArrayMember, defineField, defineType } from 'sanity'
+import { defineArrayMember, defineField } from 'sanity'
 import { OlistIcon } from '@sanity/icons'
 import { count, getBlockText } from '@/lib/utils'
+import defineModule from '@/sanity/schemaTypes/fragments/define-module'
 
-export default defineType({
+export default defineModule({
 	name: 'step-list',
 	title: 'Step list',
 	type: 'object',
 	icon: OlistIcon,
-	groups: [{ name: 'content', default: true }, { name: 'options' }],
+	groups: [{ name: 'content', default: true }],
 	fields: [
-		defineField({
-			name: 'attributes',
-			type: 'module-attributes',
-			group: 'options',
-		}),
 		defineField({
 			name: 'intro',
 			type: 'array',

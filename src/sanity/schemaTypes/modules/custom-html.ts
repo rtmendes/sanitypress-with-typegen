@@ -1,7 +1,8 @@
-import { defineField, defineType } from 'sanity'
+import { defineField } from 'sanity'
 import { CodeIcon, JsonIcon, LogoJsIcon } from '@sanity/icons'
+import defineModule from '@/sanity/schemaTypes/fragments/define-module'
 
-export default defineType({
+export default defineModule({
 	name: 'custom-html',
 	title: 'Custom HTML',
 	icon: CodeIcon,
@@ -9,14 +10,8 @@ export default defineType({
 	groups: [
 		{ name: 'html', title: 'HTML', default: true },
 		{ name: 'css', title: 'CSS' },
-		{ name: 'options' },
 	],
 	fields: [
-		defineField({
-			name: 'attributes',
-			type: 'module-attributes',
-			group: 'options',
-		}),
 		defineField({
 			name: 'className',
 			description: 'Optional class name to apply to the root HTML element',

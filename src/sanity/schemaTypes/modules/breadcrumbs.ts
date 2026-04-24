@@ -1,13 +1,14 @@
-import { defineField, defineType } from 'sanity'
+import { defineField } from 'sanity'
 import { BsBarChartSteps } from 'react-icons/bs'
 import { count } from '@/lib/utils'
+import defineModule from '@/sanity/schemaTypes/fragments/define-module'
 
-export default defineType({
+export default defineModule({
 	name: 'breadcrumbs',
 	title: 'Breadcrumbs',
 	icon: BsBarChartSteps,
 	type: 'object',
-	groups: [{ name: 'content', default: true }, { name: 'options' }],
+	groups: [{ name: 'content', default: true }],
 	fields: [
 		defineField({
 			name: 'structuredDataOnly',

@@ -1,8 +1,9 @@
-import { defineField, defineType } from 'sanity'
+import { defineField } from 'sanity'
 import { TfiLayoutMediaLeft } from 'react-icons/tfi'
 import { getBlockText } from '@/lib/utils'
+import defineModule from '@/sanity/schemaTypes/fragments/define-module'
 
-export default defineType({
+export default defineModule({
 	name: 'hero.split',
 	title: 'Hero (split)',
 	type: 'object',
@@ -10,14 +11,8 @@ export default defineType({
 	groups: [
 		{ name: 'content', default: true },
 		{ name: 'image' },
-		{ name: 'options' },
 	],
 	fields: [
-		defineField({
-			name: 'attributes',
-			type: 'module-attributes',
-			group: 'options',
-		}),
 		defineField({
 			name: 'overline',
 			type: 'string',

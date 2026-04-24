@@ -30,27 +30,25 @@ Once fields are confirmed (and any ambiguous types resolved), proceed with the s
 
 **File:** `src/sanity/schemaTypes/modules/<module-name>.ts`
 
+Use [`defineModule`](src/sanity/schemaTypes/fragments/define-module.ts) instead of `defineType`. It prepends the `attributes` (`module-attributes`) field, appends an **Options** group, wires `preview.select.hidden` for the Studio list badge, and sets the shared `modulePreview` component—do **not** add those by hand.
+
 ```ts
-import { defineArrayMember, defineField, defineType } from 'sanity'
+import { defineArrayMember, defineField } from 'sanity'
 import { SomeIcon } from '@sanity/icons'
 import { count, getBlockText } from '@/lib/utils'
+import defineModule from '@/sanity/schemaTypes/fragments/define-module'
 
-export default defineType({
+export default defineModule({
 	name: 'my-module',
 	title: 'My module',
 	type: 'object',
 	icon: SomeIcon,
 	groups: [
 		{ name: 'content', default: true },
-		// { name: 'asset' },   // add if module has an image
-		{ name: 'options' },
+		// { name: 'asset' },   // add if module has a dedicated image tab
+		// Do NOT add { name: 'options' } — defineModule appends it
 	],
 	fields: [
-		defineField({
-			name: 'attributes',
-			type: 'module-attributes',
-			group: 'options',
-		}),
 		// Add your fields here — examples:
 		defineField({
 			name: 'intro',
@@ -105,8 +103,9 @@ export default defineType({
 
 **Notes:**
 
-- Groups: always `content` (default) + `options`; add `asset` if there's an image field
-- `attributes` field is required on every module (`type: 'module-attributes'`, `group: 'options'`)
+- **Groups:** List only non-options groups (e.g. `content`, optional `asset`, `layout`, `html`/`css` as needed). `defineModule` always appends `{ name: 'options' }` and places `attributes` there. Omit `groups` entirely if everything is ungrouped (still get Options + attributes).
+- **Do not** declare an `attributes` field or `components.preview`—`defineModule` injects them.
+- **`preview.prepare`:** Return only `title` / `subtitle` / `media` as usual; `hidden` for the list badge is merged in automatically.
 - Use `getBlockText` for PortableText preview, `count` for array lengths — both from `@/lib/utils`
 - Use `fieldsets` with `options: { columns: 2 }` to visually group related inline fields in Studio
 

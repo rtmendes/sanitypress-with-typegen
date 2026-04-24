@@ -1,19 +1,15 @@
-import { defineField, defineType } from 'sanity'
+import { defineField } from 'sanity'
 import { RxInput } from 'react-icons/rx'
 import { getBlockText } from '@/lib/utils'
+import defineModule from '@/sanity/schemaTypes/fragments/define-module'
 
-export default defineType({
+export default defineModule({
 	name: 'form-module',
 	title: 'Form module',
 	type: 'object',
 	icon: RxInput,
-	groups: [{ name: 'content', default: true }, { name: 'options' }],
+	groups: [{ name: 'content', default: true }],
 	fields: [
-		defineField({
-			name: 'attributes',
-			type: 'module-attributes',
-			group: 'options',
-		}),
 		defineField({
 			name: 'overline',
 			type: 'string',

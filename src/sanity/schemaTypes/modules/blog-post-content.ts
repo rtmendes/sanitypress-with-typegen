@@ -1,19 +1,14 @@
-import { defineField, defineType } from 'sanity'
+import { defineField } from 'sanity'
 import { EditIcon } from '@sanity/icons'
+import defineModule from '@/sanity/schemaTypes/fragments/define-module'
 
-export default defineType({
+export default defineModule({
 	name: 'blog-post-content',
 	title: 'Blog post content',
 	type: 'object',
 	icon: EditIcon,
-	groups: [{ name: 'layout', default: true }, { name: 'options' }],
+	groups: [{ name: 'layout', default: true }],
 	fields: [
-		defineField({
-			name: 'attributes',
-			title: 'Module attributes',
-			type: 'module-attributes',
-			group: 'options',
-		}),
 		defineField({
 			name: 'tableOfContents',
 			title: 'Table of contents (position)',

@@ -3,6 +3,7 @@ import { cn } from '@/lib/utils'
 import type { Logo, LogoList } from '@/sanity/types'
 import Img from '@/ui/img'
 import Overline from '@/ui/overline'
+import { moduleAttributes } from '.'
 import css from './logo-list.module.css'
 
 export default function ({
@@ -12,9 +13,13 @@ export default function ({
 	logoType = 'default',
 	autoScroll,
 	duration = 12,
+	...props
 }: LogoList) {
 	return (
-		<section className="section space-y-8 text-center">
+		<section
+			className="section space-y-8 text-center"
+			{...moduleAttributes(props)}
+		>
 			{(overline || intro) && (
 				<header className="prose">
 					<Overline value={overline} />

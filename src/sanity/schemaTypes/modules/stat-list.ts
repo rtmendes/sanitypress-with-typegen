@@ -1,19 +1,15 @@
-import { defineArrayMember, defineField, defineType } from 'sanity'
+import { defineArrayMember, defineField } from 'sanity'
 import { NumberIcon } from '@sanity/icons'
 import { count, getBlockText } from '@/lib/utils'
+import defineModule from '@/sanity/schemaTypes/fragments/define-module'
 
-export default defineType({
+export default defineModule({
 	name: 'stat-list',
 	title: 'Stat list',
 	type: 'object',
 	icon: NumberIcon,
-	groups: [{ name: 'content', default: true }, { name: 'options' }],
+	groups: [{ name: 'content', default: true }],
 	fields: [
-		defineField({
-			name: 'attributes',
-			type: 'module-attributes',
-			group: 'options',
-		}),
 		defineField({
 			name: 'intro',
 			type: 'array',

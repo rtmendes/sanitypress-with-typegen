@@ -1,8 +1,9 @@
-import { defineField, defineType } from 'sanity'
+import { defineField } from 'sanity'
 import { EditIcon } from '@sanity/icons'
 import { getBlockText } from '@/lib/utils'
+import defineModule from '@/sanity/schemaTypes/fragments/define-module'
 
-export default defineType({
+export default defineModule({
 	name: 'blog-post-list',
 	title: 'Blog post list',
 	type: 'object',

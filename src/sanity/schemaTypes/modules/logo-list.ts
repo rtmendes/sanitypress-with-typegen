@@ -1,13 +1,14 @@
-import { defineField, defineType } from 'sanity'
+import { defineField } from 'sanity'
 import { ComponentIcon } from '@sanity/icons'
 import { count, getBlockText } from '@/lib/utils'
+import defineModule from '@/sanity/schemaTypes/fragments/define-module'
 
-export default defineType({
+export default defineModule({
 	name: 'logo-list',
 	title: 'Logo list',
 	type: 'object',
 	icon: ComponentIcon,
-	groups: [{ name: 'content', default: true }, { name: 'options' }],
+	groups: [{ name: 'content', default: true }],
 	fields: [
 		defineField({
 			name: 'overline',

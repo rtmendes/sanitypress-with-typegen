@@ -1,13 +1,14 @@
-import { defineField, defineType } from 'sanity'
+import { defineField } from 'sanity'
 import { SearchIcon } from '@sanity/icons'
 import { getBlockText } from '@/lib/utils'
+import defineModule from '@/sanity/schemaTypes/fragments/define-module'
 
-export default defineType({
+export default defineModule({
 	name: 'search-module',
 	title: 'Search',
 	type: 'object',
 	icon: SearchIcon,
-	groups: [{ name: 'content', default: true }, { name: 'options' }],
+	groups: [{ name: 'content', default: true }],
 	fields: [
 		defineField({
 			name: 'overline',
