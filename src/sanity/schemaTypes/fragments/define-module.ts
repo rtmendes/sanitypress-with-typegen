@@ -27,7 +27,7 @@ export default function defineModule(
 			...props.preview,
 			select: {
 				...props.preview?.select,
-				hidden: 'attributes.hidden',
+				attributes: 'attributes',
 			},
 			prepare(selection, viewOptions) {
 				const out =
@@ -38,7 +38,8 @@ export default function defineModule(
 						: {}
 				return {
 					...base,
-					hidden: selection.hidden,
+					hidden: selection.attributes?.hidden,
+					uid: selection.attributes?.uid,
 				} as any
 			},
 		},
