@@ -22,7 +22,6 @@ An improved successor to the acclaimed Next.js + Sanity.io starter template—no
 
 ```
 📂 sanitypress/
-├── public/                        # Static assets (favicon, etc.)
 ├── src/
 │   ├── app/                       # Next.js App Router
 │   │   ├── (frontend)/            # Public-facing site
@@ -33,19 +32,16 @@ An improved successor to the acclaimed Next.js + Sanity.io starter template—no
 │   │   │   ├── blog/rss.xml/      # RSS feed endpoint
 │   │   │   └── api/               # API route handlers
 │   │   │       ├── draft-mode/    # Enable/disable Sanity draft mode
-│   │   │       ├── og/            # Open Graph image generation
-│   │   │       └── revalidate/    # ISR revalidation
+│   │   │       └── og/            # Open Graph image generation
 │   │   ├── (studio)/admin/        # Sanity Studio (CMS editor UI)
 │   │   └── sitemap.ts             # Auto-generated sitemap
 │   ├── ui/                        # React components
 │   │   ├── modules/               # One component per Sanity module
 │   │   │   ├── blog/              # Blog-specific components (post list, filters, etc.)
 │   │   │   ├── prose/             # Rich text components / portable text renderer
-│   │   │   ├── search/            # Search form + results
-│   │   │   └── custom-html/       # Custom HTML/CSS/JS injection
+│   │   │   └── ...                # Modules
 │   │   ├── header/                # Header, navigation, megamenu
 │   │   ├── footer/                # Footer and link list
-│   │   ├── table-of-contents/     # Auto-generated TOC for long pages
 │   │   └── ...                    # Shared components (CTA, Img, Logo, etc.)
 │   ├── sanity/                    # Sanity CMS configuration
 │   │   ├── schemaTypes/
@@ -55,12 +51,12 @@ An improved successor to the acclaimed Next.js + Sanity.io starter template—no
 │   │   │   └── fragments/         # Shared GROQ fragment definitions
 │   │   ├── lib/                   # Queries, fetch helpers, image builder
 │   │   ├── ui/                    # Custom Studio UI components
-│   │   ├── structure.ts           # Studio sidebar layout
-│   │   └── types.ts               # Auto-generated TypeScript types (via TypeGen)
+│   │   └── ...                    # Sanity files
 │   ├── lib/                       # Shared app utilities and env helpers
 │   ├── hooks/                     # Custom React hooks
 │   └── types/                     # Global TypeScript declarations
-├── .env.example                   # Environment variable template
+├── public/                        # Static assets (favicon, etc.)
+├── .env.*                         # Environment variable template
 ├── next.config.ts                 # Next.js configuration
 ├── sanity.config.ts               # Sanity Studio configuration
 ├── sanity.cli.ts                  # Sanity CLI configuration
