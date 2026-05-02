@@ -18,11 +18,7 @@ export default async function RootLayout({
 	preconnect('https://cdn.sanity.io')
 
 	return (
-		<html
-			lang="en"
-			className={fontSans.className}
-			data-scroll-behavior="smooth"
-		>
+		<html lang="en" data-scroll-behavior="smooth">
 			<NuqsAdapter>
 				<body className="bg-background text-foreground antialiased">
 					<Header />

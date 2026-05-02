@@ -185,6 +185,7 @@ export type StatList = {
 
 export type SearchModule = {
 	_type: 'search-module'
+	attributes?: ModuleAttributes
 	overline?: string
 	intro?: Array<{
 		children?: Array<{
@@ -349,6 +350,7 @@ export type PersonReference = {
 
 export type PersonList = {
 	_type: 'person-list'
+	attributes?: ModuleAttributes
 	intro?: Array<{
 		children?: Array<{
 			marks?: Array<string>
@@ -395,6 +397,7 @@ export type LogoReference = {
 
 export type LogoList = {
 	_type: 'logo-list'
+	attributes?: ModuleAttributes
 	overline?: string
 	intro?: Array<{
 		children?: Array<{
@@ -600,6 +603,7 @@ export type Callout = {
 
 export type Breadcrumbs = {
 	_type: 'breadcrumbs'
+	attributes?: ModuleAttributes
 	structuredDataOnly?: boolean
 	crumbs?: Array<
 		{
@@ -610,6 +614,7 @@ export type Breadcrumbs = {
 
 export type BlogPostList = {
 	_type: 'blog-post-list'
+	attributes?: ModuleAttributes
 	intro?: Array<{
 		children?: Array<{
 			marks?: Array<string>
@@ -644,6 +649,7 @@ export type BlogPostContent = {
 
 export type BlogIndex = {
 	_type: 'blog-index'
+	attributes?: ModuleAttributes
 	intro?: Array<{
 		children?: Array<{
 			marks?: Array<string>
@@ -1389,6 +1395,15 @@ export type SanityAssistSchemaTypeField = {
 	>
 }
 
+export type MediaTag = {
+	_id: string
+	_type: 'media.tag'
+	_createdAt: string
+	_updatedAt: string
+	_rev: string
+	name?: Slug
+}
+
 export type SanityImagePaletteSwatch = {
 	_type: 'sanity.imagePaletteSwatch'
 	background?: string
@@ -1554,6 +1569,7 @@ export type AllSanitySchemaTypes =
 	| SanityAssistInstructionFieldRef
 	| SanityAssistInstruction
 	| SanityAssistSchemaTypeField
+	| MediaTag
 	| SanityImagePaletteSwatch
 	| SanityImagePalette
 	| SanityImageDimensions
@@ -1670,6 +1686,7 @@ export type PAGE_QUERY_RESULT = {
 		| {
 				_key: string
 				_type: 'blog-index'
+				attributes?: ModuleAttributes
 				intro?: Array<{
 					children?: Array<{
 						marks?: Array<string>
@@ -1709,6 +1726,7 @@ export type PAGE_QUERY_RESULT = {
 		| {
 				_key: string
 				_type: 'blog-post-list'
+				attributes?: ModuleAttributes
 				intro?: Array<{
 					children?: Array<{
 						marks?: Array<string>
@@ -1767,6 +1785,7 @@ export type PAGE_QUERY_RESULT = {
 		| {
 				_key: string
 				_type: 'breadcrumbs'
+				attributes?: ModuleAttributes
 				structuredDataOnly?: boolean
 				crumbs: Array<
 					| {
@@ -2096,6 +2115,7 @@ export type PAGE_QUERY_RESULT = {
 		| {
 				_key: string
 				_type: 'logo-list'
+				attributes?: ModuleAttributes
 				overline?: string
 				intro?: Array<{
 					children?: Array<{
@@ -2151,6 +2171,7 @@ export type PAGE_QUERY_RESULT = {
 		| {
 				_key: string
 				_type: 'person-list'
+				attributes?: ModuleAttributes
 				intro?: Array<{
 					children?: Array<{
 						marks?: Array<string>
@@ -2428,6 +2449,7 @@ export type PAGE_QUERY_RESULT = {
 		| {
 				_key: string
 				_type: 'search-module'
+				attributes?: ModuleAttributes
 				overline?: string
 				intro?: Array<{
 					children?: Array<{
@@ -2882,6 +2904,7 @@ export type BLOG_POST_QUERY_RESULT = {
 		| {
 				_key: string
 				_type: 'blog-index'
+				attributes?: ModuleAttributes
 				intro?: Array<{
 					children?: Array<{
 						marks?: Array<string>
@@ -2921,6 +2944,7 @@ export type BLOG_POST_QUERY_RESULT = {
 		| {
 				_key: string
 				_type: 'blog-post-list'
+				attributes?: ModuleAttributes
 				intro?: Array<{
 					children?: Array<{
 						marks?: Array<string>
@@ -2979,6 +3003,7 @@ export type BLOG_POST_QUERY_RESULT = {
 		| {
 				_key: string
 				_type: 'breadcrumbs'
+				attributes?: ModuleAttributes
 				structuredDataOnly?: boolean
 				crumbs: Array<
 					| {
@@ -3308,6 +3333,7 @@ export type BLOG_POST_QUERY_RESULT = {
 		| {
 				_key: string
 				_type: 'logo-list'
+				attributes?: ModuleAttributes
 				overline?: string
 				intro?: Array<{
 					children?: Array<{
@@ -3363,6 +3389,7 @@ export type BLOG_POST_QUERY_RESULT = {
 		| {
 				_key: string
 				_type: 'person-list'
+				attributes?: ModuleAttributes
 				intro?: Array<{
 					children?: Array<{
 						marks?: Array<string>
@@ -3640,6 +3667,7 @@ export type BLOG_POST_QUERY_RESULT = {
 		| {
 				_key: string
 				_type: 'search-module'
+				attributes?: ModuleAttributes
 				overline?: string
 				intro?: Array<{
 					children?: Array<{
@@ -4015,6 +4043,7 @@ export type NOT_FOUND_QUERY_RESULT = {
 		| {
 				_key: string
 				_type: 'blog-index'
+				attributes?: ModuleAttributes
 				intro?: Array<{
 					children?: Array<{
 						marks?: Array<string>
@@ -4047,6 +4076,7 @@ export type NOT_FOUND_QUERY_RESULT = {
 		| {
 				_key: string
 				_type: 'blog-post-list'
+				attributes?: ModuleAttributes
 				intro?: Array<{
 					children?: Array<{
 						marks?: Array<string>
@@ -4105,6 +4135,7 @@ export type NOT_FOUND_QUERY_RESULT = {
 		| {
 				_key: string
 				_type: 'breadcrumbs'
+				attributes?: ModuleAttributes
 				structuredDataOnly?: boolean
 				crumbs: Array<
 					| {
@@ -4434,6 +4465,7 @@ export type NOT_FOUND_QUERY_RESULT = {
 		| {
 				_key: string
 				_type: 'logo-list'
+				attributes?: ModuleAttributes
 				overline?: string
 				intro?: Array<{
 					children?: Array<{
@@ -4489,6 +4521,7 @@ export type NOT_FOUND_QUERY_RESULT = {
 		| {
 				_key: string
 				_type: 'person-list'
+				attributes?: ModuleAttributes
 				intro?: Array<{
 					children?: Array<{
 						marks?: Array<string>
@@ -4766,6 +4799,7 @@ export type NOT_FOUND_QUERY_RESULT = {
 		| {
 				_key: string
 				_type: 'search-module'
+				attributes?: ModuleAttributes
 				overline?: string
 				intro?: Array<{
 					children?: Array<{
