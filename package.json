@@ -46,13 +46,5 @@
 		"prettier-plugin-tailwindcss": "^0.8.0",
 		"tailwindcss": "^4.2.4",
 		"typescript": "^6.0.3"
-	},
-	"overrides": {
-		"@codemirror/state": "6.5.3",
-		"@types/react": "19.2.14",
-		"@types/react-dom": "19.2.3"
-	},
-	"patchedDependencies": {
-		"lightningcss@1.32.0": "patches/lightningcss@1.32.0.patch"
 	}
 }
